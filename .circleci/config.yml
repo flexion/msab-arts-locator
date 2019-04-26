@@ -28,4 +28,4 @@ jobs:
         
       - run:
           name: Deploy application
-          command: sls deploy --stage pre
+          command: node_modules/.bin/sls deploy --stage pre
