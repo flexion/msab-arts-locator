@@ -1,0 +1,61 @@
+service: msab-arts-locator-${opt:stage}
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: ${opt:stage}.msab.flexion.us
+    basePath: api
+    stage: ${opt:stage}
+    certificateName: '*.msab.flexion.us'
+    createRoute53Record: true
+    endpointType: 'regional'
+  hostedZoneId: ${env:HOSTEDZONEID}
+  region: ${opt:region, 'us-east-2'}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${self:custom.region}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - apigateway:POST
+      Resource: !Sub arn:aws:apigateway:${self:custom.region}::/domainnames
+    - Effect: Allow
+      Action:
+        - apigateway:GET
+        - apigateway:DELETE
+      Resource: !Sub arn:aws:apigateway:${self:custom.region}::/domainnames/*
+    - Effect: Allow
+      Action:
+        - apigateway:POST
+      Resource: !Sub arn:aws:apigateway:${self:custom.region}::/domainnames/*/basepathmappings
+    - Effect: Allow
+      Action:
+        - cloudfront:UpdateDistribution
+      Resource: '*'
+    - Effect: Allow
+      Action:
+        - route53:ListHostedZones
+      Resource: '*'
+    - Effect: Allow
+      Action:
+        - acm:ListCertificates
+      Resource: '*'
+    - Effect: Allow
+      Action:
+        - route53:ChangeResourceRecordSets
+        - route53:GetHostedZone
+        - route53:ListResourceRecordSets
+      Resource: !Sub arn:aws:route53:::hostedzone/${self:custom.hostedZoneId}
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: v1/hello
+          method: get

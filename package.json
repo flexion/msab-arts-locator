@@ -1,0 +1,26 @@
+{
+  "name": "msab-arts-locator",
+  "version": "0.0.1",
+  "description": "MSAB mobile Arts Locator application.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flexion/msab-arts-locator.git"
+  },
+  "keywords": [
+    "flexion",
+    "msab"
+  ],
+  "author": "Flexion Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flexion/msab-arts-locator/issues"
+  },
+  "homepage": "https://github.com/flexion/msab-arts-locator#readme",
+  "devDependencies": {
+    "serverless": "^1.41.1",
+    "serverless-domain-manager": "^3.2.1"
+  }
+}
