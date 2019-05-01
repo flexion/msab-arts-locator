@@ -17,6 +17,16 @@ jobs:
           - v1-dependencies-
 
       - run:
+          name: Install the AWS cli
+          command: |
+            sudo apt-get install python-dev
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+            aws --version
+            aws iam get-user
+
+      - run:
           name: Install Serverless CLI and dependencies
           command: |
             npm install
@@ -25,9 +35,15 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-
+
       - run:
-          name: Create domain
-          command: node_modules/.bin/sls create_domain --stage pre
+          name: Deploy application # creates .serverless/stack.json w/ CF stack vars
+          command: node_modules/.bin/sls deploy --stage pre --no-confirm --force
+      
       - run:
-          name: Deploy application
-          command: node_modules/.bin/sls deploy --stage pre
+          name: Create route53 upsert
+          command: jq -n --argfile stack .serverless/stack.json -f resources/alias.json -M > .serverless/upsert_alias.json
+      
+      - run:
+          name: Update route53 & wait
+          command: aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file://.serverless/upsert_alias.json --query 'ChangeInfo.Id' --output text | xargs aws route53 wait resource-record-sets-changed --id
