@@ -22,3 +22,11 @@ The service stack is namespaced to allow multiple concurrent deployments for tes
 ```
 sls deploy --stage <namespace>
 ```
+
+Start the app in dev mode
+
+    npm start
+
+Build the app in prod mode
+
+    npm run build
