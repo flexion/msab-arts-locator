@@ -39,6 +39,7 @@ jobs:
       - run:
           name: Deploy application # creates .serverless/stack.json w/ CF stack vars
           command: node_modules/.bin/sls deploy --stage pre --no-confirm --force
+          no_output_timeout: 30m
       
       - run:
           name: Create route53 upsert
