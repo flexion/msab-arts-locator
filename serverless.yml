@@ -5,7 +5,7 @@ plugins:
   - serverless-stack-output
 
 custom:
-  domain: ${opt:stage}.msab.flexion.us
+  domain: ${opt:stage}.${env.DOMAIN_NAME}
   region: ${opt:region, 'us-east-2'}
   certificateId: ${env:CERTIFICATE_ID} # Required by AWS to be in us-east-1
 
