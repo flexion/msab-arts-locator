@@ -4,6 +4,22 @@ This project leverages AWS Lambda runtime `nodejs8.10`, so using Node 8 locally 
 ```
 nvm use 8.10
 ```
+
+## AWS Access
+
+To run any `serverless` commands, AWS command-line access is required. When using an IAM user directly, ensure
+
+* `AWS_ACCESS_KEY_ID`
+* `AWS_SECRET_ACCESS_KEY`
+
+are set. If using assume-role with MFA or a federated account, ensure
+
+* `AWS_SESSION_TOKEN`
+
+is also set.
+
+Basically, if you can run commands like `aws s3 ls`, then you should be in good shape.
+
 ## Prerequisites
 
 Deployment creates secure API endpoints behind a custom domain. In order for this to work, an SSL certificate needs to be configured (uploaded or created) in AWS Certificate Manager (ACM) and a DNS zone needs to be setup in Route53.
