@@ -43,6 +43,10 @@ The service stack is namespaced to allow multiple concurrent deployments for tes
 sls deploy --stage <namespace> --force
 ```
 
+## Fullstack / web-app client
+
+This project leverages the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
+
 Start the app in dev mode
 
     npm start
@@ -51,9 +55,7 @@ Build the app in prod mode
 
     npm run build
 
-## Fullstack / web-app client
+Test the app locally
 
-This project leverages the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
-
-_Insert info about building/testing/running client locally_
+    npm test
 
