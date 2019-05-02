@@ -1,61 +1,58 @@
-service: msab-arts-locator-${opt:stage}
+service: msab-arts-locator
 
 plugins:
-  - serverless-domain-manager
+  - fullstack-serverless
+  - serverless-stack-output
 
 custom:
-  customDomain:
-    domainName: ${opt:stage}.msab.flexion.us
-    basePath: api
-    stage: ${opt:stage}
-    certificateName: '*.msab.flexion.us'
-    createRoute53Record: true
-    endpointType: 'regional'
-  hostedZoneId: ${env:HOSTEDZONEID}
+  domain: ${opt:stage}.${env.DOMAIN_NAME}
   region: ${opt:region, 'us-east-2'}
+  certificateId: ${env:CERTIFICATE_ID} # Required by AWS to be in us-east-1
+
+  output:
+    file: .serverless/stack.json
+
+  fullstack:
+    domain: ${self:custom.domain}
+    certificate: 
+      Fn::Join: 
+        - ""
+        - - "arn:aws:acm:"
+          - "us-east-1"
+          - ":"
+          - "Ref": "AWS::AccountId"
+          - ":certificate/"
+          - "${self:custom.certificateId}"
+    bucketName: "${self:custom.region}"
+    distributionFolder: client/dist            # Path to the client assets to be uploaded to S3
+    indexDocument: index.html                  # The index document to use
+    errorDocument: error.html                  # The error document to use
+    singlePageApp: true                        # If true 403 errors will be rerouted (missing assets) to your root index document to support single page apps like React and Angular where the js framework handles routing
+    compressWebContent: true                   # Use compression when serving web content
+    apiPath: api                               # The path prefix for your API Gateway lambdas. The path for the lambda http event trigger needs to start with this too eg. api/myMethod 
+    clientCommand: mkdir -p dist && cp -v index.html error.html dist/
+    clientSrcPath: client                      # The path to where you want to run the clientCommand
+    # logging:
+    #   bucket: "${self:custom.region}-${self:custom.domain}-logs"
+    #   prefix: logs
+    minimumProtocolVersion: TLSv1.2_2018
+    priceClass: PriceClass_100
 
 provider:
   name: aws
   runtime: nodejs8.10
   stage: ${opt:stage, 'dev'}
   region: ${self:custom.region}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - apigateway:POST
-      Resource: !Sub arn:aws:apigateway:${self:custom.region}::/domainnames
-    - Effect: Allow
-      Action:
-        - apigateway:GET
-        - apigateway:DELETE
-      Resource: !Sub arn:aws:apigateway:${self:custom.region}::/domainnames/*
-    - Effect: Allow
-      Action:
-        - apigateway:POST
-      Resource: !Sub arn:aws:apigateway:${self:custom.region}::/domainnames/*/basepathmappings
-    - Effect: Allow
-      Action:
-        - cloudfront:UpdateDistribution
-      Resource: '*'
-    - Effect: Allow
-      Action:
-        - route53:ListHostedZones
-      Resource: '*'
-    - Effect: Allow
-      Action:
-        - acm:ListCertificates
-      Resource: '*'
-    - Effect: Allow
-      Action:
-        - route53:ChangeResourceRecordSets
-        - route53:GetHostedZone
-        - route53:ListResourceRecordSets
-      Resource: !Sub arn:aws:route53:::hostedzone/${self:custom.hostedZoneId}
 
 functions:
   hello:
     handler: handler.hello
     events:
       - http:
-          path: v1/hello
+          path: ${self:custom.fullstack.apiPath}/v1/hello
           method: get
+
+resources:
+  Outputs:
+    FullstackDomain:
+      Value: ${self:custom.domain}

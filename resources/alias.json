@@ -1,0 +1,29 @@
+{
+    "Comment": "Creating Alias resource record sets in Route 53",
+    "Changes": [
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": $stack["FullstackDomain"],
+                "Type": "A",
+                "AliasTarget": {
+                    "HostedZoneId": "Z2FDTNDATAQYW2",
+                    "DNSName": $stack["ApiDistribution"],
+                    "EvaluateTargetHealth": false
+                }
+            }
+        },
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": $stack["FullstackDomain"],
+                "Type": "AAAA",
+                "AliasTarget": {
+                    "HostedZoneId": "Z2FDTNDATAQYW2",
+                    "DNSName": $stack["ApiDistribution"],
+                    "EvaluateTargetHealth": false
+                }
+            }
+        }
+    ]
+}
