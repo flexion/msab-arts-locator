@@ -26,3 +26,9 @@ The service stack is namespaced to allow multiple concurrent deployments for tes
 ```
 sls deploy --stage <namespace> --force
 ```
+
+## Fullstack / web-app client
+
+This project leverages the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
+
+_Insert info about building/testing/running client locally_
