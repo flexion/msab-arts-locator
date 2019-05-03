@@ -35,9 +35,15 @@ jobs:
           command: |
             npm install
 
+      - run:
+          name: Install client dependencies
+          command: |
+            cd client && npm install
+
       - save_cache:
           paths:
             - node_modules
+            - client/node_modules
           key: v1-dependencies-
 
       - run:
