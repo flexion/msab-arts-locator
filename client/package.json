@@ -4,7 +4,7 @@
     "description": "Front end client for MSAB mobile Arts Locator application.",
     "author": "Flexion Inc.",
     "license": "MIT",
-    "main": "index.js",
+    "main": "sass/main.scss",
     "scripts": {
         "debug": "node --inspect-brk node_modules/.bin/jest --runInBand .*test\\.js$",
         "fix": "prettier --write",
@@ -58,6 +58,8 @@
         "uuid": "^3.3.2"
     },
     "devDependencies": {
+        "bulma": "^0.7.4",
+        "node-sass": "^4.12.0",
         "prettier": "1.16.4"
     }
 }
