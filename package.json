@@ -20,8 +20,7 @@
   },
   "homepage": "https://github.com/flexion/msab-arts-locator#readme",
   "devDependencies": {
-    "fullstack-serverless": "^0.6.0",
     "serverless": "^1.41.1",
-    "serverless-stack-output": "^0.2.3"
+    "serverless-domain-manager": "^3.2.1"
   }
 }
