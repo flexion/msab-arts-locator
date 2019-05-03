@@ -37,6 +37,10 @@ custom:
     #   prefix: logs
     minimumProtocolVersion: TLSv1.2_2018
     priceClass: PriceClass_100
+    objectHeaders:
+      '*.html':
+        - name: Cache-Control
+          value: no-cache    
 
 provider:
   name: aws
