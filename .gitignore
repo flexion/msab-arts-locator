@@ -65,3 +65,5 @@ dist
 
 # cache files
 .cache
+
+.DS_Store
