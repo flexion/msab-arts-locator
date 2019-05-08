@@ -1,6 +1,6 @@
 //business object goes here
-const { validateRequestData } = require('../../utilities/CleanUtils');
-const { toJSON } = require('../../utilities/ObjectUtils');
+const { validateRequestData } = require('../utilities/CleanUtils');
+const { toJSON } = require('../utilities/ObjectUtils');
 
 /**
  * constructor

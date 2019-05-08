@@ -32,4 +32,4 @@ const applicationContext = {
   },
 };
 
-export { applicationContext };
+module.exports = applicationContext;

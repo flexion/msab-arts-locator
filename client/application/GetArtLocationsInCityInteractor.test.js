@@ -1,32 +1,32 @@
 const assert = require('assert');
-const {
-  createMockApplicationContext,
-  createSchemaValidationApplicationContext,
-} = require('../../utilities/TestUtils');
+const { createMockApplicationContext } = require('../utilities/TestUtils');
 const { getArtLocationsInCity } = require('./GetArtLocationsInCityInteractor');
-
+const mockData = require('../persistence/mockData');
 describe('valid city', () => {
   it('should reject requests with missing city in the requestData', async () => {
-    const mockApplicationContext = createSchemaValidationApplicationContext();
+    const mockApplicationContext = createMockApplicationContext({ mockData });
     const testResponseCallback = () => {};
 
     try {
       await getArtLocationsInCity({
-        requestData: {},
+        requestData: { meow: 'meow' },
         responseCallback: testResponseCallback,
         applicationContext: mockApplicationContext,
       });
     } catch (e) {
+      console.log('e: ', e);
       assert.ok(
         e.message.includes(
-          "should be object with a string property 'city' only"
-        )
+          "should be object with a string property 'city' only",
+        ),
       );
     }
   });
 
   it('should accept well formed and complete requests', async () => {
-    const mockApplicationContext = createSchemaValidationApplicationContext();
+    const mockApplicationContext = createMockApplicationContext({
+      mockData,
+    });
     const testResponseCallback = () => {};
 
     try {
