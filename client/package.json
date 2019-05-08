@@ -51,6 +51,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-sort-keys-fix": "^1.0.1",
     "jest": "^24.5.0",
+    "papaparse": "^4.6.3",
     "parcel-bundler": "^1.12.3",
     "pug": "^2.0.3",
     "react": "^16.8.6",

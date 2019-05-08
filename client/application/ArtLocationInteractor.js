@@ -1,7 +1,7 @@
 //Interactor goes here
 const { toJSON } = require('../../utilities/ObjectUtils');
 const { validateRequestData } = require('../../utilities/CleanUtils');
-const { NewArtEntity } = require('../../domain/NewArtEntity');
+const { ArtLocation } = require('../../domain/ArtLocation');
 
 /**
  *
@@ -10,7 +10,7 @@ const { NewArtEntity } = require('../../domain/NewArtEntity');
  * @param responseCallback
  * @returns {Promise<*>}
  */
-exports.NewArtEntity = async ({
+exports.ArtLocation = async ({
   requestData,
   responseCallback,
   applicationContext,
@@ -60,22 +60,22 @@ exports.NewArtEntity = async ({
 
   // An interactor knows the data strucures of the entities it mediates and assembles
   // those datastructures as approptiate. It doesn't blindly pass them what it receives from its caller.
-  const rawArtEntity = { description: requestData.description };
+  const rawArtLocation = { description: requestData.description };
 
   // The interactor doesn't know the details of what constitutes valid entitiy data. It relies
   // on entities for that validation.
-  const NewArtEntity = new NewArtEntity({ rawArtEntity, applicationContext });
+  const ArtLocation = new ArtLocation({ rawArtLocation, applicationContext });
 
   // Once the entities have done thier work, if the results need to be persisted, the interactor
   // extracts entity data and assebles data records that is passes to the persistencd gateway.
-  const artEntityData = toJSON(NewArtEntity);
+  const artLocationData = toJSON(ArtLocation);
 
   // The interactor invokes a very specific persistence gateway operation.
   applicationContext
     .getPersistenceGateway()
-    .createArtEntity({ artEntityData, applicationContext });
+    .createArtLocation({ artLocationData, applicationContext });
 
   // The interactor invokes a callback (probably in the presenter) to provide results. The
   // function signature should be at the same semantic level as the interactor.
-  responseCallback({ status: 'success', data: artEntityData });
+  responseCallback({ status: 'success', data: artLocationData });
 };

@@ -4,15 +4,15 @@ const { toJSON } = require('../../utilities/ObjectUtils');
 
 /**
  * constructor
- * @param rawArtEntity
+ * @param rawArtLocation
  * @param applicationContext
  * @constructor
  */
-function NewArtEntity({ rawArtEntity, applicationContext }) {
-  Object.assign(this, rawArtEntity, {
+function NewArtLocation({ rawArtLocation, applicationContext }) {
+  Object.assign(this, rawArtLocation, {
     createdAt:
-      rawArtEntity.createdAt || applicationContext.getCurrentTimestamp(),
-    enitityId: rawArtEntity.entityId || applicationContext.getUniqueIdString(),
+      rawArtLocation.createdAt || applicationContext.getCurrentTimestamp(),
+    enitityId: rawArtLocation.id || applicationContext.getUniqueIdString(),
   });
 
   // An business object owns the interface of the request. It will validate
@@ -20,7 +20,6 @@ function NewArtEntity({ rawArtEntity, applicationContext }) {
   var dataSchema = {
     type: 'object',
     required: [
-      'entityId',
       'name',
       'discipline',
       'primaryType',
@@ -33,12 +32,10 @@ function NewArtEntity({ rawArtEntity, applicationContext }) {
       'state',
       'zip',
       'description',
-      'createdAt',
     ],
     allOf: [
       {
         properties: {
-          entityId: { type: 'string' },
           description: { type: 'string', minLength: 5 },
           name: { type: 'string', minLength: 5 },
           discipline: { type: 'string', minLength: 5 },
@@ -51,7 +48,6 @@ function NewArtEntity({ rawArtEntity, applicationContext }) {
           city: { type: 'string', minLength: 5 },
           state: { type: 'string', minLength: 2 },
           zip: { type: 'number' },
-          createdAt: { type: 'number' },
         },
         additionalProperties: true,
       },
@@ -83,4 +79,4 @@ function NewArtEntity({ rawArtEntity, applicationContext }) {
   validateRequestData({ data: entityData, dataSchema, applicationContext });
 }
 
-module.exports = { NewArtEntity };
+module.exports = { NewArtLocation };
