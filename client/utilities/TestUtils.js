@@ -2,7 +2,7 @@
  *
  * @param options
  */
-function createMockApplicationContext(options) {
+function createMockApplicationContext(options = {}) {
   return {
     getUniqueIdString: () => {
       return '413f62ce-d7c8-446e-aeda-14a2a625a626';
@@ -13,11 +13,10 @@ function createMockApplicationContext(options) {
     getJsonValidator: () => ({
       validateJson: () => {},
     }),
-    getPersistenceGateway: () => ({
-      createTodo: () => {},
-      readAllTodos: () => {},
-      deleteAllTodos: () => {},
-    }),
+    getPersistenceGateway: () => ({ readAllLocationsByCity: () => {} }),
+    getDataReader: () => {
+      return options.mockData;
+    },
     ...options,
   };
 }
