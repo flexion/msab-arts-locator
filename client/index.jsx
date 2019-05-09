@@ -3,7 +3,6 @@ import App from 'cerebral';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Container } from 'bloomer';
-
 import { Home } from './views/Home';
 import { presenter } from './presenter/presenter';
 
