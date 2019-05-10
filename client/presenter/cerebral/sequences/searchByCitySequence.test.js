@@ -1,52 +1,56 @@
-// import { CerebralTest } from 'cerebral/test';
-// import { createMockApplicationContext } from '../../../utilities/TestUtils';
-// import { presenter } from '../presenter';
+import { CerebralTest } from 'cerebral/test';
+import { createMockApplicationContext } from '../../../utilities/TestUtils';
+import { presenter } from '../../../presenter/presenter';
 
-// describe('NewTodoSequence', () => {
-//   it('should invoke the new Todo use case interactor', async () => {
-//     const mockApplicationContext = createMockApplicationContext({
-//       getUseCases: () => ({
-//         newTodo: request => {
-//           expect(request.requestData).toMatchObject({
-//             description: 'Make a sammich.',
-//           });
-//           expect(request.responseCallback).toBeDefined();
-//           expect(request.applicationContext).toBeDefined();
-//         },
-//       }),
-//     });
+describe('searchByCitySequence', () => {
+  it('should invoke the searchByCity use case interactor', async () => {
+    const mockApplicationContext = createMockApplicationContext({
+      getUseCases: () => ({
+        getArtLocationsInCity: (request) => {
+          expect(request.requestData).toMatchObject({
+            city: 'Mankato',
+          });
+          expect(request.responseCallback).toBeDefined();
+          expect(request.applicationContext).toBeDefined();
+        },
+      }),
+    });
 
-//     presenter.providers.applicationContext = mockApplicationContext;
-//     const test = CerebralTest(presenter);
-//     test.setState('todoPage.todoForm.description', 'Make a sammich.');
+    presenter.providers.applicationContext = mockApplicationContext;
+    const test = CerebralTest(presenter);
+    test.setState('cityValue', 'Mankato');
 
-//     await test.runSequence('SubmitNewTodoSequence');
-//   });
+    await test.runSequence('searchByCitySequence');
+  });
 
-//   it('should add the interactor response to cerebral state', async () => {
-//     const mockApplicationContext = createMockApplicationContext({
-//       getUseCases: () => ({
-//         newTodo: request => {
-//           request.responseCallback(responseData);
-//         },
-//       }),
-//     });
+  it('should add the interactor response to cerebral state', async () => {
+    const mockApplicationContext = createMockApplicationContext({
+      getUseCases: () => ({
+        getArtLocationsInCity: (request) => {
+          request.responseCallback(responseData);
+        },
+      }),
+    });
 
-//     presenter.providers.applicationContext = mockApplicationContext;
-//     const test = CerebralTest(presenter);
-//     test.setState('todoPage.todoForm.description', 'Make a sammich.');
+    presenter.providers.applicationContext = mockApplicationContext;
+    const test = CerebralTest(presenter);
+    test.setState('locationsList', []);
 
-//     await test.runSequence('SubmitNewTodoSequence');
+    await test.runSequence('searchByCitySequence');
 
-//     expect(test.getState('todoPage.todos')).toMatchObject(responseData.data);
-//   });
-// });
+    expect(test.getState('locationsList')).toMatchObject(responseData.data);
+  });
+});
 
-// const responseData = {
-//   status: 'success',
-//   data: {
-//     description: 'Make a sammich.',
-//     createdAt: 1554070560001,
-//     todoId: '413f62ce-d7c8-446e-aeda-14a2a625a626',
-//   },
-// };
+const responseData = {
+  status: 'success',
+  data: {
+    locationsList: [
+      {
+        city: 'Mankato',
+        description:
+          "Andria Theatre will enrich people's lives while providing unique performance and educational opportunities.",
+      },
+    ],
+  },
+};
