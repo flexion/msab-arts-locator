@@ -1,7 +1,4 @@
-import { Container } from 'bloomer';
+import React from 'react';
+// import { Container, Header } from 'bloomer';
 
-export const Header = () => (
-  <Header>
-    <Container>Header</Container>
-  </Header>
-);
+export const AppHeader = () => <div>header</div>;

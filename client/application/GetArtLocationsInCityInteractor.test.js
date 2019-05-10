@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { createMockApplicationContext } = require('../utilities/TestUtils');
-const { getArtLocationsInCity } = require('./GetArtLocationsInCityInteractor');
+const { getArtLocationsInCity } = require('./getArtLocationsInCityInteractor');
 const mockData = require('../persistence/mockData');
 describe('valid city', () => {
   it('should reject requests with missing city in the requestData', async () => {

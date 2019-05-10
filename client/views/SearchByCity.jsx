@@ -5,10 +5,10 @@ import React from 'react';
 export const SearchByCity = connect(
   {
     cityValue: state.cityValue,
-    submitCitySearchSequence: sequences.submitSearchSequence,
-    updateSearchTermSequence: sequences.updateSearchTermSequence,
+    searchByCitySequence: sequences.searchByCitySequence,
+    updateCitySearchSequence: sequences.updateCitySearchSequence,
   },
-  ({ cityValue, submitCitySearchSequence, updateSearchTermSequence }) => {
+  ({ cityValue, searchByCitySequence, updateCitySearchSequence }) => {
     return (
       <form
         className="search"
@@ -16,7 +16,7 @@ export const SearchByCity = connect(
         noValidate
         onSubmit={(e) => {
           e.preventDefault();
-          submitCitySearchSequence();
+          searchByCitySequence();
         }}
       >
         <label className="sr-only" htmlFor="city-search">
@@ -28,7 +28,7 @@ export const SearchByCity = connect(
           name="citySearch"
           value={cityValue}
           onChange={(e) => {
-            updateSearchTermSequence({
+            updateCitySearchSequence({
               cityValue: e.target.value,
             });
           }}

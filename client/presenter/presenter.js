@@ -1,21 +1,20 @@
-import { SubmitNewTodoSequence } from './sequences/SubmitNewTodoSequence';
-import { updateNewTodoDescription } from './sequences/updateNewTodoDescription';
-
+import { searchByCitySequence } from './cerebral/sequences/searchByCitySequence';
+import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
+import applicationContext from '../environments/dev/ApplicationContext';
 // Cerebral module
+
 export const presenter = {
   catch: [
-    [ServerInvalidResponseError, setCurrentPageErrorSequence], // 501, 503, etc
-    [UnauthorizedRequestError, unauthorizedErrorSequence], // 403
-    [NotFoundError, notFoundErrorSequence], //404
-    [UnidentifiedUserError, unidentifiedUserErrorSequence], //401
-    [ActionError, setCurrentPageErrorSequence], // generic error handler
+    // [ServerInvalidResponseError, setCurrentPageErrorSequence], // 501, 503, etc
+    // [UnauthorizedRequestError, unauthorizedErrorSequence], // 403
+    // [NotFoundError, notFoundErrorSequence], //404
+    // [UnidentifiedUserError, unidentifiedUserErrorSequence], //401
+    // [ActionError, setCurrentPageErrorSequence], // generic error handler
   ],
-  providers: {},
-  sequences: { updateNewTodoDescription, SubmitNewTodoSequence },
+  providers: { applicationContext },
+  sequences: { searchByCitySequence, updateCitySearchSequence },
   state: {
-    todoPage: {
-      todos: [{ description: 'make lunch' }, { description: 'make dinner' }],
-      todoForm: { description: '' },
-    },
+    cityValue: '',
+    locationsList: [],
   },
 };

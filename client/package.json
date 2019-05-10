@@ -12,6 +12,8 @@
     "build-task:scss-compile": "node-sass sass/ -o dist/css",
     "build-task:autoprefixer": "postcss dist/css/*.css --use autoprefixer -d dist/css",
     "sass:build": "npm run build-task:scss-compile && npm run build-task:autoprefixer",
+    "build-css": "node-sass-chokidar --include-path ./sass --include-path ./node_modules sass/ -o sass/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./sass --include-path ./node_modules sass/ -o sass/ --watch --recursive",
     "test:watch": "jest --watch .*test\\.js$",
     "test:unit": "jest --config jest-unit.config.js ./src/.*test\\.js$",
     "test:e2e": "jest --config jest-e2e.config.js ./e2e/.*test\\.js$",
@@ -19,7 +21,8 @@
     "test:all": "npm run lint && npm run test && npm run test:pa11y && npm run cypress",
     "lint": "eslint . && eslint ./**/*.jsx && stylelint ./**/*.scss",
     "lint:fix": "eslint --fix . && eslint --fix ./**/*.jsx && stylelint --fix ./**/*.scss",
-    "start": "npm run sass:build && parcel index.pug --port 5678 ",
+    "start": "npm-run-all -p watch-css start-js",
+    "start-js": "parcel index.pug --port 5678 ",
     "build": "parcel build index.pug"
   },
   "repository": {
@@ -51,6 +54,8 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-sort-keys-fix": "^1.0.1",
     "jest": "^24.5.0",
+    "node-sass-chokidar": "^1.3.4",
+    "npm-run-all": "^4.1.5",
     "papaparse": "^4.6.3",
     "parcel-bundler": "^1.12.3",
     "pug": "^2.0.3",
