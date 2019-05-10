@@ -1,10 +1,14 @@
 const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
-const { newArtLocation } = require('../../application/ArtLocationInteractor');
+const { newArtLocation } = require('../../application/artLocationInteractor');
+const {
+  getArtLocationsInCity,
+} = require('../../application/getArtLocationsInCityInteractor');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   readAllLocationsByCity,
 } = require('../../persistence/StaticPersistence');
+
 const applicationContext = {
   getUniqueIdString: () => {
     return uuidv4();
@@ -28,6 +32,7 @@ const applicationContext = {
   getUseCases: () => {
     return {
       newArtLocation,
+      getArtLocationsInCity,
     };
   },
 };
