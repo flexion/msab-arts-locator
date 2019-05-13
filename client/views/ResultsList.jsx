@@ -1,6 +1,7 @@
 import { connect } from '@cerebral/react';
-import { sequences, state } from 'cerebral';
+import { state } from 'cerebral';
 import React from 'react';
+import { LocationListItem } from './LocationListItem';
 import { Box } from 'bloomer';
 export const ResultsList = connect(
   {
@@ -9,11 +10,14 @@ export const ResultsList = connect(
   ({ locations }) => {
     return (
       <Box>
-        <ol>
+        {!!locations.length && <span>Search Results</span>}
+        <ul>
           {locations.map((location, i) => (
-            <li key={i}>{location.name}</li>
+            <li key={i}>
+              <LocationListItem location={location} />
+            </li>
           ))}
-        </ol>
+        </ul>
       </Box>
     );
   },
