@@ -10,8 +10,8 @@ describe('searchByCitySequence', () => {
           expect(request.requestData).toMatchObject({
             city: 'Mankato',
           });
-          expect(request.responseCallback).toBeDefined();
           expect(request.applicationContext).toBeDefined();
+          return { status: 'success', data: responseData.data };
         },
       }),
     });
@@ -27,7 +27,7 @@ describe('searchByCitySequence', () => {
     const mockApplicationContext = createMockApplicationContext({
       getUseCases: () => ({
         getArtLocationsInCity: (request) => {
-          request.responseCallback(responseData);
+          return { status: 'success', data: responseData.data };
         },
       }),
     });
