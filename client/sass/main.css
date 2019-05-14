@@ -6928,3 +6928,13 @@ label.panel-block {
 
 h1 {
   font-family: 'Frank Ruhl Libre', serif; }
+
+label {
+  font-family: 'Asap', sans-serif; }
+
+.location-name {
+  font-family: 'Asap', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px; }

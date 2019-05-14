@@ -40,7 +40,9 @@ export const SearchByCity = connect(
               </Label>
               <Control>
                 <Input
-                  type="text"
+                  className="input is-medium"
+                  type="search"
+                  //type="text"
                   id="city-search"
                   name="citySearch"
                   value={cityValue}
@@ -50,6 +52,9 @@ export const SearchByCity = connect(
                     });
                   }}
                 />
+                <span className="icon is-right">
+                  <i className="fas fa-check" />
+                </span>
               </Control>
             </Field>
             <Control>

@@ -20,24 +20,26 @@ export const LocationListItem = ({ location }) => {
       <Media>
         <MediaLeft>
           {!location.icon && (
-            <Image isSize="128x128" src="https://via.placeholder.com/128x128" />
+            <Image isSize="64x64" src="https://via.placeholder.com/64x64" />
           )}
-          {!!location.icon && <Image isSize="128x128" src={location.icon} />}
+          {!!location.icon && <Image isSize="64x64" src={location.icon} />}
         </MediaLeft>
         <MediaContent>
           <Content>
             <p />
-            <a href="#">
-              <strong>{location.name}</strong>
+            <a href="#" className="has-text-primary">
+              <span>{location.name}</span>
             </a>
             <br />
             <Level isMobile>
               <LevelLeft>
-                <LevelItem>{location.address1}</LevelItem>
+                <LevelItem className="has-text-grey">
+                  {location.address1}
+                </LevelItem>
               </LevelLeft>
               <LevelRight>
                 <LevelItem>
-                  <span className="distance-text">Distance Unavailable</span>
+                  <span className="has-text-primary">0 Miles</span>
                   <Icon isSize="small">
                     <span className="map-icon" />
                   </Icon>
