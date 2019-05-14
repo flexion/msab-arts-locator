@@ -5,6 +5,7 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     title Web App
     link(rel="stylesheet" href="index.scss")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre")
   body
     #app
-    script(src="index.jsx")
+    script(src="index." + process.env.MSAB_ENV + ".js")
