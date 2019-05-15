@@ -38,9 +38,9 @@ custom:
     minimumProtocolVersion: TLSv1.2_2018
     priceClass: PriceClass_100
     objectHeaders:
-      '*.html':
+      index.html:
         - name: Cache-Control
-          value: no-cache    
+          value: public, must-revalidate, proxy-revalidate, max-age=0    
 
 provider:
   name: aws
