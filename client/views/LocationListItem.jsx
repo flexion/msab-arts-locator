@@ -26,8 +26,7 @@ export const LocationListItem = ({ location }) => {
         </MediaLeft>
         <MediaContent>
           <Content>
-            <p />
-            <a href="#" className="has-text-primary">
+            <a href="#" className="has-text-primary has-text-weight-semibold">
               <span>{location.name}</span>
             </a>
             <br />
@@ -39,15 +38,15 @@ export const LocationListItem = ({ location }) => {
               </LevelLeft>
               <LevelRight>
                 <LevelItem>
-                  <span className="has-text-primary">0 Miles</span>
-                  <Icon isSize="small">
-                    <span className="map-icon" />
-                  </Icon>
+                  <span className="has-text-primary has-text-weight-semibold">
+                    0 Miles
+                    <Icon className="font-purple fas fa-map-marker-alt" />
+                  </span>
                 </LevelItem>
               </LevelRight>
             </Level>
             <Level isMobile>
-              <Tag isColor="info">tags go here</Tag>
+              <Tag isColor="info">{location.discipline}</Tag>
             </Level>
           </Content>
         </MediaContent>

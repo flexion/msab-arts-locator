@@ -1,4 +1,7 @@
 @charset "utf-8";
+$msab-purple: #563281;
+$info: $msab-purple;
+$primary: #217575;
 @import '../node_modules/bulma/bulma.sass';
 
 h1 {
@@ -15,4 +18,16 @@ label {
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
+}
+
+.header-section {
+  padding-bottom: 0px;
+}
+
+.font-purple {
+  color: $msab-purple;
+}
+
+.bg-purple {
+  background-color: $msab-purple;
 }
