@@ -19,7 +19,7 @@ export const LocationListItem = ({ location }) => {
     <Box>
       <Media>
         <MediaLeft>
-          {!location.icon && (
+          {!!location.icon && (
             <Image isSize="64x64" src="https://via.placeholder.com/64x64" />
           )}
           {!!location.icon && <Image isSize="64x64" src={location.icon} />}
@@ -38,10 +38,12 @@ export const LocationListItem = ({ location }) => {
               </LevelLeft>
               <LevelRight>
                 <LevelItem>
-                  <span className="has-text-primary has-text-weight-semibold">
-                    0 Miles
-                    <Icon className="font-purple fas fa-map-marker-alt" />
-                  </span>
+                  <a href={location.googleURL} target="_new">
+                    <span className="has-text-primary has-text-weight-semibold">
+                      Find on Map
+                      <Icon className="font-purple fas fa-map-marker-alt" />
+                    </span>
+                  </a>
                 </LevelItem>
               </LevelRight>
             </Level>

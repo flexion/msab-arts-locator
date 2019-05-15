@@ -1,6 +1,7 @@
 import { searchByCitySequence } from './cerebral/sequences/searchByCitySequence';
 import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
 import applicationContext from '../environments/dev/ApplicationContext';
+import { mapURLHelper } from '../presenter/cerebral/computeds/mapURLHelper';
 // Cerebral module
 
 export const presenter = {
@@ -16,5 +17,6 @@ export const presenter = {
   state: {
     cityValue: '',
     locationsList: [],
+    mapURLHelper,
   },
 };
