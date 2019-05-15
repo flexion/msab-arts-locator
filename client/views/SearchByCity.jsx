@@ -19,7 +19,7 @@ export const SearchByCity = connect(
   },
   ({ cityValue, searchByCitySequence, updateCitySearchSequence }) => {
     return (
-      <Section className="has-background-grey">
+      <Section className="msab-has-background-grey">
         <Container>
           <Title isSize={3} className="has-text-white">
             Explore Minnesota Arts
@@ -38,7 +38,7 @@ export const SearchByCity = connect(
               Enter a city to find art near you
             </Label>
             <Field hasAddons>
-              <Control>
+              <Control style={{ maxWidth: '100%', width: '100%' }}>
                 <Input
                   className="input is-medium"
                   type="search"

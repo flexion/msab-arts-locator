@@ -6932,6 +6932,9 @@ h1 {
 label {
   font-family: 'Asap', sans-serif; }
 
+.msab-has-background-grey {
+  background-color: #565c65; }
+
 .location-name {
   font-family: 'Asap', sans-serif;
   font-style: normal;
