@@ -1,6 +1,36 @@
 @charset "utf-8";
+$msab-purple: #563281;
+$msab-grey: #565c65;
+$info: $msab-purple;
+$primary: #217575;
 @import '../node_modules/bulma/bulma.sass';
 
 h1 {
   font-family: 'Frank Ruhl Libre', serif;
+}
+
+label {
+  font-family: 'Asap', sans-serif;
+}
+.msab-has-background-grey {
+  background-color: $msab-grey;
+}
+.location-name {
+  font-family: 'Asap', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.header-section {
+  padding-bottom: 0px;
+}
+
+.font-purple {
+  color: $msab-purple;
+}
+
+.bg-purple {
+  background-color: $msab-purple;
 }

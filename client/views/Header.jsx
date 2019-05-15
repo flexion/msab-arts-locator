@@ -13,7 +13,7 @@ import mnlogo from '../images/mnlogo.png';
 import artsboard from '../images/artsboard.png';
 
 export const AppHeader = () => (
-  <Section>
+  <Section className="header-section">
     <Container>
       <Level isMobile>
         <LevelLeft>

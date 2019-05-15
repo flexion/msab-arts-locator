@@ -19,9 +19,9 @@ export const SearchByCity = connect(
   },
   ({ cityValue, searchByCitySequence, updateCitySearchSequence }) => {
     return (
-      <Section className="has-background-grey">
+      <Section className="msab-has-background-grey">
         <Container>
-          <Title isSize={2} className="has-text-white">
+          <Title isSize={3} className="has-text-white">
             Explore Minnesota Arts
           </Title>
 
@@ -34,13 +34,15 @@ export const SearchByCity = connect(
               searchByCitySequence();
             }}
           >
-            <Field>
-              <Label className="has-text-white">
-                Enter a city to find art near you
-              </Label>
-              <Control>
+            <Label className="has-text-white">
+              Enter a city to find art near you
+            </Label>
+            <Field hasAddons>
+              <Control style={{ maxWidth: '100%', width: '100%' }}>
                 <Input
-                  type="text"
+                  className="input is-medium"
+                  type="search"
+                  //type="text"
                   id="city-search"
                   name="citySearch"
                   value={cityValue}
@@ -51,12 +53,14 @@ export const SearchByCity = connect(
                   }}
                 />
               </Control>
+              <Control>
+                <Button isColor="primary" type="submit" className="is-medium">
+                  <span className="icon is-right has-text-white">
+                    <i className="fas fa-search" />
+                  </span>
+                </Button>
+              </Control>
             </Field>
-            <Control>
-              <Button isColor="primary" type="submit">
-                Search
-              </Button>
-            </Control>
           </form>
         </Container>
       </Section>
