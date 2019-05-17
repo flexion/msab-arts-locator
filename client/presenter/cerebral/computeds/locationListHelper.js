@@ -24,7 +24,7 @@ const createLocationURL = (location) => {
   return location;
 };
 
-export const mapURLHelper = (get) => {
+export const locationListHelper = (get) => {
   const arr = get(state.locationsList);
   return arr.length ? arr.map(createLocationURL) : [];
 };

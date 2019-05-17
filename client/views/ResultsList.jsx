@@ -5,7 +5,7 @@ import { LocationListItem } from './LocationListItem';
 import { Section, Container, Title } from 'bloomer';
 export const ResultsList = connect(
   {
-    locations: state.mapURLHelper, //this alters the location list to include google url
+    locations: state.locationListHelper, //this alters the location list to include google url
   },
   ({ locations }) => {
     return (
