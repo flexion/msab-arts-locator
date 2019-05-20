@@ -6935,6 +6935,17 @@ label {
 .msab-has-background-grey {
   background-color: #565c65; }
 
+.msab-has-background-teal {
+  background-color: #acdcdc; }
+
+.msab-footer {
+  padding-top: 5px;
+  padding-bottom: 40px;
+  height: 28px; }
+
+.msab-filter {
+  padding: 5px; }
+
 .location-name {
   font-family: 'Asap', sans-serif;
   font-style: normal;
@@ -6948,5 +6959,12 @@ label {
 .font-purple {
   color: #563281; }
 
-.bg-purple {
+.msab-has-background-purple {
   background-color: #563281; }
+
+li:not(:first-child) {
+  padding-top: 15px; }
+
+.msab-location-media {
+  padding-bottom: 15px;
+  border-bottom: 1px black solid; }

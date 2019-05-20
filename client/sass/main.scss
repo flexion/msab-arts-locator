@@ -3,6 +3,7 @@ $msab-purple: #563281;
 $msab-grey: #565c65;
 $info: $msab-purple;
 $primary: #217575;
+$teal: #acdcdc;
 @import '../node_modules/bulma/bulma.sass';
 
 h1 {
@@ -12,9 +13,25 @@ h1 {
 label {
   font-family: 'Asap', sans-serif;
 }
+
 .msab-has-background-grey {
   background-color: $msab-grey;
 }
+
+.msab-has-background-teal {
+  background-color: $teal;
+}
+
+.msab-footer {
+  padding-top: 5px;
+  padding-bottom: 40px;
+  height: 28px;
+}
+
+.msab-filter {
+  padding: 5px;
+}
+
 .location-name {
   font-family: 'Asap', sans-serif;
   font-style: normal;
@@ -31,6 +48,14 @@ label {
   color: $msab-purple;
 }
 
-.bg-purple {
+.msab-has-background-purple {
   background-color: $msab-purple;
+}
+
+li:not(:first-child) {
+  padding-top: 15px;
+}
+.msab-location-media {
+  padding-bottom: 15px;
+  border-bottom: 1px black solid;
 }
