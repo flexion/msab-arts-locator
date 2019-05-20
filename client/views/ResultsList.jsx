@@ -2,6 +2,7 @@ import { connect } from '@cerebral/react';
 import { state } from 'cerebral';
 import React from 'react';
 import { LocationListItem } from './LocationListItem';
+import { Filter } from './Filter';
 import { Section, Container, Title } from 'bloomer';
 export const ResultsList = connect(
   {
@@ -12,9 +13,12 @@ export const ResultsList = connect(
       <Section>
         <Container>
           {!!locations.length && (
-            <Title isSize={4} className="has-text-grey">
-              Search Results
-            </Title>
+            <React.Fragment>
+              <Filter />
+              <Title isSize={4} className="has-text-grey">
+                Search Results {locations.length}
+              </Title>
+            </React.Fragment>
           )}
           <ul>
             {locations.map((location, i) => (

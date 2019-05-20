@@ -1,8 +1,9 @@
 import React from 'react';
 import { SearchByCity } from './SearchByCity';
 import { AppHeader } from './Header';
-import { Footer } from './Footer';
+import { Foot } from './Footer';
 import { ResultsList } from './ResultsList';
+import { Geo } from './geo';
 //import { Box } from 'bloomer';
 
 export const Home = () => (
@@ -10,6 +11,7 @@ export const Home = () => (
     <AppHeader />
     <SearchByCity />
     <ResultsList />
-    <Footer />
+    <Foot />
+    <Geo />
   </React.Fragment>
 );
