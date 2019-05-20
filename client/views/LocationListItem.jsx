@@ -13,7 +13,7 @@ import {
   Tag,
 } from 'bloomer';
 
-export const LocationListItem = ({ location }) => {
+export const LocationListItem = ({ location, hasGeo }) => {
   return (
     <Media className="msab-location-media">
       <MediaLeft>
@@ -38,7 +38,7 @@ export const LocationListItem = ({ location }) => {
               <LevelItem>
                 <a href={location.googleURL} target="_new">
                   <span className="has-text-primary has-text-weight-semibold">
-                    Map
+                    {!hasGeo ? 'Map' : location.distance}
                     <Icon className="font-purple fas fa-map-marker-alt" />
                   </span>
                 </a>
