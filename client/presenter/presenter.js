@@ -26,6 +26,6 @@ export const presenter = {
     locationsList: [],
     locationListHelper,
     haveGeo: false,
-    position: {},
+    position: { lat: 0, long: 0 },
   },
 };

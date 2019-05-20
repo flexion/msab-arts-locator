@@ -1,9 +1,8 @@
 import { state } from 'cerebral';
 
 export const setGeoPositionAction = ({ store, props }) => {
-  console.log('props', props);
-  if (props.result.status === 'success') {
+  if (props.status === 'success') {
     store.set(state.haveGeo, true);
-    store.set(state.position, props.position);
+    store.set(state.position, { lat: props.lat, long: props.long });
   }
 };
