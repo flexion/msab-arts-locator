@@ -8,25 +8,26 @@ export const Geo = connect(
     failureSeq: sequences.geoLocationFailSequence,
   },
   ({ successSeq, failureSeq }) => {
-    // const success = (position) => {
-    //   console.log('in success');
-    //   successSeq({ status: 'success', position });
-    // };
+    const success = (position) => {
+      successSeq({
+        status: 'success',
+        lat: position.coords.latitude,
+        long: position.coords.longitude,
+      });
+    };
+
+    const failure = (err) => {
+      failureSeq({ status: 'denied' });
+    };
 
     if (!navigator.geolocation) {
-      failureSeq('denied');
+      failureSeq({ status: 'denied' });
       return <div>fail geo </div>;
     } else {
-      console.log('navigator.geolocation is a thing');
-      navigator.geolocation.getCurrentPosition(
-        (props) => {
-          console.log('props', props);
-        },
-        (fail) => {
-          console.log('failboat', fail);
-        },
-      );
-      return <div />;
+      navigator.geolocation.getCurrentPosition(success, failure, {
+        enableHighAccuracy: true,
+      });
+      return null;
     }
   },
 );
