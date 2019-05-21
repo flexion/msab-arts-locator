@@ -16,3 +16,6 @@ See aws docs for further details: https://docs.aws.amazon.com/amazondynamodb/lat
 
 ## To Run the script after set up:
 node serverless/persistence/GeoSpatialDynamoSetup.js
+
+## To use the server UI:
+Open http://localhost:8000/shell/# in your browser
