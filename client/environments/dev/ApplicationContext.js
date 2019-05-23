@@ -4,10 +4,20 @@ const { newArtLocation } = require('../../application/artLocationInteractor');
 const {
   getArtLocationsInCity,
 } = require('../../application/getArtLocationsInCityInteractor');
+const {
+  getGeoLocationInteractor,
+} = require('../../application/getGeoInteractor');
+const {
+  getReverseCityLookupInteractor,
+} = require('../../application/getReverseCityLookupInteractor');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   readAllLocationsByCity,
 } = require('../../persistence/StaticPersistence');
+const { getGeoLocation } = require('../../persistence/GeoLocationGateway');
+const {
+  getCityFromGeo,
+} = require('../../persistence/ReverseCityLookupGateway');
 
 const applicationContext = {
   getUniqueIdString: () => {
@@ -24,6 +34,8 @@ const applicationContext = {
   getPersistenceGateway: () => {
     return {
       readAllLocationsByCity,
+      getGeoLocation,
+      getCityFromGeo,
     };
   },
   getDataReader: () => {
@@ -33,6 +45,8 @@ const applicationContext = {
     return {
       newArtLocation,
       getArtLocationsInCity,
+      getGeoLocationInteractor,
+      getReverseCityLookupInteractor,
     };
   },
 };

@@ -1,7 +1,6 @@
 import { searchByCitySequence } from './cerebral/sequences/searchByCitySequence';
 import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
-import { geoLocationFailSequence } from './cerebral/sequences/geoLocationFailSequence';
-import { geoLocationSuccessSequence } from './cerebral/sequences/geoLocationSuccessSequence';
+import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSequence';
 import applicationContext from '../environments/dev/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 // Cerebral module
@@ -18,8 +17,7 @@ export const presenter = {
   sequences: {
     searchByCitySequence,
     updateCitySearchSequence,
-    geoLocationSuccessSequence,
-    geoLocationFailSequence,
+    getGeoLocationSequence,
   },
   state: {
     cityValue: '',
