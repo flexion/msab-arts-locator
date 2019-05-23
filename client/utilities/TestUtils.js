@@ -13,7 +13,11 @@ function createMockApplicationContext(options = {}) {
     getJsonValidator: () => ({
       validateJson: () => {},
     }),
-    getPersistenceGateway: () => ({ readAllLocationsByCity: () => {} }),
+    getPersistenceGateway: () => ({
+      readAllLocationsByCity: () => {},
+      getGeoLocation: () => {},
+      getCityFromGeo: () => {},
+    }),
     getDataReader: () => {
       return options.mockData;
     },
