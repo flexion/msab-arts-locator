@@ -7,5 +7,5 @@ export const getReverseCityAction = async ({ applicationContext, props }) => {
       requestData: props,
       applicationContext,
     });
-  return { result };
+  return result.data;
 };

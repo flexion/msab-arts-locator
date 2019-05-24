@@ -5,7 +5,7 @@ export const setGeoAction = ({ store, props }) => {
     lat: props.result.data.coords.latitude,
     long: props.result.data.coords.longitude,
   };
-  if (props.status === 'success') {
+  if (props.result.status === 'success') {
     store.set(state.haveGeo, true);
     store.set(state.position, geo);
   } else {

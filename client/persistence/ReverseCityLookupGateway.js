@@ -23,12 +23,16 @@ const makeRequest = (method, url) => {
 };
 
 const getCityFromGeo = async ({ data }) => {
-  const method = 'GET';
-  const geoApiUrl = 'https://nominatim.openstreetmap.org/reverse?format=json';
-  let url = `${geoApiUrl}&lat=${data.lat}&lon=${data.long}&addressdetails=1`;
-  const addressData = await makeRequest(method, url);
-  const results = { cityValue: JSON.parse(addressData).address.town };
-  return results;
+  if (data.lat && data.long) {
+    const method = 'GET';
+    const geoApiUrl = 'https://nominatim.openstreetmap.org/reverse?format=json';
+    let url = `${geoApiUrl}&lat=${data.lat}&lon=${data.long}&addressdetails=1`;
+    const addressData = await makeRequest(method, url);
+    const results = { cityValue: JSON.parse(addressData).address.town };
+    return results;
+  } else {
+    return {};
+  }
 };
 
 module.exports = { getCityFromGeo };

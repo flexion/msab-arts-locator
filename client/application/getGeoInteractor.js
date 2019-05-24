@@ -9,7 +9,6 @@ exports.getGeoLocationInteractor = async ({
     additionalProperties: false,
     errorMessage: 'should be an empty object',
   };
-
   // An interactor validates that the required objects are present.
   validateRequestData({ data: requestData, dataSchema, applicationContext });
 

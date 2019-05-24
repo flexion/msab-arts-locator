@@ -1,4 +1,3 @@
-import { props, state } from 'cerebral';
-import { set } from 'cerebral/factories';
+import { setCityAction } from '../actions/setCityAction';
 
-export const updateCitySearchSequence = [set(state.cityValue, props.cityValue)];
+export const updateCitySearchSequence = [setCityAction];
