@@ -7,30 +7,30 @@ const pageTitleSuffix = ' | MN Arts Board';
 const router = {
   initialize: (app) => {
     document.title = 'Art Around MN';
-    // const checkLoggedIn = (cb) => {
-    //   return function() {
-    //     if (!app.getState('user')) {
-    //       const path = app.getState('cognitoLoginUrl');
-    //       window.location.replace(path);
-    //     } else {
-    //       cb.apply(null, arguments);
-    //     }
-    //   };
-    //};
+    const checkLoggedIn = (cb) => {
+      return function() {
+        // if (!app.getState('user')) {
+        //   const path = app.getState('cognitoLoginUrl');
+        //   window.location.replace(path);
+        // } else {
+        cb.apply(null, arguments);
+        //}
+      };
+    };
     route('/', () => {
-      console.log('in main route');
+      app.getSequence('routeChangeSequence')({ page: 'Home' });
     });
-    route('/submit-location/*', () => {
+
+    route('/submit-location', () => {
       document.title = `Submit Location ${pageTitleSuffix}`;
+      app.getSequence('routeChangeSequence')({ page: 'LocationInput' });
     });
+
     route(
-      '/curate-locations/*',
-      checkLoggedIn((docketNumber, documentId) => {
-        document.title = `Document details ${pageTitleSuffix}`;
-        app.getSequence('gotoDocumentDetailSequence')({
-          docketNumber,
-          documentId,
-        });
+      '/curate-locations',
+      checkLoggedIn(() => {
+        document.title = `Curate Locations ${pageTitleSuffix}`;
+        app.getSequence('routeChangeSequence')({ page: 'Curate' });
       }),
     );
 

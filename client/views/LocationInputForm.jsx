@@ -10,6 +10,7 @@ import {
   Section,
   Container,
   Title,
+  Select,
 } from 'bloomer';
 
 export const LocationInputForm = connect(

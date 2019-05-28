@@ -7,7 +7,7 @@ import { Main } from './views/Main';
 import { presenter } from './presenter/presenter';
 import Devtools from 'cerebral/devtools';
 import { route, router } from './router';
-console.log('1');
+
 presenter.providers.router = {
   route,
 };
@@ -16,7 +16,7 @@ const cerebralApp = App(presenter, {
     host: 'localhost:8585',
   }),
 });
-
+router.initialize(cerebralApp);
 ReactDOM.render(
   <Container app={cerebralApp}>
     <Main />
