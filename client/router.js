@@ -1,6 +1,5 @@
 //import { queryStringDecoder } from './queryStringDecoder';
 import route from 'riot-route';
-console.log('in router');
 route.base('/');
 const pageTitleSuffix = ' | MN Arts Board';
 
