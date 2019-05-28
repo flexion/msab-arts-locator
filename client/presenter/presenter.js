@@ -1,6 +1,7 @@
 import { searchByCitySequence } from './cerebral/sequences/searchByCitySequence';
 import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
 import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSequence';
+import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
 import applicationContext from '../environments/dev/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 // Cerebral module
@@ -18,6 +19,7 @@ export const presenter = {
     searchByCitySequence,
     updateCitySearchSequence,
     getGeoLocationSequence,
+    updateFormValueSequence,
   },
   state: {
     cityValue: '',
@@ -25,5 +27,7 @@ export const presenter = {
     locationListHelper,
     haveGeo: false,
     position: { lat: 0, long: 0 },
+    currentPage: 'Home',
+    form: { artistName: '', locationName: '', phoneNumber: '', category: '' },
   },
 };
