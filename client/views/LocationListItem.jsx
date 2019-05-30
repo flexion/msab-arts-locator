@@ -28,7 +28,7 @@ export const LocationListItem = ({ location, hasGeo }) => {
             <span>{location.name}</span>
           </a>
           <br />
-          <Level isMobile>
+          <Level isMobile className="address-level">
             <LevelLeft>
               <LevelItem className="has-text-grey">
                 {location.address1}
@@ -39,11 +39,17 @@ export const LocationListItem = ({ location, hasGeo }) => {
                 <a href={location.googleURL} target="_new">
                   <span className="has-text-primary has-text-weight-semibold">
                     {!hasGeo ? 'Map' : location.distance}
-                    <Icon className="font-purple fas fa-map-marker-alt" />
+                    <Icon className="msab-has-text-purple fas fa-map-marker-alt" />
                   </span>
                 </a>
               </LevelItem>
             </LevelRight>
+          </Level>
+          <Level isMobile>
+            <LevelLeft>
+              <LevelItem className="has-text-grey">{location.city}</LevelItem>
+            </LevelLeft>
+            <LevelRight />
           </Level>
           <Level isMobile>
             <Tag isColor="info">{location.discipline}</Tag>

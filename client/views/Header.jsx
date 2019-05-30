@@ -8,7 +8,7 @@ import {
   Level,
   Section,
 } from 'bloomer';
-import logo from '../images/logo.png';
+import logo from '../images/logo1.svg';
 import mnlogo from '../images/mnlogo.png';
 import artsboard from '../images/artsboard.png';
 

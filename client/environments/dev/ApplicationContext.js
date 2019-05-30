@@ -1,6 +1,8 @@
 const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
-const { newArtLocation } = require('../../application/artLocationInteractor');
+const {
+  saveNewArtLocation,
+} = require('../../application/SaveArtLocationInteractor');
 const {
   getArtLocationsInCity,
 } = require('../../application/getArtLocationsInCityInteractor');
@@ -18,6 +20,11 @@ const { getGeoLocation } = require('../../persistence/GeoLocationGateway');
 const {
   getCityFromGeo,
 } = require('../../persistence/ReverseCityLookupGateway');
+const {
+  submitNewLocation,
+} = require('../../persistence/SubmitLocationGateway');
+
+let locations = [];
 
 const applicationContext = {
   getUniqueIdString: () => {
@@ -36,14 +43,19 @@ const applicationContext = {
       readAllLocationsByCity,
       getGeoLocation,
       getCityFromGeo,
+      submitNewLocation,
     };
   },
   getDataReader: () => {
     return rawEntityData;
   },
+  getDataWriter: (newLocation) => {
+    locations.push(newLocation);
+    return locations;
+  },
   getUseCases: () => {
     return {
-      newArtLocation,
+      saveNewArtLocation,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
