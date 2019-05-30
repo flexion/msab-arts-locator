@@ -18,7 +18,7 @@ import {
 export const LocationInputForm = connect(
   {
     form: state.form,
-    submitLocation: sequences.submitLocation,
+    submitLocation: sequences.submitLocationSequence,
     updateFormValueSequence: sequences.updateFormValueSequence,
   },
   ({ form, submitLocation, updateFormValueSequence }) => {
@@ -146,6 +146,7 @@ Contact phone
               <Label className="msab-has-text-grey">Zip</Label>
               <Control>
                 <Input
+                  type="number"
                   isColor="success"
                   name="zip"
                   value={form.zip || ''}

@@ -26,6 +26,7 @@ export const presenter = {
     submitLocationSequence,
   },
   state: {
+    submitLocationSuccess: false,
     cityValue: '',
     locationsList: [],
     locationListHelper,

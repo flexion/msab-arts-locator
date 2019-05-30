@@ -1,6 +1,8 @@
 const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
-const { newArtLocation } = require('../../application/artLocationInteractor');
+const {
+  saveNewArtLocation,
+} = require('../../application/SaveArtLocationInteractor');
 const {
   getArtLocationsInCity,
 } = require('../../application/getArtLocationsInCityInteractor');
@@ -47,15 +49,13 @@ const applicationContext = {
   getDataReader: () => {
     return rawEntityData;
   },
-  getDataWriter: () => {
-    return (newLocation) => {
-      locations.push(newLocation);
-      return locations;
-    };
+  getDataWriter: (newLocation) => {
+    locations.push(newLocation);
+    return locations;
   },
   getUseCases: () => {
     return {
-      newArtLocation,
+      saveNewArtLocation,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
