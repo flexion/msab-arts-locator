@@ -6965,6 +6965,9 @@ label {
   font-size: 14px;
   line-height: 16px; }
 
+.address-level {
+  margin-bottom: 0px !important; }
+
 .header-section {
   padding-bottom: 0px;
   background-color: #d8eeee; }
