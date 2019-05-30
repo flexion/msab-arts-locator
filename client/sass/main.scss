@@ -4,10 +4,16 @@ $msab-grey: #565c65;
 $info: $msab-purple;
 $primary: #217575;
 $teal: #acdcdc;
+$light-teal: #d8eeee;
+
 @import '../node_modules/bulma/bulma.sass';
 
 h1 {
   font-family: 'Frank Ruhl Libre', serif;
+}
+
+h2 {
+  font-family: 'Asap', sans-serif;
 }
 
 label {
@@ -18,8 +24,20 @@ label {
   background-color: $msab-grey;
 }
 
+.msab-has-text-grey {
+  color: $msab-grey;
+}
+
 .msab-has-background-teal {
   background-color: $teal;
+}
+
+.msab-has-text-purple {
+  color: $msab-purple;
+}
+
+.msab-has-background-purple {
+  background-color: $msab-purple;
 }
 
 .msab-footer {
@@ -42,14 +60,7 @@ label {
 
 .header-section {
   padding-bottom: 0px;
-}
-
-.font-purple {
-  color: $msab-purple;
-}
-
-.msab-has-background-purple {
-  background-color: $msab-purple;
+  background-color: $light-teal;
 }
 
 li:not(:first-child) {
@@ -58,4 +69,11 @@ li:not(:first-child) {
 .msab-location-media {
   padding-bottom: 15px;
   border-bottom: 1px black solid;
+}
+
+.bold {
+  font-weight: 600;
+}
+.margin-left-10 {
+  margin-left: 10px;
 }

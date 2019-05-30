@@ -6929,14 +6929,26 @@ label.panel-block {
 h1 {
   font-family: 'Frank Ruhl Libre', serif; }
 
+h2 {
+  font-family: 'Asap', sans-serif; }
+
 label {
   font-family: 'Asap', sans-serif; }
 
 .msab-has-background-grey {
   background-color: #565c65; }
 
+.msab-has-text-grey {
+  color: #565c65; }
+
 .msab-has-background-teal {
   background-color: #acdcdc; }
+
+.msab-has-text-purple {
+  color: #563281; }
+
+.msab-has-background-purple {
+  background-color: #563281; }
 
 .msab-footer {
   padding-top: 5px;
@@ -6954,13 +6966,8 @@ label {
   line-height: 16px; }
 
 .header-section {
-  padding-bottom: 0px; }
-
-.font-purple {
-  color: #563281; }
-
-.msab-has-background-purple {
-  background-color: #563281; }
+  padding-bottom: 0px;
+  background-color: #d8eeee; }
 
 li:not(:first-child) {
   padding-top: 15px; }
@@ -6968,3 +6975,9 @@ li:not(:first-child) {
 .msab-location-media {
   padding-bottom: 15px;
   border-bottom: 1px black solid; }
+
+.bold {
+  font-weight: 600; }
+
+.margin-left-10 {
+  margin-left: 10px; }

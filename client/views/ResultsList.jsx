@@ -17,7 +17,7 @@ export const ResultsList = connect(
             <React.Fragment>
               <Filter />
               <Title isSize={4} className="has-text-grey">
-                Search Results {locations.length}
+                Search Results ({locations.length})
               </Title>
             </React.Fragment>
           )}

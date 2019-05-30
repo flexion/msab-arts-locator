@@ -10,7 +10,9 @@ import {
   Section,
   Container,
   Title,
-  Select,
+  Checkbox,
+  Subtitle,
+  TextArea,
 } from 'bloomer';
 
 export const LocationInputForm = connect(
@@ -34,12 +36,22 @@ Contact phone
 ? Description ?*/
 
     return (
-      <Section className="msab-has-background-grey">
+      <Section>
         <Container>
-          <Title isSize={3} className="has-text-white">
-            Enter in your Art Location
+          <Title isSize={4} className="msab-has-text-purple">
+            Submit Your Arts Location
           </Title>
-
+          <Subtitle isSize={5} className="msab-has-text-grey">
+            Fill out this form and a Minnesota State Arts Board administrator
+            will review it before publishing.
+          </Subtitle>
+          <Subtitle isSize={6} className="msab-has-text-grey bold">
+            * All fields required unless otherwise noted
+          </Subtitle>
+          <br />
+          <Title isSize={5} className="msab-has-text-purple">
+            Your Location
+          </Title>
           <form
             className="search"
             id="add-location-form"
@@ -50,7 +62,7 @@ Contact phone
             }}
           >
             <Field>
-              <Label className="has-text-white">Artist Name</Label>
+              <Label className="msab-has-text-grey">Artist Name</Label>
               <Control>
                 <Input
                   type="text"
@@ -66,7 +78,7 @@ Contact phone
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">Location Name</Label>
+              <Label className="msab-has-text-grey">Location Name</Label>
               <Control>
                 <Input
                   type="text"
@@ -82,23 +94,7 @@ Contact phone
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">Website URL</Label>
-              <Control>
-                <Input
-                  type="text"
-                  name="website"
-                  value={form.website || ''}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-              </Control>
-            </Field>
-            <Field>
-              <Label className="has-text-white">Street Address</Label>
+              <Label className="msab-has-text-grey">Street Address</Label>
               <Control>
                 <Input
                   type="text"
@@ -114,7 +110,7 @@ Contact phone
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">City</Label>
+              <Label className="msab-has-text-grey">Town/City</Label>
               <Control>
                 <Input
                   type="text"
@@ -130,7 +126,7 @@ Contact phone
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">State</Label>
+              <Label className="msab-has-text-grey">State</Label>
               <Control>
                 <Input
                   isColor="success"
@@ -147,12 +143,12 @@ Contact phone
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">Zip</Label>
+              <Label className="msab-has-text-grey">Zip</Label>
               <Control>
                 <Input
                   isColor="success"
                   name="zip"
-                  value={form.zip || 'MN'}
+                  value={form.zip || ''}
                   onChange={(e) => {
                     updateFormValueSequence({
                       key: e.target.name,
@@ -163,31 +159,192 @@ Contact phone
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">Categories:</Label>
+              <Label className="msab-has-text-grey">Web Site (Optional)</Label>
               <Control>
-                <Select
-                  name="category"
-                  value={form.category || ''}
+                <Input
+                  type="text"
+                  name="website"
+                  value={form.website || ''}
                   onChange={(e) => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
                     });
                   }}
-                >
-                  <option>Dance</option>
-                  <option>Music</option>
-                  <option>Theater/Opera</option>
-                  <option>Visual</option>
-                  <option>Craft/Textiles</option>
-                  <option>Photography/Film/Media</option>
-                  <option>Folk/Tradition</option>
-                  <option>Literary</option>
-                </Select>
+                />
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">Contact Name</Label>
+              <Label className="msab-has-text-grey">
+                Brief Description (Optional)
+              </Label>
+              <Subtitle isSize={6} className="msab-has-text-grey">
+                (Max 250 Characters)
+              </Subtitle>
+              <Control>
+                <TextArea
+                  maxLength="250"
+                  name="description"
+                  value={form.description || ''}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+              </Control>
+            </Field>
+            <Label className="msab-has-text-grey">Categories:</Label>
+            <Subtitle isSize={6} className="msab-has-text-grey">
+              (Select up to three that apply)
+            </Subtitle>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="dance"
+                  checked={form.category.dance || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Dance
+                </span>
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="music"
+                  checked={form.category.music || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Music
+                </span>
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="opera"
+                  checked={form.category.opera || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Theater/Opera
+                </span>
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="visual"
+                  checked={form.category.visual || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Visual
+                </span>
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="craft"
+                  checked={form.category.craft || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />{' '}
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Craft/Textiles
+                </span>
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="photo"
+                  checked={form.category.photo || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Photography/Film/Media
+                </span>
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="folk"
+                  checked={form.category.folk || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Folk/Traditional
+                </span>
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Checkbox
+                  name="literary"
+                  checked={form.category.literary || false}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+                <span className="msab-has-text-grey bold margin-left-10">
+                  Literary
+                </span>
+              </Control>
+            </Field>
+            <br />
+            <br />
+            <Title isSize={4} className="msab-has-text-purple">
+              Contact Information
+            </Title>
+            <Subtitle isSize={5} className="msab-has-text-grey">
+              (For internal use only, won’t be published on site)
+            </Subtitle>
+            <Field>
+              <Label className="msab-has-text-grey">Contact Name</Label>
               <Control>
                 <Input
                   type="text"
@@ -203,23 +360,7 @@ Contact phone
               </Control>
             </Field>
             <Field>
-              <Label className="has-text-white">Contact Phone</Label>
-              <Control>
-                <Input
-                  type="text"
-                  name="contactPhone"
-                  value={form.contactPhone || ''}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-              </Control>
-            </Field>
-            <Field>
-              <Label className="has-text-white">Contact Email</Label>
+              <Label className="msab-has-text-grey">Contact E-mail</Label>
               <Control>
                 <Input
                   type="text"
@@ -234,9 +375,28 @@ Contact phone
                 />
               </Control>
             </Field>
+            <Field>
+              <Label className="msab-has-text-grey">Contact Phone</Label>
+              <Control>
+                <Input
+                  type="text"
+                  name="contactPhone"
+                  value={form.contactPhone || ''}
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+              </Control>
+            </Field>
+
             <Field isGrouped>
               <Control>
-                <Button isColor="primary">Submit</Button>
+                <Button type="submit" isColor="primary">
+                  Submit
+                </Button>
               </Control>
             </Field>
           </form>

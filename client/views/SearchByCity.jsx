@@ -22,7 +22,7 @@ export const SearchByCity = connect(
       <Section className="msab-has-background-grey">
         <Container>
           <Title isSize={3} className="has-text-white">
-            Explore Minnesota Arts
+            Find Arts Around You
           </Title>
 
           <form
@@ -35,7 +35,7 @@ export const SearchByCity = connect(
             }}
           >
             <Label className="has-text-white">
-              Enter a city to find art near you
+              Enter a town/city in Minnesota to get started
             </Label>
             <Field hasAddons>
               <Control style={{ maxWidth: '100%', width: '100%' }}>

@@ -39,7 +39,7 @@ export const LocationListItem = ({ location, hasGeo }) => {
                 <a href={location.googleURL} target="_new">
                   <span className="has-text-primary has-text-weight-semibold">
                     {!hasGeo ? 'Map' : location.distance}
-                    <Icon className="font-purple fas fa-map-marker-alt" />
+                    <Icon className="msab-has-text-purple fas fa-map-marker-alt" />
                   </span>
                 </a>
               </LevelItem>

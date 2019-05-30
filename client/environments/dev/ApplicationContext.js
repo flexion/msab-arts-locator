@@ -18,6 +18,11 @@ const { getGeoLocation } = require('../../persistence/GeoLocationGateway');
 const {
   getCityFromGeo,
 } = require('../../persistence/ReverseCityLookupGateway');
+const {
+  submitNewLocation,
+} = require('../../persistence/SubmitLocationGateway');
+
+let locations = [];
 
 const applicationContext = {
   getUniqueIdString: () => {
@@ -36,10 +41,17 @@ const applicationContext = {
       readAllLocationsByCity,
       getGeoLocation,
       getCityFromGeo,
+      submitNewLocation,
     };
   },
   getDataReader: () => {
     return rawEntityData;
+  },
+  getDataWriter: () => {
+    return (newLocation) => {
+      locations.push(newLocation);
+      return locations;
+    };
   },
   getUseCases: () => {
     return {
