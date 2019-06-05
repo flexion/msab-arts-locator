@@ -57,4 +57,4 @@ jobs:
 
       - run:
           name: Update route53 & wait
-          command: aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file://.serverless/upsert_alias.json --query 'ChangeInfo.Id' --output text | xargs aws route53 wait resource-record-sets-changed --id
+          command: aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file://src/environments/lambda/.serverless/upsert_alias.json --query 'ChangeInfo.Id' --output text | xargs aws route53 wait resource-record-sets-changed --id
