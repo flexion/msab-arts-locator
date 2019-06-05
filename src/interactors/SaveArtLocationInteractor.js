@@ -1,7 +1,7 @@
 //Interactor goes here
 const { toJSON } = require('../utilities/ObjectUtils');
 const { validateRequestData } = require('../utilities/CleanUtils');
-const { ArtLocation } = require('../domain/ArtLocation');
+const { ArtLocation } = require('../entities/ArtLocation');
 
 /**
  *

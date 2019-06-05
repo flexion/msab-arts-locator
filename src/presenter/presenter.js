@@ -4,7 +4,7 @@ import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSeque
 import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
 import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
 import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
-import applicationContext from '../environments/dev/ApplicationContext';
+import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 // Cerebral module
 

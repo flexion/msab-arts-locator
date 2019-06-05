@@ -14,24 +14,24 @@ custom:
 
   fullstack:
     domain: ${self:custom.domain}
-    certificate: 
-      Fn::Join: 
-        - ""
-        - - "arn:aws:acm:"
-          - "us-east-1"
-          - ":"
-          - "Ref": "AWS::AccountId"
-          - ":certificate/"
-          - "${self:custom.certificateId}"
-    bucketName: "${self:custom.region}"
-    distributionFolder: client/dist            # Path to the client assets to be uploaded to S3
-    indexDocument: index.html                  # The index document to use
-    errorDocument: error.html                  # The error document to use
-    singlePageApp: true                        # If true 403 errors will be rerouted (missing assets) to your root index document to support single page apps like React and Angular where the js framework handles routing
-    compressWebContent: true                   # Use compression when serving web content
-    apiPath: api                               # The path prefix for your API Gateway lambdas. The path for the lambda http event trigger needs to start with this too eg. api/myMethod 
+    certificate:
+      Fn::Join:
+        - ''
+        - - 'arn:aws:acm:'
+          - 'us-east-1'
+          - ':'
+          - 'Ref': 'AWS::AccountId'
+          - ':certificate/'
+          - '${self:custom.certificateId}'
+    bucketName: '${self:custom.region}'
+    distributionFolder: src/dist # Path to the client assets to be uploaded to S3
+    indexDocument: index.html # The index document to use
+    errorDocument: error.html # The error document to use
+    singlePageApp: true # If true 403 errors will be rerouted (missing assets) to your root index document to support single page apps like React and Angular where the js framework handles routing
+    compressWebContent: true # Use compression when serving web content
+    apiPath: api # The path prefix for your API Gateway lambdas. The path for the lambda http event trigger needs to start with this too eg. api/myMethod
     clientCommand: npm i && npm run build && cp -v error.html dist/
-    clientSrcPath: client                      # The path to where you want to run the clientCommand
+    clientSrcPath: src # The path to where you want to run the clientCommand
     # logging:
     #   bucket: "${self:custom.region}-${self:custom.domain}-logs"
     #   prefix: logs
@@ -40,7 +40,7 @@ custom:
     objectHeaders:
       index.html:
         - name: Cache-Control
-          value: public, must-revalidate, proxy-revalidate, max-age=0    
+          value: public, must-revalidate, proxy-revalidate, max-age=0
 
 provider:
   name: aws
@@ -61,23 +61,33 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ GisTable, Arn ]
+        - 'Fn::GetAtt': [GisTable, Arn]
 
 package:
   exclude:
-    - client/**
+    - src/**
     - resources/**
     - sample-data/**
 
 functions:
   hello:
-    handler: handler.hello
+    handler: lambdas/test-lambda.hello
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
     events:
       - http:
           path: ${self:custom.fullstack.apiPath}/v1/hello
           method: get
+
+  saveLocation:
+    handler: lambdas/handlers.saveLocation
+    timeout: 900
+    events:
+      - http:
+          path: v1/save-location/
+          method: post
+          cors: true
+          async: true
 
 resources:
   Outputs:

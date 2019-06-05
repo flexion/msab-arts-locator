@@ -15,7 +15,6 @@ export const ResultsList = connect(
         <Container>
           {!!locations.length && (
             <React.Fragment>
-              <Filter />
               <Title isSize={4} className="has-text-grey">
                 Search Results ({locations.length})
               </Title>
