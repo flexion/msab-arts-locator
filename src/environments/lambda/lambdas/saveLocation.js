@@ -1,8 +1,6 @@
 const createApplicationContext = require('../applicationContext');
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
-// const {
-//   handle,
-// } = require('../../../../msab-service/middleware/apiGatewayHelper');
+const { handle } = require('../middleware/apiGatewayHelper');
 
 /**
  * used for saving new locations
@@ -14,14 +12,13 @@ exports.handler = (event) =>
   handle(event, async () => {
     console.log('meow');
     //const user = getUserFromAuthHeader(event);
-    const applicationContext = createApplicationContext(user);
+    const applicationContext = createApplicationContext();
     applicationContext.logger.info('Event', event);
     try {
       await applicationContext.getUseCases().saveNewLocation({
         applicationContext,
         documentId: (event.pathParameters || event.path).documentId,
       });
-      applicationContext.logger.info('User', user);
     } catch (e) {
       applicationContext.logger.error(e);
       throw e;
