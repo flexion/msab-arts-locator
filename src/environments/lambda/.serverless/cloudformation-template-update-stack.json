@@ -251,7 +251,7 @@
           "HttpVersion": "http2",
           "Comment": "Serverless Managed pre-msab-arts-locator",
           "Aliases": [
-            "pre.flexion.us"
+            "pre.msab.flexion.us"
           ],
           "PriceClass": "PriceClass_100",
           "DefaultRootObject": "index.html",
@@ -341,7 +341,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/msab-arts-locator/pre/1559748550176-2019-06-05T15:29:10.176Z/msab-arts-locator.zip"
+          "S3Key": "serverless/msab-arts-locator/pre/1559754699074-2019-06-05T17:11:39.074Z/msab-arts-locator.zip"
         },
         "FunctionName": "msab-arts-locator-pre-hello",
         "Handler": "lambdas/test-lambda.hello",
@@ -365,14 +365,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HelloLambdaVersionidm9E5pfftES0nixzHtZ39TrIEKEZ9WiaVzNAkPhl4": {
+    "HelloLambdaVersion2FVgqv4kOPXy8RA6KfiX18z7s3CVHNhe4kw3FfG2IGs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "CS37BD32uVYWLNfjN6RA+wL/r2QVOmVbbcU200mAPJQ="
+        "CodeSha256": "hi66BA9DfV+o/A0apgbWkSz+VKSJOsOxR7cW3c31SKo="
       }
     },
     "SaveLocationLambdaFunction": {
@@ -382,7 +382,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/msab-arts-locator/pre/1559748550176-2019-06-05T15:29:10.176Z/msab-arts-locator.zip"
+          "S3Key": "serverless/msab-arts-locator/pre/1559754699074-2019-06-05T17:11:39.074Z/msab-arts-locator.zip"
         },
         "FunctionName": "msab-arts-locator-pre-saveLocation",
         "Handler": "lambdas/handlers.saveLocation",
@@ -401,14 +401,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SaveLocationLambdaVersionIHRV4gxLE9ccHhi4A1t56ICjvlbBDdbuby8QvD0JLc": {
+    "SaveLocationLambdaVersionE9w1RbE6mchnGmNj2MLN4cCIqqwoOGYsqvwYacV8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveLocationLambdaFunction"
         },
-        "CodeSha256": "CS37BD32uVYWLNfjN6RA+wL/r2QVOmVbbcU200mAPJQ="
+        "CodeSha256": "hi66BA9DfV+o/A0apgbWkSz+VKSJOsOxR7cW3c31SKo="
       }
     },
     "ApiGatewayRestApi": {
@@ -767,7 +767,7 @@
         ]
       }
     },
-    "ApiGatewayDeployment1559748542138": {
+    "ApiGatewayDeployment1559754690477": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -922,13 +922,13 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionidm9E5pfftES0nixzHtZ39TrIEKEZ9WiaVzNAkPhl4"
+        "Ref": "HelloLambdaVersion2FVgqv4kOPXy8RA6KfiX18z7s3CVHNhe4kw3FfG2IGs"
       }
     },
     "SaveLocationLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveLocationLambdaVersionIHRV4gxLE9ccHhi4A1t56ICjvlbBDdbuby8QvD0JLc"
+        "Ref": "SaveLocationLambdaVersionE9w1RbE6mchnGmNj2MLN4cCIqqwoOGYsqvwYacV8"
       }
     },
     "ServiceEndpoint": {
@@ -955,7 +955,7 @@
       }
     },
     "FullstackDomain": {
-      "Value": "pre.flexion.us"
+      "Value": "pre.msab.flexion.us"
     }
   }
 }
