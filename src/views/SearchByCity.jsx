@@ -34,9 +34,9 @@ export const SearchByCity = connect(
               searchByCitySequence();
             }}
           >
-            <Label className="has-text-white">
+            <span className="has-text-white">
               Enter a town/city in Minnesota to get started
-            </Label>
+            </span>
             <Field hasAddons>
               <Control style={{ maxWidth: '100%', width: '100%' }}>
                 <Input

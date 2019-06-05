@@ -2,16 +2,19 @@ const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
 const {
   saveNewArtLocation,
-} = require('../../application/SaveArtLocationInteractor');
+} = require('../../interactors/SaveArtLocationInteractor');
 const {
   getArtLocationsInCity,
-} = require('../../application/getArtLocationsInCityInteractor');
+} = require('../../interactors/getArtLocationsInCityInteractor');
+const {
+  getLocationCoordinatesInteractor,
+} = require('../../interactors/getLocationCoordinatesInteractor');
 const {
   getGeoLocationInteractor,
-} = require('../../application/getGeoInteractor');
+} = require('../../interactors/getGeoInteractor');
 const {
   getReverseCityLookupInteractor,
-} = require('../../application/getReverseCityLookupInteractor');
+} = require('../../interactors/getReverseCityLookupInteractor');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   readAllLocationsByCity,
@@ -22,7 +25,9 @@ const {
 } = require('../../persistence/ReverseCityLookupGateway');
 const {
   submitNewLocation,
-} = require('../../persistence/SubmitLocationGateway');
+} = require('../../persistence/SubmitNewLocationGateway');
+const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
+//const { getCoords } = require('../../../shared/business/getCoords');
 
 let locations = [];
 
@@ -44,6 +49,7 @@ const applicationContext = {
       getGeoLocation,
       getCityFromGeo,
       submitNewLocation,
+      getCoordsFromAddress,
     };
   },
   getDataReader: () => {
@@ -53,12 +59,16 @@ const applicationContext = {
     locations.push(newLocation);
     return locations;
   },
+  getCoords: () => {
+    return { getCoordsHandler: getCoords.handler };
+  },
   getUseCases: () => {
     return {
       saveNewArtLocation,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
+      getLocationCoordinatesInteractor,
     };
   },
 };
