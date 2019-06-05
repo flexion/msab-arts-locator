@@ -8,7 +8,7 @@ const { handle } = require('../middleware/apiGatewayHelper');
  * @param {Object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
-exports.handler = (event) =>
+module.exports.handler = (event) =>
   handle(event, async () => {
     console.log('meow');
     //const user = getUserFromAuthHeader(event);

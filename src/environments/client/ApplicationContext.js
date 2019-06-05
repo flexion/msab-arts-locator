@@ -2,7 +2,7 @@ const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
 const {
   saveNewArtLocation,
-} = require('../../interactors/SaveArtLocationInteractor');
+} = require('../../interactors/saveArtLocationInteractor');
 const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');

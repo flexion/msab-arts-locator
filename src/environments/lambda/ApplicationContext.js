@@ -24,7 +24,6 @@ let s3Cache;
 
 module.exports = () => {
   return {
-    docketNumberGenerator,
     environment,
     getPersistenceGateway: () => {
       return {};
@@ -43,7 +42,7 @@ module.exports = () => {
       return uuidv4();
     },
     getUseCases: () => {
-      return {};
+      return { saveNewLocation };
     },
     logger: {
       error: (value) => {
