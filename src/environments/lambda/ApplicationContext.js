@@ -1,6 +1,12 @@
 /* eslint-disable security/detect-object-injection */
 const AWSXRay = require('aws-xray-sdk');
-
+const {
+  validateArtLocation,
+} = require('../../interactors/validateArtLocationInteractor');
+const { saveNewArtLocation } = require('../../interactors/saveNewArtLocation');
+const {
+  getLocationCoordinates,
+} = require('../../interactors/getLocationCoordinatesInteractor');
 const AWS =
   process.env.NODE_ENV === 'production'
     ? AWSXRay.captureAWS(require('aws-sdk'))
@@ -24,7 +30,6 @@ let s3Cache;
 
 module.exports = () => {
   return {
-    docketNumberGenerator,
     environment,
     getPersistenceGateway: () => {
       return {};
@@ -43,7 +48,11 @@ module.exports = () => {
       return uuidv4();
     },
     getUseCases: () => {
-      return {};
+      return {
+        saveNewArtLocation,
+        getLocationCoordinates,
+        validateArtLocation,
+      };
     },
     logger: {
       error: (value) => {
