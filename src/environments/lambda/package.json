@@ -30,6 +30,7 @@
     "serverless-stack-output": "^0.2.3"
   },
   "dependencies": {
+    "aws-xray-sdk": "^2.3.3",
     "dynamodb-geo": "^0.4.0"
   }
 }

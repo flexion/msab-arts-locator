@@ -1,7 +1,7 @@
 const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
 const {
-  saveNewArtLocation,
+  sendArtLocation,
 } = require('../../interactors/sendArtLocationInteractor');
 const {
   getArtLocationsInCity,
@@ -27,7 +27,6 @@ const {
   submitNewLocation,
 } = require('../../persistence/SubmitNewLocationGateway');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
-//const { getCoords } = require('../../../shared/business/getCoords');
 
 let locations = [];
 
@@ -64,7 +63,7 @@ const applicationContext = {
   },
   getUseCases: () => {
     return {
-      saveNewArtLocation,
+      sendArtLocation,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,

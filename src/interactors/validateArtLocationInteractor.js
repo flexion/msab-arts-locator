@@ -16,7 +16,7 @@ exports.validateArtLocation = async ({ requestData, applicationContext }) => {
     //TODO: Possibly return artLocation including unique ids
     return { status: 'success' };
   } catch (e) {
-    console.log('e');
-    return { status: 'error' };
+    console.log('e: ', e);
+    return { status: 'error validating data' };
   }
 };

@@ -3,10 +3,13 @@ const AWSXRay = require('aws-xray-sdk');
 const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
-const { saveNewArtLocation } = require('../../interactors/saveNewArtLocation');
+const {
+  saveNewArtLocation,
+} = require('../../interactors/saveNewArtLocationInteractor');
 const {
   getLocationCoordinates,
 } = require('../../interactors/getLocationCoordinatesInteractor');
+const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const AWS =
   process.env.NODE_ENV === 'production'
     ? AWSXRay.captureAWS(require('aws-sdk'))
@@ -32,7 +35,7 @@ module.exports = () => {
   return {
     environment,
     getPersistenceGateway: () => {
-      return {};
+      return { getCoordsFromAddress };
     },
     getStorageClient: () => {
       if (!s3Cache) {
