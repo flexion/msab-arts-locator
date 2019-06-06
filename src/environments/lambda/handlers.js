@@ -1,4 +1,4 @@
 module.exports = {
-  saveLocation: require('./lambdas/saveLocation').handler,
+  saveLocation: require('./lambdas/saveLocation').post,
   hello: require('./lambdas/test-lambda').hello,
 };

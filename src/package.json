@@ -58,7 +58,9 @@
     "riot-route": "^3.1.4",
     "sass": "^1.17.3",
     "uuid": "^3.3.2",
-    "xhr-mock": "^2.4.1"
+    "xhr-mock": "^2.4.1",
+    "aws-xray-sdk": "^2.3.3",
+    "dynamodb-geo": "^0.4.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
@@ -74,6 +76,9 @@
     "prettier": "^1.17.1",
     "stylelint": "^9.10.1",
     "stylelint-config-idiomatic-order": "^6.2.0",
-    "stylelint-config-standard": "^18.2.0"
+    "stylelint-config-standard": "^18.2.0",
+    "serverless": "^1.41.1",
+    "serverless-stack-output": "^0.2.3",
+    "fullstack-serverless": "^0.6.0"
   }
 }

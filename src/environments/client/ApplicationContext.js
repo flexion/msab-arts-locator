@@ -1,7 +1,7 @@
 const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
 const {
-  saveNewArtLocation,
+  sendArtLocation,
 } = require('../../interactors/sendArtLocationInteractor');
 const {
   getArtLocationsInCity,
@@ -64,7 +64,7 @@ const applicationContext = {
   },
   getUseCases: () => {
     return {
-      saveNewArtLocation,
+      sendArtLocation,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,

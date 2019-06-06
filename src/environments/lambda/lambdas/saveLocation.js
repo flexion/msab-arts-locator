@@ -1,4 +1,4 @@
-const createApplicationContext = require('../applicationContext');
+const createApplicationContext = require('../ApplicationContext');
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
 //const { handle } = require('../middleware/apiGatewayHelper');
 
@@ -9,12 +9,16 @@ const createApplicationContext = require('../applicationContext');
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
 const post = async (event) => {
-  console.log('meow', event);
-  const requestData = JSON.parse(event.body);
-  //const user = getUserFromAuthHeader(event);
   const applicationContext = createApplicationContext();
-  applicationContext.logger.info('Event', event);
   try {
+    console.log('event.body:', event);
+    if (!event || !event.body) throw new Error('data not-found error');
+    const requestData = body;
+    //const user = getUserFromAuthHeader(event);
+    console.log('requestData: ', requestData);
+    console.log('applicationContext: ', applicationContext);
+    applicationContext.logger.info('Event', event);
+
     const validateResult = await applicationContext
       .getUseCases()
       .validateArtLocation({
@@ -46,10 +50,10 @@ const post = async (event) => {
         }
       }
     }
-    return { statusCode: 500, body: JSON.stringify({ message: 'error' }) };
   } catch (e) {
+    console.log('e: ', e);
     applicationContext.logger.error(e);
-    return { statusCode: 500, body: JSON.stringify({ message: 'error' }) };
+    return { statusCode: 500, body: JSON.stringify({ message: 'error', e }) };
   }
 };
 

@@ -24,14 +24,14 @@ custom:
           - ':certificate/'
           - '${self:custom.certificateId}'
     bucketName: '${self:custom.region}'
-    distributionFolder: ../../dist # Path to the client assets to be uploaded to S3
+    distributionFolder: dist # Path to the client assets to be uploaded to S3
     indexDocument: index.html # The index document to use
     errorDocument: error.html # The error document to use
     singlePageApp: true # If true 403 errors will be rerouted (missing assets) to your root index document to support single page apps like React and Angular where the js framework handles routing
     compressWebContent: true # Use compression when serving web content
     apiPath: api # The path prefix for your API Gateway lambdas. The path for the lambda http event trigger needs to start with this too eg. api/myMethod
     clientCommand: npm i && npm run build
-    clientSrcPath: ../../ # The path to where you want to run the clientCommand
+    clientSrcPath: . # The path to where you want to run the clientCommand
     # logging:
     #   bucket: "${self:custom.region}-${self:custom.domain}-logs"
     #   prefix: logs
@@ -65,13 +65,18 @@ provider:
 
 package:
   exclude:
-    - src/**
-    - resources/**
-    - sample-data/**
+    - .cache/**
+    - .serverless/**
+    - coverage/**
+    - images/**
+    - sass/**
+    - presenter/**
+    - views/**
+    - node_modules/**
 
 functions:
   hello:
-    handler: lambdas/test-lambda.hello
+    handler: environments/lambda/lambdas/test-lambda.hello
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
     events:
@@ -80,7 +85,7 @@ functions:
           method: get
 
   saveLocation:
-    handler: lambdas/saveLocation.post
+    handler: environments/lambda/handlers.saveLocation
     timeout: 30
     events:
       - http:
