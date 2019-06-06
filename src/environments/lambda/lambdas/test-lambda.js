@@ -11,6 +11,7 @@ config.hashKeyLength = 5;
 const myGeoTableManager = new ddbGeo.GeoDataManager(config);
 
 module.exports.hello = async (event, context) => {
+  console.log('hello!');
   await myGeoTableManager
     .putPoint({
       RangeKeyValue: { S: '1234' }, // Use this to ensure uniqueness of the hash/range pairs.

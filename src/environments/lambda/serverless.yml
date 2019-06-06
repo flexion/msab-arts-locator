@@ -84,7 +84,7 @@ functions:
     timeout: 30
     events:
       - http:
-          path: v1/save-location/
+          path: ${self:custom.fullstack.apiPath}/v1/save-location/
           method: post
           cors: true
           async: true
