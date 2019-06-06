@@ -81,7 +81,7 @@ functions:
 
   saveLocation:
     handler: lambdas/handlers.saveLocation
-    timeout: 900
+    timeout: 30
     events:
       - http:
           path: v1/save-location/

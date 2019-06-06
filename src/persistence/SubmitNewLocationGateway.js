@@ -30,7 +30,7 @@ const submitNewLocation = async ({ location }) => {
   if (location) {
     const method = 'POST';
     const lambdaURL = 'https://pre.msab.flexion.us/api/v1/saveLocation';
-    const response = await makeRequest(method, lambdaURL, data);
+    const response = await makeRequest(method, lambdaURL, location);
     const results = { response };
     return results;
   } else {
