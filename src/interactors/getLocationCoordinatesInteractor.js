@@ -1,4 +1,4 @@
-exports.getGeoLocationInteractor = async ({
+exports.getLocationCoordinates = async ({
   requestData,
   applicationContext,
 }) => {

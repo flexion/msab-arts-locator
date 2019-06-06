@@ -27,7 +27,6 @@ const {
   submitNewLocation,
 } = require('../../persistence/SubmitNewLocationGateway');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
-//const { getCoords } = require('../../../shared/business/getCoords');
 
 let locations = [];
 

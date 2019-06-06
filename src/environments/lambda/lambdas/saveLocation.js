@@ -23,7 +23,7 @@ const post = async (event) => {
       .getUseCases()
       .validateArtLocation({
         applicationContext,
-        requestData,
+        rawArtLocation: requestData,
       });
     if ((validateResult.status = 'success')) {
       const coordResult = await applicationContext
