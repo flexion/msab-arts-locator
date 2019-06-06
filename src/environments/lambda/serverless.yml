@@ -80,7 +80,7 @@ functions:
           method: get
 
   saveLocation:
-    handler: lambdas/handlers.saveLocation
+    handler: lambdas/saveLocation.handler
     timeout: 30
     events:
       - http:
