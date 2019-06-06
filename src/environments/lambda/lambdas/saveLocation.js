@@ -13,7 +13,7 @@ const post = async (event) => {
   try {
     console.log('event.body:', event);
     if (!event || !event.body) throw new Error('data not-found error');
-    const requestData = body;
+    const requestData = event.body;
     //const user = getUserFromAuthHeader(event);
     console.log('requestData: ', requestData);
     console.log('applicationContext: ', applicationContext);
