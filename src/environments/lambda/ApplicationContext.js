@@ -3,7 +3,9 @@ const AWSXRay = require('aws-xray-sdk');
 const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
-const { saveNewArtLocation } = require('../../interactors/saveNewArtLocation');
+const {
+  saveNewArtLocation,
+} = require('../../interactors/saveNewArtLocationInteractor');
 const {
   getLocationCoordinates,
 } = require('../../interactors/getLocationCoordinatesInteractor');
