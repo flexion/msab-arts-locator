@@ -9,7 +9,6 @@ const { toJSON } = require('../utilities/ObjectUtils');
  * @constructor
  */
 function ArtLocation({ rawArtLocation, applicationContext }) {
-  console.log('rawartlocation: ', rawArtLocation);
   Object.assign(this, rawArtLocation, {
     createdAt:
       rawArtLocation.createdAt || applicationContext.getCurrentTimestamp(),

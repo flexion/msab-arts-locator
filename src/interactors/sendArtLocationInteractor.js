@@ -13,7 +13,6 @@ const { ArtLocation } = require('../entities/ArtLocation');
 exports.sendArtLocation = async ({ requestData, applicationContext }) => {
   // An interactor owns the interface of the request. It will validate that the requestData is
   // well-formed using a JSON Schema validator. Detailed validation is handled by entities later.
-  console.log('sendartlocationInteractor');
   const dataSchema = {
     type: 'object',
     properties: {

@@ -86,6 +86,8 @@ functions:
 
   saveLocation:
     handler: environments/lambda/handlers.saveLocation
+    environment:
+      GIS_TABLE: ${self:service}-gis-${opt:stage}
     timeout: 30
     events:
       - http:

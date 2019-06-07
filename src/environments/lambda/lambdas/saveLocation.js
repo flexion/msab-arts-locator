@@ -22,7 +22,6 @@ const post = async (event) => {
         applicationContext,
         requestData,
       });
-    console.log('validateResult: ', validateResult);
     if (validateResult.status === 'success') {
       const artLocation = validateResult.artLocation;
       const coordResult = await applicationContext
@@ -38,6 +37,7 @@ const post = async (event) => {
           .saveNewArtLocation({
             applicationContext,
             artLocation,
+            coords: coordResult.coords,
           });
         console.log('saveResult: ', saveResult);
         if (saveResult.status === 'success') {

@@ -8,7 +8,6 @@ const { ArtLocation } = require('../entities/ArtLocation');
  */
 exports.validateArtLocation = async ({ requestData, applicationContext }) => {
   try {
-    console.log('validation requestdata: ', requestData);
     const artLocation = new ArtLocation({
       rawArtLocation: requestData,
       applicationContext,
