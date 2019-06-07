@@ -10,35 +10,36 @@ const createApplicationContext = require('../ApplicationContext');
  */
 const post = async (event) => {
   const applicationContext = createApplicationContext();
+  let requestData = null;
   try {
-    console.log('event.body:', event);
     if (!event || !event.body) throw new Error('data not-found error');
-    const requestData = event.body;
-    //const user = getUserFromAuthHeader(event);
-    console.log('requestData: ', requestData);
-    console.log('applicationContext: ', applicationContext);
-    applicationContext.logger.info('Event', event);
+    requestData = event.body;
 
+    console.log('requestData: ', requestData);
     const validateResult = await applicationContext
       .getUseCases()
       .validateArtLocation({
         applicationContext,
-        rawArtLocation: requestData,
+        requestData,
       });
-    if ((validateResult.status = 'success')) {
+    console.log('validateResult: ', validateResult);
+    if (validateResult.status === 'success') {
+      const artLocation = validateResult.artLocation;
       const coordResult = await applicationContext
         .getUseCases()
         .getLocationCoordinates({
           applicationContext,
-          requestData,
+          artLocation,
         });
+      console.log('coordResult: ', coordResult);
       if (coordResult.status === 'success') {
         const saveResult = await applicationContext
           .getUseCases()
           .saveNewArtLocation({
             applicationContext,
-            requestData,
+            artLocation,
           });
+        console.log('saveResult: ', saveResult);
         if (saveResult.status === 'success') {
           return {
             statusCode: 200,

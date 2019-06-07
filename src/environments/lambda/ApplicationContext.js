@@ -1,5 +1,6 @@
 /* eslint-disable security/detect-object-injection */
 const AWSXRay = require('aws-xray-sdk');
+const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
@@ -26,6 +27,7 @@ const environment = {
   region: process.env.AWS_REGION || 'us-east-1',
   s3Endpoint: process.env.S3_ENDPOINT || 'localhost',
   stage: process.env.STAGE || 'local',
+  apiKey: process.env.APIKEY,
 };
 
 let dynamoClientCache = {};
@@ -55,6 +57,18 @@ module.exports = () => {
         saveNewArtLocation,
         getLocationCoordinates,
         validateArtLocation,
+      };
+    },
+
+    getUniqueIdString: () => {
+      return uuidv4();
+    },
+    getCurrentTimestamp: () => {
+      return Date.now();
+    },
+    getJsonValidator: () => {
+      return {
+        validateJson,
       };
     },
     logger: {

@@ -8,13 +8,14 @@ const { ArtLocation } = require('../entities/ArtLocation');
  */
 exports.validateArtLocation = async ({ requestData, applicationContext }) => {
   try {
+    console.log('validation requestdata: ', requestData);
     const artLocation = new ArtLocation({
-      rawArtLocation: requestData.data,
+      rawArtLocation: requestData,
       applicationContext,
     });
 
     //TODO: Possibly return artLocation including unique ids
-    return { status: 'success' };
+    return { status: 'success', artLocation };
   } catch (e) {
     console.log('e: ', e);
     return { status: 'error validating data' };
