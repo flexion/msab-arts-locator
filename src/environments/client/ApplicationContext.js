@@ -7,9 +7,6 @@ const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');
 const {
-  getLocationCoordinatesInteractor,
-} = require('../../interactors/getLocationCoordinatesInteractor');
-const {
   getGeoLocationInteractor,
 } = require('../../interactors/getGeoInteractor');
 const {
@@ -67,7 +64,6 @@ const applicationContext = {
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
-      getLocationCoordinatesInteractor,
     };
   },
 };

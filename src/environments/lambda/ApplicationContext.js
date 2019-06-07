@@ -1,5 +1,6 @@
 /* eslint-disable security/detect-object-injection */
 const AWSXRay = require('aws-xray-sdk');
+const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
@@ -10,6 +11,7 @@ const {
   getLocationCoordinates,
 } = require('../../interactors/getLocationCoordinatesInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
+const { saveNewLocationGeo } = require('../../persistence/saveToDynamoGateway');
 const AWS =
   process.env.NODE_ENV === 'production'
     ? AWSXRay.captureAWS(require('aws-sdk'))
@@ -26,6 +28,7 @@ const environment = {
   region: process.env.AWS_REGION || 'us-east-1',
   s3Endpoint: process.env.S3_ENDPOINT || 'localhost',
   stage: process.env.STAGE || 'local',
+  apiKey: process.env.APIKEY,
 };
 
 let dynamoClientCache = {};
@@ -35,7 +38,7 @@ module.exports = () => {
   return {
     environment,
     getPersistenceGateway: () => {
-      return { getCoordsFromAddress };
+      return { getCoordsFromAddress, saveNewLocationGeo };
     },
     getStorageClient: () => {
       if (!s3Cache) {
@@ -55,6 +58,18 @@ module.exports = () => {
         saveNewArtLocation,
         getLocationCoordinates,
         validateArtLocation,
+      };
+    },
+
+    getUniqueIdString: () => {
+      return uuidv4();
+    },
+    getCurrentTimestamp: () => {
+      return Date.now();
+    },
+    getJsonValidator: () => {
+      return {
+        validateJson,
       };
     },
     logger: {

@@ -41,12 +41,15 @@
     "@cerebral/react": "^4.1.0",
     "ajv": "^6.10.0",
     "ajv-errors": "^1.0.1",
+    "aws-xray-sdk": "^2.3.3",
+    "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
     "babel-plugin-cerebral": "^1.0.1",
     "bloomer": "^0.6.5",
     "bulma": "^0.7.4",
     "cerebral": "^5.1.0",
+    "dynamodb-geo": "^0.4.0",
     "jest": "^24.5.0",
     "node-sass-chokidar": "^1.3.4",
     "npm-run-all": "^4.1.5",
@@ -58,9 +61,7 @@
     "riot-route": "^3.1.4",
     "sass": "^1.17.3",
     "uuid": "^3.3.2",
-    "xhr-mock": "^2.4.1",
-    "aws-xray-sdk": "^2.3.3",
-    "dynamodb-geo": "^0.4.0"
+    "xhr-mock": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

@@ -1,11 +1,16 @@
 exports.getLocationCoordinates = async ({
-  requestData,
+  artLocation,
   applicationContext,
 }) => {
   // The interactor invokes a very specific persistence gateway operation.
   const coordinateData = await applicationContext
     .getPersistenceGateway()
-    .getCoordsFromAddress({ requestData, applicationContext });
-  console.log('coords: ', coordinateData);
-  return { status: 'success', data: coordinateData };
+    .getCoordsFromAddress({
+      artLocation,
+      APIKEY: applicationContext.environment.apiKey,
+    });
+  if (coordinateData.status === 'success') {
+    return coordinateData;
+  }
+  return { status: 'failure' };
 };

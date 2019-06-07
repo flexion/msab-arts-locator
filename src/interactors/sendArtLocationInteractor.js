@@ -13,7 +13,6 @@ const { ArtLocation } = require('../entities/ArtLocation');
 exports.sendArtLocation = async ({ requestData, applicationContext }) => {
   // An interactor owns the interface of the request. It will validate that the requestData is
   // well-formed using a JSON Schema validator. Detailed validation is handled by entities later.
-  console.log('sendartlocationInteractor');
   const dataSchema = {
     type: 'object',
     properties: {
@@ -55,23 +54,10 @@ exports.sendArtLocation = async ({ requestData, applicationContext }) => {
     applicationContext,
   });
 
-  // An interactor knows the data strucures of the entities it mediates and assembles
-  // those datastructures as approptiate. It doesn't blindly pass them what it receives from its caller.
-
-  // The interactor doesn't know the details of what constitutes valid entitiy data. It relies
-  // on entities for that validation.
-  const artLocation = new ArtLocation({
-    rawArtLocation: requestData.data,
+  await applicationContext.getPersistenceGateway().submitNewLocation({
+    artLocationData: requestData.data,
     applicationContext,
   });
 
-  // Once the entities have done thier work, if the results need to be persisted, the interactor
-  // extracts entity data and assebles data records that is passes to the persistencd gateway.
-  const artLocationData = toJSON(artLocation);
-  // The interactor invokes a very specific persistence gateway operation.
-  await applicationContext
-    .getPersistenceGateway()
-    .submitNewLocation({ artLocationData, applicationContext });
-
-  return { status: 'success', data: artLocationData };
+  return { status: 'success', data: requestData.data };
 };
