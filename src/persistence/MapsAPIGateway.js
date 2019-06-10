@@ -14,7 +14,7 @@ const getCoordsFromAddress = async ({ artLocation, apiKey }) => {
     return { status: 'success', coords };
   } else {
     console.log('missing data for coords', artLocation);
-    return { status: 'failure' };
+    return { status: 'geolocation failure' };
   }
 };
 
