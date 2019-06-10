@@ -42,19 +42,18 @@ jobs:
 
       - save_cache:
           paths:
-            - src/environments/lambda/node_modules
             - src/node_modules
           key: v1-dependencies-
 
       - run:
           name: Deploy application # creates .serverless/stack.json w/ CF stack vars
-          command: cd src/environments/lambda && npx sls deploy --verbose --stage pre --no-confirm --force
+          command: cd src && npx sls deploy --verbose --stage pre --no-confirm --force
           no_output_timeout: 30m
 
       - run:
           name: Create route53 upsert
-          command: jq -n --argfile stack src/environments/lambda/.serverless/stack.json -f resources/alias.json -M > src/environments/lambda/.serverless/upsert_alias.json
+          command: jq -n --argfile stack src/.serverless/stack.json -f resources/alias.json -M > src/.serverless/upsert_alias.json
 
       - run:
           name: Update route53 & wait
-          command: aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file://src/environments/lambda/.serverless/upsert_alias.json --query 'ChangeInfo.Id' --output text | xargs aws route53 wait resource-record-sets-changed --id
+          command: aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file://src/.serverless/upsert_alias.json --query 'ChangeInfo.Id' --output text | xargs aws route53 wait resource-record-sets-changed --id
