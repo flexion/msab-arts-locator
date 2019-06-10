@@ -11,7 +11,10 @@ const {
   getLocationCoordinates,
 } = require('../../interactors/getLocationCoordinatesInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
-const { saveNewLocationGeo } = require('../../persistence/saveToDynamoGateway');
+const {
+  saveNewLocationGeo,
+  getLocationsByGeo,
+} = require('../../persistence/GeoDynamoGateway');
 // const AWS =
 //   process.env.NODE_ENV === 'production'
 //     ? AWSXRay.captureAWS(require('aws-sdk'))
@@ -39,7 +42,7 @@ module.exports = () => {
   return {
     environment,
     getPersistenceGateway: () => {
-      return { getCoordsFromAddress, saveNewLocationGeo };
+      return { getCoordsFromAddress, saveNewLocationGeo, getLocationsByGeo };
     },
     getStorageClient: () => {
       if (!s3Cache) {
