@@ -1,5 +1,5 @@
 /* eslint-disable security/detect-object-injection */
-const AWSXRay = require('aws-xray-sdk');
+//const AWSXRay = require('aws-xray-sdk');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   validateArtLocation,
@@ -12,10 +12,11 @@ const {
 } = require('../../interactors/getLocationCoordinatesInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const { saveNewLocationGeo } = require('../../persistence/saveToDynamoGateway');
-const AWS =
-  process.env.NODE_ENV === 'production'
-    ? AWSXRay.captureAWS(require('aws-sdk'))
-    : require('aws-sdk');
+// const AWS =
+//   process.env.NODE_ENV === 'production'
+//     ? AWSXRay.captureAWS(require('aws-sdk'))
+//     : require('aws-sdk');
+const AWS = require('aws-sdk');
 
 const uuidv4 = require('uuid/v4');
 const { S3, DynamoDB } = AWS;
