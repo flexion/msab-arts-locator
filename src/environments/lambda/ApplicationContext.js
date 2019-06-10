@@ -29,7 +29,7 @@ const environment = {
   region: process.env.AWS_REGION || 'us-east-1',
   s3Endpoint: process.env.S3_ENDPOINT || 'localhost',
   stage: process.env.STAGE || 'local',
-  apiKey: process.env.APIKEY,
+  apiKey: process.env.API_KEY,
 };
 
 let dynamoClientCache = {};
