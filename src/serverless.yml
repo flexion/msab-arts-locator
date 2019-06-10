@@ -72,7 +72,7 @@ package:
     - sass/**
     - presenter/**
     - views/**
-    - node_modules/**
+    # - node_modules/**
 
 functions:
   hello:
