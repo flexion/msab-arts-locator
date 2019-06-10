@@ -31,11 +31,6 @@ jobs:
             aws iam get-user
 
       - run:
-          name: Install Serverless CLI and dependencies
-          command: |
-            cd src && npm install
-
-      - run:
           name: Install client dependencies
           command: |
             cd src && npm install
