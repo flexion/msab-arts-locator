@@ -14,11 +14,11 @@ jobs:
       - checkout
 
       # Download and cache dependencies
-      #- restore_cache:
-      #    keys:
-      #      - v1-dependencies-
-      #      # fallback to using the latest cache if no exact match is found
-      #      - v1-dependencies-
+      - restore_cache:
+          keys:
+            - v1-dependencies-
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run:
           name: Install the AWS cli
@@ -35,10 +35,10 @@ jobs:
           command: |
             cd src && npm install
 
-      #- save_cache:
-      #    paths:
-      #      - src/node_modules
-      #    key: v1-dependencies-
+      - save_cache:
+          paths:
+            - src/node_modules
+          key: v1-dependencies-
 
       - run:
           name: Deploy application # creates .serverless/stack.json w/ CF stack vars
