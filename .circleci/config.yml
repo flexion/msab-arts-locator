@@ -35,10 +35,10 @@ jobs:
           command: |
             cd src && npm install
 
-      - save_cache:
-          paths:
-            - src/node_modules
-          key: v1-dependencies-
+      #- save_cache:
+      #    paths:
+      #      - src/node_modules
+      #    key: v1-dependencies-
 
       - run:
           name: Deploy application # creates .serverless/stack.json w/ CF stack vars
