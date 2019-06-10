@@ -11,6 +11,8 @@ const createApplicationContext = require('../ApplicationContext');
 const post = async (event) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
+  let saveResult = null;
+  let msg = null;
   try {
     if (!event || !event.body) throw new Error('data not-found error');
     requestData = event.body;
@@ -22,7 +24,8 @@ const post = async (event) => {
         applicationContext,
         requestData,
       });
-    if (validateResult.status === 'success') {
+    msg = validateResult.status;
+    if (msg === 'success') {
       const artLocation = validateResult.artLocation;
       const coordResult = await applicationContext
         .getUseCases()
@@ -30,26 +33,34 @@ const post = async (event) => {
           applicationContext,
           artLocation,
         });
+      msg = coordResult.status;
       console.log('coordResult: ', coordResult);
-      if (coordResult.status === 'success') {
-        const saveResult = await applicationContext
-          .getUseCases()
-          .saveNewArtLocation({
-            applicationContext,
-            artLocation,
-            coords: coordResult.coords,
-          });
+      if (msg === 'success') {
+        saveResult = await applicationContext.getUseCases().saveNewArtLocation({
+          applicationContext,
+          artLocation,
+          coords: coordResult.coords,
+        });
+        msg = saveResult.status;
         console.log('saveResult: ', saveResult);
-        if (saveResult.status === 'success') {
-          return {
-            statusCode: 200,
-            body: JSON.stringify({
-              message: 'success',
-              input: event,
-            }),
-          };
-        }
       }
+    }
+    if (saveResult.status === 'success') {
+      return {
+        statusCode: 201,
+        body: JSON.stringify({
+          message: 'success',
+          input: event,
+        }),
+      };
+    } else {
+      return {
+        statusCode: 406,
+        body: JSON.stringify({
+          message: msg,
+          input: event,
+        }),
+      };
     }
   } catch (e) {
     console.log('e: ', e);

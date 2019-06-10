@@ -45,7 +45,7 @@ const saveNewLocationGeo = async ({ artLocation, coords }) => {
     return { status: 'success', artLocation };
   } catch (e) {
     console.log('something failed on dynamo put', e);
-    return { status: 'failure' };
+    return { status: 'save failed' };
   }
 };
 
