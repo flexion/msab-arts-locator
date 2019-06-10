@@ -7,7 +7,7 @@ exports.getLocationCoordinates = async ({
     .getPersistenceGateway()
     .getCoordsFromAddress({
       artLocation,
-      APIKEY: applicationContext.environment.apiKey,
+      apiKey: applicationContext.environment.apiKey,
     });
   if (coordinateData.status === 'success') {
     return coordinateData;

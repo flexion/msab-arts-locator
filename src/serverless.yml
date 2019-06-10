@@ -8,6 +8,7 @@ custom:
   domain: ${opt:stage}.${env:DOMAIN_NAME}
   region: ${opt:region, 'us-east-2'}
   certificateId: ${env:CERTIFICATE_ID} # Required by AWS to be in us-east-1
+  apiKey: ${eng:GOOGLE_GEOCODING_API_KEY} #api key to use google maps api
 
   output:
     file: .serverless/stack.json
@@ -88,6 +89,7 @@ functions:
     handler: environments/lambda/handlers.saveLocation
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
+      API_KEY: ${self:custom.apiKey  }
     timeout: 30
     events:
       - http:
