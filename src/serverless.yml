@@ -142,14 +142,14 @@ resources:
             AttributeType: N
           - AttributeName: rangeKey
             AttributeType: S
-          - AttributeName: geoHash
-            AttributeType: S
+          - AttributeName: geohash
+            AttributeType: N
         LocalSecondaryIndexes:
           - IndexName: geohash-index
             KeySchema:
               - AttributeName: hashKey
                 KeyType: HASH
-              - AttributeName: geoHash
+              - AttributeName: geohash
                 KeyType: RANGE
             Projection:
               ProjectionType: ALL
