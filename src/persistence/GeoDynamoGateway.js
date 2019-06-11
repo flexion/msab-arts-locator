@@ -51,6 +51,7 @@ const saveNewLocationGeo = async ({ artLocation, coords }) => {
 
 const getLocationsByGeo = async ({ lat, long, radius }) => {
   try {
+    console.log('lat,long,radius', lat, long, radius);
     const results = await myGeoTableManager.queryRadius({
       RadiusInMeter: radius,
       CenterPoint: {

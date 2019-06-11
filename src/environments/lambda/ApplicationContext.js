@@ -5,6 +5,9 @@ const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
 const {
+  getArtLocationsByGeo,
+} = require('../../interactors/getArtLocationsByGeoInteractor');
+const {
   saveNewArtLocation,
 } = require('../../interactors/saveNewArtLocationInteractor');
 const {
@@ -62,6 +65,7 @@ module.exports = () => {
         saveNewArtLocation,
         getLocationCoordinates,
         validateArtLocation,
+        getArtLocationsByGeo,
       };
     },
 

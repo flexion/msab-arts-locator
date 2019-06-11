@@ -1,7 +1,6 @@
-const { toJSON } = require('../utilities/ObjectUtils');
 const { validateRequestData } = require('../utilities/CleanUtils');
 
-exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {
+exports.getArtLocationsByGeo = async ({ requestData, applicationContext }) => {
   const dataSchema = {
     type: 'object',
     properties: {
@@ -18,7 +17,9 @@ exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {
   // An interactor validates that the required objects are present.
   validateRequestData({ data: requestData, dataSchema, applicationContext });
 
-  const { lat, long, radius } = requestData;
+  const lat = parseFloat(requestData.lat);
+  const long = parseFloat(requestData.long);
+  const radius = parseFloat(requestData.radius);
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
     .getPersistenceGateway()

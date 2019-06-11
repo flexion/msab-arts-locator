@@ -18,7 +18,7 @@ const get = async (event) => {
     console.log('requestData: ', requestData);
     const geoResults = await applicationContext
       .getUseCases()
-      .retrieveGeoArtLocations({
+      .getArtLocationsByGeo({
         applicationContext,
         requestData,
       });
