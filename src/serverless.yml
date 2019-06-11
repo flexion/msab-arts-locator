@@ -63,6 +63,27 @@ provider:
       # the specific table for the stage
       Resource:
         - 'Fn::GetAtt': [GisTable, Arn]
+    - Effect: 'Allow'
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:BatchGetItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:BatchWriteItem
+      Resource:
+        - Fn::GetAtt: [GisTable, Arn]
+        - Fn::Join:
+            - '/'
+            - - Fn::GetAtt:
+                  - GisTable
+                  - Arn
+              - index
+              - geohash-index
+        # - arn:aws:dynamodb:${self:custom.region}:${opt:accountId}:table/${self:service}-gis-${opt:stage}
+        # - arn:aws:dynamodb:${self:custom.region}:${opt:accountId}:table/${self:service}-gis-${opt:stage}/index/*
 
 package:
   exclude:
