@@ -12,10 +12,10 @@ const get = async (event) => {
 
   let msg = null;
   try {
-    if (!event || !event.body) throw new Error('data not-found error');
-    requestData = event.body;
+    if (!event || !event.query) throw new Error('data not-found error');
+    requestData = event.query;
 
-    console.log('requestData: ', requestData);
+    console.log('requestdata: ', requestData);
     const geoResults = await applicationContext
       .getUseCases()
       .getArtLocationsByGeo({
