@@ -49,4 +49,21 @@ const saveNewLocationGeo = async ({ artLocation, coords }) => {
   }
 };
 
-module.exports = { saveNewLocationGeo };
+const getLocationsByGeo = async ({ lat, long, radius }) => {
+  try {
+    console.log('lat,long,radius', lat, long, radius);
+    const results = await myGeoTableManager.queryRadius({
+      RadiusInMeter: radius,
+      CenterPoint: {
+        latitude: lat,
+        longitude: long,
+      },
+    });
+    return { status: 'success', results };
+  } catch (e) {
+    console.log('something failed on dynamo get', e);
+    return { status: 'get failed' };
+  }
+};
+
+module.exports = { saveNewLocationGeo, getLocationsByGeo };

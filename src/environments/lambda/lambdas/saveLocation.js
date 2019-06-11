@@ -45,7 +45,7 @@ const post = async (event) => {
         console.log('saveResult: ', saveResult);
       }
     }
-    if (saveResult.status === 'success') {
+    if (msg === 'success') {
       return {
         statusCode: 201,
         body: JSON.stringify({

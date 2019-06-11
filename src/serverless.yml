@@ -76,14 +76,17 @@ package:
     # - node_modules/**
 
 functions:
-  hello:
-    handler: environments/lambda/lambdas/test-lambda.hello
+  getLocations:
+    handler: environments/lambda/handlers.getLocations
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
+    timeout: 30
     events:
       - http:
-          path: ${self:custom.fullstack.apiPath}/v1/hello
+          path: ${self:custom.fullstack.apiPath}/v1/get-locations
           method: get
+          cors: true
+          async: true
 
   saveLocation:
     handler: environments/lambda/handlers.saveLocation
