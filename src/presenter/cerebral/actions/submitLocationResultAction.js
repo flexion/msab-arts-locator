@@ -5,6 +5,8 @@ export const submitLocationResultAction = async ({ store, props }) => {
     store.set(state.submitLocationSuccess, true);
   } else {
     // eventually do something with validation
-    console.log('validation or something failed on submit');
+    const fullError = JSON.parse(props.result.data);
+    store.set(state.submitLocationFailure, true);
+    store.set(state.submitLocationFailureMsg, fullError[0].message);
   }
 };

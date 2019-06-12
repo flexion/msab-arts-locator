@@ -14,7 +14,6 @@ function validateJson(data, schema) {
   var validate = ajv.compile(schema);
   var valid = validate(data);
   if (!valid) {
-    // console.log(JSON.stringify(validate.errors));
     return validate.errors;
   }
 }

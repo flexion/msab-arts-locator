@@ -1,9 +1,6 @@
 const uuidv4 = require('uuid/v4');
 const rawEntityData = require('../../../sample-data/sample-data');
 const {
-  sendArtLocation,
-} = require('../../interactors/sendArtLocationInteractor');
-const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');
 const {
@@ -12,6 +9,9 @@ const {
 const {
   getReverseCityLookupInteractor,
 } = require('../../interactors/getReverseCityLookupInteractor');
+const {
+  validateArtLocation,
+} = require('../../interactors/validateArtLocationInteractor');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   readAllLocationsByCity,
@@ -60,10 +60,10 @@ const applicationContext = {
   },
   getUseCases: () => {
     return {
-      sendArtLocation,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
+      validateArtLocation,
     };
   },
 };
