@@ -1,7 +1,7 @@
 import { state } from 'cerebral';
 
 export const submitLocationAction = async ({ applicationContext, get }) => {
-  const result = await applicationContext.getUseCases().sendArtLocation({
+  const result = await applicationContext.getUseCases().validateArtLocation({
     requestData: { data: get(state.form) },
     applicationContext,
   });

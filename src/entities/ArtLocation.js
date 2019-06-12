@@ -20,8 +20,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
   var dataSchema = {
     type: 'object',
     required: [
-      'artistName',
-      'locationName',
+      'name',
       'street',
       'city',
       'state',
@@ -33,10 +32,9 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
     allOf: [
       {
         properties: {
-          artistName: { type: 'string', minLength: 1 },
-          locationName: { type: 'string', minLength: 1 },
+          name: { type: 'string', minLength: 1 },
           category: { type: 'object' },
-          website: { type: 'string', minLength: 1 },
+          website: { type: 'string', minLength: 0 },
           street: { type: 'string', minLength: 1 },
           city: { type: 'string', minLength: 1 },
           state: { type: 'string', minLength: 2, maxLength: 2 },
@@ -44,7 +42,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
           contactName: { type: 'string', minLength: 1 },
           contactEmail: { type: 'string', minLength: 1 },
           contactPhone: { type: 'string', minLength: 1 },
-          description: { type: 'string', minLength: 1, maxLength: 250 },
+          description: { type: 'string', minLength: 0, maxLength: 250 },
           long: { type: 'number' },
           lat: { type: 'number' },
         },
@@ -54,18 +52,20 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
     errorMessage: {
       type: 'data should be an object',
       properties: {
-        description:
-          'description should be at least 1 characters long and less than 250 characters',
-        name: 'name should be a string at least 1 characters long',
-        url: 'url should be a string at least 1 characters long',
-        phone: 'phone should be a string at least 1 characters long',
-        email: 'email should be a string at least 1 characters long',
+        name: 'Name should be a string at least 1 characters long',
+        contactPhone:
+          'Contact phone should be a string at least 1 characters long',
+        contactName:
+          'Contact name should be a string at least 1 characters long',
+        contactEmail:
+          'Contact e-mail should be a string at least 1 characters long',
         street: 'street should be a string at least 1 characters long',
         city: 'city should be a string 1 characters long',
         state: 'state should be a string 2 characters long',
         zip: 'zip should be a number at least 5 numbers long',
       },
-      _: 'data should include a description, creation date, and unique id',
+      _:
+        'Location should include a name, street address, city name, zip code, contact name, contact phone, and contact email.',
     },
   };
 

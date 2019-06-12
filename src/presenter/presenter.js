@@ -27,6 +27,8 @@ export const presenter = {
   },
   state: {
     submitLocationSuccess: false,
+    submitLocationFailure: false,
+    submitLocationFailureMsg: '',
     cityValue: '',
     locationsList: [],
     locationListHelper,
@@ -34,8 +36,7 @@ export const presenter = {
     position: { lat: 0, long: 0 },
     currentPage: 'Home',
     form: {
-      artistName: '',
-      locationName: '',
+      name: '',
       category: {
         folk: false,
         visual: false,

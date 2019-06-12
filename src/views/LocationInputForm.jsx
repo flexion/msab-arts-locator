@@ -22,19 +22,6 @@ export const LocationInputForm = connect(
     updateFormValueSequence: sequences.updateFormValueSequence,
   },
   ({ form, submitLocation, updateFormValueSequence }) => {
-    /*
-
-Location Name
-Location Phone Number - Optional?
-Category/Discipline - multiple select
-Address - Street address, City, State, Zip
-Photo
-URL - Optional?
-Contact person
-Contact Email
-Contact phone
-? Description ?*/
-
     return (
       <Section>
         <Container>
@@ -62,28 +49,12 @@ Contact phone
             }}
           >
             <Field>
-              <Label className="msab-has-text-grey">Artist Name</Label>
+              <Label className="msab-has-text-grey">Name</Label>
               <Control>
                 <Input
                   type="text"
-                  name="artistName"
-                  value={form.artistName || ''}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-              </Control>
-            </Field>
-            <Field>
-              <Label className="msab-has-text-grey">Location Name</Label>
-              <Control>
-                <Input
-                  type="text"
-                  name="locationName"
-                  value={form.locationName || ''}
+                  name="name"
+                  value={form.name || ''}
                   onChange={(e) => {
                     updateFormValueSequence({
                       key: e.target.name,
