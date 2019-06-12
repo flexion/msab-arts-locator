@@ -12,5 +12,5 @@ exports.getLocationCoordinates = async ({
   if (coordinateData.status === 'success') {
     return coordinateData;
   }
-  return { status: 'failure' };
+  return { status: 'failure', data: coordinateData };
 };

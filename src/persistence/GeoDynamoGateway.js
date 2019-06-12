@@ -10,11 +10,15 @@ const config = new ddbGeo.GeoDataManagerConfiguration(
 config.hashKeyLength = 5;
 const myGeoTableManager = new ddbGeo.GeoDataManager(config);
 
-const saveNewLocationGeo = async ({ artLocation, coords }) => {
+const saveNewLocationGeo = async ({
+  artLocation,
+  coords,
+  applicationContext,
+}) => {
   try {
     await myGeoTableManager
       .putPoint({
-        RangeKeyValue: { S: '1234' }, // Use this to ensure uniqueness of the hash/range pairs.
+        RangeKeyValue: { S: applicationContext.getUniqueId() }, // Use this to ensure uniqueness of the hash/range pairs.
         GeoPoint: {
           // An object specifying latitutde and longitude as plain numbers. Used to build the geohash, the hashkey and geojson data
           latitude: coords.lat,
