@@ -29,9 +29,7 @@ const makeRequest = (method, url, data) => {
 };
 
 const submitNewLocation = async ({ artLocationData }) => {
-  console.log('in submitnewlocation', artLocationData);
   if (artLocationData) {
-    console.log('wtf bbq');
     const method = 'POST';
     const lambdaURL = 'https://pre.msab.flexion.us/api/v1/save-location';
     const response = await makeRequest(method, lambdaURL, artLocationData);
