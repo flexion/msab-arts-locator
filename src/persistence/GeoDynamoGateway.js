@@ -27,8 +27,7 @@ const saveNewLocationGeo = async ({
         },
         PutItemInput: {
           Item: {
-            artistName: { S: artLocation.artistName },
-            locationName: { S: artLocation.locationName },
+            name: { S: artLocation.name },
             category: { S: JSON.stringify(artLocation.category) },
             website: { S: artLocation.website },
             street: { S: artLocation.street },

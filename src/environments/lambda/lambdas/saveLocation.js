@@ -22,6 +22,7 @@ const post = async (event) => {
   let saveResult = null;
   let msg = null;
   try {
+    console.log('event: ', event.body);
     if (!event || !event.body) throw new Error('data not-found error');
     requestData = event.body;
 
