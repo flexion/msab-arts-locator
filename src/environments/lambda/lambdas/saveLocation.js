@@ -22,11 +22,9 @@ const post = async (event) => {
   let saveResult = null;
   let msg = null;
   try {
-    console.log('event: ', event.body);
     if (!event || !event.body) throw new Error('data not-found error');
     requestData = event.body;
 
-    console.log('requestData: ', requestData);
     const validateResult = await applicationContext
       .getUseCases()
       .validateArtLocation({
@@ -55,6 +53,7 @@ const post = async (event) => {
       }
     }
     if (msg === 'success') {
+      console.log('should return a 201');
       return {
         statusCode: 201,
         body: JSON.stringify({

@@ -5,7 +5,6 @@
  * @returns {result}
  */
 exports.sendArtLocation = async ({ requestData, applicationContext }) => {
-  console.log('send art location requestData: ', requestData);
   const result = await applicationContext
     .getPersistenceGateway()
     .submitNewLocation({
