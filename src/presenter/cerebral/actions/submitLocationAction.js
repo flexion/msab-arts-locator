@@ -1,9 +1,12 @@
-import { state } from 'cerebral';
-
-export const submitLocationAction = async ({ applicationContext, get }) => {
-  const result = await applicationContext.getUseCases().validateArtLocation({
-    requestData: { data: get(state.form) },
-    applicationContext,
-  });
-  return { result };
+export const submitLocationAction = async ({ applicationContext, props }) => {
+  if (props.result.status === 'success') {
+    const result = await applicationContext.getUseCases().sendArtLocation({
+      requestData: props.result.artLocation,
+      applicationContext,
+    });
+    return { result };
+  }
+  //else {
+  //   return props;
+  // }
 };
