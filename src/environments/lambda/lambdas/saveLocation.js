@@ -1,6 +1,13 @@
 const createApplicationContext = require('../ApplicationContext');
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
 //const { handle } = require('../middleware/apiGatewayHelper');
+const headers = {
+  'Access-Control-Allow-Origin': '*',
+  'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
+  'Content-Type': 'application/json',
+  Pragma: 'no-cache',
+  'X-Content-Type-Options': 'nosniff',
+};
 
 /**
  * used for saving new locations
@@ -8,6 +15,7 @@ const createApplicationContext = require('../ApplicationContext');
  * @param {Object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
+
 const post = async (event) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
@@ -52,20 +60,27 @@ const post = async (event) => {
           message: 'success',
           input: event,
         }),
+        headers,
       };
     } else {
+      console.log('should return a 406');
       return {
         statusCode: 406,
         body: JSON.stringify({
           message: msg,
           input: event,
         }),
+        headers,
       };
     }
   } catch (e) {
     console.log('e: ', e);
     applicationContext.logger.error(e);
-    return { statusCode: 500, body: JSON.stringify({ message: 'error', e }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'error', e }),
+      headers,
+    };
   }
 };
 

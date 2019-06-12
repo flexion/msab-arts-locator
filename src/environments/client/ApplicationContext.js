@@ -10,6 +10,9 @@ const {
   getReverseCityLookupInteractor,
 } = require('../../interactors/getReverseCityLookupInteractor');
 const {
+  sendArtLocation,
+} = require('../../interactors/sendArtLocationInteractor');
+const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
@@ -64,6 +67,7 @@ const applicationContext = {
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
       validateArtLocation,
+      sendArtLocation,
     };
   },
 };

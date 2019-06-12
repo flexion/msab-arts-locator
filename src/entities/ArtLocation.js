@@ -9,6 +9,7 @@ const { toJSON } = require('../utilities/ObjectUtils');
  * @constructor
  */
 function ArtLocation({ rawArtLocation, applicationContext }) {
+  console.log('rawartlocation: ', typeof rawArtLocation);
   Object.assign(this, rawArtLocation, {
     createdAt:
       rawArtLocation.createdAt || applicationContext.getCurrentTimestamp(),
@@ -71,8 +72,10 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
 
   // An object validates that the arguments are as valid as can be determined at this point.
   const entityData = toJSON(this);
+  console.log('entityData1', entityData);
+
   validateRequestData({
-    data: entityData.data,
+    data: entityData,
     dataSchema,
     applicationContext,
   });

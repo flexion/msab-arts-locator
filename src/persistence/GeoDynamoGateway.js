@@ -16,6 +16,7 @@ const saveNewLocationGeo = async ({
   applicationContext,
 }) => {
   try {
+    console.log('in save to geo: ', artLocation);
     await myGeoTableManager
       .putPoint({
         RangeKeyValue: { S: applicationContext.getUniqueId() }, // Use this to ensure uniqueness of the hash/range pairs.
@@ -33,7 +34,7 @@ const saveNewLocationGeo = async ({
             street: { S: artLocation.street },
             city: { S: artLocation.city },
             state: { S: artLocation.state },
-            zip: { N: artLocation.zip },
+            zip: { S: artLocation.zip },
             contactName: { S: artLocation.contactName },
             contactEmail: { S: artLocation.contactEmail },
             contactPhone: { S: artLocation.contactPhone },
