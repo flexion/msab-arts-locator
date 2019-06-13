@@ -22,8 +22,8 @@ const post = async (event) => {
   try {
     if (!event || !event.body) throw new Error('data not-found error');
     requestData = JSON.parse(event.body);
-    console.log(`Event: ${JSON.stringify(event)}`);
-    console.log(`requestData: ${JSON.stringify(requestData)}`);
+    // console.log(`Event: ${JSON.stringify(event)}`);
+    // console.log(`requestData: ${JSON.stringify(requestData)}`);
 
     const validateResult = await applicationContext
       .getUseCases()
@@ -56,7 +56,6 @@ const post = async (event) => {
       console.log('should return a 201');
       return {
         statusCode: 201,
-        isBase64Encoded: false,
         headers: headers,
         body: JSON.stringify({
           message: 'success',
