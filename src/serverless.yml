@@ -107,7 +107,6 @@ functions:
           path: ${self:custom.fullstack.apiPath}/v1/get-locations
           method: get
           cors: true
-          async: true
 
   saveLocation:
     handler: environments/lambda/handlers.saveLocation
@@ -120,7 +119,6 @@ functions:
           path: ${self:custom.fullstack.apiPath}/v1/save-location/
           method: post
           cors: true
-          async: true
 
 resources:
   Outputs:

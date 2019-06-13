@@ -5,8 +5,6 @@ const headers = {
   'Access-Control-Allow-Origin': '*',
   'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
   'Content-Type': 'application/json',
-  Pragma: 'no-cache',
-  'X-Content-Type-Options': 'nosniff',
 };
 
 /**
@@ -23,7 +21,9 @@ const post = async (event) => {
   let msg = null;
   try {
     if (!event || !event.body) throw new Error('data not-found error');
-    requestData = event.body;
+    requestData = JSON.parse(event.body);
+    // console.log(`Event: ${JSON.stringify(event)}`);
+    // console.log(`requestData: ${JSON.stringify(requestData)}`);
 
     const validateResult = await applicationContext
       .getUseCases()
@@ -56,21 +56,21 @@ const post = async (event) => {
       console.log('should return a 201');
       return {
         statusCode: 201,
+        headers: headers,
         body: JSON.stringify({
           message: 'success',
           input: event,
         }),
-        headers,
       };
     } else {
       console.log('should return a 406');
       return {
         statusCode: 406,
+        headers: headers,
         body: JSON.stringify({
           message: msg,
           input: event,
         }),
-        headers,
       };
     }
   } catch (e) {
@@ -78,8 +78,8 @@ const post = async (event) => {
     applicationContext.logger.error(e);
     return {
       statusCode: 500,
+      headers: headers,
       body: JSON.stringify({ message: 'error', e }),
-      headers,
     };
   }
 };
