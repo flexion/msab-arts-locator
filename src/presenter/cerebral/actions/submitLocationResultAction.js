@@ -8,6 +8,7 @@ export const submitLocationResultAction = async ({ store, props }) => {
     props.result.response.status === 201
   ) {
     store.set(state.submitLocationSuccess, true);
+    store.set(state.submitLocationMsg, 'Art Location Successfully Submitted!');
   } else {
     if (props.result && props.result.data) {
       const fullError = JSON.parse(props.result.data);
