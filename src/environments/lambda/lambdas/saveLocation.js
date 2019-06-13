@@ -63,12 +63,11 @@ const post = async (event) => {
         }),
       };
     } else {
-      console.log('should return a 406');
+      console.log('should return a 406', msg);
       return {
         statusCode: 406,
         headers: headers,
         body: JSON.stringify({
-          message: msg,
           input: event,
         }),
       };

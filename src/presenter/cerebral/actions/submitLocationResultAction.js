@@ -2,18 +2,19 @@ import { state } from 'cerebral';
 
 export const submitLocationResultAction = async ({ store, props }) => {
   console.log('submitlocationresults: ', props);
-  if (props.result.status === 'success') {
+  if (
+    props.result &&
+    props.result.response &&
+    props.result.response.status === 201
+  ) {
     store.set(state.submitLocationSuccess, true);
+    store.set(state.submitLocationMsg, 'Art Location Successfully Submitted!');
   } else {
-    // eventually do something with validation
     if (props.result && props.result.data) {
       const fullError = JSON.parse(props.result.data);
-      store.set(state.submitLocationFailureMsg, fullError[0].message);
+      store.set(state.submitLocationMsg, fullError[0].message);
     } else {
-      store.set(
-        state.submitLocationFailureMsg,
-        'There was an error submitting your location',
-      );
+      store.set(state.submitLocationMsg, 'Location Failed to Save.');
     }
     store.set(state.submitLocationFailure, true);
   }

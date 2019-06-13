@@ -22,7 +22,7 @@
     "lint": "eslint . && eslint ./**/*.jsx && stylelint ./**/*.scss",
     "lint:fix": "eslint --fix . && eslint --fix ./**/*.jsx && stylelint --fix ./**/*.scss",
     "start": "rm -rf dist && npm-run-all -p watch-css start-js",
-    "start-js": "MSAB_ENV=dev parcel --no-cache --no-hmr index.pug  --port 5678",
+    "start-js": "MSAB_ENV=dev parcel --no-cache index.pug  --port 5678",
     "build": "MSAB_ENV=prod parcel build  --no-source-maps index.pug"
   },
   "repository": {

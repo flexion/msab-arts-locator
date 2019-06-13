@@ -4,27 +4,27 @@ import { Foot } from './Footer';
 import { LocationInputForm } from './LocationInputForm';
 import { connect } from '@cerebral/react';
 import { state } from 'cerebral';
-import { Title } from 'bloomer';
+import { Notification, Section, Container } from 'bloomer';
 export const LocationInput = connect(
   {
     success: state.submitLocationSuccess,
     failure: state.submitLocationFailure,
-    failMsg: state.submitLocationFailureMsg,
+    submitMsg: state.submitLocationMsg,
   },
-  ({ success, failure, failMsg }) => {
+  ({ success, failure, submitMsg }) => {
+    let color = success ? 'success' : 'danger';
     return (
       <React.Fragment>
         <AppHeader />
-        {success && (
-          <div>
-            <Title>Art Location Successfully Submitted!</Title>
-          </div>
+
+        {(success || failure) && (
+          <Section>
+            <Container>
+              <Notification isColor={color}>{submitMsg}</Notification>
+            </Container>
+          </Section>
         )}
-        {failure && (
-          <div>
-            <Title>{failMsg}</Title>
-          </div>
-        )}
+
         <LocationInputForm />
         <Foot />
       </React.Fragment>
