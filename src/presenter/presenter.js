@@ -28,7 +28,7 @@ export const presenter = {
   state: {
     submitLocationSuccess: false,
     submitLocationFailure: false,
-    submitLocationFailureMsg: '',
+    submitLocationMsg: '',
     cityValue: '',
     locationsList: [],
     locationListHelper,
