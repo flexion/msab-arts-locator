@@ -120,7 +120,6 @@ functions:
           path: ${self:custom.fullstack.apiPath}/v1/save-location/
           method: post
           cors: true
-          async: true
 
 resources:
   Outputs:

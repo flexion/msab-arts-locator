@@ -2,11 +2,9 @@ const createApplicationContext = require('../ApplicationContext');
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
 //const { handle } = require('../middleware/apiGatewayHelper');
 const headers = {
-  // 'Access-Control-Allow-Origin': '*',
-  // 'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
+  'Access-Control-Allow-Origin': '*',
+  'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
   'Content-Type': 'application/json',
-  // Pragma: 'no-cache',
-  // 'X-Content-Type-Options': 'nosniff',
 };
 
 /**
@@ -23,7 +21,7 @@ const post = async (event) => {
   let msg = null;
   try {
     if (!event || !event.body) throw new Error('data not-found error');
-    requestData = event.body;
+    requestData = JSON.parse(event.body);
     console.log(`Event: ${JSON.stringify(event)}`);
     console.log(`requestData: ${JSON.stringify(requestData)}`);
 
@@ -56,18 +54,15 @@ const post = async (event) => {
     }
     if (msg === 'success') {
       console.log('should return a 201');
-      const promise = new Promise(function(resolve, reject) {
-        resolve({
-          statusCode: 201,
-          isBase64Encoded: false,
-          headers: headers,
-          body: JSON.stringify({
-            message: 'success',
-            input: event,
-          }),
-        });
-      });
-      return promise;
+      return {
+        statusCode: 201,
+        isBase64Encoded: false,
+        headers: headers,
+        body: JSON.stringify({
+          message: 'success',
+          input: event,
+        }),
+      };
     } else {
       console.log('should return a 406');
       return {
