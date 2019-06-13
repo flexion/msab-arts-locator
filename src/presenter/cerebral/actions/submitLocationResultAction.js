@@ -2,13 +2,21 @@ import { state } from 'cerebral';
 
 export const submitLocationResultAction = async ({ store, props }) => {
   console.log('submitlocationresults: ', props);
-  if (
-    props.result &&
-    props.result.response &&
-    props.result.response.status === 201
-  ) {
-    store.set(state.submitLocationSuccess, true);
-    store.set(state.submitLocationMsg, 'Art Location Successfully Submitted!');
+  let response = null;
+  if (props.result && props.result.response) {
+    if (typeof props.result.response === 'string') {
+      response = JSON.parse(props.result.response);
+    } else {
+      response = props.result.response;
+    }
+    console.log('response: ', response);
+    if (response.message === 'success') {
+      store.set(state.submitLocationSuccess, true);
+      store.set(
+        state.submitLocationMsg,
+        'Art Location Successfully Submitted!',
+      );
+    }
   } else {
     if (props.result && props.result.data) {
       const fullError = JSON.parse(props.result.data);
