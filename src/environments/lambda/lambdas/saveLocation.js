@@ -2,11 +2,11 @@ const createApplicationContext = require('../ApplicationContext');
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
 //const { handle } = require('../middleware/apiGatewayHelper');
 const headers = {
-  'Access-Control-Allow-Origin': '*',
-  'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
+  // 'Access-Control-Allow-Origin': '*',
+  // 'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
   'Content-Type': 'application/json',
-  Pragma: 'no-cache',
-  'X-Content-Type-Options': 'nosniff',
+  // Pragma: 'no-cache',
+  // 'X-Content-Type-Options': 'nosniff',
 };
 
 /**
@@ -24,6 +24,8 @@ const post = async (event) => {
   try {
     if (!event || !event.body) throw new Error('data not-found error');
     requestData = event.body;
+    console.log(`Event: ${JSON.stringify(event)}`);
+    console.log(`requestData: ${JSON.stringify(requestData)}`);
 
     const validateResult = await applicationContext
       .getUseCases()
@@ -54,23 +56,27 @@ const post = async (event) => {
     }
     if (msg === 'success') {
       console.log('should return a 201');
-      return {
-        statusCode: 201,
-        body: JSON.stringify({
-          message: 'success',
-          input: event,
-        }),
-        headers,
-      };
+      const promise = new Promise(function(resolve, reject) {
+        resolve({
+          statusCode: 201,
+          isBase64Encoded: false,
+          headers: headers,
+          body: JSON.stringify({
+            message: 'success',
+            input: event,
+          }),
+        });
+      });
+      return promise;
     } else {
       console.log('should return a 406');
       return {
         statusCode: 406,
+        headers: headers,
         body: JSON.stringify({
           message: msg,
           input: event,
         }),
-        headers,
       };
     }
   } catch (e) {
@@ -78,8 +84,8 @@ const post = async (event) => {
     applicationContext.logger.error(e);
     return {
       statusCode: 500,
+      headers: headers,
       body: JSON.stringify({ message: 'error', e }),
-      headers,
     };
   }
 };
