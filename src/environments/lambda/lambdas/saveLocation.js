@@ -68,6 +68,7 @@ const post = async (event) => {
         statusCode: 406,
         headers: headers,
         body: JSON.stringify({
+          message: msg,
           input: event,
         }),
       };
