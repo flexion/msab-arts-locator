@@ -24,15 +24,17 @@ export const LocationListItem = ({ location, hasGeo }) => {
       </MediaLeft>
       <MediaContent>
         <Content>
-          <a href="#" className="has-text-primary has-text-weight-semibold">
+          <a
+            href={location.website}
+            target="_new"
+            className="has-text-primary has-text-weight-semibold"
+          >
             <span>{location.name}</span>
           </a>
           <br />
           <Level isMobile className="address-level">
             <LevelLeft>
-              <LevelItem className="has-text-grey">
-                {location.address1}
-              </LevelItem>
+              <LevelItem className="has-text-grey">{location.street}</LevelItem>
             </LevelLeft>
             <LevelRight>
               <LevelItem>

@@ -15,11 +15,16 @@ const getMapUrl = () => {
 };
 
 const createLocationURL = (location) => {
-  const address = `${location.address1} ${location.ad2} ${location.city} ${
-    location.st
-  } ${location.zip}`;
+  let geoJson = null;
+  if (typeof location.geoJson === 'string') {
+    geoJson = JSON.parse(location.geoJson);
+  } else {
+    geoJson = location.geoJson;
+  }
+  console.log('geoJson: ', geoJson);
+  // https://www.google.com/maps/search/?api=1&query=28.6139,77.2090
   location.googleURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    address,
+    `${geoJson.coordinates[1]}, ${geoJson.coordinates[0]}`,
   )}`;
   return location;
 };
