@@ -4,7 +4,6 @@ exports.getArtLocationsInRadius = async ({
   requestData,
   applicationContext,
 }) => {
-  console.log('requestData: ', requestData);
   const dataSchema = {
     type: 'object',
     properties: {

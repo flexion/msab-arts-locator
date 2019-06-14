@@ -29,8 +29,14 @@ const formatDistance = (location) => {
 
 const formatCategories = (location) => {
   location.categories = [];
-  Object.keys(location.category).forEach(function(cat) {
-    if (location.category[cat]) {
+
+  let cats = location.category;
+  if (typeof cats === 'string') {
+    cats = JSON.parse(cats);
+  }
+
+  Object.keys(cats).forEach(function(cat) {
+    if (cats[cat]) {
       location.categories.push(cat);
     }
   });
@@ -38,7 +44,6 @@ const formatCategories = (location) => {
 };
 
 const formatMapsURL = (location) => {
-  console.log('coords: ', location.coordinates);
   // location.coordinates is [long, lat]
   // https://www.google.com/maps/search/?api=1&query=28.6139,77.2090
   location.googleURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
