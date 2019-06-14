@@ -47,7 +47,7 @@ describe('getGeoLocationSequence', () => {
     presenter.providers.applicationContext = mockApplicationContext;
     const test = CerebralTest(presenter);
     await test.runSequence('getGeoLocationSequence');
-    expect(test.getState('hasGeo')).toBeTrue;
+    expect(test.getState('haveGeo')).toBeTrue;
     const geo = {
       lat: 10,
       long: 10,

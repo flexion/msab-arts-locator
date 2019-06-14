@@ -1,22 +1,39 @@
 const createApplicationContext = require('../ApplicationContext');
 const AWS = require('aws-sdk');
+const getDistance = require('geolib/es/getDistance').default;
+var conversions = require('conversions');
 /**
  * used for retrieving locations based on geocoords
  *
  * @param {Object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
+const formatLocation = (location, requestData) => {
+  //alter data in here before it gets sent
+  location.distance = conversions(
+    getDistance(requestData, JSON.parse(location.geoJson).coordinates),
+    'meters',
+    'miles',
+  );
+  location.coordinates = JSON.parse(location.geoJson).coordinates;
+  delete location.geoJson;
+  delete location.hashKey;
+  delete location.rangeKey;
+  delete location.geohash;
+
+  return location;
+};
+
 const get = async (event, context) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
 
   let msg = null;
   try {
-    console.log('event: ', event.queryStringParameters);
+    console.log('event data: ', event.queryStringParameters);
     if (!event || !event.queryStringParameters)
       throw new Error('data not-found error');
     requestData = event.queryStringParameters;
-    console.log('requestData: ', requestData);
     const geoResults = await applicationContext
       .getUseCases()
       .getArtLocationsByGeo({
@@ -26,12 +43,13 @@ const get = async (event, context) => {
     console.log('geoResults: ', geoResults);
     const { status, results } = geoResults;
     const newResults = results.map((result) => {
-      console.log('result: ', result);
-      return AWS.DynamoDB.Converter.unmarshall(result, {
+      let location = AWS.DynamoDB.Converter.unmarshall(result, {
         convertEmptyValues: true,
       });
+      location = formatLocation(location, requestData);
+      console.log('location: ', location);
+      return location;
     });
-    console.log('newresults: ', newResults);
     if (status === 'success') {
       if (results.length > 0) {
         return {

@@ -1,30 +1,59 @@
 import { state } from 'cerebral';
-const getMapUrl = () => {
-  let mapUrlFullPath;
-  var mapUrl = '?q=' + geocoding.latitude + ',' + geocoding.longitude;
-  // Check if a mobile device exists, or is web browser
-  if (typeof device !== 'undefined') {
-    mapUrlFullPath =
-      device.platform.toLowerCase() === 'ios'
-        ? 'maps://' + mapUrl
-        : 'geo:' + mapUrl;
-  } else {
-    mapUrlFullPath = 'geo:' + mapUrl;
-  }
-  window.open(mapUrlFullPath, '_system');
+const urlFormat = require('format-url');
+
+// const getMapUrl = () => {
+//   let mapUrlFullPath;
+//   var mapUrl = '?q=' + geocoding.latitude + ',' + geocoding.longitude;
+//   // Check if a mobile device exists, or is web browser
+//   if (typeof device !== 'undefined') {
+//     mapUrlFullPath =
+//       device.platform.toLowerCase() === 'ios'
+//         ? 'maps://' + mapUrl
+//         : 'geo:' + mapUrl;
+//   } else {
+//     mapUrlFullPath = 'geo:' + mapUrl;
+//   }
+//   window.open(mapUrlFullPath, '_system');
+// };
+
+const formatWebsiteURL = (location) => {
+  location.website = urlFormat(location.website);
+  return location;
 };
 
-const createLocationURL = (location) => {
-  const address = `${location.address1} ${location.ad2} ${location.city} ${
-    location.st
-  } ${location.zip}`;
+const formatDistance = (location) => {
+  const distance = Math.round(location.distance * 10) / 10;
+  location.distance = `${distance} miles`;
+  return location;
+};
+
+const formatCategories = (location) => {
+  location.categories = [];
+  Object.keys(location.category).forEach(function(cat) {
+    if (location.category[cat]) {
+      location.categories.push(cat);
+    }
+  });
+  return location;
+};
+
+const formatMapsURL = (location) => {
+  console.log('coords: ', location.coordinates);
+  // location.coordinates is [long, lat]
+  // https://www.google.com/maps/search/?api=1&query=28.6139,77.2090
   location.googleURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    address,
+    `${location.coordinates[1]}, ${location.coordinates[0]}`,
   )}`;
   return location;
 };
 
+const formatLocation = (location) => {
+  location = formatDistance(location);
+  location = formatCategories(location);
+  return formatMapsURL(formatWebsiteURL(location));
+};
+
 export const locationListHelper = (get) => {
   const arr = get(state.locationsList);
-  return arr.length ? arr.map(createLocationURL) : [];
+  return arr.length ? arr.map(formatLocation) : [];
 };

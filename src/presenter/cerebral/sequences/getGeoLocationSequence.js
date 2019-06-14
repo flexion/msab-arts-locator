@@ -8,8 +8,8 @@ import { setLocationsListAction } from '../actions/setLocationsListAction';
 export const getGeoLocationSequence = [
   getGeoAction,
   setGeoAction,
-  getReverseCityAction,
-  setCityAction,
+  //getReverseCityAction,
+  //setCityAction,
   searchByGeoAction,
   setLocationsListAction,
 ];
