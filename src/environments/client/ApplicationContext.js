@@ -32,7 +32,7 @@ const {
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   getLocationsByRadius,
-} = require('../../persistence/getLocationsByRadiusGateway');
+} = require('../../persistence/GetLocationsByRadiusGateway');
 
 let locations = [];
 
