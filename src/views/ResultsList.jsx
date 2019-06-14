@@ -7,9 +7,9 @@ import { Section, Container, Title } from 'bloomer';
 export const ResultsList = connect(
   {
     locations: state.locationListHelper, //this alters the location list to include google url
-    hasGeo: state.hasGeo,
+    haveGeo: state.haveGeo,
   },
-  ({ locations, hasGeo }) => {
+  ({ locations, haveGeo }) => {
     return (
       <Section>
         <Container>
@@ -23,7 +23,11 @@ export const ResultsList = connect(
           <ul>
             {locations.map((location, i) => (
               <li key={i}>
-                <LocationListItem location={location} hasGeo={hasGeo} />
+                <LocationListItem
+                  location={location}
+                  index={i}
+                  haveGeo={haveGeo}
+                />
               </li>
             ))}
           </ul>
