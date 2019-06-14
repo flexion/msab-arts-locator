@@ -1,8 +1,7 @@
-const makeRequest = (method, url, data) => {
+const makeRequest = (method, url) => {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open(method, url);
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
     xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhr.onload = function() {
@@ -21,25 +20,16 @@ const makeRequest = (method, url, data) => {
         statusText: xhr.statusText,
       });
     };
-    if (data) {
-      data = JSON.stringify(data);
-      xhr.send(data);
-    } else {
-      xhr.send();
-    }
+    xhr.send();
   });
 };
 
-const submitNewLocation = async ({ artLocationData }) => {
-  if (artLocationData) {
-    const method = 'POST';
-    const lambdaURL = 'https://pre.msab.flexion.us/api/v1/save-location';
-    const response = await makeRequest(method, lambdaURL, artLocationData);
-    const results = { response };
-    return results;
-  } else {
-    return {};
-  }
+const getLocationsByRadius = async ({ lat, long, radius }) => {
+  const method = 'GET';
+  const lambdaURL = 'https://pre.msab.flexion.us/api/v1/get-locations';
+  let url = `${lambdaURL}&lat=${lat}&lon=${long}&radius=${radius}`;
+  const locations = await makeRequest(method, url);
+  return locations;
 };
 
-module.exports = { submitNewLocation };
+module.exports = { getLocationsByRadius };

@@ -4,6 +4,9 @@ const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');
 const {
+  getArtLocationsInRadius,
+} = require('../../interactors/getArtLocationsInRadiusInteractor');
+const {
   getGeoLocationInteractor,
 } = require('../../interactors/getGeoInteractor');
 const {
@@ -27,6 +30,9 @@ const {
   submitNewLocation,
 } = require('../../persistence/SubmitNewLocationGateway');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
+const {
+  getLocationsByRadius,
+} = require('../../persistence/getLocationsByRadiusGateway');
 
 let locations = [];
 
@@ -49,6 +55,7 @@ const applicationContext = {
       getCityFromGeo,
       submitNewLocation,
       getCoordsFromAddress,
+      getLocationsByRadius,
     };
   },
   getDataReader: () => {
@@ -68,6 +75,7 @@ const applicationContext = {
       getReverseCityLookupInteractor,
       validateArtLocation,
       sendArtLocation,
+      getArtLocationsInRadius,
     };
   },
 };

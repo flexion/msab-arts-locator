@@ -14,7 +14,7 @@ const get = async (event) => {
   try {
     if (!event || !event.query) throw new Error('data not-found error');
     requestData = event.query;
-
+    console.log('requestData: ', requestData);
     const geoResults = await applicationContext
       .getUseCases()
       .getArtLocationsByGeo({
