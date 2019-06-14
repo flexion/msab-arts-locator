@@ -29,5 +29,5 @@ exports.getArtLocationsInRadius = async ({
     .getPersistenceGateway()
     .getLocationsByRadius({ lat, long, radius });
 
-  return artLocationData;
+  return { result: JSON.parse(artLocationData) };
 };

@@ -3,6 +3,7 @@ import { setGeoAction } from '../actions/setGeoAction';
 import { setCityAction } from '../actions/setCityAction';
 import { getReverseCityAction } from '../actions/getReverseCityAction';
 import { searchByGeoAction } from '../actions/searchByGeoAction';
+import { setLocationsListAction } from '../actions/setLocationsListAction';
 
 export const getGeoLocationSequence = [
   getGeoAction,
@@ -10,4 +11,5 @@ export const getGeoLocationSequence = [
   getReverseCityAction,
   setCityAction,
   searchByGeoAction,
+  setLocationsListAction,
 ];

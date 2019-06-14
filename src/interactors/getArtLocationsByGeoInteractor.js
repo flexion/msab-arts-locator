@@ -5,20 +5,20 @@ exports.getArtLocationsByGeo = async ({ requestData, applicationContext }) => {
     type: 'object',
     properties: {
       lat: { type: 'string' },
-      long: { type: 'string' },
+      lon: { type: 'string' },
       radius: { type: 'string' },
     },
-    required: ['lat', 'long', 'radius'],
+    required: ['lat', 'lon', 'radius'],
     additionalProperties: false,
     errorMessage:
-      "should be an object with string properties 'lat', 'long', 'radius'",
+      "should be an object with string properties 'lat', 'lon', 'radius'",
   };
 
   // An interactor validates that the required objects are present.
   validateRequestData({ data: requestData, dataSchema, applicationContext });
 
   const lat = parseFloat(requestData.lat);
-  const long = parseFloat(requestData.long);
+  const long = parseFloat(requestData.lon);
   const radius = parseFloat(requestData.radius);
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
