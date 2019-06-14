@@ -27,7 +27,7 @@ const makeRequest = (method, url) => {
 const getLocationsByRadius = async ({ lat, long, radius }) => {
   const method = 'GET';
   const lambdaURL = 'https://pre.msab.flexion.us/api/v1/get-locations';
-  let url = `${lambdaURL}&lat=${lat}&lon=${long}&radius=${radius}`;
+  let url = `${lambdaURL}?lat=${lat}&lon=${long}&radius=${radius}`;
   const locations = await makeRequest(method, url);
   return locations;
 };
