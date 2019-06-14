@@ -3,8 +3,8 @@ const makeRequest = (method, url, data) => {
     var xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    // xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
+    // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhr.onload = function() {
       if (this.status >= 200 && this.status < 300) {
         resolve(xhr.response);

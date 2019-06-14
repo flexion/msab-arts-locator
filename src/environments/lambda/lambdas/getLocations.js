@@ -13,7 +13,6 @@ const get = async (event, context) => {
   let msg = null;
   try {
     console.log('event: ', event.queryStringParameters);
-    console.log('context: ', context);
     if (!event || !event.queryStringParameters)
       throw new Error('data not-found error');
     requestData = event.queryStringParameters;
