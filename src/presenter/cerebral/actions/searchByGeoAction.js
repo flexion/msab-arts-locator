@@ -12,7 +12,6 @@ export const searchByGeoAction = async ({ applicationContext, get, store }) => {
         },
         applicationContext,
       });
-    console.log('result after: ', result);
     return result;
   }
 };
