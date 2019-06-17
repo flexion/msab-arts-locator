@@ -4,12 +4,17 @@ import React from 'react';
 import { LocationListItem } from './LocationListItem';
 import { Filter } from './Filter';
 import { Section, Container, Title } from 'bloomer';
+import { sequences } from 'cerebral';
+
 export const ResultsList = connect(
   {
     locations: state.locationListHelper, //this alters the location list to include google url
     haveGeo: state.haveGeo,
+    getGeoLocationSequence: sequences.getGeoLocationSequence,
   },
-  ({ locations, haveGeo }) => {
+  ({ locations, haveGeo, getGeoLocationSequence }) => {
+    console.log('loading resultslist');
+    getGeoLocationSequence();
     return (
       <Section>
         <Container>
