@@ -2,7 +2,7 @@ const requestPosition = () => {
   let options = {
     enableHighAccuracy: false,
     //timeout: 15000, // time in millis when error callback will be invoked
-    //maximumAge: 0, // max cached age of gps data, also in millis
+    maximumAge: 10, // max cached age of gps data, also in millis
   };
 
   return new Promise(function(resolve, reject) {

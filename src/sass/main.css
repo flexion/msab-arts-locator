@@ -6926,6 +6926,9 @@ label.panel-block {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
 
+button:active {
+  background-color: #2a4ea5 !important; }
+
 h1 {
   font-family: 'Frank Ruhl Libre', serif; }
 
@@ -6939,10 +6942,10 @@ label {
   background-color: #565c65; }
 
 .msab-has-text-grey {
-  color: #565c65; }
+  color: #565c65 !important; }
 
 .msab-has-background-teal {
-  background-color: #acdcdc; }
+  background-color: #acdcdc !important; }
 
 .msab-has-text-purple {
   color: #563281; }
@@ -6953,24 +6956,59 @@ label {
 .msab-footer {
   padding-top: 5px;
   padding-bottom: 40px;
-  height: 28px; }
+  font-family: Asap;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px; }
+
+.msab-tiny-text {
+  font-family: Asap;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 11px; }
 
 .msab-filter {
   padding: 5px; }
 
+.msab-margin-10 {
+  margin: 10px; }
+
 .location-name {
+  font-family: Asap;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 17px; }
+
+.msab-location-address {
   font-family: 'Asap', sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 16px; }
+  font-size: 12px;
+  line-height: 14px; }
+
+.tag-text {
+  font-family: Asap;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 13px; }
+
+.msab-location-description {
+  font-family: 'Asap', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px; }
 
 .address-level {
   margin-bottom: 0px !important; }
 
 .header-section {
   padding-bottom: 0px;
-  background-color: #d8eeee; }
+  background-color: #563281; }
 
 li:not(:first-child) {
   padding-top: 15px; }
@@ -6984,3 +7022,6 @@ li:not(:first-child) {
 
 .margin-left-10 {
   margin-left: 10px; }
+
+.msab-description {
+  overflow-wrap: break-word; }
