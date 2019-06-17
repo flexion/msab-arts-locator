@@ -19,10 +19,10 @@ export const SearchByCity = connect(
   },
   ({ cityValue, searchByCitySequence, updateCitySearchSequence }) => {
     return (
-      <Section className="msab-has-background-grey">
+      <Section>
         <Container>
-          <Title isSize={3} className="has-text-white">
-            Find Arts Around You
+          <Title isSize={3} className="msab-has-text-purple">
+            Find Artistic Things To Do
           </Title>
 
           <form
@@ -34,7 +34,7 @@ export const SearchByCity = connect(
               searchByCitySequence();
             }}
           >
-            <span className="has-text-white">
+            <span className="msab-has-text-grey">
               Enter a town/city in Minnesota to get started
             </span>
             <Field hasAddons>

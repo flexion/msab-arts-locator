@@ -20,14 +20,14 @@ export const LocationListItem = ({ location, haveGeo, index }) => {
         <a
           href={location.website}
           target="_new"
-          className="has-text-primary has-text-weight-semibold"
+          className="has-text-primary location-name"
         >
           <span>
             {index + 1}. {location.name}
           </span>
         </a>
       </div>
-      <Media className="msab-location-media">
+      <Media>
         <MediaLeft>
           {!location.icon && (
             <Image isSize="64x64" src="https://via.placeholder.com/64x64" />
@@ -38,14 +38,14 @@ export const LocationListItem = ({ location, haveGeo, index }) => {
           <Content>
             <Level isMobile className="address-level">
               <LevelLeft>
-                <LevelItem className="has-text-grey">
+                <LevelItem className="has-text-grey msab-location-address">
                   {location.street}
                 </LevelItem>
               </LevelLeft>
               <LevelRight>
                 <LevelItem>
                   <a href={location.googleURL} target="_new">
-                    <span className="has-text-primary has-text-weight-semibold">
+                    <span className="has-text-primary has-text-weight-semibold msab-location-address">
                       {!haveGeo ? 'Map' : location.distance}
                       <Icon className="msab-has-text-purple fas fa-map-marker-alt" />
                     </span>
@@ -55,29 +55,31 @@ export const LocationListItem = ({ location, haveGeo, index }) => {
             </Level>
             <Level isMobile>
               <LevelLeft>
-                <LevelItem className="has-text-grey">{location.city}</LevelItem>
-                <LevelItem className="has-text-grey">{location.zip}</LevelItem>
-              </LevelLeft>
-              <LevelRight />
-            </Level>
-            <Level isMobile>
-              <LevelLeft>
-                <LevelItem className="has-text-grey">
-                  {location.description}
+                <LevelItem className="has-text-grey msab-location-address">
+                  {location.city}
+                </LevelItem>
+                <LevelItem className="has-text-grey msab-location-address">
+                  {location.zip}
                 </LevelItem>
               </LevelLeft>
               <LevelRight />
             </Level>
-            <Level isMobile>
-              {location.categories.map((tag, i) => (
-                <Tag isColor="info" key={i}>
-                  {tag}
-                </Tag>
-              ))}
-            </Level>
+            <p className="has-text-grey msab-location-description">
+              {location.description}
+            </p>
           </Content>
         </MediaContent>
       </Media>
+      <div className="msab-location-media">
+        {location.categories.map((tag, i) => (
+          <Tag
+            className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10"
+            key={i}
+          >
+            {tag}
+          </Tag>
+        ))}
+      </div>
     </React.Fragment>
   );
 };
