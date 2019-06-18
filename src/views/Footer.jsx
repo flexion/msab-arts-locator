@@ -11,7 +11,7 @@ export const Foot = () => (
       </Level>
       <Level isMobile>
         <LevelItem className="has-text-centered">
-          <Button isColor="primary" className="is-medium">
+          <Button isColor="primary" href="/submit-location/">
             Submit Location
           </Button>
         </LevelItem>

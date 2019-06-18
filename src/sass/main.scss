@@ -12,6 +12,13 @@ $msab-blue: #2a4ea5;
 button:active {
   background-color: $msab-blue !important;
 }
+a.button:active {
+  background-color: $msab-blue !important;
+  color: white !important;
+}
+a:active {
+  color: $msab-blue !important;
+}
 
 h1 {
   font-family: 'Frank Ruhl Libre', serif;
