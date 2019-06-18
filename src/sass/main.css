@@ -6929,6 +6929,12 @@ label.panel-block {
 button:active {
   background-color: #2a4ea5 !important; }
 
+a.button:active {
+  background-color: #2a4ea5 !important; }
+
+a:active {
+  color: #2a4ea5 !important; }
+
 h1 {
   font-family: 'Frank Ruhl Libre', serif; }
 

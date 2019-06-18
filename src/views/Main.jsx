@@ -18,7 +18,6 @@ export const Main = connect(
   },
   ({ currentPage }) => {
     let CurrentPage = pages[currentPage];
-    console.log('currentpage: ', currentPage);
     return (
       <React.Fragment>
         <main id="main-content" role="main">
