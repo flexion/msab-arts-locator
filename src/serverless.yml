@@ -115,7 +115,6 @@ functions:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
       API_KEY: ${self:custom.apiKey  }
       CAPTCHA_KEY: ${self:custom.captchaKey}
-
     timeout: 30
     events:
       - http:

@@ -1,10 +1,13 @@
 const createApplicationContext = require('../ApplicationContext');
+const multipart = require('aws-lambda-multipart-parser');
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
 //const { handle } = require('../middleware/apiGatewayHelper');
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
   'Content-Type': 'application/json',
+  'Access-Control-Allow-Methods': 'OPTIONS, POST',
+  'Access-Control-Allow-Headers': 'Content-Type',
 };
 
 /**
@@ -21,10 +24,10 @@ const post = async (event) => {
   let msg = null;
   try {
     if (!event || !event.body) throw new Error('data not-found error');
-    requestData = JSON.parse(event.body);
-    // console.log(`Event: ${JSON.stringify(event)}`);
-    // console.log(`requestData: ${JSON.stringify(requestData)}`);
+    const formData = multipart.parse(event, true);
 
+    console.log('image: ', formData.image);
+    requestData = JSON.parse(formData.data);
     const captchaResult = await applicationContext
       .getUseCases()
       .validateCaptcha({ value: requestData.gresp, applicationContext });

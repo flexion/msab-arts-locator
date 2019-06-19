@@ -58,6 +58,7 @@ export const presenter = {
       contactEmail: '',
       contactPhone: '',
       description: '',
+      image: null,
     },
   },
 };
