@@ -372,7 +372,9 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Location Image</Label>
+              <Label className="msab-has-text-grey">
+                Location Image (Optional)
+              </Label>
               <Control>
                 <input
                   type="file"
