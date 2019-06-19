@@ -9,6 +9,7 @@ custom:
   region: ${opt:region, 'us-east-2'}
   certificateId: ${env:CERTIFICATE_ID} # Required by AWS to be in us-east-1
   apiKey: ${env:GOOGLE_GEOCODING_API_KEY} #api key to use google maps api
+  captchaKey: ${env:GOOGLE_CAPTCHA_KEY}
 
   output:
     file: .serverless/stack.json
@@ -113,6 +114,8 @@ functions:
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
       API_KEY: ${self:custom.apiKey  }
+      CAPTCHA_KEY: ${self:custom.captchaKey}
+
     timeout: 30
     events:
       - http:

@@ -28,6 +28,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
       'contactName',
       'contactEmail',
       'contactPhone',
+      'gresp',
     ],
     allOf: [
       {
@@ -45,6 +46,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
           description: { type: 'string', minLength: 0, maxLength: 250 },
           long: { type: 'number' },
           lat: { type: 'number' },
+          gresp: { type: 'string' },
         },
         additionalProperties: true,
       },
@@ -63,6 +65,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
         city: 'city should be a string 1 characters long',
         state: 'state should be a string 2 characters long',
         zip: 'zip should be a number at least 5 numbers long',
+        gresp: 'Please complete the CAPTCHA',
       },
       _:
         'Location should include a name, street address, city name, zip code, contact name, contact phone, and contact email.',

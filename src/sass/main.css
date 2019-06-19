@@ -6930,7 +6930,8 @@ button:active {
   background-color: #2a4ea5 !important; }
 
 a.button:active {
-  background-color: #2a4ea5 !important; }
+  background-color: #2a4ea5 !important;
+  color: white !important; }
 
 a:active {
   color: #2a4ea5 !important; }

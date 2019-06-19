@@ -37,6 +37,7 @@ export const presenter = {
     position: { lat: 0, long: 0 },
     currentPage: 'Home',
     form: {
+      gresp: '',
       name: '',
       category: {
         folk: false,

@@ -1,4 +1,5 @@
 import { connect } from '@cerebral/react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { sequences, state } from 'cerebral';
 import React from 'react';
 import {
@@ -45,7 +46,14 @@ export const LocationInputForm = connect(
             noValidate
             onSubmit={(e) => {
               e.preventDefault();
-              submitLocation();
+              const gresp = grecaptcha.getResponse();
+              if (gresp) {
+                updateFormValueSequence({
+                  key: 'gresp',
+                  value: gresp,
+                });
+                submitLocation();
+              }
             }}
           >
             <Field>
@@ -366,6 +374,22 @@ export const LocationInputForm = connect(
 
             <Field isGrouped>
               <Control>
+                <ReCAPTCHA
+                  sitekey="6LfpgakUAAAAAExacnxuT4JdaEfOa3KUmH_qK31_"
+                  onChange={(value) => {
+                    updateFormValueSequence({
+                      key: 'gresp',
+                      value: value,
+                    });
+                  }}
+                  onExpired={(e) => {
+                    updateFormValueSequence({
+                      key: 'gresp',
+                      value: '',
+                    });
+                  }}
+                />
+
                 <Button type="submit" isColor="primary">
                   Submit
                 </Button>
