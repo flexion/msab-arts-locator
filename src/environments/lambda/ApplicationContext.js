@@ -13,11 +13,15 @@ const {
 const {
   getLocationCoordinates,
 } = require('../../interactors/getLocationCoordinatesInteractor');
+const {
+  validateCaptcha,
+} = require('../../interactors/validateCaptchaInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   saveNewLocationGeo,
   getLocationsByGeo,
 } = require('../../persistence/GeoDynamoGateway');
+const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 // const AWS =
 //   process.env.NODE_ENV === 'production'
 //     ? AWSXRay.captureAWS(require('aws-sdk'))
@@ -36,6 +40,7 @@ const environment = {
   s3Endpoint: process.env.S3_ENDPOINT || 'localhost',
   stage: process.env.STAGE || 'local',
   apiKey: process.env.API_KEY,
+  captchaKey: process.env.CAPTCHA_KEY,
 };
 
 let dynamoClientCache = {};
@@ -45,7 +50,12 @@ module.exports = () => {
   return {
     environment,
     getPersistenceGateway: () => {
-      return { getCoordsFromAddress, saveNewLocationGeo, getLocationsByGeo };
+      return {
+        getCoordsFromAddress,
+        saveNewLocationGeo,
+        getLocationsByGeo,
+        confirmCaptcha,
+      };
     },
     getStorageClient: () => {
       if (!s3Cache) {
@@ -66,6 +76,7 @@ module.exports = () => {
         getLocationCoordinates,
         validateArtLocation,
         getArtLocationsByGeo,
+        validateCaptcha,
       };
     },
 

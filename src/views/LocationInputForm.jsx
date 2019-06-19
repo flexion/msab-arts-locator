@@ -377,14 +377,12 @@ export const LocationInputForm = connect(
                 <ReCAPTCHA
                   sitekey="6LfpgakUAAAAAExacnxuT4JdaEfOa3KUmH_qK31_"
                   onChange={(value) => {
-                    console.log('success: ', value);
                     updateFormValueSequence({
                       key: 'gresp',
                       value: value,
                     });
                   }}
                   onExpired={(e) => {
-                    console.log('expired: ', e);
                     updateFormValueSequence({
                       key: 'gresp',
                       value: '',

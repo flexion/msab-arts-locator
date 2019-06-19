@@ -25,53 +25,61 @@ const post = async (event) => {
     // console.log(`Event: ${JSON.stringify(event)}`);
     // console.log(`requestData: ${JSON.stringify(requestData)}`);
 
-    const validateResult = await applicationContext
+    const captchaResult = await applicationContext
       .getUseCases()
-      .validateArtLocation({
-        applicationContext,
-        requestData,
-      });
-    msg = validateResult.status;
-    if (msg === 'success') {
-      const artLocation = validateResult.artLocation;
-      const coordResult = await applicationContext
+      .validateCaptcha({ value: requestData.gresp, applicationContext });
+    console.log('captcharesult: ', captchaResult);
+    if (captchaResult.status === 'success') {
+      const validateResult = await applicationContext
         .getUseCases()
-        .getLocationCoordinates({
+        .validateArtLocation({
           applicationContext,
-          artLocation,
+          requestData,
         });
-      msg = coordResult.status;
-      console.log('coordResult: ', coordResult);
+      msg = validateResult.status;
       if (msg === 'success') {
-        saveResult = await applicationContext.getUseCases().saveNewArtLocation({
-          applicationContext,
-          artLocation,
-          coords: coordResult.coords,
-        });
-        msg = saveResult.status;
-        console.log('saveResult: ', saveResult);
+        const artLocation = validateResult.artLocation;
+        const coordResult = await applicationContext
+          .getUseCases()
+          .getLocationCoordinates({
+            applicationContext,
+            artLocation,
+          });
+        msg = coordResult.status;
+        console.log('coordResult: ', coordResult);
+        if (msg === 'success') {
+          saveResult = await applicationContext
+            .getUseCases()
+            .saveNewArtLocation({
+              applicationContext,
+              artLocation,
+              coords: coordResult.coords,
+            });
+          msg = saveResult.status;
+          console.log('saveResult: ', saveResult);
+        }
       }
-    }
-    if (msg === 'success') {
-      console.log('should return a 201');
-      return {
-        statusCode: 201,
-        headers: headers,
-        body: JSON.stringify({
-          message: 'success',
-          input: event,
-        }),
-      };
-    } else {
-      console.log('should return a 406', msg);
-      return {
-        statusCode: 406,
-        headers: headers,
-        body: JSON.stringify({
-          message: msg,
-          input: event,
-        }),
-      };
+      if (msg === 'success') {
+        console.log('should return a 201');
+        return {
+          statusCode: 201,
+          headers: headers,
+          body: JSON.stringify({
+            message: 'success',
+            input: event,
+          }),
+        };
+      } else {
+        console.log('should return a 406', msg);
+        return {
+          statusCode: 406,
+          headers: headers,
+          body: JSON.stringify({
+            message: msg,
+            input: event,
+          }),
+        };
+      }
     }
   } catch (e) {
     console.log('e: ', e);
