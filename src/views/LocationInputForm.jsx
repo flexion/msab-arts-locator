@@ -371,7 +371,22 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
-
+            <Field>
+              <Label className="msab-has-text-grey">Location Image</Label>
+              <Control>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  onChange={(e) => {
+                    updateFormValueSequence({
+                      key: 'image',
+                      value: e.target.files[0],
+                    });
+                  }}
+                />
+              </Control>
+            </Field>
             <Field isGrouped>
               <Control>
                 <ReCAPTCHA
