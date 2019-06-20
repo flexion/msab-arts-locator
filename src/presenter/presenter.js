@@ -52,7 +52,7 @@ export const presenter = {
       website: '',
       street: '',
       city: '',
-      state: 'MN',
+      state: 'WI',
       zip: '',
       contactName: '',
       contactEmail: '',

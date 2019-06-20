@@ -42,7 +42,7 @@ const saveNewLocationGeo = async ({
             adminId: { S: artLocation.adminId },
             updateId: { S: artLocation.updateId },
             imageURL: { S: artLocation.imageURL },
-            approved: { B: artLocation.approved },
+            approved: { BOOL: artLocation.approved },
           },
         },
       })

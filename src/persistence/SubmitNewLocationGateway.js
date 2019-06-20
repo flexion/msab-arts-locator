@@ -32,6 +32,8 @@ const makeRequest = (method, url, formdata) => {
 const buildForm = (artLocationData) => {
   const form = new FormData();
   form.append('data', JSON.stringify(artLocationData));
+  console.log('typeof:', typeof artLocationData.image);
+  console.log('image: ', artLocationData.image);
   form.append('image', artLocationData.image);
   return form;
 };
