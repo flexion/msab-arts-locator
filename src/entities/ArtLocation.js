@@ -12,7 +12,10 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
   Object.assign(this, rawArtLocation, {
     createdAt:
       rawArtLocation.createdAt || applicationContext.getCurrentTimestamp(),
-    enitityId: rawArtLocation.id || applicationContext.getUniqueIdString(),
+    entityId: rawArtLocation.id || applicationContext.getUniqueIdString(),
+    adminId: applicationContext.getUniqueIdString(),
+    updateId: applicationContext.getUniqueIdString(),
+    approved: false,
   });
 
   // An business object owns the interface of the request. It will validate

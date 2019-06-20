@@ -22,11 +22,13 @@ const post = async (event) => {
   let requestData = null;
   let saveResult = null;
   let msg = null;
+  let imageUrl = null;
   try {
     if (!event || !event.body) throw new Error('data not-found error');
     const formData = multipart.parse(event, true);
 
     console.log('image: ', formData.image);
+    const image = formData.image;
     requestData = JSON.parse(formData.data);
     const captchaResult = await applicationContext
       .getUseCases()
@@ -51,15 +53,32 @@ const post = async (event) => {
         msg = coordResult.status;
         console.log('coordResult: ', coordResult);
         if (msg === 'success') {
-          saveResult = await applicationContext
-            .getUseCases()
-            .saveNewArtLocation({
-              applicationContext,
-              artLocation,
-              coords: coordResult.coords,
-            });
-          msg = saveResult.status;
-          console.log('saveResult: ', saveResult);
+          if (image) {
+            saveResult = await applicationContext
+              .getUseCases()
+              .putArtLocationImage(
+                {
+                  entityId: artLocation.entityId,
+                  image: image,
+                },
+                applicationContext,
+              );
+            msg = saveResult.status;
+            imageUrl = saveResult.data.Location;
+          }
+
+          if (msg === 'success') {
+            artLocation.imageURL = imageUrl;
+            saveResult = await applicationContext
+              .getUseCases()
+              .saveNewArtLocation({
+                applicationContext,
+                artLocation,
+                coords: coordResult.coords,
+              });
+            msg = saveResult.status;
+            console.log('saveResult: ', saveResult);
+          }
         }
       }
       if (msg === 'success') {

@@ -37,6 +37,12 @@ const saveNewLocationGeo = async ({
             contactEmail: { S: artLocation.contactEmail },
             contactPhone: { S: artLocation.contactPhone },
             description: { S: artLocation.description },
+            createdAt: { N: `${artLocation.createdAt}` },
+            entityId: { S: artLocation.entityId },
+            adminId: { S: artLocation.adminId },
+            updateId: { S: artLocation.updateId },
+            imageURL: { S: artLocation.imageURL },
+            approved: { B: artLocation.approved },
           },
         },
       })
