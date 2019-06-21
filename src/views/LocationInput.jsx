@@ -16,16 +16,14 @@ export const LocationInput = connect(
     return (
       <React.Fragment>
         <AppHeader />
-
-        {(success || failure) && (
-          <Section>
-            <Container>
-              <Notification isColor={color}>{submitMsg}</Notification>
-            </Container>
-          </Section>
-        )}
-
         <LocationInputForm />
+        {(success || failure) && (
+          <Container>
+            <Notification isColor={color}>
+              <h1 className="location-name">{submitMsg}</h1>
+            </Notification>
+          </Container>
+        )}
         <Foot />
       </React.Fragment>
     );

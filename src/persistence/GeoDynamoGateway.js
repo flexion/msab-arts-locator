@@ -16,6 +16,30 @@ const saveNewLocationGeo = async ({
   applicationContext,
 }) => {
   try {
+    let item = {
+      name: { S: artLocation.name },
+      category: { S: JSON.stringify(artLocation.category) },
+      street: { S: artLocation.street },
+      city: { S: artLocation.city },
+      state: { S: artLocation.state },
+      zip: { S: artLocation.zip },
+      contactName: { S: artLocation.contactName },
+      contactEmail: { S: artLocation.contactEmail },
+      contactPhone: { S: artLocation.contactPhone },
+      createdAt: { N: `${artLocation.createdAt}` },
+      entityId: { S: artLocation.entityId },
+      adminId: { S: artLocation.adminId },
+      updateId: { S: artLocation.updateId },
+      imageURL: { S: artLocation.imageURL },
+      approved: { BOOL: artLocation.approved },
+    };
+    if (artLocation.description) {
+      item.description = { S: artLocation.description };
+    }
+    if (artLocation.website) {
+      item.website = { S: artLocation.website };
+    }
+
     await myGeoTableManager
       .putPoint({
         RangeKeyValue: { S: applicationContext.getUniqueId() }, // Use this to ensure uniqueness of the hash/range pairs.
@@ -25,25 +49,7 @@ const saveNewLocationGeo = async ({
           longitude: coords.lng,
         },
         PutItemInput: {
-          Item: {
-            name: { S: artLocation.name },
-            category: { S: JSON.stringify(artLocation.category) },
-            website: { S: artLocation.website },
-            street: { S: artLocation.street },
-            city: { S: artLocation.city },
-            state: { S: artLocation.state },
-            zip: { S: artLocation.zip },
-            contactName: { S: artLocation.contactName },
-            contactEmail: { S: artLocation.contactEmail },
-            contactPhone: { S: artLocation.contactPhone },
-            description: { S: artLocation.description },
-            createdAt: { N: `${artLocation.createdAt}` },
-            entityId: { S: artLocation.entityId },
-            adminId: { S: artLocation.adminId },
-            updateId: { S: artLocation.updateId },
-            imageURL: { S: artLocation.imageURL },
-            approved: { BOOL: artLocation.approved },
-          },
+          Item: item,
         },
       })
       .promise()
