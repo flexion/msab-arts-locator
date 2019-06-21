@@ -18,6 +18,9 @@ const {
 const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
+const {
+  validateImageFileType,
+} = require('../../interactors/validateImageFileTypeInteractor');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   readAllLocationsByCity,
@@ -76,6 +79,7 @@ const applicationContext = {
       validateArtLocation,
       sendArtLocation,
       getArtLocationsInRadius,
+      validateImageFileType,
     };
   },
 };

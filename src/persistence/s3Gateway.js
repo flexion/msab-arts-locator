@@ -4,11 +4,10 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 
 const putImage = async (
-  { image, entityId, contentType },
+  { imageBuffer, entityId, contentType },
   applicationContext,
 ) => {
   try {
-    const imageBuffer = Buffer.from(image, 'base64');
     const fileExtension = contentType.split('/')[1];
     const bucket = applicationContext.environment.imageBucket;
     let params = {

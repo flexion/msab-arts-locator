@@ -21,8 +21,9 @@ export const LocationInputForm = connect(
     form: state.form,
     submitLocation: sequences.submitLocationSequence,
     updateFormValueSequence: sequences.updateFormValueSequence,
+    setImageSequence: sequences.setImageSequence,
   },
-  ({ form, submitLocation, updateFormValueSequence }) => {
+  ({ form, submitLocation, updateFormValueSequence, setImageSequence }) => {
     return (
       <Section>
         <Container>
@@ -381,9 +382,8 @@ export const LocationInputForm = connect(
                   id="image"
                   name="image"
                   onChange={(e) => {
-                    updateFormValueSequence({
-                      key: 'image',
-                      value: e.target.files[0],
+                    setImageSequence({
+                      image: e.target.files[0],
                     });
                   }}
                 />

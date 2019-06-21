@@ -4,6 +4,7 @@ import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSeque
 import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
 import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
 import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
+import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 // Cerebral module
@@ -24,6 +25,7 @@ export const presenter = {
     updateFormValueSequence,
     routeChangeSequence,
     submitLocationSequence,
+    setImageSequence,
   },
   state: {
     submitLocationSuccess: false,
