@@ -22,16 +22,17 @@ const post = async (event) => {
   let requestData = null;
   let saveResult = null;
   let msg = null;
+  let imageUrl = null;
   try {
+    console.log('event:', event);
     if (!event || !event.body) throw new Error('data not-found error');
-    const formData = multipart.parse(event, true);
-
-    console.log('image: ', formData.image);
-    requestData = JSON.parse(formData.data);
+    requestData = JSON.parse(event.body);
+    console.log('requestData: ', requestData);
     const captchaResult = await applicationContext
       .getUseCases()
       .validateCaptcha({ value: requestData.gresp, applicationContext });
     console.log('captcharesult: ', captchaResult);
+
     if (captchaResult.status === 'success') {
       const validateResult = await applicationContext
         .getUseCases()
@@ -51,15 +52,33 @@ const post = async (event) => {
         msg = coordResult.status;
         console.log('coordResult: ', coordResult);
         if (msg === 'success') {
-          saveResult = await applicationContext
-            .getUseCases()
-            .saveNewArtLocation({
-              applicationContext,
-              artLocation,
-              coords: coordResult.coords,
-            });
-          msg = saveResult.status;
-          console.log('saveResult: ', saveResult);
+          if (requestData.base64Image) {
+            saveResult = await applicationContext
+              .getUseCases()
+              .putArtLocationImage(
+                {
+                  contentType: artLocation.imageContentType,
+                  entityId: artLocation.entityId,
+                  image: requestData.base64Image,
+                },
+                applicationContext,
+              );
+            msg = saveResult.status;
+            imageUrl = saveResult.data.Location;
+          }
+
+          if (msg === 'success') {
+            artLocation.imageURL = imageUrl;
+            saveResult = await applicationContext
+              .getUseCases()
+              .saveNewArtLocation({
+                applicationContext,
+                artLocation,
+                coords: coordResult.coords,
+              });
+            msg = saveResult.status;
+            console.log('saveResult: ', saveResult);
+          }
         }
       }
       if (msg === 'success') {

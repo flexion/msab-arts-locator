@@ -29,10 +29,9 @@ export const LocationListItem = ({ location, haveGeo, index }) => {
       </div>
       <Media>
         <MediaLeft>
-          {!location.icon && (
-            <Image isSize="64x64" src="https://via.placeholder.com/64x64" />
+          {!!location.imageURL && (
+            <Image isSize="64x64" src={location.imageURL} />
           )}
-          {!!location.icon && <Image isSize="64x64" src={location.icon} />}
         </MediaLeft>
         <MediaContent>
           <Content>

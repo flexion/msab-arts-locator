@@ -10,6 +10,7 @@ custom:
   certificateId: ${env:CERTIFICATE_ID} # Required by AWS to be in us-east-1
   apiKey: ${env:GOOGLE_GEOCODING_API_KEY} #api key to use google maps api
   captchaKey: ${env:GOOGLE_CAPTCHA_KEY}
+  imageBucket: ${env:IMAGE_BUCKET}
 
   output:
     file: .serverless/stack.json
@@ -83,6 +84,15 @@ provider:
                   - Arn
               - index
               - geohash-index
+    - Effect: 'Allow'
+      Action:
+        - 's3:*'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - ${self:custom.imageBucket}
+            - '/*'
         # - arn:aws:dynamodb:${self:custom.region}:${opt:accountId}:table/${self:service}-gis-${opt:stage}
         # - arn:aws:dynamodb:${self:custom.region}:${opt:accountId}:table/${self:service}-gis-${opt:stage}/index/*
 
@@ -115,6 +125,7 @@ functions:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
       API_KEY: ${self:custom.apiKey  }
       CAPTCHA_KEY: ${self:custom.captchaKey}
+      IMAGE_BUCKET: ${self:custom.imageBucket}
     timeout: 30
     events:
       - http:
