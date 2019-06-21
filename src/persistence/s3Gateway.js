@@ -4,17 +4,16 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 
 const putImage = async (
-  { image, entityId, contentType },
+  { base64Image, ext, entityId, contentType },
   applicationContext,
 ) => {
   try {
-    const imageBuffer = Buffer.from(image, 'base64');
-    const fileExtension = contentType.split('/')[1];
+    const imageBuffer = Buffer.from(base64Image, 'base64');
     const bucket = applicationContext.environment.imageBucket;
     let params = {
       Body: imageBuffer,
       Bucket: bucket,
-      Key: `${entityId}.${fileExtension}`,
+      Key: `${entityId}.${ext}`,
       ContentType: contentType,
       ACL: 'public-read',
     };

@@ -18,7 +18,9 @@ export const AppHeader = () => (
       <Level isMobile>
         <LevelLeft>
           <LevelItem>
-            <Image isSize="96x96" src={logo} />
+            <a href={`https://${window.location.hostname}`}>
+              <Image isSize="96x96" src={logo} />
+            </a>
           </LevelItem>
         </LevelLeft>
         <LevelRight>

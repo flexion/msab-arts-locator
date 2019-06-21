@@ -4,6 +4,7 @@ import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSeque
 import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
 import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
 import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
+import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 // Cerebral module
@@ -24,10 +25,13 @@ export const presenter = {
     updateFormValueSequence,
     routeChangeSequence,
     submitLocationSequence,
+    setImageSequence,
   },
   state: {
     submitLocationSuccess: false,
     submitLocationFailure: false,
+    selectImageFailure: false,
+    selectImageMsg: '',
     submitLocationMsg: '',
     cityValue: '',
     locationsList: [],
@@ -38,7 +42,7 @@ export const presenter = {
     currentPage: 'Home',
     form: {
       gresp: '',
-      name: '',
+      name: null,
       category: {
         folk: false,
         visual: false,
@@ -49,16 +53,17 @@ export const presenter = {
         opera: false,
         dance: false,
       },
-      website: '',
-      street: '',
-      city: '',
+      website: null,
+      street: null,
+      city: null,
       state: 'MN',
-      zip: '',
-      contactName: '',
-      contactEmail: '',
-      contactPhone: '',
-      description: '',
+      zip: null,
+      contactName: null,
+      contactEmail: null,
+      contactPhone: null,
+      description: null,
       image: null,
+      base64Image: null,
     },
   },
 };

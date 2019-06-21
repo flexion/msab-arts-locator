@@ -21,6 +21,7 @@ const post = async (event) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
   let saveResult = null;
+  let validateResult = null;
   let msg = null;
   let imageUrl = null;
   try {
@@ -34,7 +35,7 @@ const post = async (event) => {
     console.log('captcharesult: ', captchaResult);
 
     if (captchaResult.status === 'success') {
-      const validateResult = await applicationContext
+      validateResult = await applicationContext
         .getUseCases()
         .validateArtLocation({
           applicationContext,
@@ -53,18 +54,25 @@ const post = async (event) => {
         console.log('coordResult: ', coordResult);
         if (msg === 'success') {
           if (requestData.base64Image) {
-            saveResult = await applicationContext
+            validateResult = await applicationContext
               .getUseCases()
-              .putArtLocationImage(
-                {
-                  contentType: artLocation.imageContentType,
-                  entityId: artLocation.entityId,
-                  image: requestData.base64Image,
-                },
-                applicationContext,
-              );
-            msg = saveResult.status;
-            imageUrl = saveResult.data.Location;
+              .validateImageFileType(requestData.base64Image);
+            msg = validateResult.status;
+            if (msg === 'success') {
+              saveResult = await applicationContext
+                .getUseCases()
+                .putArtLocationImage(
+                  {
+                    contentType: validateResult.contentType.type,
+                    ext: validateResult.contentType.ext,
+                    entityId: artLocation.entityId,
+                    base64Image: requestData.base64Image,
+                  },
+                  applicationContext,
+                );
+              msg = saveResult.status;
+              imageUrl = saveResult.data.Location;
+            }
           }
 
           if (msg === 'success') {

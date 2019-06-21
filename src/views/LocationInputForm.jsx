@@ -14,6 +14,7 @@ import {
   Checkbox,
   Subtitle,
   TextArea,
+  Notification,
 } from 'bloomer';
 
 export const LocationInputForm = connect(
@@ -21,10 +22,20 @@ export const LocationInputForm = connect(
     form: state.form,
     submitLocation: sequences.submitLocationSequence,
     updateFormValueSequence: sequences.updateFormValueSequence,
+    setImageSequence: sequences.setImageSequence,
+    imgFailure: state.selectImageFailure,
+    imgMsg: state.selectImageMsg,
   },
-  ({ form, submitLocation, updateFormValueSequence }) => {
+  ({
+    form,
+    submitLocation,
+    updateFormValueSequence,
+    setImageSequence,
+    imgFailure,
+    imgMsg,
+  }) => {
     return (
-      <Section>
+      <Section className="msab-section-form">
         <Container>
           <Title isSize={4} className="msab-has-text-purple">
             Submit Your Arts Location
@@ -47,13 +58,11 @@ export const LocationInputForm = connect(
             onSubmit={(e) => {
               e.preventDefault();
               const gresp = grecaptcha.getResponse();
-              if (gresp) {
-                updateFormValueSequence({
-                  key: 'gresp',
-                  value: gresp,
-                });
-                submitLocation();
-              }
+              updateFormValueSequence({
+                key: 'gresp',
+                value: gresp,
+              });
+              submitLocation();
             }}
           >
             <Field>
@@ -371,7 +380,7 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
-            <Field>
+            <Field className="msab-margin-top">
               <Label className="msab-has-text-grey">
                 Location Image (Optional)
               </Label>
@@ -381,17 +390,20 @@ export const LocationInputForm = connect(
                   id="image"
                   name="image"
                   onChange={(e) => {
-                    updateFormValueSequence({
-                      key: 'image',
-                      value: e.target.files[0],
+                    setImageSequence({
+                      image: e.target.files[0],
                     });
                   }}
                 />
               </Control>
             </Field>
+            {imgFailure && (
+              <Notification isColor="danger">{imgMsg}</Notification>
+            )}
             <Field isGrouped>
               <Control>
                 <ReCAPTCHA
+                  className="msab-margin-top"
                   sitekey="6LfpgakUAAAAAExacnxuT4JdaEfOa3KUmH_qK31_"
                   onChange={(value) => {
                     updateFormValueSequence({
@@ -407,7 +419,11 @@ export const LocationInputForm = connect(
                   }}
                 />
 
-                <Button type="submit" isColor="primary">
+                <Button
+                  type="submit"
+                  isColor="primary"
+                  className="msab-margin-top"
+                >
                   Submit
                 </Button>
               </Control>

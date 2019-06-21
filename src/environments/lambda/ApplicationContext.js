@@ -19,6 +19,9 @@ const {
 const {
   putArtLocationImage,
 } = require('../../interactors/putArtLocationImageInteractor');
+const {
+  validateImageFileType,
+} = require('../../interactors/validateImageFileTypeInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   saveNewLocationGeo,
@@ -59,6 +62,7 @@ module.exports = () => {
         validateArtLocation,
         getArtLocationsByGeo,
         validateCaptcha,
+        validateImageFileType,
       };
     },
 

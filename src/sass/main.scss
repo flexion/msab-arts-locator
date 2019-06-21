@@ -51,7 +51,9 @@ label {
 .msab-has-background-purple {
   background-color: $msab-purple;
 }
-
+.msab-section-form {
+  padding: 1rem 1.5rem;
+}
 .msab-footer {
   padding-top: 5px;
   padding-bottom: 40px;
@@ -121,6 +123,12 @@ label {
 
 li:not(:first-child) {
   padding-top: 15px;
+}
+.msab-margin-top {
+  margin-top: 20px;
+}
+.msab-margin-bottom {
+  margin-top: 20px;
 }
 .msab-location-media {
   padding-bottom: 15px;

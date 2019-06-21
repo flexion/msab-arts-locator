@@ -38,7 +38,6 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
         properties: {
           name: { type: 'string', minLength: 1 },
           category: { type: 'object' },
-          website: { type: 'string', minLength: 0 },
           street: { type: 'string', minLength: 1 },
           city: { type: 'string', minLength: 1 },
           state: { type: 'string', minLength: 2, maxLength: 2 },
@@ -46,10 +45,9 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
           contactName: { type: 'string', minLength: 1 },
           contactEmail: { type: 'string', minLength: 1 },
           contactPhone: { type: 'string', minLength: 1 },
-          description: { type: 'string', minLength: 0, maxLength: 250 },
           long: { type: 'number' },
           lat: { type: 'number' },
-          gresp: { type: 'string' },
+          gresp: { type: 'string', minLength: 1 },
         },
         additionalProperties: true,
       },
@@ -68,7 +66,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
         city: 'city should be a string 1 characters long',
         state: 'state should be a string 2 characters long',
         zip: 'zip should be a number at least 5 numbers long',
-        gresp: 'Please complete the CAPTCHA',
+        gresp: 'Please complete the CAPTCHA to submit your location',
       },
       _:
         'Location should include a name, street address, city name, zip code, contact name, contact phone, and contact email.',
