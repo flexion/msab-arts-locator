@@ -24,16 +24,15 @@ const post = async (event) => {
   let msg = null;
   let imageUrl = null;
   try {
+    console.log('event:', event);
     if (!event || !event.body) throw new Error('data not-found error');
-    const formData = multipart.parse(event, true);
-
-    console.log('image: ', formData.image);
-    const image = formData.image;
-    requestData = JSON.parse(formData.data);
+    requestData = JSON.parse(event.body);
+    console.log('requestData: ', requestData);
     const captchaResult = await applicationContext
       .getUseCases()
       .validateCaptcha({ value: requestData.gresp, applicationContext });
     console.log('captcharesult: ', captchaResult);
+
     if (captchaResult.status === 'success') {
       const validateResult = await applicationContext
         .getUseCases()
@@ -53,13 +52,14 @@ const post = async (event) => {
         msg = coordResult.status;
         console.log('coordResult: ', coordResult);
         if (msg === 'success') {
-          if (image) {
+          if (requestData.base64Image) {
             saveResult = await applicationContext
               .getUseCases()
               .putArtLocationImage(
                 {
+                  contentType: artLocation.imageContentType,
                   entityId: artLocation.entityId,
-                  image: image,
+                  image: requestData.base64Image,
                 },
                 applicationContext,
               );

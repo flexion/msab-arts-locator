@@ -110,7 +110,7 @@ export const LocationInputForm = connect(
                 <Input
                   isColor="success"
                   name="state"
-                  value={form.state || 'WI'}
+                  value={form.state || 'MN'}
                   disabled
                   onChange={(e) => {
                     updateFormValueSequence({
