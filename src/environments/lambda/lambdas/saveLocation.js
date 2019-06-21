@@ -21,6 +21,7 @@ const post = async (event) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
   let saveResult = null;
+  let validateResult = null;
   let msg = null;
   let imageUrl = null;
   try {
@@ -34,7 +35,7 @@ const post = async (event) => {
     console.log('captcharesult: ', captchaResult);
 
     if (captchaResult.status === 'success') {
-      const validateResult = await applicationContext
+      validateResult = await applicationContext
         .getUseCases()
         .validateArtLocation({
           applicationContext,
