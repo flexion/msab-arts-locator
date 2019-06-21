@@ -6,15 +6,19 @@ export const validateImageFileTypeAction = async ({
   store,
   props,
 }) => {
-  console.log('props', props.image.content);
-
-  const result = await applicationContext.getUseCases().validateImageFileType({
-    image: props.image.content,
-  });
+  // props.image is of type File
+  store.set(state.selectImageFailure, false);
+  store.set(state.selectImageMsg, '');
+  const result = await applicationContext
+    .getUseCases()
+    .validateImageFileType(props.image);
   if (result.status === 'success') {
-    store.set(state.form.image, props.image);
+    store.set(state.form.base64Image, result.base64Image);
   } else {
-    return { status: 'error: invalid image file type' };
+    store.set(state.form.base64Image, null);
+    store.set(state.selectImageFailure, true);
+    store.set(state.selectImageMsg, result.status);
+    return result;
   }
-  return { result };
+  return result;
 };

@@ -53,18 +53,25 @@ const post = async (event) => {
         console.log('coordResult: ', coordResult);
         if (msg === 'success') {
           if (requestData.base64Image) {
-            saveResult = await applicationContext
+            validateResult = await applicationContext
               .getUseCases()
-              .putArtLocationImage(
-                {
-                  contentType: artLocation.imageContentType,
-                  entityId: artLocation.entityId,
-                  image: requestData.base64Image,
-                },
-                applicationContext,
-              );
-            msg = saveResult.status;
-            imageUrl = saveResult.data.Location;
+              .validateImageFileType(requestData.base64Image);
+            msg = validateResult.status;
+            if (msg === 'success') {
+              saveResult = await applicationContext
+                .getUseCases()
+                .putArtLocationImage(
+                  {
+                    contentType: validateResult.contentType.type,
+                    ext: validateResult.contentType.ext,
+                    entityId: artLocation.entityId,
+                    base64Image: requestData.base64Image,
+                  },
+                  applicationContext,
+                );
+              msg = saveResult.status;
+              imageUrl = saveResult.data.Location;
+            }
           }
 
           if (msg === 'success') {

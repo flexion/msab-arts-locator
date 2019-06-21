@@ -29,26 +29,9 @@ const makeRequest = (method, url, artLocationData) => {
     }
   });
 };
-const getBase64 = (image) => {
-  let file = null;
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onload = () => {
-      file = reader.result.split(',')[1];
-      resolve(file);
-    };
-  });
-};
 
 const submitNewLocation = async ({ artLocationData }) => {
   if (artLocationData) {
-    if (artLocationData.image) {
-      artLocationData.imageContentType = artLocationData.image.type;
-      console.log('image: ', artLocationData.image);
-      artLocationData.base64Image = await getBase64(artLocationData.image);
-      console.log('base64Image:', artLocationData.base64Image);
-    }
     const method = 'POST';
     const lambdaURL = 'https://pre.msab.flexion.us/api/v1/save-location';
     const data = JSON.stringify(artLocationData);

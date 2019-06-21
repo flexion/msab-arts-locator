@@ -14,6 +14,7 @@ import {
   Checkbox,
   Subtitle,
   TextArea,
+  Notification,
 } from 'bloomer';
 
 export const LocationInputForm = connect(
@@ -22,8 +23,17 @@ export const LocationInputForm = connect(
     submitLocation: sequences.submitLocationSequence,
     updateFormValueSequence: sequences.updateFormValueSequence,
     setImageSequence: sequences.setImageSequence,
+    imgFailure: state.selectImageFailure,
+    imgMsg: state.selectImageMsg,
   },
-  ({ form, submitLocation, updateFormValueSequence, setImageSequence }) => {
+  ({
+    form,
+    submitLocation,
+    updateFormValueSequence,
+    setImageSequence,
+    imgFailure,
+    imgMsg,
+  }) => {
     return (
       <Section>
         <Container>
@@ -389,6 +399,9 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
+            {imgFailure && (
+              <Notification isColor="danger">{imgMsg}</Notification>
+            )}
             <Field isGrouped>
               <Control>
                 <ReCAPTCHA

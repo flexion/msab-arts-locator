@@ -30,6 +30,8 @@ export const presenter = {
   state: {
     submitLocationSuccess: false,
     submitLocationFailure: false,
+    selectImageFailure: false,
+    selectImageMsg: '',
     submitLocationMsg: '',
     cityValue: '',
     locationsList: [],
@@ -61,6 +63,7 @@ export const presenter = {
       contactPhone: '',
       description: '',
       image: null,
+      base64Image: null,
     },
   },
 };
