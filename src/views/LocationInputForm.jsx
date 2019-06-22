@@ -188,142 +188,28 @@ export const LocationInputForm = connect(
             <Subtitle isSize={6} className="msab-has-text-grey">
               (Select up to three that apply)
             </Subtitle>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="dance"
-                  checked={form.category.dance || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Dance
-                </span>
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="music"
-                  checked={form.category.music || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Music
-                </span>
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="opera"
-                  checked={form.category.opera || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Theater/Opera
-                </span>
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="visual"
-                  checked={form.category.visual || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Visual
-                </span>
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="craft"
-                  checked={form.category.craft || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />{' '}
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Craft/Textiles
-                </span>
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="photo"
-                  checked={form.category.photo || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Photography/Film/Media
-                </span>
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="folk"
-                  checked={form.category.folk || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Folk/Traditional
-                </span>
-              </Control>
-            </Field>
-            <Field>
-              <Control>
-                <Checkbox
-                  name="literary"
-                  checked={form.category.literary || false}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-                <span className="msab-has-text-grey bold margin-left-10">
-                  Literary
-                </span>
-              </Control>
-            </Field>
+            {Object.keys(form.category).map((catKey, i) => {
+              return (
+                <Field key={i}>
+                  <Control>
+                    <Checkbox
+                      name={catKey}
+                      checked={form.category[catKey] || false}
+                      onChange={(e) => {
+                        updateFormValueSequence({
+                          key: `category.${catKey}`,
+                          value: e.target.value,
+                        });
+                      }}
+                    />
+                    <span className="msab-has-text-grey bold margin-left-10">
+                      {catKey}
+                    </span>
+                  </Control>
+                </Field>
+              );
+            })}
+
             <br />
             <br />
             <Title isSize={4} className="msab-has-text-purple">
