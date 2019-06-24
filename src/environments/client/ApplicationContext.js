@@ -37,9 +37,23 @@ const {
   getLocationsByRadius,
 } = require('../../persistence/GetLocationsByRadiusGateway');
 
-let locations = [];
+const environment = {
+  domain: window.location.href,
+  apiURL: `${window.location.origin}/api/v1/`,
+};
 
+const apiURLs = {
+  captchaURL: `https://www.google.com/recaptcha/api/siteverify`,
+  geocodeAPIUrl: `https://maps.googleapis.com/maps/api/geocode/json`,
+  reverseApiUrl: 'https://nominatim.openstreetmap.org/reverse?format=json',
+};
 const applicationContext = {
+  apiURLs: () => {
+    return apiURLs;
+  },
+  environment: () => {
+    return environment;
+  },
   getUniqueIdString: () => {
     return uuidv4();
   },
@@ -63,10 +77,6 @@ const applicationContext = {
   },
   getDataReader: () => {
     return rawEntityData;
-  },
-  getDataWriter: (newLocation) => {
-    locations.push(newLocation);
-    return locations;
   },
   getCoords: () => {
     return { getCoordsHandler: getCoords.handler };

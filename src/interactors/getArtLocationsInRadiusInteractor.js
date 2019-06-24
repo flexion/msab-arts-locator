@@ -26,7 +26,7 @@ exports.getArtLocationsInRadius = async ({
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
     .getPersistenceGateway()
-    .getLocationsByRadius({ lat, long, radius });
+    .getLocationsByRadius({ lat, long, radius }, applicationContext);
   if (artLocationData) {
     return { result: JSON.parse(artLocationData) };
   } else {
