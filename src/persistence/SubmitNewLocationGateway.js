@@ -31,7 +31,6 @@ const makeRequest = (method, url, artLocationData) => {
 };
 
 const submitNewLocation = async ({ artLocationData, applicationContext }) => {
-  console.log(applicationContext.environment());
   if (artLocationData) {
     const method = 'POST';
     const lambdaURL = applicationContext.environment().apiURL + 'save-location';

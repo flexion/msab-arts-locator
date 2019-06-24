@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const confirmCaptcha = async ({ value, key }, applicationContext) => {
-  console.log('applicationContext.apiURLs: ', applicationContext.apiURLs());
   if (value && key) {
     let url = `${
       applicationContext.apiURLs().captchaURL
