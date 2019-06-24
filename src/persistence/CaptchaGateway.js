@@ -1,9 +1,11 @@
 const axios = require('axios');
 
-const confirmCaptcha = async ({ value, key }) => {
+const confirmCaptcha = async ({ value, key }, applicationContext) => {
+  console.log('applicationContext.apiURLs: ', applicationContext.apiURLs());
   if (value && key) {
-    const googleUrl = ` https://www.google.com/recaptcha/api/siteverify`;
-    let url = `${googleUrl}?secret=${key}&response=${value}`;
+    let url = `${
+      applicationContext.apiURLs().captchaURL
+    }?secret=${key}&response=${value}`;
     const response = await axios.get(url);
     if (response && response.data && response.data.success === true) {
       return { status: 'success' };

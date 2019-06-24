@@ -5,10 +5,13 @@ exports.getLocationCoordinates = async ({
   // The interactor invokes a very specific persistence gateway operation.
   const coordinateData = await applicationContext
     .getPersistenceGateway()
-    .getCoordsFromAddress({
-      artLocation,
-      apiKey: applicationContext.environment.apiKey,
-    });
+    .getCoordsFromAddress(
+      {
+        artLocation,
+        apiKey: applicationContext.environment.apiKey,
+      },
+      applicationContext,
+    );
   if (coordinateData.status === 'success') {
     return coordinateData;
   }

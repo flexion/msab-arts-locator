@@ -30,10 +30,11 @@ const makeRequest = (method, url, artLocationData) => {
   });
 };
 
-const submitNewLocation = async ({ artLocationData }) => {
+const submitNewLocation = async ({ artLocationData, applicationContext }) => {
+  console.log(applicationContext.environment());
   if (artLocationData) {
     const method = 'POST';
-    const lambdaURL = 'https://pre.msab.flexion.us/api/v1/save-location';
+    const lambdaURL = applicationContext.environment().apiURL + 'save-location';
     const data = JSON.stringify(artLocationData);
     const response = await makeRequest(method, lambdaURL, data);
     const results = { response };

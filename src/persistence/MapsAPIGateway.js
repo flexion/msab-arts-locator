@@ -1,14 +1,19 @@
 const axios = require('axios');
 
-const getCoordsFromAddress = async ({ artLocation, apiKey }) => {
+const getCoordsFromAddress = async (
+  { artLocation, apiKey },
+  applicationContext,
+) => {
   if (artLocation && apiKey) {
     const address = encodeURIComponent(
       `${artLocation.street}+${artLocation.city}+${artLocation.state}+${
         artLocation.zip
       }`,
     );
-    const mapsAPIUrl = `https://maps.googleapis.com/maps/api/geocode/json`;
-    let url = `${mapsAPIUrl}?address=${address}&key=${apiKey}`;
+
+    let url = `${
+      applicationContext.apiURLs().geocodeAPIUrl
+    }?address=${address}&key=${apiKey}`;
 
     const response = await axios.get(url);
     if (response.data.results && response.data.results.length > 0) {

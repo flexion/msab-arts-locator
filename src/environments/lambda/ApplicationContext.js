@@ -31,6 +31,12 @@ const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { putImage, getImage } = require('../../persistence/s3Gateway');
 const uuidv4 = require('uuid/v4');
 
+const apiURLs = {
+  captchaURL: `https://www.google.com/recaptcha/api/siteverify`,
+  geocodeAPIUrl: `https://maps.googleapis.com/maps/api/geocode/json`,
+  reverseApiUrl: 'https://nominatim.openstreetmap.org/reverse?format=json',
+};
+
 const environment = {
   stage: process.env.STAGE || 'local',
   apiKey: process.env.API_KEY,
@@ -40,6 +46,9 @@ const environment = {
 
 module.exports = () => {
   return {
+    apiURLs: () => {
+      return apiURLs;
+    },
     environment,
     getPersistenceGateway: () => {
       return {
