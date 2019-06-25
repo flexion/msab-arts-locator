@@ -25,6 +25,7 @@ export const LocationInputForm = connect(
     setImageSequence: sequences.setImageSequence,
     imgFailure: state.selectImageFailure,
     imgMsg: state.selectImageMsg,
+    categories: state.categories,
   },
   ({
     form,
@@ -33,6 +34,7 @@ export const LocationInputForm = connect(
     setImageSequence,
     imgFailure,
     imgMsg,
+    categories,
   }) => {
     return (
       <Section className="msab-section-form">
@@ -203,7 +205,7 @@ export const LocationInputForm = connect(
                       }}
                     />
                     <span className="msab-has-text-grey bold margin-left-10">
-                      {catKey}
+                      {categories[catKey]}
                     </span>
                   </Control>
                 </Field>
