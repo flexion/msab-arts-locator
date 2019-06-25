@@ -27,6 +27,7 @@ export const presenter = {
     submitLocationSequence,
     setImageSequence,
   },
+
   state: {
     submitLocationSuccess: false,
     submitLocationFailure: false,
@@ -40,6 +41,16 @@ export const presenter = {
     radius: 40233, //in meters
     position: { lat: 0, long: 0 },
     currentPage: 'Home',
+    categories: {
+      folk: 'Folk/Traditional',
+      visual: 'Visual Arts',
+      literary: 'Literary Arts',
+      music: 'Music',
+      craft: 'Craft/Textiles',
+      photo: 'Photography/Film/Media',
+      opera: 'Theater/Opera',
+      dance: 'Dance',
+    },
     form: {
       gresp: '',
       name: null,
