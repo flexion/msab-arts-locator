@@ -6,5 +6,6 @@ export const searchByCityAction = async ({ applicationContext, get }) => {
     requestData: { city: get(state`cityValue`) },
     applicationContext,
   });
+  console.log('result: ', result);
   return { result };
 };

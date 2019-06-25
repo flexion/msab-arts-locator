@@ -65,7 +65,7 @@ const get = async (event, context) => {
         });
       status = queryResults.status;
       results = queryResults.results;
-      console.log('city: ', results);
+      console.log('citysearch results: ', results);
       newResults = results.map((result) => {
         let location = AWS.DynamoDB.Converter.unmarshall(result, {
           convertEmptyValues: true,

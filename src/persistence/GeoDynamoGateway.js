@@ -10,6 +10,19 @@ const config = new ddbGeo.GeoDataManagerConfiguration(
 config.hashKeyLength = 5;
 const myGeoTableManager = new ddbGeo.GeoDataManager(config);
 const documentClient = new AWS.DynamoDB.DocumentClient();
+const queryDynamo = (params) => {
+  return new Promise(function(resolve, reject) {
+    documentClient.query(params, function(err, data) {
+      if (err) {
+        console.log(err);
+        reject({ status: 'failed', data: err });
+      } else {
+        console.log('city query: ', data);
+        resolve({ status: 'success', data });
+      }
+    });
+  });
+};
 
 const saveNewLocationGeo = async ({
   artLocation,
@@ -91,10 +104,8 @@ const getLocationsInCity = async ({ city }) => {
       ':c': city,
     },
   };
-  documentClient.query(params, function(err, data) {
-    if (err) console.log(err);
-    else console.log(data);
-  });
+  const results = await queryDynamo(params);
+  return results;
 };
 
 module.exports = { saveNewLocationGeo, getLocationsByGeo, getLocationsInCity };
