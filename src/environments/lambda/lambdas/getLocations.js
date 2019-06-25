@@ -27,29 +27,54 @@ const formatLocation = (location, requestData) => {
 const get = async (event, context) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
-
+  let results = null;
+  let queryResults = null;
+  let newResults = null;
   let msg = null;
+  let status = null;
   try {
     console.log('event data: ', event.queryStringParameters);
     if (!event || !event.queryStringParameters)
       throw new Error('data not-found error');
     requestData = event.queryStringParameters;
-    const geoResults = await applicationContext
-      .getUseCases()
-      .getArtLocationsByGeo({
-        applicationContext,
-        requestData,
+    if (requestData.lat && requestData.lon) {
+      queryResults = await applicationContext
+        .getUseCases()
+        .getArtLocationsByGeo({
+          applicationContext,
+          requestData,
+        });
+      status = queryResults.status;
+      results = queryResults.results;
+      console.log('geoResults: ', results);
+      newResults = results.map((result) => {
+        let location = AWS.DynamoDB.Converter.unmarshall(result, {
+          convertEmptyValues: true,
+        });
+        location = formatLocation(location, requestData);
+        console.log('location: ', location);
+        return location;
       });
-    console.log('geoResults: ', geoResults);
-    const { status, results } = geoResults;
-    const newResults = results.map((result) => {
-      let location = AWS.DynamoDB.Converter.unmarshall(result, {
-        convertEmptyValues: true,
+    } else if (requestData.city) {
+      console.log('requestdata.city:', requestData.city);
+      queryResults = await applicationContext
+        .getUseCases()
+        .getArtLocationsInCity({
+          applicationContext,
+          requestData,
+        });
+      status = queryResults.status;
+      results = queryResults.results;
+      console.log('city: ', results);
+      newResults = results.map((result) => {
+        let location = AWS.DynamoDB.Converter.unmarshall(result, {
+          convertEmptyValues: true,
+        });
+        console.log('location: ', location);
+        return location;
       });
-      location = formatLocation(location, requestData);
-      console.log('location: ', location);
-      return location;
-    });
+    }
+
     if (status === 'success') {
       if (results.length > 0) {
         return {

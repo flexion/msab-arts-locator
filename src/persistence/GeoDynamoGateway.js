@@ -9,6 +9,7 @@ const config = new ddbGeo.GeoDataManagerConfiguration(
 );
 config.hashKeyLength = 5;
 const myGeoTableManager = new ddbGeo.GeoDataManager(config);
+const documentClient = new AWS.DynamoDB.DocumentClient();
 
 const saveNewLocationGeo = async ({
   artLocation,
@@ -80,4 +81,20 @@ const getLocationsByGeo = async ({ lat, long, radius }) => {
   }
 };
 
-module.exports = { saveNewLocationGeo, getLocationsByGeo };
+const getLocationsInCity = async ({ city }) => {
+  console.log('city: ', city);
+  var params = {
+    TableName: process.env.GIS_TABLE,
+    IndexName: 'cityName-index',
+    KeyConditionExpression: 'city = :c',
+    ExpressionAttributeValues: {
+      ':c': city,
+    },
+  };
+  documentClient.query(params, function(err, data) {
+    if (err) console.log(err);
+    else console.log(data);
+  });
+};
+
+module.exports = { saveNewLocationGeo, getLocationsByGeo, getLocationsInCity };

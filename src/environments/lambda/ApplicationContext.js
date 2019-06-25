@@ -22,10 +22,14 @@ const {
 const {
   validateImageFileType,
 } = require('../../interactors/validateImageFileTypeInteractor');
+const {
+  getArtLocationsInCity,
+} = require('../../interactors/getArtLocationsInCityInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   saveNewLocationGeo,
   getLocationsByGeo,
+  getLocationsInCity,
 } = require('../../persistence/GeoDynamoGateway');
 const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { putImage, getImage } = require('../../persistence/s3Gateway');
@@ -58,6 +62,7 @@ module.exports = () => {
         saveNewLocationGeo,
         getLocationsByGeo,
         confirmCaptcha,
+        getLocationsInCity,
       };
     },
     getUniqueId: () => {
@@ -72,6 +77,7 @@ module.exports = () => {
         getArtLocationsByGeo,
         validateCaptcha,
         validateImageFileType,
+        getArtLocationsInCity,
       };
     },
 

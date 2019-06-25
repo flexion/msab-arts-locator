@@ -16,10 +16,11 @@ exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {
   validateRequestData({ data: requestData, dataSchema, applicationContext });
 
   const { city } = requestData;
+  console.log('city: ', city);
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
     .getPersistenceGateway()
-    .readAllLocationsByCity({ city, applicationContext });
+    .getLocationsInCity({ city, applicationContext });
 
   return { status: 'success', data: artLocationData };
 };
