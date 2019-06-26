@@ -46,7 +46,6 @@ const saveNewLocationGeo = async ({
       approved: { BOOL: artLocation.approved },
     };
 
-    console.log('image url: ', artlocation.imageURL);
     if (artLocation.imageURL) {
       item.imageURL = { S: artLocation.imageURL };
     }
@@ -56,7 +55,7 @@ const saveNewLocationGeo = async ({
     if (artLocation.website) {
       item.website = { S: artLocation.website };
     }
-    console.log('item being inserted: ', item);
+    console.log('Location being inserted: ', item);
     await myGeoTableManager
       .putPoint({
         RangeKeyValue: { S: applicationContext.getUniqueId() }, // Use this to ensure uniqueness of the hash/range pairs.

@@ -65,6 +65,7 @@ export const LocationInputForm = connect(
                 value: gresp,
               });
               submitLocation();
+              grecaptcha.reset();
             }}
           >
             <Field>
