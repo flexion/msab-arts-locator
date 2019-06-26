@@ -13,7 +13,7 @@ import {
   Tag,
 } from 'bloomer';
 
-export const LocationListItem = ({ location, haveGeo, index }) => {
+export const LocationListItem = ({ location, citySearch, index }) => {
   return (
     <React.Fragment>
       <div>
@@ -45,7 +45,7 @@ export const LocationListItem = ({ location, haveGeo, index }) => {
                 <LevelItem>
                   <a href={location.googleURL} target="_new">
                     <span className="has-text-primary has-text-weight-semibold msab-location-address">
-                      {!haveGeo ? 'Map' : location.distance}
+                      {citySearch ? 'Map' : location.distance}
                       <Icon className="msab-has-text-purple fas fa-map-marker-alt" />
                     </span>
                   </a>
