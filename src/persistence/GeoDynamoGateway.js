@@ -43,9 +43,11 @@ const saveNewLocationGeo = async ({
       entityId: { S: artLocation.entityId },
       adminId: { S: artLocation.adminId },
       updateId: { S: artLocation.updateId },
-      imageURL: { S: artLocation.imageURL },
       approved: { BOOL: artLocation.approved },
     };
+    if (artLocation.imageURL) {
+      item.imageURL = { S: artLocation.imageURL };
+    }
     if (artLocation.description) {
       item.description = { S: artLocation.description };
     }
