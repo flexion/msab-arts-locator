@@ -54,6 +54,50 @@ label {
 .msab-section-form {
   padding: 1rem 1.5rem;
 }
+.msab-loading {
+  font-family: Asap;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.msab-loading-ellipsis {
+  font-size: 30px;
+}
+
+.msab-loading-ellipsis:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4, end) 900ms infinite;
+  animation: ellipsis steps(4, end) 900ms infinite;
+  content: '\2026'; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}
+
+.msab-width-70 {
+  width: 70%;
+}
+.msab-loading-footer {
+  font-family: Asap;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+}
 .msab-footer {
   padding-top: 5px;
   padding-bottom: 40px;

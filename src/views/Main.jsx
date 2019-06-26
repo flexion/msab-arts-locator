@@ -24,7 +24,7 @@ export const Main = connect(
     return (
       <React.Fragment>
         <main id="main-content" role="main">
-          {/* {askingLocation && <Loading />} */}
+          <Loading isActive={askingLocation} />
           <CurrentPage />
         </main>
       </React.Fragment>
