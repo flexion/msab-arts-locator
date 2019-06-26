@@ -12,8 +12,7 @@ const requestPosition = () => {
         resolve(pos);
       },
       (err) => {
-        console.log('did not find location');
-        reject({ status: 'failed', error: err });
+        reject({ result: { status: 'failed', error: err } });
       },
       options,
     );
