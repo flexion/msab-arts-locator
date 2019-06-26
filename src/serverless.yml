@@ -84,6 +84,13 @@ provider:
                   - Arn
               - index
               - geohash-index
+        - Fn::Join:
+            - '/'
+            - - Fn::GetAtt:
+                  - GisTable
+                  - Arn
+              - index
+              - cityName-index
     - Effect: 'Allow'
       Action:
         - 's3:*'
@@ -155,10 +162,41 @@ resources:
             AttributeType: S
           - AttributeName: geohash
             AttributeType: N
+          - AttributeName: city
+            AttributeType: S
+          - AttributeName: adminId
+            AttributeType: S
+          - AttributeName: updateId
+            AttributeType: S
         LocalSecondaryIndexes:
           - IndexName: geohash-index
             KeySchema:
               - AttributeName: hashKey
+                KeyType: HASH
+              - AttributeName: geohash
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+        GlobalSecondaryIndexes:
+          - IndexName: cityName-index
+            KeySchema:
+              - AttributeName: city
+                KeyType: HASH
+              - AttributeName: geohash
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+          - IndexName: adminId-index
+            KeySchema:
+              - AttributeName: adminId
+                KeyType: HASH
+              - AttributeName: geohash
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+          - IndexName: updateId-index
+            KeySchema:
+              - AttributeName: updateId
                 KeyType: HASH
               - AttributeName: geohash
                 KeyType: RANGE

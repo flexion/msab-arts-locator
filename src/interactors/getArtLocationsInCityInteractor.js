@@ -19,7 +19,6 @@ exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
     .getPersistenceGateway()
-    .readAllLocationsByCity({ city, applicationContext });
-
-  return { status: 'success', data: artLocationData };
+    .getLocationsInCity({ city, applicationContext });
+  return artLocationData;
 };

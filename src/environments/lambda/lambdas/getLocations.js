@@ -8,6 +8,15 @@ var conversions = require('conversions');
  * @param {Object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
+
+const removeKeys = (location) => {
+  location.coordinates = JSON.parse(location.geoJson).coordinates;
+  delete location.geoJson;
+  delete location.hashKey;
+  delete location.rangeKey;
+  delete location.geohash;
+  return location;
+};
 const formatLocation = (location, requestData) => {
   //alter data in here before it gets sent
   location.distance = conversions(
@@ -15,43 +24,60 @@ const formatLocation = (location, requestData) => {
     'meters',
     'miles',
   );
-  location.coordinates = JSON.parse(location.geoJson).coordinates;
-  delete location.geoJson;
-  delete location.hashKey;
-  delete location.rangeKey;
-  delete location.geohash;
-
+  location = removeKeys(location);
   return location;
 };
 
 const get = async (event, context) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
-
+  let results = null;
+  let queryResults = null;
+  let newResults = null;
   let msg = null;
+  let status = null;
   try {
     console.log('event data: ', event.queryStringParameters);
     if (!event || !event.queryStringParameters)
       throw new Error('data not-found error');
     requestData = event.queryStringParameters;
-    const geoResults = await applicationContext
-      .getUseCases()
-      .getArtLocationsByGeo({
-        applicationContext,
-        requestData,
+    if (requestData.lat && requestData.lon) {
+      queryResults = await applicationContext
+        .getUseCases()
+        .getArtLocationsByGeo({
+          applicationContext,
+          requestData,
+        });
+      status = queryResults.status;
+      results = queryResults.results;
+      console.log('geoResults: ', results);
+      newResults = results.map((result) => {
+        let location = AWS.DynamoDB.Converter.unmarshall(result, {
+          convertEmptyValues: true,
+        });
+        location = formatLocation(location, requestData);
+        console.log('location: ', location);
+        return location;
       });
-    console.log('geoResults: ', geoResults);
-    const { status, results } = geoResults;
-    const newResults = results.map((result) => {
-      let location = AWS.DynamoDB.Converter.unmarshall(result, {
-        convertEmptyValues: true,
+    } else if (requestData.city) {
+      queryResults = await applicationContext
+        .getUseCases()
+        .getArtLocationsInCity({
+          applicationContext,
+          requestData,
+        });
+      status = queryResults.status;
+      results = queryResults.results;
+      console.log('queryResults: ', queryResults);
+      newResults = results.Items.map((location) => {
+        location = removeKeys(location);
+        console.log('location: ', location);
+        return location;
       });
-      location = formatLocation(location, requestData);
-      console.log('location: ', location);
-      return location;
-    });
+    }
+
     if (status === 'success') {
-      if (results.length > 0) {
+      if (newResults.length > 0) {
         return {
           statusCode: 201,
           body: JSON.stringify({

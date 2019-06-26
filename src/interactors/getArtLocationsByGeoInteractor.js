@@ -24,6 +24,5 @@ exports.getArtLocationsByGeo = async ({ requestData, applicationContext }) => {
   const artLocationData = await applicationContext
     .getPersistenceGateway()
     .getLocationsByGeo({ lat, long, radius });
-
   return artLocationData;
 };

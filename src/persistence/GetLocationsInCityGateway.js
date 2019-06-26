@@ -24,15 +24,12 @@ const makeRequest = (method, url) => {
   });
 };
 
-const getLocationsByRadius = async (
-  { lat, long, radius },
-  applicationContext,
-) => {
-  const lambdaURL = applicationContext.environment().apiURL + 'get-locations';
+const getLocationsInCity = async ({ city, applicationContext }) => {
   const method = 'GET';
-  let url = `${lambdaURL}?lat=${lat}&lon=${long}&radius=${radius}`;
+  const lambdaURL = applicationContext.environment().apiURL + 'get-locations';
+  let url = `${lambdaURL}?city=${city}`;
   const locations = await makeRequest(method, url);
   return locations;
 };
 
-module.exports = { getLocationsByRadius };
+module.exports = { getLocationsInCity };

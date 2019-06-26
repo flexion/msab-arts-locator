@@ -13,7 +13,7 @@ class ResultsListComponent extends React.Component {
 
   render() {
     const locations = this.props.locations;
-    const haveGeo = this.props.haveGeo;
+    const citySearch = this.props.citySearch;
 
     return (
       <Section>
@@ -31,7 +31,7 @@ class ResultsListComponent extends React.Component {
                 <LocationListItem
                   location={location}
                   index={i}
-                  haveGeo={haveGeo}
+                  citySearch={citySearch}
                 />
               </li>
             ))}
@@ -44,7 +44,7 @@ class ResultsListComponent extends React.Component {
 export const ResultsList = connect(
   {
     locations: state.locationListHelper, //this alters the location list to include google url
-    haveGeo: state.haveGeo,
+    citySearch: state.citySearch,
     getGeoLocationSequence: sequences.getGeoLocationSequence,
   },
   ResultsListComponent,

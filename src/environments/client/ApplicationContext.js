@@ -25,6 +25,9 @@ const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   readAllLocationsByCity,
 } = require('../../persistence/StaticPersistence');
+const {
+  getLocationsInCity,
+} = require('../../persistence/GetLocationsInCityGateway');
 const { getGeoLocation } = require('../../persistence/GeoLocationGateway');
 const {
   getCityFromGeo,
@@ -73,6 +76,7 @@ const applicationContext = {
       submitNewLocation,
       getCoordsFromAddress,
       getLocationsByRadius,
+      getLocationsInCity,
     };
   },
   getDataReader: () => {

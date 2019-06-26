@@ -18,7 +18,6 @@ const putImage = async (
       ACL: 'public-read',
     };
     const response = await s3.upload(params).promise();
-    console.log('response: ', response);
     return { status: 'success', data: response };
   } catch (e) {
     console.log('something failed on s3 put', e);
@@ -26,18 +25,18 @@ const putImage = async (
   }
 };
 
-const getImage = async ({ imageId }) => {
-  try {
-    let params = {
-      Bucket: 'msab-arts-locator-pre-us-east-images',
-      Key: imageId,
-    };
-    const image = s3.getObject(params, function(err, data) {});
-    return { status: 'success', image: image };
-  } catch (e) {
-    console.log('something failed on s3 get', e);
-    return { status: 's3 get failed' };
-  }
-};
+// const getImage = async ({ imageId }) => {
+//   try {
+//     let params = {
+//       Bucket: 'msab-arts-locator-pre-us-east-images',
+//       Key: imageId,
+//     };
+//     const image = s3.getObject(params, function(err, data) {});
+//     return { status: 'success', image: image };
+//   } catch (e) {
+//     console.log('something failed on s3 get', e);
+//     return { status: 's3 get failed' };
+//   }
+// };
 
-module.exports = { putImage, getImage };
+module.exports = { putImage };
