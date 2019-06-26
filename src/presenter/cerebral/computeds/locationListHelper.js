@@ -17,7 +17,9 @@ const urlFormat = require('format-url');
 // };
 
 const formatWebsiteURL = (location) => {
-  location.website = urlFormat(location.website);
+  if (location.website) {
+    location.website = urlFormat(location.website);
+  }
   return location;
 };
 
