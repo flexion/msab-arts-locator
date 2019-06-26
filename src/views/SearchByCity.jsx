@@ -16,13 +16,16 @@ export const SearchByCity = connect(
     cityValue: state.cityValue,
     searchByCitySequence: sequences.searchByCitySequence,
     updateCitySearchSequence: sequences.updateCitySearchSequence,
+    haveGeo: state.haveGeo,
   },
-  ({ cityValue, searchByCitySequence, updateCitySearchSequence }) => {
+  ({ cityValue, searchByCitySequence, updateCitySearchSequence, haveGeo }) => {
     return (
       <Section>
         <Container>
           <Title isSize={3} className="msab-has-text-purple">
-            Find Artistic Things To Do
+            {haveGeo
+              ? 'Find Artistic Things To Do'
+              : 'Oops! Can’t Find Your Location'}
           </Title>
 
           <form
