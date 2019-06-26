@@ -19,6 +19,9 @@ const getBase64 = (image) => {
  */
 exports.validateImageFileType = async (image) => {
   // converts to base64 to buffer to check the mime type
+  if (!image) {
+    return { status: 'success', base64Image: null };
+  }
   try {
     const types = ['image/jpeg', 'image/png', 'image/gif'];
     let imageBuffer = null;

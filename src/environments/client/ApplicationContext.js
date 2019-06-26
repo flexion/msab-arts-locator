@@ -8,7 +8,7 @@ const {
 } = require('../../interactors/getArtLocationsInRadiusInteractor');
 const {
   getGeoLocationInteractor,
-} = require('../../interactors/getGeoInteractor');
+} = require('../../interactors/getGeoLocationInteractor');
 const {
   getReverseCityLookupInteractor,
 } = require('../../interactors/getReverseCityLookupInteractor');
