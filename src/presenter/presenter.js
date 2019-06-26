@@ -39,7 +39,7 @@ export const presenter = {
     locationListHelper,
     haveGeo: false,
     askingLocation: false,
-    findingResults: false,
+    findingLocations: false,
     citySearch: false,
     radius: 40233, //in meters
     position: { lat: 0, long: 0 },

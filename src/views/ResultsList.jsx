@@ -3,8 +3,9 @@ import { state } from 'cerebral';
 import React from 'react';
 import { LocationListItem } from './LocationListItem';
 import { Filter } from './Filter';
-import { Section, Container, Title } from 'bloomer';
+import { Section, Container, Title, Level, LevelItem } from 'bloomer';
 import { sequences } from 'cerebral';
+import collage from '../images/collage.svg';
 
 class ResultsListComponent extends React.Component {
   componentDidMount() {
@@ -36,6 +37,13 @@ class ResultsListComponent extends React.Component {
               </li>
             ))}
           </ul>
+          {!locations.length && (
+            <Level>
+              <LevelItem>
+                <img src={collage} />
+              </LevelItem>
+            </Level>
+          )}
         </Container>
       </Section>
     );

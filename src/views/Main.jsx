@@ -15,16 +15,22 @@ const pages = {
 export const Main = connect(
   {
     currentPage: state.currentPage,
-    findingResults: state.findingResults,
+    findingLocations: state.findingLocations,
     askingLocation: state.askingLocation,
-    haveGeo: state.haveGeo,
   },
-  ({ currentPage, findingResults, askingLocation, haveGeo }) => {
+  ({ currentPage, findingLocations, askingLocation }) => {
     let CurrentPage = pages[currentPage];
+    let isActive = findingLocations || askingLocation;
     return (
       <React.Fragment>
         <main id="main-content" role="main">
-          {/* {askingLocation && <Loading />} */}
+          {currentPage === 'Home' && (
+            <Loading
+              isActive={isActive}
+              askingLocation={askingLocation}
+              findingLocations={findingLocations}
+            />
+          )}
           <CurrentPage />
         </main>
       </React.Fragment>
