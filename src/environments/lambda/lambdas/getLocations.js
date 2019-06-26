@@ -8,6 +8,14 @@ var conversions = require('conversions');
  * @param {Object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
+
+const removeKeys = (location) => {
+  delete location.geoJson;
+  delete location.hashKey;
+  delete location.rangeKey;
+  delete location.geohash;
+  return location;
+};
 const formatLocation = (location, requestData) => {
   //alter data in here before it gets sent
   location.distance = conversions(
@@ -16,11 +24,7 @@ const formatLocation = (location, requestData) => {
     'miles',
   );
   location.coordinates = JSON.parse(location.geoJson).coordinates;
-  delete location.geoJson;
-  delete location.hashKey;
-  delete location.rangeKey;
-  delete location.geohash;
-
+  location = removeKeys(location);
   return location;
 };
 
@@ -56,7 +60,6 @@ const get = async (event, context) => {
         return location;
       });
     } else if (requestData.city) {
-      console.log('requestdata.city:', requestData.city);
       queryResults = await applicationContext
         .getUseCases()
         .getArtLocationsInCity({
@@ -65,18 +68,16 @@ const get = async (event, context) => {
         });
       status = queryResults.status;
       results = queryResults.results;
-      console.log('citysearch results: ', results);
-      newResults = results.map((result) => {
-        let location = AWS.DynamoDB.Converter.unmarshall(result, {
-          convertEmptyValues: true,
-        });
+      console.log('queryResults: ', queryResults);
+      newResults = results.Items.map((location) => {
+        location = removeKeys(location);
         console.log('location: ', location);
         return location;
       });
     }
 
     if (status === 'success') {
-      if (results.length > 0) {
+      if (newResults.length > 0) {
         return {
           statusCode: 201,
           body: JSON.stringify({

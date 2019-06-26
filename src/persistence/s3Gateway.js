@@ -18,7 +18,6 @@ const putImage = async (
       ACL: 'public-read',
     };
     const response = await s3.upload(params).promise();
-    console.log('response: ', response);
     return { status: 'success', data: response };
   } catch (e) {
     console.log('something failed on s3 put', e);

@@ -17,8 +17,7 @@ const queryDynamo = (params) => {
         console.log(err);
         reject({ status: 'failed', data: err });
       } else {
-        console.log('city query: ', data);
-        resolve({ status: 'success', data });
+        resolve({ status: 'success', results: data });
       }
     });
   });
@@ -95,7 +94,6 @@ const getLocationsByGeo = async ({ lat, long, radius }) => {
 };
 
 const getLocationsInCity = async ({ city }) => {
-  console.log('city: ', city);
   var params = {
     TableName: process.env.GIS_TABLE,
     IndexName: 'cityName-index',

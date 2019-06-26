@@ -29,6 +29,7 @@ const getLocationsInCity = async ({ city, applicationContext }) => {
   const lambdaURL = applicationContext.environment().apiURL + 'get-locations';
   let url = `${lambdaURL}?city=${city}`;
   const locations = await makeRequest(method, url);
+  console.log('gateway locations: ', locations);
   return locations;
 };
 

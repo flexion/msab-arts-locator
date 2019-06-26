@@ -32,7 +32,6 @@ const getLocationsByRadius = async (
   const method = 'GET';
   let url = `${lambdaURL}?lat=${lat}&lon=${long}&radius=${radius}`;
   const locations = await makeRequest(method, url);
-  console.log('locations: ', locations);
   return locations;
 };
 
