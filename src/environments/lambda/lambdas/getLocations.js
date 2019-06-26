@@ -10,6 +10,7 @@ var conversions = require('conversions');
  */
 
 const removeKeys = (location) => {
+  location.coordinates = JSON.parse(location.geoJson).coordinates;
   delete location.geoJson;
   delete location.hashKey;
   delete location.rangeKey;
@@ -23,7 +24,6 @@ const formatLocation = (location, requestData) => {
     'meters',
     'miles',
   );
-  location.coordinates = JSON.parse(location.geoJson).coordinates;
   location = removeKeys(location);
   return location;
 };
