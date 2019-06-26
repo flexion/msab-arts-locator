@@ -19,7 +19,7 @@ export const AppHeader = () => (
         <LevelLeft>
           <LevelItem>
             <a href={`${window.location.origin}`}>
-              <Image isSize="96x96" src={logo} />
+              <Image className="logosize" src={logo} />
             </a>
           </LevelItem>
         </LevelLeft>

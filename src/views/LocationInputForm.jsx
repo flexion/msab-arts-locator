@@ -46,10 +46,9 @@ export const LocationInputForm = connect(
             Fill out this form and a Minnesota State Arts Board administrator
             will review it before publishing.
           </Subtitle>
-          <Subtitle isSize={6} className="msab-has-text-grey bold">
+          <Subtitle isSize={6} className="msab-has-text-grey-bold">
             * All fields required unless otherwise noted
           </Subtitle>
-          <br />
           <Title isSize={5} className="msab-has-text-purple">
             Your Location
           </Title>
@@ -70,6 +69,9 @@ export const LocationInputForm = connect(
           >
             <Field>
               <Label className="msab-has-text-grey">Name</Label>
+              <Subtitle className="msab-has-text-grey-small">
+              How do you want people to know and find you? (e.g., your legal name, your publicity name, a DBA, a pen name, etc.)
+              </Subtitle>
               <Control>
                 <Input
                   type="text"
@@ -86,6 +88,9 @@ export const LocationInputForm = connect(
             </Field>
             <Field>
               <Label className="msab-has-text-grey">Street Address</Label>
+              <Subtitle className="msab-has-text-grey-small">
+              Where do you want people to find you and potentially visit? (e.g., a performance venue, your studio, retail location, etc.)
+              </Subtitle>
               <Control>
                 <Input
                   type="text"
@@ -117,28 +122,10 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">State</Label>
-              <Control>
-                <Input
-                  isColor="success"
-                  name="state"
-                  value={form.state || 'MN'}
-                  disabled
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-              </Control>
-            </Field>
-            <Field>
-              <Label className="msab-has-text-grey">Zip</Label>
+              <Label className="msab-has-text-grey">ZIP</Label>
               <Control>
                 <Input
                   type="number"
-                  isColor="success"
                   name="zip"
                   value={form.zip || ''}
                   onChange={(e) => {
@@ -151,7 +138,7 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Web Site (Optional)</Label>
+              <Label className="msab-has-text-grey">Website (optional)</Label>
               <Control>
                 <Input
                   type="text"
@@ -168,10 +155,10 @@ export const LocationInputForm = connect(
             </Field>
             <Field>
               <Label className="msab-has-text-grey">
-                Brief Description (Optional)
+                Brief Description (optional - max 250 characters)
               </Label>
-              <Subtitle isSize={6} className="msab-has-text-grey">
-                (Max 250 Characters)
+              <Subtitle className="msab-has-text-grey-small">
+              What do you want people to know about you? (e.g., mission statement, description of your art, what you offer, etc.)
               </Subtitle>
               <Control>
                 <TextArea
@@ -187,7 +174,7 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
-            <Label className="msab-has-text-grey">Categories:</Label>
+            <Label className="msab-has-text-grey">Type</Label>
             <Subtitle isSize={6} className="msab-has-text-grey">
               (Select up to three that apply)
             </Subtitle>
@@ -205,7 +192,7 @@ export const LocationInputForm = connect(
                         });
                       }}
                     />
-                    <span className="msab-has-text-grey bold margin-left-10">
+                    <span className="msab-has-text-grey margin-left-10">
                       {categories[catKey]}
                     </span>
                   </Control>
@@ -213,7 +200,6 @@ export const LocationInputForm = connect(
               );
             })}
 
-            <br />
             <br />
             <Title isSize={4} className="msab-has-text-purple">
               Contact Information
@@ -271,7 +257,7 @@ export const LocationInputForm = connect(
             </Field>
             <Field className="msab-margin-top">
               <Label className="msab-has-text-grey">
-                Location Image (Optional)
+                Location Image (optional)
               </Label>
               <Control>
                 <input
