@@ -15,6 +15,7 @@ class ResultsListComponent extends React.Component {
   render() {
     const locations = this.props.locations;
     const citySearch = this.props.citySearch;
+    const categories = this.props.categories;
 
     return (
       <Section>
