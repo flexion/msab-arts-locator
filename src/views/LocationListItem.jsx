@@ -30,7 +30,7 @@ export const LocationListItem = ({ location, citySearch, index }) => {
       <Media>
         <MediaLeft>
           {!!location.imageURL && (
-            <Image isSize="64x64" src={location.imageURL} />
+            <Image className="thumbsize" src={location.imageURL} />
           )}
         </MediaLeft>
         <MediaContent>
@@ -55,7 +55,7 @@ export const LocationListItem = ({ location, citySearch, index }) => {
             <Level isMobile>
               <LevelLeft>
                 <LevelItem className="has-text-grey msab-location-address">
-                  {location.city}
+                  {location.city}, MN
                 </LevelItem>
                 <LevelItem className="has-text-grey msab-location-address">
                   {location.zip}

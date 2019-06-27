@@ -100,7 +100,7 @@ label {
 }
 .msab-footer {
   padding-top: 5px;
-  padding-bottom: 40px;
+  padding-bottom: 10px;
   font-family: Asap;
   font-style: normal;
   font-weight: normal;
@@ -121,14 +121,15 @@ label {
 }
 
 .msab-margin-10 {
-  margin: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .location-name {
   font-family: Asap;
   font-style: normal;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 17px;
 }
 
@@ -136,7 +137,7 @@ label {
   font-family: 'Asap', sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 14px;
 }
 
@@ -152,8 +153,8 @@ label {
   font-family: 'Asap', sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .address-level {
@@ -174,13 +175,9 @@ li:not(:first-child) {
 .msab-margin-bottom {
   margin-top: 20px;
 }
-.msab-location-media {
-  padding-bottom: 15px;
-  border-bottom: 1px black solid;
-}
 
 .bold {
-  font-weight: 600;
+  font-weight: 500;
 }
 .margin-left-10 {
   margin-left: 10px;
@@ -188,4 +185,94 @@ li:not(:first-child) {
 
 .msab-description {
   overflow-wrap: break-word;
+}
+
+.section {
+  padding: 1rem;
+}
+
+.logosize {
+  width: 96px;
+}
+
+.textarea {
+  color: #565C65;
+}
+
+.subtitle.is-5 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #565C65;
+}
+
+.subtitle.is-6 {
+  font-size: 1rem;
+  color: #565C65;
+}
+
+.msab-has-text-grey-bold {
+  font-weight: 600;
+  color: #565C65;
+}
+
+.msab-has-text-grey-small {
+  font-size: .85rem;
+  line-height: 1.2rem;
+  color: #565C65;
+}
+
+.subtitle:not(.is-spaced) + .title {
+  margin-top: 0;
+}
+
+.body {
+    color: #565C65;
+  }
+
+.field.is-grouped {
+  padding-bottom: 1.5rem;
+}
+
+.button.is-primary {
+  font-weight: 600;
+}
+
+.field.has-addons {
+  margin-top: 1rem;
+}
+
+.media-left {
+  margin-top: 8px;
+  margin-right: 0px;
+}
+
+.has-text-grey {
+  color: #565C65 !important;
+}
+
+.level.is-mobile {
+  margin-bottom: 1rem;
+}
+
+.thumbsize {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.tag:not(body) {
+  font-size: .9rem;
+  font-variant-caps: all-small-caps;
+  padding-left: .5em;
+  padding-right: .5em;
+  height: 1.5em;
+}
+
+.level.is-mobile .level-item:not(:last-child) {
+  margin-right: .3rem;
+}
+
+.msab-location-media {
+  padding-bottom: 20px;
+  border-bottom: 1px #EBEAEB solid;
 }
