@@ -15,6 +15,8 @@ const removeKeys = (location) => {
   delete location.hashKey;
   delete location.rangeKey;
   delete location.geohash;
+  delete location.adminId;
+  delete location.updateId;
   return location;
 };
 const formatLocation = (location, requestData) => {
