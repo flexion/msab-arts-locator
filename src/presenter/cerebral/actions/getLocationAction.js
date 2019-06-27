@@ -1,9 +1,14 @@
 import { state } from 'cerebral';
 
-export const getLocationAction = async ({ applicationContext, get, store }) => {
+export const getLocationAction = async ({
+  applicationContext,
+  get,
+  store,
+  props,
+}) => {
   store.set(state.citySearch, true);
   const result = await applicationContext.getUseCases().getArtLocationById({
-    requestData: { entityId: get(state`entityId`) },
+    requestData: { entityId: props.entityId, actionType: props.type },
     applicationContext,
   });
   return { result };

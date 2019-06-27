@@ -4,6 +4,9 @@ const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');
 const {
+  getArtLocationById,
+} = require('../../interactors/getArtLocationByIdInteractor');
+const {
   getArtLocationsInRadius,
 } = require('../../interactors/getArtLocationsInRadiusInteractor');
 const {
@@ -39,7 +42,7 @@ const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   getLocationsByRadius,
 } = require('../../persistence/GetLocationsByRadiusGateway');
-
+const { getLocationById } = require('../../persistence/GetLocationByIdGateway');
 const environment = {
   domain: window.location.href,
   apiURL: `${window.location.origin}/api/v1/`,
@@ -70,6 +73,7 @@ const applicationContext = {
   },
   getPersistenceGateway: () => {
     return {
+      getLocationById,
       readAllLocationsByCity,
       getGeoLocation,
       getCityFromGeo,
@@ -87,6 +91,7 @@ const applicationContext = {
   },
   getUseCases: () => {
     return {
+      getArtLocationById,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,

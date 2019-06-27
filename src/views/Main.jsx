@@ -19,6 +19,7 @@ export const Main = connect(
     askingLocation: state.askingLocation,
   },
   ({ currentPage, findingLocations, askingLocation }) => {
+    console.log('currentPage', currentPage);
     let CurrentPage = pages[currentPage];
     let isActive = findingLocations || askingLocation;
     return (

@@ -4,6 +4,7 @@ import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSeque
 import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
 import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
 import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
+import { getLocationSequence } from './cerebral/sequences/getLocationSequence';
 import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
@@ -19,6 +20,7 @@ export const presenter = {
   ],
   providers: { applicationContext },
   sequences: {
+    getLocationSequence,
     searchByCitySequence,
     updateCitySearchSequence,
     getGeoLocationSequence,
@@ -29,6 +31,10 @@ export const presenter = {
   },
 
   state: {
+    update: {
+      entityId: '',
+      actionType: '',
+    },
     submitLocationSuccess: false,
     submitLocationFailure: false,
     selectImageFailure: false,
