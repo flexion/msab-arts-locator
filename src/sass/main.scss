@@ -111,6 +111,7 @@ label {
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
+  margin-top: -.5rem;
 }
 
 .address-level {
@@ -175,6 +176,7 @@ li:not(:first-child) {
   font-size: .85rem;
   line-height: 1.2rem;
   color: #565C65;
+  margin-bottom: .75rem !important;
 }
 
 .subtitle:not(.is-spaced) + .title {
@@ -186,8 +188,8 @@ li:not(:first-child) {
   }
 
 .field.is-grouped {
-  padding-bottom: 1.5rem;
-}
+    padding-bottom: 1.5rem;
+  }
 
 .button.is-primary {
   font-weight: 600;
@@ -206,9 +208,6 @@ li:not(:first-child) {
   color: #565C65 !important;
 }
 
-.level.is-mobile {
-  margin-bottom: 1rem;
-}
 
 .thumbsize {
   width: 80px;
@@ -231,4 +230,9 @@ li:not(:first-child) {
 .msab-location-media {
   padding-bottom: 20px;
   border-bottom: 1px #EBEAEB solid;
+}
+
+
+.text-field {
+  margin-bottom: 2rem !important;
 }
