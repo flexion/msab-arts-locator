@@ -13,7 +13,12 @@ import {
   Tag,
 } from 'bloomer';
 
-export const LocationListItem = ({ location, citySearch, index }) => {
+export const LocationListItem = ({
+  location,
+  citySearch,
+  index,
+  categories,
+}) => {
   return (
     <React.Fragment>
       <div>
@@ -75,7 +80,7 @@ export const LocationListItem = ({ location, citySearch, index }) => {
             className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10"
             key={i}
           >
-            {tag}
+            {categories[tag]}
           </Tag>
         ))}
       </div>
