@@ -72,7 +72,7 @@ export const LocationInputForm = connect(
               <Subtitle className="msab-has-text-grey-small">
               How do you want people to know and find you? (e.g., your legal name, your publicity name, a DBA, a pen name, etc.)
               </Subtitle>
-              <Control>
+              <Control className="text-field">
                 <Input
                   type="text"
                   name="name"
@@ -91,7 +91,7 @@ export const LocationInputForm = connect(
               <Subtitle className="msab-has-text-grey-small">
               Where do you want people to find you and potentially visit? (e.g., a performance venue, your studio, retail location, etc.)
               </Subtitle>
-              <Control>
+              <Control className="text-field">
                 <Input
                   type="text"
                   name="street"
@@ -107,7 +107,7 @@ export const LocationInputForm = connect(
             </Field>
             <Field>
               <Label className="msab-has-text-grey">Town/City</Label>
-              <Control>
+              <Control className="text-field">
                 <Input
                   type="text"
                   name="city"
@@ -123,7 +123,7 @@ export const LocationInputForm = connect(
             </Field>
             <Field>
               <Label className="msab-has-text-grey">ZIP</Label>
-              <Control>
+              <Control className="text-field">
                 <Input
                   type="number"
                   name="zip"
@@ -138,8 +138,8 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Website (optional)</Label>
-              <Control>
+              <Label className="msab-has-text-grey">Web Site (optional)</Label>
+              <Control className="text-field">
                 <Input
                   type="text"
                   name="website"
@@ -160,7 +160,7 @@ export const LocationInputForm = connect(
               <Subtitle className="msab-has-text-grey-small">
               What do you want people to know about you? (e.g., mission statement, description of your art, what you offer, etc.)
               </Subtitle>
-              <Control>
+              <Control className="text-field">
                 <TextArea
                   maxLength="250"
                   name="description"
@@ -181,7 +181,7 @@ export const LocationInputForm = connect(
             {Object.keys(form.category).map((catKey, i) => {
               return (
                 <Field key={i}>
-                  <Control>
+                <Control>
                     <Checkbox
                       name={catKey}
                       checked={form.category[catKey] || false}
@@ -209,7 +209,7 @@ export const LocationInputForm = connect(
             </Subtitle>
             <Field>
               <Label className="msab-has-text-grey">Contact Name</Label>
-              <Control>
+              <Control className="text-field">
                 <Input
                   type="text"
                   name="contactName"
@@ -225,7 +225,7 @@ export const LocationInputForm = connect(
             </Field>
             <Field>
               <Label className="msab-has-text-grey">Contact E-mail</Label>
-              <Control>
+              <Control className="text-field">
                 <Input
                   type="text"
                   name="contactEmail"
@@ -241,7 +241,7 @@ export const LocationInputForm = connect(
             </Field>
             <Field>
               <Label className="msab-has-text-grey">Contact Phone</Label>
-              <Control>
+              <Control className="text-field">
                 <Input
                   type="text"
                   name="contactPhone"

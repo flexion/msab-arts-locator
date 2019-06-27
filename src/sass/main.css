@@ -7050,7 +7050,8 @@ label {
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  line-height: 18px; }
+  line-height: 18px;
+  margin-top: -.5rem; }
 
 .address-level {
   margin-bottom: 0px !important; }
@@ -7102,7 +7103,8 @@ li:not(:first-child) {
 .msab-has-text-grey-small {
   font-size: .85rem;
   line-height: 1.2rem;
-  color: #565C65; }
+  color: #565C65;
+  margin-bottom: .75rem !important; }
 
 .subtitle:not(.is-spaced) + .title {
   margin-top: 0; }
@@ -7126,9 +7128,6 @@ li:not(:first-child) {
 .has-text-grey {
   color: #565C65 !important; }
 
-.level.is-mobile {
-  margin-bottom: 1rem; }
-
 .thumbsize {
   width: 80px;
   height: 80px;
@@ -7147,3 +7146,6 @@ li:not(:first-child) {
 .msab-location-media {
   padding-bottom: 20px;
   border-bottom: 1px #EBEAEB solid; }
+
+.text-field {
+  margin-bottom: 2rem !important; }
