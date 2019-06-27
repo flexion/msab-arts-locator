@@ -33,6 +33,7 @@ class ResultsListComponent extends React.Component {
                   location={location}
                   index={i}
                   citySearch={citySearch}
+                  categories={categories}
                 />
               </li>
             ))}
@@ -54,6 +55,7 @@ export const ResultsList = connect(
     locations: state.locationListHelper, //this alters the location list to include google url
     citySearch: state.citySearch,
     getGeoLocationSequence: sequences.getGeoLocationSequence,
+    categories: state.categories,
   },
   ResultsListComponent,
 );
