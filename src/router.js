@@ -17,7 +17,6 @@ const router = {
     });
 
     route('/curate-location/*', (entityId) => {
-      console.log('on curate: ', entityId);
       document.title = `Curate Location ${pageTitleSuffix}`;
       app.getSequence('getLocationSequence')({
         page: 'LocationInput',

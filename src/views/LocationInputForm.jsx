@@ -182,8 +182,6 @@ export const LocationInputForm = connect(
               (Select up to three that apply)
             </Subtitle>
             {Object.keys(form.category).map((catKey, i) => {
-              console.log('form.category', form.category);
-              console.log('catKey:', catKey);
               return (
                 <Field key={i}>
                   <Control>

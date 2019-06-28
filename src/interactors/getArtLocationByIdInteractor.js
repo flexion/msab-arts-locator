@@ -1,7 +1,6 @@
 const { validateRequestData } = require('../utilities/CleanUtils');
 
 exports.getArtLocationById = async ({ requestData, applicationContext }) => {
-  console.log('requestData: ', requestData);
   const dataSchema = {
     type: 'object',
     properties: {
@@ -21,6 +20,5 @@ exports.getArtLocationById = async ({ requestData, applicationContext }) => {
   const artLocationData = await applicationContext
     .getPersistenceGateway()
     .getLocationById({ entityId, actionType, applicationContext });
-  console.log('artlocationdata: ', artLocationData);
   return artLocationData;
 };
