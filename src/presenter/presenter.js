@@ -8,6 +8,7 @@ import { getLocationSequence } from './cerebral/sequences/getLocationSequence';
 import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
+import { locationFormButtonsHelper } from './cerebral/computeds/locationFormButtonsHelper';
 // Cerebral module
 
 export const presenter = {
@@ -31,10 +32,6 @@ export const presenter = {
   },
 
   state: {
-    update: {
-      entityId: '',
-      actionType: '',
-    },
     submitLocationSuccess: false,
     submitLocationFailure: false,
     selectImageFailure: false,
@@ -43,6 +40,7 @@ export const presenter = {
     cityValue: '',
     locationsList: [],
     locationListHelper,
+    locationFormButtonsHelper,
     haveGeo: false,
     askingLocation: false,
     findingLocations: false,
@@ -61,7 +59,18 @@ export const presenter = {
       photo: 'Photography/Film/Media',
       opera: 'Theater/Opera',
     },
+    update: {
+      entityId: '',
+      actionType: '',
+      approved: false,
+    },
     form: {
+      update: {
+        entityId: '',
+        actionType: '',
+        approved: false,
+      },
+      formDirty: false,
       gresp: '',
       name: null,
       category: {

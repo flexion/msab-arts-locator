@@ -5,4 +5,7 @@ export const updateFormValueAction = ({ store, props }) => {
     props.value = null;
   }
   store.set(state.form[props.key], props.value);
+  if (props.key !== 'gresp' && props.key !== 'update.approved') {
+    store.set(state.form.formDirty, true);
+  }
 };

@@ -26,6 +26,7 @@ export const LocationInputForm = connect(
     imgFailure: state.selectImageFailure,
     imgMsg: state.selectImageMsg,
     categories: state.categories,
+    locationFormButtonsHelper: state.locationFormButtonsHelper,
   },
   ({
     form,
@@ -35,6 +36,7 @@ export const LocationInputForm = connect(
     imgFailure,
     imgMsg,
     categories,
+    locationFormButtonsHelper,
   }) => {
     return (
       <Section className="msab-section-form">
@@ -274,6 +276,11 @@ export const LocationInputForm = connect(
                   }}
                 />
               </Control>
+              {form.imageURL && !form.base64Image && (
+                <Control>
+                  <img src={form.imageURL} />
+                </Control>
+              )}
             </Field>
             {imgFailure && (
               <Notification isColor="danger">{imgMsg}</Notification>
@@ -296,14 +303,37 @@ export const LocationInputForm = connect(
                     });
                   }}
                 />
-
                 <Button
                   type="submit"
                   isColor="primary"
                   className="msab-margin-top"
+                  disabled={form.approved}
+                  onClick={() => {
+                    updateFormValueSequence({
+                      key: 'update.approved',
+                      value: true,
+                    });
+                  }}
                 >
-                  Submit
+                  {locationFormButtonsHelper.showSubmit && 'Submit'}
+                  {locationFormButtonsHelper.showAdmin && 'Approve'}
+                  {locationFormButtonsHelper.update && 'Update'}
                 </Button>
+                {locationFormButtonsHelper.showAdmin && (
+                  <Button
+                    type="submit"
+                    isColor="primary"
+                    className="msab-margin-top"
+                    onClick={() => {
+                      updateFormValueSequence({
+                        key: 'update.approved',
+                        value: false,
+                      });
+                    }}
+                  >
+                    Not Approve
+                  </Button>
+                )}
               </Control>
             </Field>
           </form>

@@ -17,6 +17,7 @@ const removeKeys = (location) => {
   delete location.geohash;
   delete location.adminId;
   delete location.updateId;
+  delete location.entityId;
   return location;
 };
 

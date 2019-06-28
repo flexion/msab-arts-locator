@@ -32,7 +32,7 @@ const post = async (event) => {
     if (entityId && actionType) {
       validateResult = await applicationContext
         .getUseCases()
-        .updateLocationById(requestData.base64Image);
+        .updateLocationById(requestData);
       msg = validateResult.status;
 
       if (msg === 'success') {
