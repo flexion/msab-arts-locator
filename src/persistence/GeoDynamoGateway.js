@@ -109,4 +109,27 @@ const getLocationsInCity = async ({ city }) => {
   return results;
 };
 
-module.exports = { saveNewLocationGeo, getLocationsByGeo, getLocationsInCity };
+const getLocationById = async ({ entityId, actionType }) => {
+  console.group('entityid, action', entityId, actionType);
+  const indexName = `${actionType}Id-index`;
+  const columnName = `${actionType}Id`;
+  var params = {
+    TableName: process.env.GIS_TABLE,
+    IndexName: indexName,
+    KeyConditionExpression: `${columnName} = :id`,
+    ExpressionAttributeValues: {
+      ':id': entityId,
+    },
+  };
+  console.log('params', params);
+  const results = await queryDynamo(params);
+  console.log('results: ', results);
+  return results;
+};
+
+module.exports = {
+  saveNewLocationGeo,
+  getLocationsByGeo,
+  getLocationsInCity,
+  getLocationById,
+};

@@ -22,7 +22,7 @@ const router = {
       app.getSequence('getLocationSequence')({
         page: 'LocationInput',
         entityId,
-        type: 'curate',
+        actionType: 'admin',
       });
     });
 
@@ -31,7 +31,7 @@ const router = {
       app.getSequence('getLocationSequence')({
         page: 'LocationInput',
         entityId,
-        type: 'update',
+        actionType: 'update',
       });
     });
 

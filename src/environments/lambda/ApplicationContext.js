@@ -23,6 +23,9 @@ const {
   validateImageFileType,
 } = require('../../interactors/validateImageFileTypeInteractor');
 const {
+  getArtLocationById,
+} = require('../../interactors/getArtLocationByIdInteractor');
+const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
@@ -30,6 +33,7 @@ const {
   saveNewLocationGeo,
   getLocationsByGeo,
   getLocationsInCity,
+  getLocationById,
 } = require('../../persistence/GeoDynamoGateway');
 const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { putImage, getImage } = require('../../persistence/s3Gateway');
@@ -63,6 +67,7 @@ module.exports = () => {
         getLocationsByGeo,
         confirmCaptcha,
         getLocationsInCity,
+        getLocationById,
       };
     },
     getUniqueId: () => {
@@ -70,6 +75,7 @@ module.exports = () => {
     },
     getUseCases: () => {
       return {
+        getArtLocationById,
         putArtLocationImage,
         saveNewArtLocation,
         getLocationCoordinates,

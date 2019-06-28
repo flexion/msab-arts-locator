@@ -91,6 +91,20 @@ provider:
                   - Arn
               - index
               - cityName-index
+        - Fn::Join:
+            - '/'
+            - - Fn::GetAtt:
+                  - GisTable
+                  - Arn
+              - index
+              - adminId-index
+        - Fn::Join:
+            - '/'
+            - - Fn::GetAtt:
+                  - GisTable
+                  - Arn
+              - index
+              - updateId-index
     - Effect: 'Allow'
       Action:
         - 's3:*'
@@ -137,6 +151,26 @@ functions:
     events:
       - http:
           path: ${self:custom.fullstack.apiPath}/v1/save-location/
+          method: post
+          cors: true
+  getLocation:
+    handler: environments/lambda/handlers.getLocation
+    environment:
+      GIS_TABLE: ${self:service}-gis-${opt:stage}
+    timeout: 30
+    events:
+      - http:
+          path: ${self:custom.fullstack.apiPath}/v1/get-location
+          method: get
+          cors: true
+  updateLocation:
+    handler: environments/lambda/handlers.updateLocation
+    environment:
+      GIS_TABLE: ${self:service}-gis-${opt:stage}
+    timeout: 30
+    events:
+      - http:
+          path: ${self:custom.fullstack.apiPath}/v1/update-location
           method: post
           cors: true
 
