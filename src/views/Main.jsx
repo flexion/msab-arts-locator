@@ -17,21 +17,23 @@ export const Main = connect(
     currentPage: state.currentPage,
     findingLocations: state.findingLocations,
     askingLocation: state.askingLocation,
+    gettingLocation: state.gettingLocation,
   },
-  ({ currentPage, findingLocations, askingLocation }) => {
+  ({ currentPage, findingLocations, askingLocation, gettingLocation }) => {
     console.log('currentPage', currentPage);
     let CurrentPage = pages[currentPage];
-    let isActive = findingLocations || askingLocation;
+    let isActive = findingLocations || askingLocation || gettingLocation;
     return (
       <React.Fragment>
         <main id="main-content" role="main">
-          {currentPage === 'Home' && (
-            <Loading
-              isActive={isActive}
-              askingLocation={askingLocation}
-              findingLocations={findingLocations}
-            />
-          )}
+          {/* {currentPage === 'Home' && ( */}
+          <Loading
+            isActive={isActive}
+            askingLocation={askingLocation}
+            findingLocations={findingLocations}
+            gettingLocation={gettingLocation}
+          />
+          {/* )} */}
           <CurrentPage />
         </main>
       </React.Fragment>

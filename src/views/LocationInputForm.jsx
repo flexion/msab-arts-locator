@@ -70,7 +70,8 @@ export const LocationInputForm = connect(
             <Field>
               <Label className="msab-has-text-grey">Name</Label>
               <Subtitle className="msab-has-text-grey-small">
-              How do you want people to know and find you? (e.g., your legal name, your publicity name, a DBA, a pen name, etc.)
+                How do you want people to know and find you? (e.g., your legal
+                name, your publicity name, a DBA, a pen name, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
@@ -89,7 +90,8 @@ export const LocationInputForm = connect(
             <Field>
               <Label className="msab-has-text-grey">Street Address</Label>
               <Subtitle className="msab-has-text-grey-small">
-              Where do you want people to find you and potentially visit? (e.g., a performance venue, your studio, retail location, etc.)
+                Where do you want people to find you and potentially visit?
+                (e.g., a performance venue, your studio, retail location, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
@@ -158,7 +160,8 @@ export const LocationInputForm = connect(
                 Brief Description (optional - max 250 characters)
               </Label>
               <Subtitle className="msab-has-text-grey-small">
-              What do you want people to know about you? (e.g., mission statement, description of your art, what you offer, etc.)
+                What do you want people to know about you? (e.g., mission
+                statement, description of your art, what you offer, etc.)
               </Subtitle>
               <Control className="text-field">
                 <TextArea
@@ -179,9 +182,11 @@ export const LocationInputForm = connect(
               (Select up to three that apply)
             </Subtitle>
             {Object.keys(form.category).map((catKey, i) => {
+              console.log('form.category', form.category);
+              console.log('catKey:', catKey);
               return (
                 <Field key={i}>
-                <Control>
+                  <Control>
                     <Checkbox
                       name={catKey}
                       checked={form.category[catKey] || false}

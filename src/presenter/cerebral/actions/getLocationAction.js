@@ -6,7 +6,7 @@ export const getLocationAction = async ({
   store,
   props,
 }) => {
-  store.set(state.findingLocations, true);
+  store.set(state.gettingLocation, true);
   // const result = await applicationContext.getUseCases().getArtLocationById({
   //   requestData: { entityId: props.entityId, actionType: props.actionType },
   //   applicationContext,

@@ -10,7 +10,12 @@ import {
   LevelItem,
 } from 'bloomer';
 
-export const Loading = ({ isActive, askingLocation, findingLocations }) => {
+export const Loading = ({
+  isActive,
+  askingLocation,
+  findingLocations,
+  gettingLocation,
+}) => {
   return (
     <Modal isActive={isActive} className="has-text-white msab-loading">
       <ModalBackground className="msab-has-background-purple" />
@@ -37,6 +42,12 @@ export const Loading = ({ isActive, askingLocation, findingLocations }) => {
               {findingLocations && (
                 <div className="msab-width-70">
                   <span>Retrieving locations</span>
+                  <span className="msab-loading-ellipsis" />
+                </div>
+              )}
+              {gettingLocation && (
+                <div className="msab-width-70">
+                  <span>Retrieving location</span>
                   <span className="msab-loading-ellipsis" />
                 </div>
               )}

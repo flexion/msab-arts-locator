@@ -46,6 +46,7 @@ export const presenter = {
     haveGeo: false,
     askingLocation: false,
     findingLocations: false,
+    gettingLocation: false,
     citySearch: false,
     radius: 40233, //in meters
     position: { lat: 0, long: 0 },
