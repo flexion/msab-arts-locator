@@ -33,6 +33,7 @@ const getLocationById = async ({
   const method = 'GET';
   let url = `${lambdaURL}?entityId=${entityId}&actionType=${actionType}`;
   const location = await makeRequest(method, url);
+  console.log('location gateway: ', location);
   return location;
 };
 

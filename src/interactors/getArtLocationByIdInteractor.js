@@ -21,5 +21,6 @@ exports.getArtLocationById = async ({ requestData, applicationContext }) => {
   const artLocationData = await applicationContext
     .getPersistenceGateway()
     .getLocationById({ entityId, actionType, applicationContext });
+  console.log('artlocationdata: ', artLocationData);
   return artLocationData;
 };
