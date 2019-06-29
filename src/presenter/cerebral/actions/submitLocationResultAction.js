@@ -2,7 +2,6 @@ import { state } from 'cerebral';
 
 export const submitLocationResultAction = async ({ store, props }) => {
   let response = null;
-  console.log('props.result.response', props.result.response);
   if (props.result && props.result.response && response.message === 'success') {
     if (typeof props.result.response === 'string') {
       response = JSON.parse(props.result.response);

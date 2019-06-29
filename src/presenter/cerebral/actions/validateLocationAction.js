@@ -6,7 +6,6 @@ export const validateLocationAction = async ({
   store,
   path,
 }) => {
-  console.log('top of validate');
   store.set(state.submitLocationSuccess, false);
   store.set(state.submitLocationFailure, false);
   store.set(state.submitLocationMsg, '');
@@ -14,7 +13,6 @@ export const validateLocationAction = async ({
     requestData: get(state.form),
     applicationContext,
   });
-  console.log('validate result: ', result);
   if (get(state.form.formDirty)) {
     console.log('path: submit');
     return path.submit({ result });

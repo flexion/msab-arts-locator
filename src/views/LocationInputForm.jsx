@@ -46,7 +46,7 @@ export const LocationInputForm = connect(
           key: 'gresp',
           value: gresp,
         });
-        console.log('appr ', appr);
+
         updateFormValueSequence({
           key: 'approved',
           value: appr,
