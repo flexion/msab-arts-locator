@@ -62,13 +62,11 @@ export const presenter = {
     update: {
       entityId: '',
       actionType: '',
-      approved: false,
     },
     form: {
       update: {
         entityId: '',
         actionType: '',
-        approved: false,
       },
       formDirty: false,
       gresp: '',
@@ -93,6 +91,7 @@ export const presenter = {
       contactPhone: null,
       description: null,
       image: null,
+      approved: false,
       base64Image: null,
     },
   },

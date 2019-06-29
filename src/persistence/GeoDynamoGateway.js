@@ -23,6 +23,19 @@ const queryDynamo = (params) => {
   });
 };
 
+const updateDynamo = (params) => {
+  return new Promise(function(resolve, reject) {
+    documentClient.update(params, function(err, data) {
+      if (err) {
+        console.log(err);
+        reject({ status: 'failed', data: err });
+      } else {
+        resolve({ status: 'success', results: data });
+      }
+    });
+  });
+};
+
 const saveNewLocationGeo = async ({
   artLocation,
   coords,
@@ -127,9 +140,36 @@ const getLocationById = async ({ entityId, actionType }) => {
   return results;
 };
 
+const updateLocationApproval = async ({ artLocationData }) => {
+  console.log('requestData: ', artLocationData);
+  let results = null;
+  const id = artLocationData.update.entityId;
+  const approved = artLocationData.approved;
+  results = await getLocationById({ entityId: id, actionType: 'admin' });
+
+  if (results.results.Items.length > 0) {
+    const item = results.results.Items[0];
+
+    let params = {
+      TableName: process.env.GIS_TABLE,
+      Key: { hashKey: item.hashKey, rangeKey: item.rangeKey },
+      UpdateExpression: 'set approved = :a',
+      ExpressionAttributeValues: {
+        ':a': approved,
+      },
+    };
+
+    console.log('params', params);
+    results = await updateDynamo(params);
+    console.log('results: ', results);
+  }
+  return results;
+};
+
 module.exports = {
   saveNewLocationGeo,
   getLocationsByGeo,
   getLocationsInCity,
   getLocationById,
+  updateLocationApproval,
 };

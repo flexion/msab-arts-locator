@@ -7051,7 +7051,7 @@ label {
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  margin-top: -.5rem; }
+  margin-top: -0.5rem; }
 
 .address-level {
   margin-bottom: 0px !important; }
@@ -7085,32 +7085,32 @@ li:not(:first-child) {
   width: 96px; }
 
 .textarea {
-  color: #565C65; }
+  color: #565c65; }
 
 .subtitle.is-5 {
   font-size: 1rem;
   line-height: 1.5rem;
-  color: #565C65; }
+  color: #565c65; }
 
 .subtitle.is-6 {
   font-size: 1rem;
-  color: #565C65; }
+  color: #565c65; }
 
 .msab-has-text-grey-bold {
   font-weight: 600;
-  color: #565C65; }
+  color: #565c65; }
 
 .msab-has-text-grey-small {
-  font-size: .85rem;
+  font-size: 0.85rem;
   line-height: 1.2rem;
-  color: #565C65;
-  margin-bottom: .75rem !important; }
+  color: #565c65;
+  margin-bottom: 0.75rem !important; }
 
 .subtitle:not(.is-spaced) + .title {
   margin-top: 0; }
 
 .body {
-  color: #565C65; }
+  color: #565c65; }
 
 .field.is-grouped {
   padding-bottom: 1.5rem; }
@@ -7126,7 +7126,7 @@ li:not(:first-child) {
   margin-right: 0px; }
 
 .has-text-grey {
-  color: #565C65 !important; }
+  color: #565c65 !important; }
 
 .thumbsize {
   width: 80px;
@@ -7134,18 +7134,18 @@ li:not(:first-child) {
   margin-right: 10px; }
 
 .tag:not(body) {
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-variant-caps: all-small-caps;
-  padding-left: .5em;
-  padding-right: .5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   height: 1.5em; }
 
 .level.is-mobile .level-item:not(:last-child) {
-  margin-right: .3rem; }
+  margin-right: 0.3rem; }
 
 .msab-location-media {
   padding-bottom: 20px;
-  border-bottom: 1px #EBEAEB solid; }
+  border-bottom: 1px #ebeaeb solid; }
 
 .text-field {
   margin-bottom: 2rem !important; }

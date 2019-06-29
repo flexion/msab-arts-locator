@@ -28,12 +28,16 @@ const {
 const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');
+const {
+  updateArtLocation,
+} = require('../../interactors/updateArtLocationInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   saveNewLocationGeo,
   getLocationsByGeo,
   getLocationsInCity,
   getLocationById,
+  updateLocationApproval,
 } = require('../../persistence/GeoDynamoGateway');
 const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { putImage, getImage } = require('../../persistence/s3Gateway');
@@ -68,6 +72,7 @@ module.exports = () => {
         confirmCaptcha,
         getLocationsInCity,
         getLocationById,
+        updateLocationApproval,
       };
     },
     getUniqueId: () => {
@@ -84,6 +89,7 @@ module.exports = () => {
         validateCaptcha,
         validateImageFileType,
         getArtLocationsInCity,
+        updateArtLocation,
       };
     },
 

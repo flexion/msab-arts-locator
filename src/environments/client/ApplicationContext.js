@@ -46,6 +46,9 @@ const {
   getLocationsByRadius,
 } = require('../../persistence/GetLocationsByRadiusGateway');
 const { getLocationById } = require('../../persistence/GetLocationByIdGateway');
+const {
+  updateLocationApproval,
+} = require('../../persistence/UpdateLocationGateway');
 const environment = {
   domain: window.location.href,
   apiURL: `${window.location.origin}/api/v1/`,
@@ -84,6 +87,7 @@ const applicationContext = {
       getCoordsFromAddress,
       getLocationsByRadius,
       getLocationsInCity,
+      updateLocationApproval,
     };
   },
   getDataReader: () => {

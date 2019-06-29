@@ -1,5 +1,5 @@
 const createApplicationContext = require('../ApplicationContext');
-const multipart = require('aws-lambda-multipart-parser');
+
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
 //const { handle } = require('../middleware/apiGatewayHelper');
 const headers = {
@@ -21,41 +21,48 @@ const post = async (event) => {
   const applicationContext = createApplicationContext();
   let requestData = null;
   let saveResult = null;
-  let validateResult = null;
+  let updateResults = null;
   let msg = null;
   try {
     console.log('event:', event);
     if (!event || !event.body) throw new Error('data not-found error');
     requestData = JSON.parse(event.body);
     console.log('requestData: ', requestData);
-    const { entityId, actionType } = requestData;
+    const { entityId, actionType } = requestData.update;
     if (entityId && actionType) {
-      validateResult = await applicationContext
+      const captchaResult = await applicationContext
         .getUseCases()
-        .updateLocationById(requestData);
-      msg = validateResult.status;
+        .validateCaptcha({ value: requestData.gresp, applicationContext });
+      console.log('captcharesult: ', captchaResult);
 
-      if (msg === 'success') {
-        console.log('should return a 201');
-        return {
-          statusCode: 201,
-          headers: headers,
-          body: JSON.stringify({
-            message: 'success',
-            input: event,
-          }),
-        };
-      } else {
-        console.log('should return a 406', msg);
-        return {
-          statusCode: 406,
-          headers: headers,
-          body: JSON.stringify({
-            message: msg,
-            input: event,
-          }),
-        };
+      if (captchaResult.status === 'success') {
+        updateResults = await applicationContext
+          .getUseCases()
+          .updateArtLocation({ requestData, applicationContext });
+        msg = updateResults.status;
       }
+    }
+    if (msg === 'success') {
+      console.log('should return a 201');
+      return {
+        statusCode: 201,
+        headers: headers,
+        body: JSON.stringify({
+          message: 'success',
+          input: event,
+          results: updateResults.results,
+        }),
+      };
+    } else {
+      console.log('should return a 406', msg);
+      return {
+        statusCode: 406,
+        headers: headers,
+        body: JSON.stringify({
+          message: msg,
+          input: event,
+        }),
+      };
     }
   } catch (e) {
     console.log('e: ', e);

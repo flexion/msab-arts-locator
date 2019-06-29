@@ -38,6 +38,24 @@ export const LocationInputForm = connect(
     categories,
     locationFormButtonsHelper,
   }) => {
+    const onSubmit = (e, appr) => {
+      e.preventDefault();
+      const gresp = grecaptcha.getResponse();
+      if (gresp) {
+        updateFormValueSequence({
+          key: 'gresp',
+          value: gresp,
+        });
+        console.log('appr ', appr);
+        updateFormValueSequence({
+          key: 'approved',
+          value: appr,
+        });
+      }
+      submitLocation();
+      grecaptcha.reset();
+    };
+
     return (
       <Section className="msab-section-form">
         <Container>
@@ -54,21 +72,7 @@ export const LocationInputForm = connect(
           <Title isSize={5} className="msab-has-text-purple">
             Your Location
           </Title>
-          <form
-            className="search"
-            id="add-location-form"
-            noValidate
-            onSubmit={(e) => {
-              e.preventDefault();
-              const gresp = grecaptcha.getResponse();
-              updateFormValueSequence({
-                key: 'gresp',
-                value: gresp,
-              });
-              submitLocation();
-              grecaptcha.reset();
-            }}
-          >
+          <form className="search" id="add-location-form" noValidate>
             <Field>
               <Label className="msab-has-text-grey">Name</Label>
               <Subtitle className="msab-has-text-grey-small">
@@ -308,11 +312,8 @@ export const LocationInputForm = connect(
                   isColor="primary"
                   className="msab-margin-top"
                   disabled={form.approved}
-                  onClick={() => {
-                    updateFormValueSequence({
-                      key: 'update.approved',
-                      value: true,
-                    });
+                  onClick={(e) => {
+                    onSubmit(e, true);
                   }}
                 >
                   {locationFormButtonsHelper.showSubmit && 'Submit'}
@@ -324,11 +325,8 @@ export const LocationInputForm = connect(
                     type="submit"
                     isColor="primary"
                     className="msab-margin-top"
-                    onClick={() => {
-                      updateFormValueSequence({
-                        key: 'update.approved',
-                        value: false,
-                      });
+                    onClick={(e) => {
+                      onSubmit(e, false);
                     }}
                   >
                     Not Approve

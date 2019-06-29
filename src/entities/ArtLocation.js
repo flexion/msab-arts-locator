@@ -15,7 +15,6 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
     entityId: rawArtLocation.id || applicationContext.getUniqueIdString(),
     adminId: applicationContext.getUniqueIdString(),
     updateId: applicationContext.getUniqueIdString(),
-    approved: false,
   });
 
   // An business object owns the interface of the request. It will validate
@@ -32,6 +31,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
       'contactEmail',
       'contactPhone',
       'gresp',
+      'approved',
     ],
     allOf: [
       {
@@ -48,6 +48,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
           long: { type: 'number' },
           lat: { type: 'number' },
           gresp: { type: 'string', minLength: 1 },
+          approved: { type: 'boolean' },
         },
         additionalProperties: true,
       },

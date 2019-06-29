@@ -163,10 +163,11 @@ functions:
           path: ${self:custom.fullstack.apiPath}/v1/get-location
           method: get
           cors: true
-  updateLocation:
-    handler: environments/lambda/handlers.updateLocation
+  updateLocationApproval:
+    handler: environments/lambda/handlers.updateLocationApproval
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
+      CAPTCHA_KEY: ${self:custom.captchaKey}
     timeout: 30
     events:
       - http:

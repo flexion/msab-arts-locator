@@ -7,7 +7,7 @@
 exports.updateArtLocation = async ({ requestData, applicationContext }) => {
   const result = await applicationContext
     .getPersistenceGateway()
-    .updateLocation({
+    .updateLocationApproval({
       artLocationData: requestData,
       applicationContext,
     });
