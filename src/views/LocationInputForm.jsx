@@ -307,30 +307,64 @@ export const LocationInputForm = connect(
                     });
                   }}
                 />
-                <Button
-                  type="submit"
-                  isColor="primary"
-                  className="msab-margin-top"
-                  disabled={form.approved}
-                  onClick={(e) => {
-                    onSubmit(e, true);
-                  }}
-                >
-                  {locationFormButtonsHelper.showSubmit && 'Submit'}
-                  {locationFormButtonsHelper.showAdmin && 'Approve'}
-                  {locationFormButtonsHelper.update && 'Update'}
-                </Button>
+              </Control>
+            </Field>
+            <Field isGrouped>
+              <Control>
                 {locationFormButtonsHelper.showAdmin && (
                   <Button
                     type="submit"
                     isColor="primary"
                     className="msab-margin-top"
+                    disabled={form.approved}
                     onClick={(e) => {
-                      onSubmit(e, false);
+                      onSubmit(e, true);
                     }}
                   >
-                    Not Approve
+                    Approve
                   </Button>
+                )}
+                {locationFormButtonsHelper.showSubmit && (
+                  <Button
+                    type="submit"
+                    isColor="primary"
+                    className="msab-margin-top"
+                    onClick={(e) => {
+                      onSubmit(e, true);
+                    }}
+                  >
+                    Submit
+                  </Button>
+                )}
+
+                {locationFormButtonsHelper.showUpdate && (
+                  <Button
+                    type="submit"
+                    isColor="primary"
+                    className="msab-margin-top"
+                    onClick={(e) => {
+                      onSubmit(e, true);
+                    }}
+                  >
+                    Update
+                  </Button>
+                )}
+
+                {locationFormButtonsHelper.showAdmin && (
+                  <Field isGrouped>
+                    <Control>
+                      <Button
+                        type="submit"
+                        isColor="primary"
+                        className="msab-margin-top"
+                        onClick={(e) => {
+                          onSubmit(e, false);
+                        }}
+                      >
+                        Not Approve
+                      </Button>
+                    </Control>
+                  </Field>
                 )}
               </Control>
             </Field>
