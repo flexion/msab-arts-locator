@@ -34,7 +34,6 @@ const updateLocationApproval = async ({
   artLocationData,
   applicationContext,
 }) => {
-  console.log('artlocationdata: ', artLocationData);
   if (artLocationData) {
     const method = 'POST';
     const lambdaURL =

@@ -141,7 +141,6 @@ const getLocationById = async ({ entityId, actionType }) => {
 };
 
 const updateLocationApproval = async ({ artLocationData }) => {
-  console.log('requestData: ', artLocationData);
   let results = null;
   const id = artLocationData.update.entityId;
   const approved = artLocationData.approved;
@@ -161,7 +160,7 @@ const updateLocationApproval = async ({ artLocationData }) => {
 
     console.log('params', params);
     results = await updateDynamo(params);
-    console.log('results: ', results);
+    console.log('update results: ', results);
   }
   return results;
 };

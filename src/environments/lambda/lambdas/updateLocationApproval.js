@@ -40,6 +40,7 @@ const post = async (event) => {
           .getUseCases()
           .updateArtLocation({ requestData, applicationContext });
         msg = updateResults.status;
+        console.log('updateResults: ', updateResults);
       }
     }
     if (msg === 'success') {

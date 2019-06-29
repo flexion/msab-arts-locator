@@ -9,9 +9,10 @@ import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 import { locationFormButtonsHelper } from './cerebral/computeds/locationFormButtonsHelper';
+
 // Cerebral module
 
-export const presenter = {
+const presenter = {
   catch: [
     // [ServerInvalidResponseError, setCurrentPageErrorSequence], // 501, 503, etc
     // [UnauthorizedRequestError, unauthorizedErrorSequence], // 403
@@ -30,7 +31,6 @@ export const presenter = {
     submitLocationSequence,
     setImageSequence,
   },
-
   state: {
     submitLocationSuccess: false,
     submitLocationFailure: false,
@@ -96,3 +96,5 @@ export const presenter = {
     },
   },
 };
+
+module.exports = { presenter };
