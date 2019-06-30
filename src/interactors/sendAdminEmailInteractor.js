@@ -11,13 +11,9 @@ exports.sendAdminEmail = async ({ artLocation, applicationContext }) => {
     subject: `Arts Around MN Received a new location request: ${
       artLocation.name
     }`,
-    body: `Admin link: https://${
+    body: `Admin link: <a href='https://${
       applicationContext.environment.domainName
-    }/curate-location/${artLocation.adminId} \n\n ${JSON.stringify(
-      artLocation,
-      null,
-      2,
-    )}; `,
+    }/curate-location/${artLocation.adminId}'>${artLocation.name}</a>`,
   };
   console.log('admin email data: ', requestData);
   const result = await applicationContext

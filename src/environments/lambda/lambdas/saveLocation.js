@@ -28,6 +28,7 @@ const post = async (event) => {
   let isUpdateValid = true;
   let isUpdate = false;
   let sendEmail = true;
+  let artLocation = null;
   try {
     console.log('event:', event);
     if (!event || !event.body) throw new Error('data not-found error');
@@ -76,7 +77,7 @@ const post = async (event) => {
           });
         msg = validateResult.status;
         if (msg === 'success') {
-          const artLocation = validateResult.artLocation;
+          artLocation = validateResult.artLocation;
           const coordResult = await applicationContext
             .getUseCases()
             .getLocationCoordinates({

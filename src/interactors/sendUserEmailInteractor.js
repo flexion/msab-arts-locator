@@ -10,6 +10,7 @@ exports.sendUserEmail = async ({
   approved,
   applicationContext,
 }) => {
+  console.log('artlocation updateid: ', artLocation.updateId);
   // to, subject, bodyText,
   let requestData = null;
   if (initial) {
@@ -22,7 +23,7 @@ You will receive a notification message when the content has been approved or di
 submitted here: 
 https://${applicationContext.environment.domainName}/update-location/${
         artLocation.updateId
-      } \n\n ${JSON.stringify(artLocation, null, 2)}; `,
+      }`,
     };
   } else {
     if (approved) {

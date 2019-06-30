@@ -172,7 +172,9 @@ const updateLocationApproval = async ({ artLocationData }) => {
     };
 
     console.log('params', params);
-    results = await updateDynamo(params);
+    await updateDynamo(params);
+
+    results = { status: 'success', updateId: item.updateId };
     console.log('update results: ', results);
   }
   return results;

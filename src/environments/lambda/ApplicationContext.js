@@ -67,7 +67,7 @@ const environment = {
 };
 const emailConfig = {
   from: 'artsaroundmn.admin@state.mn.us',
-  logger: true,
+  logger: false,
   debug: false,
   auth: {
     user: process.env.EMAIL_USER,
