@@ -2,28 +2,27 @@
 const nodemailer = require('nodemailer');
 let transporter = undefined;
 
-const sendMail = async ({ to, subject, bodyText, applicationContext }) => {
+const sendEmail = async ({ requestData, applicationContext }) => {
   // create reusable transporter object using the default SMTP transport
+  const emailConfig = {
+    service: 'Outlook365',
+    ...applicationContext.emailConfig,
+  };
+  console.log('email config: ', emailConfig);
   if (transporter == undefined) {
-    transporter = nodemailer.createTransport({
-      service: 'Outlook365',
-      logger: applicationContext.shouldLogMailer(), // true:false
-      debug: applicationContext.shouldDebugLogMailer(), // true:false
-      auth: {
-        user: applicationContext.getMailCredentials().user,
-        pass: applicationContext.getMailCredentials().pass,
-      },
-    });
+    transporter = nodemailer.createTransport(emailConfig);
   }
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: applicationContext.getMailFrom(), // sender address
-    to: to, // list of receivers
-    subject: subject, // Subject line
-    text: bodyText, // plain text body
-    html: `<p>${bodyText}</p>`, // html body
+    from: applicationContext.emailConfig.from, // sender address
+    to: requestData.to, // list of receivers
+    subject: requestData.subject, // Subject line
+    text: requestData.body, // plain text body
+    html: `<p>${requestData.body}</p>`, // html body
   });
+  console.log('email info: ', info);
+  return info;
 };
 
 // const debugContext = {
@@ -51,4 +50,4 @@ const sendMail = async ({ to, subject, bodyText, applicationContext }) => {
 //   applicationContext: debugContext,
 // }).catch(console.error);
 
-module.exports = { sendMail };
+module.exports = { sendEmail };
