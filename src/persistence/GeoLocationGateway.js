@@ -21,12 +21,10 @@ const requestPosition = () => {
 };
 
 const getGeoLocation = async () => {
-  console.log('even get here?');
   if (!navigator.geolocation) {
     console.log('geolocation not allowed on this device');
     return { status: 'denied' };
   } else {
-    console.log('requesting position');
     const geoPos = await requestPosition();
     return geoPos;
   }

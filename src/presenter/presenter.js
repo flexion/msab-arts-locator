@@ -4,12 +4,15 @@ import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSeque
 import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
 import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
 import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
+import { getLocationSequence } from './cerebral/sequences/getLocationSequence';
 import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
+import { locationFormButtonsHelper } from './cerebral/computeds/locationFormButtonsHelper';
+
 // Cerebral module
 
-export const presenter = {
+const presenter = {
   catch: [
     // [ServerInvalidResponseError, setCurrentPageErrorSequence], // 501, 503, etc
     // [UnauthorizedRequestError, unauthorizedErrorSequence], // 403
@@ -19,6 +22,7 @@ export const presenter = {
   ],
   providers: { applicationContext },
   sequences: {
+    getLocationSequence,
     searchByCitySequence,
     updateCitySearchSequence,
     getGeoLocationSequence,
@@ -27,7 +31,6 @@ export const presenter = {
     submitLocationSequence,
     setImageSequence,
   },
-
   state: {
     submitLocationSuccess: false,
     submitLocationFailure: false,
@@ -37,9 +40,11 @@ export const presenter = {
     cityValue: '',
     locationsList: [],
     locationListHelper,
+    locationFormButtonsHelper,
     haveGeo: false,
     askingLocation: false,
     findingLocations: false,
+    gettingLocation: false,
     citySearch: false,
     radius: 40233, //in meters
     position: { lat: 0, long: 0 },
@@ -54,7 +59,16 @@ export const presenter = {
       photo: 'Photography/Film/Media',
       opera: 'Theater/Opera',
     },
+    update: {
+      entityId: '',
+      actionType: '',
+    },
     form: {
+      update: {
+        entityId: '',
+        actionType: '',
+      },
+      formDirty: false,
       gresp: '',
       name: null,
       category: {
@@ -77,7 +91,10 @@ export const presenter = {
       contactPhone: null,
       description: null,
       image: null,
+      approved: false,
       base64Image: null,
     },
   },
 };
+
+module.exports = { presenter };

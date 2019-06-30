@@ -23,6 +23,32 @@ const queryDynamo = (params) => {
   });
 };
 
+const updateDynamo = (params) => {
+  return new Promise(function(resolve, reject) {
+    documentClient.update(params, function(err, data) {
+      if (err) {
+        console.log(err);
+        reject({ status: 'failed', data: err });
+      } else {
+        resolve({ status: 'success', results: data });
+      }
+    });
+  });
+};
+
+const deleteDynamo = (params) => {
+  return new Promise(function(resolve, reject) {
+    documentClient.delete(params, function(err, data) {
+      if (err) {
+        console.log(err);
+        reject({ status: 'failed', data: err });
+      } else {
+        resolve({ status: 'success', results: data });
+      }
+    });
+  });
+};
+
 const saveNewLocationGeo = async ({
   artLocation,
   coords,
@@ -109,4 +135,70 @@ const getLocationsInCity = async ({ city }) => {
   return results;
 };
 
-module.exports = { saveNewLocationGeo, getLocationsByGeo, getLocationsInCity };
+const getLocationById = async ({ entityId, actionType }) => {
+  console.group('entityid, action', entityId, actionType);
+  const indexName = `${actionType}Id-index`;
+  const columnName = `${actionType}Id`;
+  var params = {
+    TableName: process.env.GIS_TABLE,
+    IndexName: indexName,
+    KeyConditionExpression: `${columnName} = :id`,
+    ExpressionAttributeValues: {
+      ':id': entityId,
+    },
+  };
+  console.log('params', params);
+  const results = await queryDynamo(params);
+  console.log('results: ', results);
+  return results;
+};
+
+const updateLocationApproval = async ({ artLocationData }) => {
+  let results = null;
+  const id = artLocationData.update.entityId;
+  const approved = artLocationData.approved;
+  results = await getLocationById({ entityId: id, actionType: 'admin' });
+
+  if (results.results.Items.length > 0) {
+    const item = results.results.Items[0];
+
+    let params = {
+      TableName: process.env.GIS_TABLE,
+      Key: { hashKey: item.hashKey, rangeKey: item.rangeKey },
+      UpdateExpression: 'set approved = :a',
+      ExpressionAttributeValues: {
+        ':a': approved,
+      },
+    };
+
+    console.log('params', params);
+    results = await updateDynamo(params);
+    console.log('update results: ', results);
+  }
+  return results;
+};
+
+const deleteLocation = async ({ requestData }) => {
+  let results = null;
+  const hashKey = requestData.hashKey;
+  const rangeKey = requestData.rangeKey;
+
+  let params = {
+    TableName: process.env.GIS_TABLE,
+    Key: { hashKey: hashKey, rangeKey: rangeKey },
+  };
+
+  console.log('params', params);
+  results = await deleteDynamo(params);
+  console.log('delete results: ', results);
+
+  return results;
+};
+module.exports = {
+  saveNewLocationGeo,
+  getLocationsByGeo,
+  getLocationsInCity,
+  getLocationById,
+  updateLocationApproval,
+  deleteLocation,
+};

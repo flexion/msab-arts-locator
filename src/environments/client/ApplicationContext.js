@@ -4,6 +4,9 @@ const {
   getArtLocationsInCity,
 } = require('../../interactors/getArtLocationsInCityInteractor');
 const {
+  getArtLocationById,
+} = require('../../interactors/getArtLocationByIdInteractor');
+const {
   getArtLocationsInRadius,
 } = require('../../interactors/getArtLocationsInRadiusInteractor');
 const {
@@ -21,6 +24,9 @@ const {
 const {
   validateImageFileType,
 } = require('../../interactors/validateImageFileTypeInteractor');
+const {
+  updateArtLocation,
+} = require('../../interactors/updateArtLocationInteractor');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   readAllLocationsByCity,
@@ -39,7 +45,10 @@ const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   getLocationsByRadius,
 } = require('../../persistence/GetLocationsByRadiusGateway');
-
+const { getLocationById } = require('../../persistence/GetLocationByIdGateway');
+const {
+  updateLocationApproval,
+} = require('../../persistence/UpdateLocationGateway');
 const environment = {
   domain: window.location.href,
   apiURL: `${window.location.origin}/api/v1/`,
@@ -70,6 +79,7 @@ const applicationContext = {
   },
   getPersistenceGateway: () => {
     return {
+      getLocationById,
       readAllLocationsByCity,
       getGeoLocation,
       getCityFromGeo,
@@ -77,6 +87,7 @@ const applicationContext = {
       getCoordsFromAddress,
       getLocationsByRadius,
       getLocationsInCity,
+      updateLocationApproval,
     };
   },
   getDataReader: () => {
@@ -87,6 +98,7 @@ const applicationContext = {
   },
   getUseCases: () => {
     return {
+      getArtLocationById,
       getArtLocationsInCity,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
@@ -94,6 +106,7 @@ const applicationContext = {
       sendArtLocation,
       getArtLocationsInRadius,
       validateImageFileType,
+      updateArtLocation,
     };
   },
 };

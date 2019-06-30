@@ -26,6 +26,7 @@ export const LocationInputForm = connect(
     imgFailure: state.selectImageFailure,
     imgMsg: state.selectImageMsg,
     categories: state.categories,
+    locationFormButtonsHelper: state.locationFormButtonsHelper,
   },
   ({
     form,
@@ -35,7 +36,26 @@ export const LocationInputForm = connect(
     imgFailure,
     imgMsg,
     categories,
+    locationFormButtonsHelper,
   }) => {
+    const onSubmit = (e, appr) => {
+      e.preventDefault();
+      const gresp = grecaptcha.getResponse();
+      if (gresp) {
+        updateFormValueSequence({
+          key: 'gresp',
+          value: gresp,
+        });
+
+        updateFormValueSequence({
+          key: 'approved',
+          value: appr,
+        });
+      }
+      submitLocation();
+      grecaptcha.reset();
+    };
+
     return (
       <Section className="msab-section-form">
         <Container>
@@ -52,25 +72,12 @@ export const LocationInputForm = connect(
           <Title isSize={5} className="msab-has-text-purple">
             Your Location
           </Title>
-          <form
-            className="search"
-            id="add-location-form"
-            noValidate
-            onSubmit={(e) => {
-              e.preventDefault();
-              const gresp = grecaptcha.getResponse();
-              updateFormValueSequence({
-                key: 'gresp',
-                value: gresp,
-              });
-              submitLocation();
-              grecaptcha.reset();
-            }}
-          >
+          <form className="search" id="add-location-form" noValidate>
             <Field>
               <Label className="msab-has-text-grey">Name</Label>
               <Subtitle className="msab-has-text-grey-small">
-              How do you want people to know and find you? (e.g., your legal name, your publicity name, a DBA, a pen name, etc.)
+                How do you want people to know and find you? (e.g., your legal
+                name, your publicity name, a DBA, a pen name, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
@@ -89,7 +96,8 @@ export const LocationInputForm = connect(
             <Field>
               <Label className="msab-has-text-grey">Street Address</Label>
               <Subtitle className="msab-has-text-grey-small">
-              Where do you want people to find you and potentially visit? (e.g., a performance venue, your studio, retail location, etc.)
+                Where do you want people to find you and potentially visit?
+                (e.g., a performance venue, your studio, retail location, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
@@ -158,7 +166,8 @@ export const LocationInputForm = connect(
                 Brief Description (optional - max 250 characters)
               </Label>
               <Subtitle className="msab-has-text-grey-small">
-              What do you want people to know about you? (e.g., mission statement, description of your art, what you offer, etc.)
+                What do you want people to know about you? (e.g., mission
+                statement, description of your art, what you offer, etc.)
               </Subtitle>
               <Control className="text-field">
                 <TextArea
@@ -181,7 +190,7 @@ export const LocationInputForm = connect(
             {Object.keys(form.category).map((catKey, i) => {
               return (
                 <Field key={i}>
-                <Control>
+                  <Control>
                     <Checkbox
                       name={catKey}
                       checked={form.category[catKey] || false}
@@ -271,6 +280,11 @@ export const LocationInputForm = connect(
                   }}
                 />
               </Control>
+              {form.imageURL && !form.base64Image && (
+                <Control>
+                  <img src={form.imageURL} />
+                </Control>
+              )}
             </Field>
             {imgFailure && (
               <Notification isColor="danger">{imgMsg}</Notification>
@@ -293,14 +307,66 @@ export const LocationInputForm = connect(
                     });
                   }}
                 />
+              </Control>
+            </Field>
+            <Field isGrouped>
+              <Control>
+                {locationFormButtonsHelper.showAdmin && (
+                  <Button
+                    type="submit"
+                    isColor="primary"
+                    className="msab-margin-top"
+                    disabled={form.approved}
+                    onClick={(e) => {
+                      onSubmit(e, true);
+                    }}
+                  >
+                    Approve
+                  </Button>
+                )}
+                {locationFormButtonsHelper.showSubmit && (
+                  <Button
+                    type="submit"
+                    isColor="primary"
+                    className="msab-margin-top"
+                    onClick={(e) => {
+                      onSubmit(e, true);
+                    }}
+                  >
+                    Submit
+                  </Button>
+                )}
 
-                <Button
-                  type="submit"
-                  isColor="primary"
-                  className="msab-margin-top"
-                >
-                  Submit
-                </Button>
+                {locationFormButtonsHelper.showUpdate && (
+                  <Button
+                    type="submit"
+                    isColor="primary"
+                    className="msab-margin-top"
+                    disabled={!form.formDirty}
+                    onClick={(e) => {
+                      onSubmit(e, true);
+                    }}
+                  >
+                    Update
+                  </Button>
+                )}
+
+                {locationFormButtonsHelper.showAdmin && (
+                  <Field isGrouped>
+                    <Control>
+                      <Button
+                        type="submit"
+                        isColor="primary"
+                        className="msab-margin-top"
+                        onClick={(e) => {
+                          onSubmit(e, false);
+                        }}
+                      >
+                        Not Approve
+                      </Button>
+                    </Control>
+                  </Field>
+                )}
               </Control>
             </Field>
           </form>

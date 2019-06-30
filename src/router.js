@@ -16,19 +16,21 @@ const router = {
       app.getSequence('routeChangeSequence')({ page: 'LocationInput' });
     });
 
-    route('/curate-locations/*', (entityId) => {
-      document.title = `Curate Locations ${pageTitleSuffix}`;
-      app.getSequence('routeChangeSequence')({
+    route('/curate-location/*', (entityId) => {
+      document.title = `Curate Location ${pageTitleSuffix}`;
+      app.getSequence('getLocationSequence')({
         page: 'LocationInput',
         entityId,
+        actionType: 'admin',
       });
     });
 
     route('/update-location/*', (entityId) => {
       document.title = `Update Location ${pageTitleSuffix}`;
-      app.getSequence('routeChangeSequence')({
+      app.getSequence('getLocationSequence')({
         page: 'LocationInput',
         entityId,
+        actionType: 'update',
       });
     });
 
