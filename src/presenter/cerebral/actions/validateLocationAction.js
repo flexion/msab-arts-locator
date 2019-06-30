@@ -18,10 +18,8 @@ export const validateLocationAction = async ({
     (get(state.form.update.actionType) === 'update' &&
       get(state.form.formDirty))
   ) {
-    console.log('path: submit');
     return path.submit({ result });
   } else if (get(state.form.update.actionType) === 'admin') {
-    console.log('path: update');
     return path.update({ result });
   }
 };
