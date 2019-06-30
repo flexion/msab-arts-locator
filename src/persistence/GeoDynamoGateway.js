@@ -36,6 +36,19 @@ const updateDynamo = (params) => {
   });
 };
 
+const deleteDynamo = (params) => {
+  return new Promise(function(resolve, reject) {
+    documentClient.delete(params, function(err, data) {
+      if (err) {
+        console.log(err);
+        reject({ status: 'failed', data: err });
+      } else {
+        resolve({ status: 'success', results: data });
+      }
+    });
+  });
+};
+
 const saveNewLocationGeo = async ({
   artLocation,
   coords,
@@ -165,10 +178,27 @@ const updateLocationApproval = async ({ artLocationData }) => {
   return results;
 };
 
+const deleteLocation = async ({ requestData }) => {
+  let results = null;
+  const hashKey = requestData.hashKey;
+  const rangeKey = requestData.rangeKey;
+
+  let params = {
+    TableName: process.env.GIS_TABLE,
+    Key: { hashKey: hashKey, rangeKey: rangeKey },
+  };
+
+  console.log('params', params);
+  results = await deleteDynamo(params);
+  console.log('delete results: ', results);
+
+  return results;
+};
 module.exports = {
   saveNewLocationGeo,
   getLocationsByGeo,
   getLocationsInCity,
   getLocationById,
   updateLocationApproval,
+  deleteLocation,
 };

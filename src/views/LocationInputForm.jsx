@@ -342,6 +342,7 @@ export const LocationInputForm = connect(
                     type="submit"
                     isColor="primary"
                     className="msab-margin-top"
+                    disabled={!form.formDirty}
                     onClick={(e) => {
                       onSubmit(e, true);
                     }}

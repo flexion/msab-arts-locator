@@ -14,6 +14,7 @@ export const validateImageFileTypeAction = async ({
     .validateImageFileType(props.image);
   if (result.status === 'success') {
     store.set(state.form.base64Image, result.base64Image);
+    store.set(state.form.formDirty, true);
   } else {
     store.set(state.form.base64Image, null);
     store.set(state.selectImageFailure, true);
