@@ -60,7 +60,10 @@ const formatLocation = (location) => {
   return formatMapsURL(formatWebsiteURL(location));
 };
 
-export const locationListHelper = (get) => {
-  const arr = get(state.locationsList);
-  return arr.length ? arr.map(formatLocation) : [];
+export const locationListHelper = (get, list) => {
+  console.log('list', list);
+  if (!list) {
+    list = get(state.locationsList);
+  }
+  return list.length ? list.map(formatLocation) : [];
 };

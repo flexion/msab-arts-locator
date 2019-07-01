@@ -342,7 +342,7 @@ export const LocationInputForm = connect(
                       onSubmit(e, true);
                     }}
                   >
-                    Approve
+                    Publish
                   </Button>
                 )}
                 {locationFormButtonsHelper.showSubmit && (
@@ -384,7 +384,7 @@ export const LocationInputForm = connect(
                           onSubmit(e, false);
                         }}
                       >
-                        Not Approve
+                        Don't Publish
                       </Button>
                     </Control>
                   </Field>

@@ -1,15 +1,21 @@
 import { state } from 'cerebral';
+import { locationListHelper } from '../computeds/locationListHelper';
 
 export const filterResultsListAction = ({ store, props, get }) => {
-  let list = [];
+  let filteredList = [];
   if (props.value === '') {
     //reset to full list
-    list = get(state.locationListBk);
+    filteredList = get(state.locationsListBk);
   } else {
-    list = get(state.locationListBk).map((loc) => {
-      return loc.categories[props.value];
+    let list = locationListHelper(get, get(state.locationsListBk));
+    list.forEach((loc) => {
+      loc.categories.forEach((cat) => {
+        if (cat === props.value) {
+          filteredList.push(loc);
+        }
+      });
     });
-    console.log(list);
+    console.log('filtered list: ', filteredList);
   }
-  store.set(state.locationsList, props.result.results);
+  store.set(state.locationsList, filteredList);
 };
