@@ -27,6 +27,8 @@ const post = async (event) => {
   let imageUrl = null;
   let isUpdateValid = true;
   let isUpdate = false;
+  let sendEmail = true;
+  let artLocation = null;
   try {
     console.log('event:', event);
     if (!event || !event.body) throw new Error('data not-found error');
@@ -36,7 +38,7 @@ const post = async (event) => {
       .getUseCases()
       .validateCaptcha({ value: requestData.gresp, applicationContext });
     console.log('captcharesult: ', captchaResult);
-
+    requestData.approved = false; // always false, if admin action handled later
     if (captchaResult.status === 'success') {
       //if updating an existing location, need to validate id
       if (
@@ -75,7 +77,7 @@ const post = async (event) => {
           });
         msg = validateResult.status;
         if (msg === 'success') {
-          const artLocation = validateResult.artLocation;
+          artLocation = validateResult.artLocation;
           const coordResult = await applicationContext
             .getUseCases()
             .getLocationCoordinates({
@@ -147,10 +149,53 @@ const post = async (event) => {
           console.log('delete results: ', deleteResults);
           if (deleteResults.status !== 'success') {
             //uh oh, we might now have duplicate rows
-            //email admin
+            //email admin?
           }
         }
         if (msg === 'success') {
+          let emailResults = null;
+          if (isUpdate) {
+            if (artLocation.approved) {
+              //is admin action
+              emailResults = await applicationContext
+                .getUseCases()
+                .sendUserEmail({
+                  initial: false,
+                  approved: true,
+                  applicationContext,
+                  artLocation,
+                });
+              console.log('user email Results: ', emailResults);
+            } else {
+              // user updated action
+              emailResults = await applicationContext
+                .getUseCases()
+                .sendAdminEmail({
+                  applicationContext,
+                  artLocation,
+                });
+              console.log('admin email Results: ', emailResults);
+            }
+          } else {
+            //is first time submission or update
+            emailResults = await applicationContext
+              .getUseCases()
+              .sendAdminEmail({
+                applicationContext,
+                artLocation,
+              });
+            console.log('admin email Results: ', emailResults);
+            emailResults = await applicationContext
+              .getUseCases()
+              .sendUserEmail({
+                initial: true,
+                approved: false,
+                applicationContext,
+                artLocation,
+              });
+            console.log('user email Results: ', emailResults);
+          }
+
           console.log('should return a 201');
           return {
             statusCode: 201,

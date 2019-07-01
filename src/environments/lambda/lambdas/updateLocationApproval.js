@@ -44,6 +44,15 @@ const post = async (event) => {
       }
     }
     if (msg === 'success') {
+      const emailResults = await applicationContext
+        .getUseCases()
+        .sendUserEmail({
+          initial: false,
+          approved: requestData.approved,
+          applicationContext,
+          artLocation: updateResults.artLocation,
+        });
+      console.log('send user email results: ', emailResults);
       console.log('should return a 201');
       return {
         statusCode: 201,

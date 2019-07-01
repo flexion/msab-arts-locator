@@ -34,7 +34,10 @@ const {
 const {
   deleteArtLocation,
 } = require('../../interactors/deleteArtLocationInteractor');
-
+const {
+  sendAdminEmail,
+} = require('../../interactors/sendAdminEmailInteractor');
+const { sendUserEmail } = require('../../interactors/sendUserEmailInteractor');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const {
   saveNewLocationGeo,
@@ -46,6 +49,7 @@ const {
 } = require('../../persistence/GeoDynamoGateway');
 const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { putImage, getImage } = require('../../persistence/s3Gateway');
+const { sendEmail } = require('../../persistence/emailGateway');
 const uuidv4 = require('uuid/v4');
 
 const apiURLs = {
@@ -59,6 +63,16 @@ const environment = {
   apiKey: process.env.API_KEY,
   captchaKey: process.env.CAPTCHA_KEY,
   imageBucket: process.env.IMAGE_BUCKET,
+  domainName: process.env.DOMAIN_NAME,
+};
+const emailConfig = {
+  from: 'artsaroundmn.admin@state.mn.us',
+  logger: false,
+  debug: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PW,
+  },
 };
 
 module.exports = () => {
@@ -67,6 +81,7 @@ module.exports = () => {
       return apiURLs;
     },
     environment,
+    emailConfig,
     getPersistenceGateway: () => {
       return {
         putImage,
@@ -79,6 +94,7 @@ module.exports = () => {
         getLocationById,
         updateLocationApproval,
         deleteLocation,
+        sendEmail,
       };
     },
     getUniqueId: () => {
@@ -97,6 +113,8 @@ module.exports = () => {
         getArtLocationsInCity,
         updateArtLocation,
         deleteArtLocation,
+        sendAdminEmail,
+        sendUserEmail,
       };
     },
 

@@ -11,6 +11,8 @@ custom:
   apiKey: ${env:GOOGLE_GEOCODING_API_KEY} #api key to use google maps api
   captchaKey: ${env:GOOGLE_CAPTCHA_KEY}
   imageBucket: ${env:IMAGE_BUCKET}
+  emailUser: ${env:EMAIL_USER}
+  emailPW: ${env:EMAIL_PW}
 
   output:
     file: .serverless/stack.json
@@ -147,6 +149,9 @@ functions:
       API_KEY: ${self:custom.apiKey  }
       CAPTCHA_KEY: ${self:custom.captchaKey}
       IMAGE_BUCKET: ${self:custom.imageBucket}
+      EMAIL_USER: ${self:custom.emailUser}
+      EMAIL_PW: ${self:custom.emailPW}
+      DOMAIN_NAME: ${self:custom.domain}
     timeout: 30
     events:
       - http:
@@ -168,6 +173,9 @@ functions:
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
       CAPTCHA_KEY: ${self:custom.captchaKey}
+      EMAIL_USER: ${self:custom.emailUser}
+      EMAIL_PW: ${self:custom.emailPW}
+      DOMAIN_NAME: ${self:custom.domain}
     timeout: 30
     events:
       - http:
