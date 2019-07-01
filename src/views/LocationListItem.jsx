@@ -78,9 +78,11 @@ export const LocationListItem = ({
       <div className="msab-location-media">
         {location.categories.map((tag, i) => (
           <Tag
-            className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10"
+            className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10 msab-pointer"
             key={i}
-            onClick={setActiveFilter(tag)}
+            onClick={(e) => {
+              setActiveFilter({ value: tag });
+            }}
           >
             {categories[tag]}
           </Tag>

@@ -7156,3 +7156,6 @@ li:not(:first-child) {
 
 .text-field {
   margin-bottom: 2rem !important; }
+
+.msab-pointer {
+  cursor: pointer; }
