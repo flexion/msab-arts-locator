@@ -197,7 +197,7 @@ export const LocationInputForm = connect(
                       onChange={(e) => {
                         updateFormValueSequence({
                           key: `category.${catKey}`,
-                          value: e.target.value,
+                          value: e.target.checked,
                         });
                       }}
                     />
@@ -309,6 +309,24 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
+            {locationFormButtonsHelper.showSubmit && (
+              <Field>
+                <Control>
+                  <Checkbox
+                    name={form.ToS}
+                    onChange={(e) => {
+                      updateFormValueSequence({
+                        key: 'ToS',
+                        value: e.target.checked,
+                      });
+                    }}
+                  />
+                  <span className="msab-has-text-grey margin-left-10">
+                    I agree to the <a href="tos">terms of service</a>
+                  </span>
+                </Control>
+              </Field>
+            )}
             <Field isGrouped>
               <Control>
                 {locationFormButtonsHelper.showAdmin && (
@@ -329,6 +347,7 @@ export const LocationInputForm = connect(
                     type="submit"
                     isColor="primary"
                     className="msab-margin-top"
+                    disabled={!form.ToS}
                     onClick={(e) => {
                       onSubmit(e, true);
                     }}
