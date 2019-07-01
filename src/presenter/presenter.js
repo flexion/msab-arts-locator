@@ -6,6 +6,8 @@ import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
 import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
 import { getLocationSequence } from './cerebral/sequences/getLocationSequence';
 import { setImageSequence } from './cerebral/sequences/setImageSequence';
+import { setActiveFilterSequence } from './cerebral/sequences/setActiveFilterSequence';
+
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 import { locationFormButtonsHelper } from './cerebral/computeds/locationFormButtonsHelper';
@@ -30,8 +32,10 @@ const presenter = {
     routeChangeSequence,
     submitLocationSequence,
     setImageSequence,
+    setActiveFilterSequence,
   },
   state: {
+    activeFilter: null,
     submitLocationSuccess: false,
     submitLocationFailure: false,
     selectImageFailure: false,
@@ -39,6 +43,7 @@ const presenter = {
     submitLocationMsg: '',
     cityValue: '',
     locationsList: [],
+    locationsListBk: [],
     locationListHelper,
     locationFormButtonsHelper,
     haveGeo: false,

@@ -6970,6 +6970,13 @@ label {
   font-size: 20px;
   line-height: 30px; }
 
+.msab-filter {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 33px;
+  color: white; }
+
 .msab-loading-ellipsis {
   font-size: 30px; }
 
@@ -7149,3 +7156,10 @@ li:not(:first-child) {
 
 .text-field {
   margin-bottom: 2rem !important; }
+
+.msab-pointer {
+  cursor: pointer; }
+
+.msab-margin-lr {
+  margin-left: 10px;
+  margin-right: 10px; }
