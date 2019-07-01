@@ -15,7 +15,6 @@ export const filterResultsListAction = ({ store, props, get }) => {
         }
       });
     });
-    console.log('filtered list: ', filteredList);
   }
   store.set(state.locationsList, filteredList);
 };

@@ -61,7 +61,6 @@ const formatLocation = (location) => {
 };
 
 export const locationListHelper = (get, list) => {
-  console.log('list', list);
   if (!list) {
     list = get(state.locationsList);
   }

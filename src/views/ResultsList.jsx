@@ -11,6 +11,8 @@ import {
   LevelItem,
   Tag,
   Delete,
+  LevelLeft,
+  LevelRight,
 } from 'bloomer';
 import { sequences } from 'cerebral';
 import collage from '../images/collage.svg';
@@ -36,11 +38,26 @@ class ResultsListComponent extends React.Component {
                 {!activeFilter && 'Click on a Category Tag to Filter'}
                 {activeFilter && (
                   <React.Fragment>
-                    <span>'Filtered by: '</span>
-                    <Delete />
-                    <Tag className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10">
-                      {activeFilter}
-                    </Tag>
+                    <Level isMobile>
+                      <LevelLeft>
+                        <LevelItem>
+                          <span>Filtered by: </span>
+                        </LevelItem>
+                      </LevelLeft>
+                      <LevelRight>
+                        <LevelItem>
+                          <Delete
+                            className="msab-delete"
+                            onClick={(e) => {
+                              setActiveFilter({ value: '' });
+                            }}
+                          />
+                          <Tag className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-lr">
+                            {activeFilter}
+                          </Tag>
+                        </LevelItem>
+                      </LevelRight>
+                    </Level>
                   </React.Fragment>
                 )}
               </Level>
