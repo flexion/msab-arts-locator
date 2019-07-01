@@ -313,7 +313,7 @@ export const LocationInputForm = connect(
               <Field>
                 <Control>
                   <Checkbox
-                    name={form.ToS}
+                    name="ToS"
                     onChange={(e) => {
                       updateFormValueSequence({
                         key: 'ToS',
