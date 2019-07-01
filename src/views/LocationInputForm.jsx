@@ -322,7 +322,10 @@ export const LocationInputForm = connect(
                     }}
                   />
                   <span className="msab-has-text-grey margin-left-10">
-                    I agree to the <a href="tos">terms of service</a>
+                    I agree to the{' '}
+                    <a href="tos" target="_new">
+                      terms of service
+                    </a>
                   </span>
                 </Control>
               </Field>
