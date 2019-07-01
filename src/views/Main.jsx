@@ -2,6 +2,7 @@ import { Home } from './Home';
 import { LocationInput } from './LocationInput';
 import { Curate } from './Curate';
 import { Loading } from './Loading';
+import { TOS } from './TOS';
 import { connect } from '@cerebral/react';
 import { state } from 'cerebral';
 import React from 'react';
@@ -10,6 +11,7 @@ const pages = {
   Home,
   LocationInput,
   Curate,
+  TOS,
 };
 
 export const Main = connect(

@@ -28,4 +28,5 @@ export const defaultForm = {
   image: null,
   approved: false,
   base64Image: null,
+  ToS: false,
 };

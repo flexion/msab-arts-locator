@@ -93,6 +93,7 @@ const presenter = {
       image: null,
       approved: false,
       base64Image: null,
+      ToS: false,
     },
   },
 };

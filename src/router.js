@@ -16,6 +16,11 @@ const router = {
       app.getSequence('routeChangeSequence')({ page: 'LocationInput' });
     });
 
+    route('/tos', () => {
+      document.title = `Terms of Service ${pageTitleSuffix}`;
+      app.getSequence('routeChangeSequence')({ page: 'TOS' });
+    });
+
     route('/curate-location/*', (entityId) => {
       document.title = `Curate Location ${pageTitleSuffix}`;
       app.getSequence('getLocationSequence')({
