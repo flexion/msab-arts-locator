@@ -13,6 +13,8 @@ import {
   Delete,
   LevelLeft,
   LevelRight,
+  Select,
+  Option,
 } from 'bloomer';
 import { sequences } from 'cerebral';
 import collage from '../images/collage.svg';
@@ -28,6 +30,8 @@ class ResultsListComponent extends React.Component {
     const categories = this.props.categories;
     const activeFilter = this.props.activeFilter;
     const setActiveFilter = this.props.setActiveFilter;
+    const setRadius = this.props.setRadius;
+    const haveGeo = this.props.haveGeo;
 
     return (
       <Section>
@@ -61,9 +65,38 @@ class ResultsListComponent extends React.Component {
                   </React.Fragment>
                 )}
               </Level>
-              <Title isSize={5} className="msab-has-text-purple">
-                Search Results ({locations.length})
-              </Title>
+              <Level isMobile>
+                <LevelLeft>
+                  <LevelItem>
+                    <Title isSize={5} className="msab-has-text-purple">
+                      Search Results ({locations.length})
+                    </Title>
+                  </LevelItem>
+                </LevelLeft>
+                <LevelRight>
+                  {haveGeo && (
+                    <LevelItem>
+                      <span>Within </span>
+                      <Select
+                        defaultValue="10"
+                        className="msab-margin-lr"
+                        onChange={(e) => {
+                          setRadius({
+                            key: e.target.name,
+                            value: e.target.value,
+                          });
+                        }}
+                      >
+                        <option value="1">1 mile</option>
+                        <option value="5">5 miles</option>
+                        <option value="10">10 miles</option>
+                        <option value="25">25 miles</option>
+                        <option value="50">50 miles</option>
+                      </Select>
+                    </LevelItem>
+                  )}
+                </LevelRight>
+              </Level>
             </React.Fragment>
           )}
           <ul>
@@ -99,6 +132,8 @@ export const ResultsList = connect(
     getGeoLocationSequence: sequences.getGeoLocationSequence,
     categories: state.categories,
     setActiveFilter: sequences.setActiveFilterSequence,
+    setRadius: sequences.setRadiusSequence,
+    haveGeo: state.haveGeo,
   },
   ResultsListComponent,
 );

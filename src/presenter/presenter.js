@@ -7,7 +7,7 @@ import { submitLocationSequence } from './cerebral/sequences/submitLocationSeque
 import { getLocationSequence } from './cerebral/sequences/getLocationSequence';
 import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import { setActiveFilterSequence } from './cerebral/sequences/setActiveFilterSequence';
-
+import { setRadiusSequence } from './cerebral/sequences/setRadiusSequence';
 import applicationContext from '../environments/client/ApplicationContext';
 import { locationListHelper } from './cerebral/computeds/locationListHelper';
 import { locationFormButtonsHelper } from './cerebral/computeds/locationFormButtonsHelper';
@@ -33,6 +33,7 @@ const presenter = {
     submitLocationSequence,
     setImageSequence,
     setActiveFilterSequence,
+    setRadiusSequence,
   },
   state: {
     activeFilter: null,
