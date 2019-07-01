@@ -50,7 +50,7 @@ const post = async (event) => {
           initial: false,
           approved: requestData.approved,
           applicationContext,
-          artLocation: updateResults.results,
+          artLocation: updateResults.artLocation,
         });
       console.log('send user email results: ', emailResults);
       console.log('should return a 201');

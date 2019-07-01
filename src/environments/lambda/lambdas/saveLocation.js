@@ -38,7 +38,7 @@ const post = async (event) => {
       .getUseCases()
       .validateCaptcha({ value: requestData.gresp, applicationContext });
     console.log('captcharesult: ', captchaResult);
-
+    requestData.approved = false; // always false, if admin action handled later
     if (captchaResult.status === 'success') {
       //if updating an existing location, need to validate id
       if (

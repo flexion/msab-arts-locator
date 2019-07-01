@@ -10,7 +10,6 @@ exports.sendUserEmail = async ({
   approved,
   applicationContext,
 }) => {
-  console.log('artlocation updateid: ', artLocation.updateId);
   // to, subject, bodyText,
   let requestData = null;
   if (initial) {
@@ -47,7 +46,6 @@ https://${applicationContext.environment.domainName}/update-location/${
     }
   }
 
-  console.log('user email data: ', requestData);
   const result = await applicationContext
     .getPersistenceGateway()
     .sendEmail({ requestData, applicationContext });

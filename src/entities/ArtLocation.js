@@ -76,7 +76,6 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
 
   // An object validates that the arguments are as valid as can be determined at this point.
   const entityData = toJSON(this);
-
   validateRequestData({
     data: entityData,
     dataSchema,
