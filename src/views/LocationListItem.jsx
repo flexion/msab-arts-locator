@@ -18,6 +18,7 @@ export const LocationListItem = ({
   citySearch,
   index,
   categories,
+  setActiveFilter,
 }) => {
   return (
     <React.Fragment>
@@ -79,6 +80,7 @@ export const LocationListItem = ({
           <Tag
             className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10"
             key={i}
+            onClick={setActiveFilter(tag)}
           >
             {categories[tag]}
           </Tag>
