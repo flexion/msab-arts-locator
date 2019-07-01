@@ -79,25 +79,13 @@ const get = async (event, context) => {
     }
 
     if (status === 'success') {
-      if (newResults.length > 0) {
-        return {
-          statusCode: 201,
-          body: JSON.stringify({
-            message: 'success',
-            results: newResults,
-          }),
-        };
-      } else {
-        //no results found
-        return {
-          statusCode: 204,
-          body: JSON.stringify({
-            message: 'success',
-            input: event,
-            results,
-          }),
-        };
-      }
+      return {
+        statusCode: 201,
+        body: JSON.stringify({
+          message: 'success',
+          results: newResults,
+        }),
+      };
     } else {
       return {
         statusCode: 406,
