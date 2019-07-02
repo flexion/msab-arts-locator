@@ -24,6 +24,7 @@ exports.validateImageFileType = async (image) => {
   }
   try {
     const types = ['image/jpeg', 'image/png', 'image/gif'];
+
     let imageBuffer = null;
     let base64Image = null;
     if (typeof image === 'string') {
@@ -33,17 +34,19 @@ exports.validateImageFileType = async (image) => {
       base64Image = await getBase64(image);
       imageBuffer = Buffer.from(base64Image, 'base64');
     }
+
     const contentType = fileType(imageBuffer);
     if (
       contentType &&
       contentType.mime &&
-      types.indexOf(contentType.mime) > -1
+      types.indexOf(contentType.mime) > -1 &&
+      imageBuffer.length <= 1000000
     ) {
       return { status: 'success', contentType, base64Image };
     } else {
       return {
         status:
-          'error: Image you selected is an unsupported file type. Please choose a file of type: png, gif, jpeg/jpg',
+          'error: Image you selected is an unsupported file type or too large. Please choose a file of type: png, gif, jpeg/jpg, less than 1MB in size.',
       };
     }
   } catch (e) {
