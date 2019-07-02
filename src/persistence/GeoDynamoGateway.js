@@ -129,7 +129,7 @@ const getLocationsInCity = async ({ city }) => {
     IndexName: 'cityName-index',
     KeyConditionExpression: 'city = :c',
     ExpressionAttributeValues: {
-      ':c': city,
+      ':c': city.toLowerCase(),
     },
   };
   const results = await queryDynamo(params);
