@@ -35,8 +35,7 @@ const get = async (event, context) => {
   let requestData = null;
   let results = null;
   let queryResults = null;
-  let newResults = null;
-  let msg = null;
+  let newResults = [];
   let status = null;
   try {
     console.log('event data: ', event.queryStringParameters);
@@ -53,13 +52,16 @@ const get = async (event, context) => {
       status = queryResults.status;
       results = queryResults.results;
       console.log('geoResults: ', results);
-      newResults = results.map((result) => {
+      results.forEach((result) => {
         let location = AWS.DynamoDB.Converter.unmarshall(result, {
           convertEmptyValues: true,
         });
-        location = formatLocation(location, requestData);
-        console.log('location: ', location);
-        return location;
+        console.log('location.approved: ', location.approved);
+        if (location.approved) {
+          location = formatLocation(location, requestData);
+          console.log('location: ', location);
+          newResults.push(location);
+        }
       });
     } else if (requestData.city) {
       queryResults = await applicationContext
@@ -71,10 +73,13 @@ const get = async (event, context) => {
       status = queryResults.status;
       results = queryResults.results;
       console.log('queryResults: ', queryResults);
-      newResults = results.Items.map((location) => {
-        location = removeKeys(location);
-        console.log('location: ', location);
-        return location;
+      results.Items.forEach((location) => {
+        console.log('location.approved: ', location.approved);
+        if (location.approved) {
+          location = removeKeys(location);
+          console.log('location: ', location);
+          newResults.push(location);
+        }
       });
     }
 
@@ -90,7 +95,7 @@ const get = async (event, context) => {
       return {
         statusCode: 406,
         body: JSON.stringify({
-          message: msg,
+          message: status,
           input: event,
         }),
       };
