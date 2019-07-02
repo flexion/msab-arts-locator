@@ -52,7 +52,7 @@ const presenter = {
     findingLocations: false,
     gettingLocation: false,
     citySearch: false,
-    radius: 40233, //in meters
+    radius: 16093, //in meters
     position: { lat: 0, long: 0 },
     currentPage: 'Home',
     categories: {
