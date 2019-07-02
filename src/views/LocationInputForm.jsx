@@ -266,7 +266,7 @@ export const LocationInputForm = connect(
             </Field>
             <Field className="msab-margin-top">
               <Label className="msab-has-text-grey">
-                Location Image (optional)
+                Location Image (optional - max size 1 MB)
               </Label>
               <Control>
                 <input
