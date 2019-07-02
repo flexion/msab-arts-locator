@@ -56,7 +56,6 @@ const get = async (event, context) => {
         let location = AWS.DynamoDB.Converter.unmarshall(result, {
           convertEmptyValues: true,
         });
-        console.log('location.approved: ', location.approved);
         if (location.approved) {
           location = formatLocation(location, requestData);
           console.log('location: ', location);
@@ -74,7 +73,6 @@ const get = async (event, context) => {
       results = queryResults.results;
       console.log('queryResults: ', queryResults);
       results.Items.forEach((location) => {
-        console.log('location.approved: ', location.approved);
         if (location.approved) {
           location = removeKeys(location);
           console.log('location: ', location);
