@@ -2,7 +2,6 @@ import { connect } from '@cerebral/react';
 import { state } from 'cerebral';
 import React from 'react';
 import { LocationListItem } from './LocationListItem';
-import { Filter } from './Filter';
 import {
   Section,
   Container,
@@ -14,7 +13,6 @@ import {
   LevelLeft,
   LevelRight,
   Select,
-  Option,
 } from 'bloomer';
 import { sequences } from 'cerebral';
 import collage from '../images/collage.svg';
@@ -57,7 +55,7 @@ class ResultsListComponent extends React.Component {
                             }}
                           />
                           <Tag className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-lr">
-                            {activeFilter}
+                            {categories[activeFilter]}
                           </Tag>
                         </LevelItem>
                       </LevelRight>
