@@ -49,7 +49,7 @@ const formatMapsURL = (location) => {
   // location.coordinates is [long, lat]
   // https://www.google.com/maps/search/?api=1&query=28.6139,77.2090
   location.googleURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${location.coordinates[1]}, ${location.coordinates[0]}`,
+    `${location.street} ${location.city} ${location.state} ${location.zip}`,
   )}`;
   return location;
 };

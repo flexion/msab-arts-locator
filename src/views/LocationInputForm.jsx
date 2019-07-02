@@ -268,6 +268,10 @@ export const LocationInputForm = connect(
               <Label className="msab-has-text-grey">
                 Location Image (optional - max size 1 MB)
               </Label>
+              <Subtitle className="msab-has-text-grey-small">
+                Please choose an image less than 1MB in size and within the
+                filetypes supported: GIF, JPG/JPEG, PNG
+              </Subtitle>
               <Control>
                 <input
                   type="file"

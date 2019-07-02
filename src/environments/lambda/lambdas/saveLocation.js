@@ -126,6 +126,8 @@ const post = async (event) => {
                   artLocation.approved = false;
                 }
               }
+              location.displayCity = location.city;
+              location.city = location.city.toLowerCase();
               saveResult = await applicationContext
                 .getUseCases()
                 .saveNewArtLocation({

@@ -60,6 +60,7 @@ const saveNewLocationGeo = async ({
       category: { S: JSON.stringify(artLocation.category) },
       street: { S: artLocation.street },
       city: { S: artLocation.city },
+      displayCity: { S: artLocation.displayCity },
       state: { S: artLocation.state },
       zip: { S: artLocation.zip },
       contactName: { S: artLocation.contactName },
@@ -128,7 +129,7 @@ const getLocationsInCity = async ({ city }) => {
     IndexName: 'cityName-index',
     KeyConditionExpression: 'city = :c',
     ExpressionAttributeValues: {
-      ':c': city,
+      ':c': city.toLowerCase(),
     },
   };
   const results = await queryDynamo(params);
