@@ -64,7 +64,7 @@ label {
 
 .msab-filter {
   font-family: 'Frank Ruhl Libre', serif;
-  font-weight: normal;
+  font-weight: 600;
   font-size: 15px;
   line-height: 33px;
   color: white;
@@ -126,6 +126,7 @@ label {
 
 .msab-filter {
   padding: 5px;
+  padding-left: 15px;
 }
 
 .msab-margin-10 {
@@ -294,4 +295,9 @@ li:not(:first-child) {
 .msab-margin-lr {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.delete, .modal-close {
+    background-color: #A9AEB1;
+    margin-left: 10px;
 }
