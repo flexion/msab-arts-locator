@@ -1,4 +1,3 @@
-const { toJSON } = require('../utilities/ObjectUtils');
 const { validateRequestData } = require('../utilities/CleanUtils');
 
 exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {
@@ -16,7 +15,6 @@ exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {
   validateRequestData({ data: requestData, dataSchema, applicationContext });
 
   const { city } = requestData;
-  console.log(' city in interactor: ', city);
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
     .getPersistenceGateway()
