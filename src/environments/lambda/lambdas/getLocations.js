@@ -17,6 +17,7 @@ const removeKeys = (location) => {
   delete location.geohash;
   delete location.adminId;
   delete location.updateId;
+  delete location.entityId;
   return location;
 };
 const formatLocation = (location, requestData) => {
@@ -62,6 +63,7 @@ const get = async (event, context) => {
           newResults.push(location);
         }
       });
+      newResults.sort((a, b) => (a.distance > b.distance ? 1 : -1));
     } else if (requestData.city) {
       const geocode = {
         street: '',
@@ -98,7 +100,6 @@ const get = async (event, context) => {
         });
       }
     }
-
     if (status === 'success') {
       return {
         statusCode: 201,

@@ -72,7 +72,7 @@ class ResultsListComponent extends React.Component {
                   </LevelItem>
                 </LevelLeft>
                 <LevelRight>
-                  {haveGeo && (
+                  {haveGeo && !citySearch && (
                     <LevelItem>
                       <span>Within </span>
                       <Select
