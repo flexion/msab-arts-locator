@@ -61,7 +61,7 @@ export const LocationListItem = ({
             <Level isMobile>
               <LevelLeft>
                 <LevelItem className="has-text-grey msab-location-address">
-                  {location.displayCity}, MN
+                  {location.city}, MN
                 </LevelItem>
                 <LevelItem className="has-text-grey msab-location-address">
                   {location.zip}

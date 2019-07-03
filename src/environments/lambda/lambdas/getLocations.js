@@ -63,22 +63,40 @@ const get = async (event, context) => {
         }
       });
     } else if (requestData.city) {
-      queryResults = await applicationContext
+      const geocode = {
+        street: '',
+        city: requestData.city,
+        state: 'MN',
+        zip: '',
+      };
+      //need to standardize city name:
+      const coordResult = await applicationContext
         .getUseCases()
-        .getArtLocationsInCity({
+        .getLocationCoordinates({
           applicationContext,
-          requestData,
+          artLocation: geocode,
         });
-      status = queryResults.status;
-      results = queryResults.results;
-      console.log('queryResults: ', queryResults);
-      results.Items.forEach((location) => {
-        if (location.approved) {
-          location = removeKeys(location);
-          console.log('location: ', location);
-          newResults.push(location);
-        }
-      });
+      status = coordResult.status;
+      let city = coordResult.cityName;
+      console.log('standardized city name: ', city);
+      if (city) {
+        queryResults = await applicationContext
+          .getUseCases()
+          .getArtLocationsInCity({
+            applicationContext,
+            requestData: { city },
+          });
+        status = queryResults.status;
+        results = queryResults.results;
+        console.log('queryResults: ', queryResults);
+        results.Items.forEach((location) => {
+          if (location.approved) {
+            location = removeKeys(location);
+            console.log('location: ', location);
+            newResults.push(location);
+          }
+        });
+      }
     }
 
     if (status === 'success') {

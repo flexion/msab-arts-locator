@@ -24,9 +24,10 @@ const formatWebsiteURL = (location) => {
 };
 
 const formatDistance = (location) => {
-  console.log('location.distance', location.distance);
-  const distance = Math.round(location.distance * 10) / 10;
-  location.distance = `${distance} miles`;
+  if (typeof location.distance === 'number') {
+    const distance = Math.round(location.distance * 10) / 10;
+    location.distance = `${distance} miles`;
+  }
   return location;
 };
 
@@ -62,7 +63,6 @@ const formatLocation = (location) => {
 };
 
 export const locationListHelper = (get, list) => {
-  console.log('location:', list);
   if (!list) {
     list = get(state.locationsList);
   }
