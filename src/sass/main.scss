@@ -247,6 +247,7 @@ li:not(:first-child) {
 
 .button.is-primary {
   font-weight: 600;
+  color: #ffffff !important;
 }
 
 .field.has-addons {
@@ -301,4 +302,26 @@ li:not(:first-child) {
 .delete, .modal-close {
     background-color: #A9AEB1;
     margin-left: 10px;
+}
+
+a.has-text-primary:hover, a.has-text-primary:focus {
+    color: #2A4EA5 !important;
+}
+
+a {
+  color: #217575 !important;
+}
+
+a:hover {
+  color: #2A4EA5 !important;
+}
+
+.button.is-primary:hover, .button.is-primary.is-hovered {
+    background-color: #2A4EA5;
+    cursor: pointer;
+}
+
+.tag:hover {
+  background-color: #2A4EA5 !important;
+  color: #ffffff !important;
 }
