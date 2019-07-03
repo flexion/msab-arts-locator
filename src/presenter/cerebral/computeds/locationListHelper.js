@@ -24,8 +24,10 @@ const formatWebsiteURL = (location) => {
 };
 
 const formatDistance = (location) => {
-  const distance = Math.round(location.distance * 10) / 10;
-  location.distance = `${distance} miles`;
+  if (typeof location.distance === 'number') {
+    const distance = Math.round(location.distance * 10) / 10;
+    location.distance = `${distance} miles`;
+  }
   return location;
 };
 

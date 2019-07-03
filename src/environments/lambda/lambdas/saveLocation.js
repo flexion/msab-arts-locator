@@ -85,6 +85,7 @@ const post = async (event) => {
               artLocation,
             });
           msg = coordResult.status;
+
           console.log('coordResult: ', coordResult);
           if (msg === 'success') {
             if (requestData.base64Image) {
@@ -126,8 +127,12 @@ const post = async (event) => {
                   artLocation.approved = false;
                 }
               }
-              artLocation.displayCity = artLocation.city;
-              artLocation.city = artLocation.city.toLowerCase();
+
+              artLocation.city = coordResult.cityName;
+              console.log(
+                'setting city name based on geocoords: ',
+                coordResult.cityName,
+              );
               saveResult = await applicationContext
                 .getUseCases()
                 .saveNewArtLocation({

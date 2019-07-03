@@ -3,7 +3,6 @@ const makeRequest = (method, url, artLocationData) => {
     var xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    // xhr.setRequestHeader('enctype', 'multipart/form-data');
     // xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
     //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhr.onload = function() {

@@ -128,6 +128,7 @@ package:
     - sass/**
     - presenter/**
     - views/**
+    - favicon/**
     # - node_modules/**
 
 functions:
@@ -135,6 +136,7 @@ functions:
     handler: environments/lambda/handlers.getLocations
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
+      API_KEY: ${self:custom.apiKey}
     timeout: 30
     events:
       - http:
@@ -146,7 +148,7 @@ functions:
     handler: environments/lambda/handlers.saveLocation
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
-      API_KEY: ${self:custom.apiKey  }
+      API_KEY: ${self:custom.apiKey}
       CAPTCHA_KEY: ${self:custom.captchaKey}
       IMAGE_BUCKET: ${self:custom.imageBucket}
       EMAIL_USER: ${self:custom.emailUser}

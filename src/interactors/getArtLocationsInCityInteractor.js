@@ -1,4 +1,3 @@
-const { toJSON } = require('../utilities/ObjectUtils');
 const { validateRequestData } = require('../utilities/CleanUtils');
 
 exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {

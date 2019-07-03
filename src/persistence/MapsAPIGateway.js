@@ -14,12 +14,19 @@ const getCoordsFromAddress = async (
     let url = `${
       applicationContext.apiURLs().geocodeAPIUrl
     }?address=${address}&key=${apiKey}`;
-
+    let cityName = null;
     const response = await axios.get(url);
-    console.log(response, response.data, response.data.results[0]);
+
     if (response.data.results && response.data.results.length > 0) {
       const coords = response.data.results[0].geometry.location;
-      return { status: 'success', coords };
+      const address_comps = response.data.results[0].address_components;
+      address_comps.forEach((comp) => {
+        if (comp.types[0] === 'locality') {
+          cityName = comp.long_name;
+        }
+      });
+
+      return { status: 'success', coords, cityName };
     } else {
       console.log('geolocation failure for :', artLocation, response.data);
       return { status: 'geolocation failure', msg: response.data };
