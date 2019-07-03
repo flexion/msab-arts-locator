@@ -50,7 +50,6 @@ exports.validateImageFileType = async (image) => {
       };
     }
   } catch (e) {
-    console.log('e: ', e.message);
     return { status: 'error: unsupported filetype', data: e.message };
   }
 };

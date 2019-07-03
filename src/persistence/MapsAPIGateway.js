@@ -16,6 +16,7 @@ const getCoordsFromAddress = async (
     }?address=${address}&key=${apiKey}`;
 
     const response = await axios.get(url);
+    console.log(response, response.data, response.data.results[0]);
     if (response.data.results && response.data.results.length > 0) {
       const coords = response.data.results[0].geometry.location;
       return { status: 'success', coords };
