@@ -8,7 +8,6 @@ const requestPosition = () => {
   return new Promise(function(resolve, reject) {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        console.log('geolocation found');
         resolve(pos);
       },
       (err) => {

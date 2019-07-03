@@ -15,7 +15,7 @@ exports.sendAdminEmail = async ({ artLocation, applicationContext }) => {
       applicationContext.environment.domainName
     }/curate-location/${artLocation.adminId}'>${artLocation.name}</a>`,
   };
-  console.log('admin email data: ', requestData);
+
   const result = await applicationContext
     .getPersistenceGateway()
     .sendEmail({ requestData, applicationContext });

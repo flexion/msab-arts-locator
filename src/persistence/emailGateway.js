@@ -8,7 +8,7 @@ const sendEmail = async ({ requestData, applicationContext }) => {
     service: 'Outlook365',
     ...applicationContext.emailConfig,
   };
-  console.log('email config: ', emailConfig);
+
   if (transporter == undefined) {
     transporter = nodemailer.createTransport(emailConfig);
   }

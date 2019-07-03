@@ -54,7 +54,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
       },
     ],
     errorMessage: {
-      type: 'data should be an object',
+      type: 'Data should be an object',
       properties: {
         name: 'Name should be a string at least 1 characters long',
         contactPhone:
@@ -63,10 +63,10 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
           'Contact name should be a string at least 1 characters long',
         contactEmail:
           'Contact e-mail should be a string at least 1 characters long',
-        street: 'street should be a string at least 1 characters long',
-        city: 'city should be a string 1 characters long',
-        state: 'state should be a string 2 characters long',
-        zip: 'zip should be a number at least 5 numbers long',
+        street: 'Street should be a string at least 1 characters long',
+        city: 'City should be a string 1 characters long',
+        state: 'State should be a string 2 characters long',
+        zip: 'Zip should be a number at least 5 numbers long',
         gresp: 'Please complete the CAPTCHA to submit',
       },
       _:
@@ -81,6 +81,21 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
     dataSchema,
     applicationContext,
   });
+  // need to loop through categories to see if type is true
+  let atLeastOne = false;
+  let cats = this.category;
+  if (typeof cats === 'string') {
+    cats = JSON.parse(cats);
+  }
+
+  Object.keys(cats).forEach(function(cat) {
+    if (cats[cat]) {
+      atLeastOne = true;
+    }
+  });
+  if (!atLeastOne) {
+    throw new Error('[{"message": "At least one category type is required"}]');
+  }
 }
 
 module.exports = { ArtLocation };
