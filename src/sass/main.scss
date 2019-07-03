@@ -247,6 +247,7 @@ li:not(:first-child) {
 
 .button.is-primary {
   font-weight: 600;
+  color: #ffffff !important;
 }
 
 .field.has-addons {
@@ -313,4 +314,8 @@ a {
 
 a:hover {
   color: #2A4EA5 !important;
+}
+
+.button.is-primary:hover, .button.is-primary.is-hovered {
+    background-color: #2A4EA5;
 }
