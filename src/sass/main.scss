@@ -318,4 +318,10 @@ a:hover {
 
 .button.is-primary:hover, .button.is-primary.is-hovered {
     background-color: #2A4EA5;
+    cursor: pointer;
+}
+
+.tag:hover {
+  background-color: #2A4EA5 !important;
+  color: #ffffff !important;
 }
