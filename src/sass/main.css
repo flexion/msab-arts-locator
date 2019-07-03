@@ -7125,7 +7125,8 @@ li:not(:first-child) {
   padding-bottom: 1.5rem; }
 
 .button.is-primary {
-  font-weight: 600; }
+  font-weight: 600;
+  color: #ffffff !important; }
 
 .field.has-addons {
   margin-top: 1rem; }
@@ -7178,3 +7179,6 @@ a {
 
 a:hover {
   color: #2A4EA5 !important; }
+
+.button.is-primary:hover, .button.is-primary.is-hovered {
+  background-color: #2A4EA5; }
