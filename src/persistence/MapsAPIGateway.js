@@ -19,7 +19,8 @@ const getCoordsFromAddress = async (
     console.log(response, response.data, response.data.results[0]);
     if (response.data.results && response.data.results.length > 0) {
       const coords = response.data.results[0].geometry.location;
-      return { status: 'success', coords };
+      const cityName = respnose.data.results[0].address_components[0].long_name;
+      return { status: 'success', coords, cityName };
     } else {
       console.log('geolocation failure for :', artLocation, response.data);
       return { status: 'geolocation failure', msg: response.data };
