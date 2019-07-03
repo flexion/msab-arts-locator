@@ -302,3 +302,15 @@ li:not(:first-child) {
     background-color: #A9AEB1;
     margin-left: 10px;
 }
+
+a.has-text-primary:hover, a.has-text-primary:focus {
+    color: #2A4EA5 !important;
+}
+
+a {
+  color: #217575 !important;
+}
+
+a:hover {
+  color: #2A4EA5 !important;
+}
