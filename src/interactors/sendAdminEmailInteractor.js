@@ -8,10 +8,10 @@ exports.sendAdminEmail = async ({ artLocation, applicationContext }) => {
   // to, subject, bodyText,
   const requestData = {
     to: applicationContext.emailConfig.from,
-    subject: `Arts Around MN Received a new location request: ${
+    subject: `${
       artLocation.name
-    }`,
-    body: `Admin link: <a href='https://${
+    } submitted a new location`,
+    body: `Admin link to approve or deny the listing: <a href='https://${
       applicationContext.environment.domainName
     }/curate-location/${artLocation.adminId}'>${artLocation.name}</a>`,
   };
