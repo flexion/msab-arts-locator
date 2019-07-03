@@ -6949,7 +6949,8 @@ label {
   background-color: #565c65; }
 
 .msab-has-text-grey {
-  color: #565c65 !important; }
+  color: #565c65 !important;
+  font-family: 'Asap', sans-serif !important; }
 
 .msab-has-background-teal {
   background-color: #acdcdc !important; }

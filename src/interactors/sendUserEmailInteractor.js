@@ -15,14 +15,15 @@ exports.sendUserEmail = async ({
   if (initial) {
     requestData = {
       to: artLocation.contactEmail,
-      subject: `Location submitted to Arts Around MN: ${artLocation.name}`,
-      body: `Thank you for your interest in reaching a wider group of participants or audience members through the Arts Around MN site.
-We have received and will review the content you submitted.  The Arts Board reserves the right to approve or disapprove any content submitted.
-You will receive a notification message when the content has been approved or disapproved to post on the site. Meanwhile, you can update your content
-submitted here: 
-https://${applicationContext.environment.domainName}/update-location/${
-        artLocation.updateId
-      }`,
+      subject: `Thank you for your submission to Arts Around MN`,
+      body: `<p>Thank you for your interest in promoting your work and your activities through Arts Around MN.</p>
+      <br/>
+      <p>The Arts Board will review your submission and determine if we’re able to publish the contents on our site or not. We reserve the right to approve or deny any content submitted.</p>
+      <br/>
+      <p>Once we’ve reviewed your submission, you’ll receive another e-mail to let you know whether or not we’ve published it.</p>
+      <br/>
+      <p>Sincerely,<p>
+      <p>The Minnesota State Arts Board</p>`,
     };
   } else {
     if (approved) {

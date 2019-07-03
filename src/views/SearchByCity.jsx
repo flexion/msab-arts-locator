@@ -24,7 +24,7 @@ export const SearchByCity = connect(
         <Container>
           <Title isSize={3} className="msab-has-text-purple">
             {haveGeo
-              ? 'Find Artistic Things To Do'
+              ? 'Find Arts in Minnesota'
               : 'Oops! Can’t Find Your Location'}
           </Title>
 

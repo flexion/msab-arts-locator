@@ -59,7 +59,7 @@ export const LocationInputForm = connect(
     return (
       <Section className="msab-section-form">
         <Container>
-          <Title isSize={4} className="msab-has-text-purple">
+          <Title isSize={3} className="msab-has-text-purple">
             Submit Your Arts Location
           </Title>
           <Subtitle isSize={5} className="msab-has-text-grey">
@@ -69,7 +69,7 @@ export const LocationInputForm = connect(
           <Subtitle isSize={6} className="msab-has-text-grey-bold">
             * All fields required unless otherwise noted
           </Subtitle>
-          <Title isSize={5} className="msab-has-text-purple">
+          <Title isSize={4} className="msab-has-text-purple">
             Your Location
           </Title>
           <form className="search" id="add-location-form" noValidate>
@@ -208,7 +208,35 @@ export const LocationInputForm = connect(
                 </Field>
               );
             })}
-
+            <Field className="msab-margin-top">
+              <Label className="msab-has-text-grey">
+                Location Image (optional - max size 1 MB)
+              </Label>
+              <Subtitle className="msab-has-text-grey-small">
+                Please choose an image less than 1MB in size and within the
+                file types supported: GIF, JPG/JPEG, PNG
+              </Subtitle>
+              <Control>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  onChange={(e) => {
+                    setImageSequence({
+                      image: e.target.files[0],
+                    });
+                  }}
+                />
+              </Control>
+              {form.imageURL && !form.base64Image && (
+                <Control>
+                  <img src={form.imageURL} />
+                </Control>
+              )}
+            </Field>
+            {imgFailure && (
+              <Notification isColor="danger">{imgMsg}</Notification>
+            )}
             <br />
             <Title isSize={4} className="msab-has-text-purple">
               Contact Information
@@ -264,55 +292,6 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
-            <Field className="msab-margin-top">
-              <Label className="msab-has-text-grey">
-                Location Image (optional - max size 1 MB)
-              </Label>
-              <Subtitle className="msab-has-text-grey-small">
-                Please choose an image less than 1MB in size and within the
-                filetypes supported: GIF, JPG/JPEG, PNG
-              </Subtitle>
-              <Control>
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  onChange={(e) => {
-                    setImageSequence({
-                      image: e.target.files[0],
-                    });
-                  }}
-                />
-              </Control>
-              {form.imageURL && !form.base64Image && (
-                <Control>
-                  <img src={form.imageURL} />
-                </Control>
-              )}
-            </Field>
-            {imgFailure && (
-              <Notification isColor="danger">{imgMsg}</Notification>
-            )}
-            <Field isGrouped>
-              <Control>
-                <ReCAPTCHA
-                  className="msab-margin-top"
-                  sitekey="6LfpgakUAAAAAExacnxuT4JdaEfOa3KUmH_qK31_"
-                  onChange={(value) => {
-                    updateFormValueSequence({
-                      key: 'gresp',
-                      value: value,
-                    });
-                  }}
-                  onExpired={(e) => {
-                    updateFormValueSequence({
-                      key: 'gresp',
-                      value: '',
-                    });
-                  }}
-                />
-              </Control>
-            </Field>
             {locationFormButtonsHelper.showSubmit && (
               <Field>
                 <Control>
@@ -334,6 +313,26 @@ export const LocationInputForm = connect(
                 </Control>
               </Field>
             )}
+            <Field isGrouped>
+              <Control>
+                <ReCAPTCHA
+                  className="msab-margin-top"
+                  sitekey="6LfpgakUAAAAAExacnxuT4JdaEfOa3KUmH_qK31_"
+                  onChange={(value) => {
+                    updateFormValueSequence({
+                      key: 'gresp',
+                      value: value,
+                    });
+                  }}
+                  onExpired={(e) => {
+                    updateFormValueSequence({
+                      key: 'gresp',
+                      value: '',
+                    });
+                  }}
+                />
+              </Control>
+            </Field>
             <Field isGrouped>
               <Control>
                 {locationFormButtonsHelper.showAdmin && (
