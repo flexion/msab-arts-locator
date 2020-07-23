@@ -6,3 +6,4 @@ googleCaptchaKey: ""
 imageS3BucketName: ""
 emailUsername: ""
 emailPassword: ""
+lambdaExecutionRole: arn:aws:iam::<account-id>:role/your-externally-created-lambdaRole

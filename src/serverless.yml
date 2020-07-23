@@ -54,7 +54,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ${self:custom.region}
 
-  role: arn:aws:iam::083391359992:role/msab-arts-locator-dev-us-east-2-lambdaRole
+  role: ${self:custom.vars.lambdaExecutionRole}
 
 package:
   exclude:
