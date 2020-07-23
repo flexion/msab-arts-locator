@@ -1,0 +1,8 @@
+domainNameRoot: subdomain.domain.us
+# certificate `Identifier` from AWS Certificate Manager, not the ARN
+certificateId: xxxxxxxx-yyyy-zzzz-aaaa-123456789012
+googleGeocodingApiKey: ""
+googleCaptchaKey: ""
+imageS3BucketName: ""
+emailUsername: ""
+emailPassword: ""
