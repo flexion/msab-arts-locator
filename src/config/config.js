@@ -1,3 +1,3 @@
 module.exports = {
-  RECAPTCHA_KEY: '6LfpgakUAAAAAExacnxuT4JdaEfOa3KUmH_qK31_',
+  RECAPTCHA_KEY: '6LcSG9IaAAAAAF9T0ILLychx0scymwcpzAZbDbOt',
 };
