@@ -16,6 +16,7 @@ import {
   TextArea,
   Notification,
 } from 'bloomer';
+import { RECAPTCHA_KEY } from '../config/config';
 
 export const LocationInputForm = connect(
   {
@@ -213,8 +214,8 @@ export const LocationInputForm = connect(
                 Location Image (optional - max size 1 MB)
               </Label>
               <Subtitle className="msab-has-text-grey-small">
-                Please choose an image less than 1MB in size and within the
-                file types supported: GIF, JPG/JPEG, PNG
+                Please choose an image less than 1MB in size and within the file
+                types supported: GIF, JPG/JPEG, PNG
               </Subtitle>
               <Control>
                 <input
@@ -317,7 +318,7 @@ export const LocationInputForm = connect(
               <Control>
                 <ReCAPTCHA
                   className="msab-margin-top"
-                  sitekey="6LfpgakUAAAAAExacnxuT4JdaEfOa3KUmH_qK31_"
+                  sitekey={RECAPTCHA_KEY}
                   onChange={(value) => {
                     updateFormValueSequence({
                       key: 'gresp',
