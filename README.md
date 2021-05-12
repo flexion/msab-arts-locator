@@ -1,9 +1,9 @@
 # Development
 
-This project leverages AWS Lambda runtime `nodejs8.10`, so using Node 8 locally is a good idea to avoid accidentally introducing incompatibilities (like `Promise.finally`).
+This project leverages AWS Lambda runtime `nodejs12.x`, so using Node 12 locally is a good idea to avoid accidentally introducing incompatibilities.
 
 ```
-nvm use 8.10
+nvm i 12
 ```
 
 ## AWS Access
@@ -28,8 +28,23 @@ Google reCAPTCHA - https://developers.google.com/recaptcha/intro
 Google Maps - https://developers.google.com/maps/documentation/geocoding/start
 
 The environment variables for these keys are:
-GOOGLE_CAPTCHA_KEY
+GOOGLE_CAPTCHA_KEY (server-side secret)
 GOOGLE_GEOCODING_API_KEY
+
+### reCAPTCHA
+
+Access http://www.google.com/recaptcha/admin to setup a key pair (client/server). You'll _Register a new site_, providing 
+
+1. Label: anything you want, site URL is a good option if it's descriptive enough
+2. reCAPTCHA type: v2
+3. Domains: the domains the reCAPTCHA will be served from (base domain should suffice, e.g. msab.flexion.us should enable *.msab.flexion.us)
+4. Owners: email addresses/accounts that can administer
+5. Accept the reCAPTCH TOS
+6. Send alerts to owners: optional
+
+Submit
+
+You'll receive two keys - a client-side key and a server-side secret. The client-side key is encoded in the React client code (configuration coming), the server-side secret is provided in the serverless environment config (see `config/example.yml`).
 
 ## Prerequisites
 
