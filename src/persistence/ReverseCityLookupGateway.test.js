@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { createMockApplicationContext } = require('../utilities/TestUtils');
 const { getCityFromGeo } = require('./ReverseCityLookupGateway');
 import mock from 'xhr-mock';
 describe('ReverseCityLookupGateway', () => {
@@ -16,11 +17,17 @@ describe('ReverseCityLookupGateway', () => {
       assert.deepStrictEqual(city, {});
     });
     it('returns locations when city is provided', async () => {
+      const mockApplicationContext = createMockApplicationContext({
+        apiURLs: () => {
+          return { reverseApiUrl: '' };
+        },
+      });
       mock.use((req, res) => {
         return res.status(201).body('{"address":{"town":"Sun Prairie"}}');
       });
       const city = await getCityFromGeo({
         data: { lat: 43.1796, long: -89.2802 },
+        applicationContext: mockApplicationContext,
       });
       assert.deepStrictEqual(city.cityValue, 'Sun Prairie');
     });

@@ -1,6 +1,6 @@
 const createApplicationContext = require('../ApplicationContext');
 const AWS = require('aws-sdk');
-const getDistance = require('geolib/es/getDistance').default;
+const { getDistance } = require('geolib');
 var conversions = require('conversions');
 /**
  * used for retrieving locations based on geocoords

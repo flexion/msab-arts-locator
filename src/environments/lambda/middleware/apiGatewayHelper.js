@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const {
   UnauthorizedError,
   NotFoundError,
-} = require('../../../shared/src/errors/errors');
+} = require('../../../errors/errors');
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -29,7 +29,7 @@ exports.handle = async (event, fun) => {
     const response = await fun();
     return exports.sendOk(response);
   } catch (err) {
-    console.error('err', err);
+    // console.error('err', err);
     if (err instanceof NotFoundError) {
       err.statusCode = 404;
       return exports.sendError(err);

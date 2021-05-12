@@ -27,7 +27,7 @@ describe('searchByCitySequence', () => {
     const mockApplicationContext = createMockApplicationContext({
       getUseCases: () => ({
         getArtLocationsInCity: (request) => {
-          return { status: 'success', data: responseData.data };
+          return { message: 'success', results: responseData.data };
         },
       }),
     });

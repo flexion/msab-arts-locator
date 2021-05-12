@@ -1,43 +1,48 @@
 const assert = require('assert');
 const { createMockApplicationContext } = require('../utilities/TestUtils');
 const { getArtLocationsInCity } = require('./getArtLocationsInCityInteractor');
+const { validateJson } = require('../utilities/AjvJsonValidator');
 const mockData = require('../persistence/mockData');
 describe('valid city', () => {
   it('should reject requests with missing city in the requestData', async () => {
-    const mockApplicationContext = createMockApplicationContext({ mockData });
-    const testResponseCallback = () => {};
+    const mockApplicationContext = createMockApplicationContext({
+      getJsonValidator: () => {
+        return {
+          validateJson,
+        };
+      },
+    });
 
     try {
       await getArtLocationsInCity({
         requestData: { meow: 'meow' },
-        responseCallback: testResponseCallback,
         applicationContext: mockApplicationContext,
       });
     } catch (e) {
-      console.log('e: ', e);
       assert.ok(
-        e.message.includes(
-          "should be object with a string property 'city' only",
-        ),
+        e.message.includes("should be an object with string properties 'city'"),
       );
     }
   });
 
   it('should accept well formed and complete requests', async () => {
     const mockApplicationContext = createMockApplicationContext({
-      mockData,
+      getJsonValidator: () => {
+        return {
+          validateJson,
+        };
+      },
     });
-    const testResponseCallback = () => {};
 
     try {
       await getArtLocationsInCity({
         requestData: {
           city: 'Mankato',
         },
-        responseCallback: testResponseCallback,
         applicationContext: mockApplicationContext,
       });
     } catch (e) {
+      console.log(e);
       assert.fail('should not have thrown an exception');
     }
   });

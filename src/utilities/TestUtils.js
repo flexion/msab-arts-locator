@@ -17,6 +17,7 @@ function createMockApplicationContext(options = {}) {
       readAllLocationsByCity: () => {},
       getGeoLocation: () => {},
       getCityFromGeo: () => {},
+      getLocationsInCity: () => {},
     }),
     getDataReader: () => {
       return options.mockData;
