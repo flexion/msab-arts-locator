@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { createMockApplicationContext } = require('../utilities/TestUtils');
-const { getGeoLocationInteractor } = require('./getGeoInteractor');
+const { getGeoLocationInteractor } = require('./getGeoLocationInteractor');
 const mockData = require('../persistence/mockData');
 describe('valid city', () => {
   it('should reject requests with data in the requestData', async () => {

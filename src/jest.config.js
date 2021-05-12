@@ -1,5 +1,5 @@
 module.exports = {
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   verbose: true,
   collectCoverage: true,
   coverageDirectory: './coverage',
