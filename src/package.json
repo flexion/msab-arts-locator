@@ -80,7 +80,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-sort-keys-fix": "^1.0.1",
     "autoprefixer": "^9.5.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "postcss-cli": "^6.1.2",
     "prettier": "^1.17.1",
     "stylelint": "^9.10.1",
