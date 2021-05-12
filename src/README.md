@@ -207,19 +207,12 @@ The `deployer` (above) policy has no `IAM` permissions to create the Lambda exec
     "Statement": [
         {
             "Action": [
-                "logs:CreateLogStream"
-            ],
-            "Resource": [
-                "arn:aws:logs:::log-group:/aws/lambda/msab-arts-locator-*:*"
-            ],
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
+                "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
             "Resource": [
-                "arn:aws:logs:::log-group:/aws/lambda/msab-arts-locator-*:*:*"
+                "arn:aws:logs:<region>:<account-id>:log-group:/aws/lambda/msab-arts-locator-*:*",
+                "arn:aws:logs:<region>:<account-id>:log-group:/aws/lambda/msab-arts-locator-*:*:*"
             ],
             "Effect": "Allow"
         },
@@ -230,27 +223,13 @@ The `deployer` (above) policy has no `IAM` permissions to create the Lambda exec
                 "dynamodb:Scan",
                 "dynamodb:GetItem",
                 "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem"
-            ],
-            "Resource": [
-                "arn:aws:dynamodb:::table/msab-arts-locator-gis-*"
-            ],
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
-                "dynamodb:Query",
-                "dynamodb:Scan",
-                "dynamodb:GetItem",
-                "dynamodb:PutItem",
                 "dynamodb:BatchGetItem",
                 "dynamodb:UpdateItem",
                 "dynamodb:DeleteItem",
                 "dynamodb:BatchWriteItem"
             ],
             "Resource": [
-                "arn:aws:dynamodb:::table/msab-arts-locator-gis-*"
+                "arn:aws:dynamodb:<region>:<account-id>:table/msab-arts-locator-gis-*"
             ],
             "Effect": "Allow"
         },
@@ -258,16 +237,21 @@ The `deployer` (above) policy has no `IAM` permissions to create the Lambda exec
             "Action": [
                 "s3:*"
             ],
-            "Resource": "arn:aws:s3:::/*",
+            "Resource": "arn:aws:s3:<region>:<account-id>:/msab-arts-locator-*",
             "Effect": "Allow"
         }
     ]
 }
 ```
 
+Update the `dev.yml` configuration with the ARN of the role created above.
 ## Fullstack / web-app client
 
-This project leverages the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
+This project leverages `nodejs12.x` and the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
+
+Change to the `src/` subdirectory and install dependencies
+
+    npm i
 
 Start the app in dev mode
 
