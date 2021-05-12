@@ -44,7 +44,7 @@ Access http://www.google.com/recaptcha/admin to setup a key pair (client/server)
 
 Submit
 
-You'll receive two keys - a client-side key and a server-side secret. The client-side key is encoded in the React client code (configuration coming), the server-side secret is provided in the serverless environment config (see `config/example.yml`).
+You'll receive two keys - a client-side key and a server-side secret. The client-side key is encoded in the React client code (see `src/config/config.js`), the server-side secret is provided in the serverless environment config (see `config/example.yml`).
 
 ## Prerequisites
 
