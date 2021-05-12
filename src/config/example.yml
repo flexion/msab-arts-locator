@@ -3,7 +3,6 @@ domainNameRoot: subdomain.domain.us
 certificateId: xxxxxxxx-yyyy-zzzz-aaaa-123456789012
 googleGeocodingApiKey: ""
 googleCaptchaKey: ""
-imageS3BucketName: ""
 emailUsername: ""
 emailPassword: ""
 lambdaExecutionRole: arn:aws:iam::<account-id>:role/your-externally-created-lambdaRole
