@@ -1,3 +1,6 @@
+const { v4: uuidv4 } = require('uuid');
+const { validateJson } = require('../../utilities/AjvJsonValidator');
+
 module.exports = () => {
   return {
     getUniqueIdString: () => {
@@ -5,6 +8,11 @@ module.exports = () => {
     },
     getCurrentTimestamp: () => {
       return Date.now();
+    },
+    getJsonValidator: () => {
+      return {
+        validateJson,
+      };
     },
     logger: {
       error: (value) => {

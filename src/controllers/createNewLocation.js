@@ -3,10 +3,20 @@ const {
 } = require('../interactors/validateArtLocationInteractor');
 
 exports.createNewLocation = async ({ locationData, applicationContext }) => {
-  validateResult = await validateArtLocation({
+  const validateResult = await validateArtLocation({
     applicationContext,
     requestData: locationData,
   });
-  msg = validateResult.status;
-  console.log(msg);
+  if (validateResult.status != 'success') { throw new Error(`Invalid ArtLocation: ${validateResult.data}`)}
+
+  const artLocation = validateResult.artLocation;
+  const coordResult = await applicationContext
+    .getUseCases()
+    .getLocationCoordinates({
+      applicationContext,
+      artLocation,
+    });
+
+  if (coordResult.status != 'success') { throw new Error(`Error getting location coordinates: ${coordResult.status}`)}
+  return coordResult
 };
