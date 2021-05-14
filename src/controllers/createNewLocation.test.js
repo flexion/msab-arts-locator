@@ -10,6 +10,12 @@ const { getCoordsFromAddress } = require('../persistence/MapsAPIGateway');
 const apiURLs = {
  geocodeAPIUrl: `https://maps.googleapis.com/maps/api/geocode/json`,
 };
+const {
+ saveNewArtLocation,
+} = require('../interactors/saveNewArtLocationInteractor');
+const {
+ saveNewLocationGeo,
+} = require('../persistence/GeoDynamoGateway');
 
 const mockLocationData = {
  name: 'Another Cool Art Location',
@@ -40,13 +46,15 @@ const mockApplicationContext = createMockApplicationContext({
  },
  getUseCases: () => {
   return {
-   getLocationCoordinates
+   getLocationCoordinates,
+   saveNewArtLocation,
   }
  },
  environment,
  getPersistenceGateway: () => {
   return {
-   getCoordsFromAddress
+   getCoordsFromAddress,
+   saveNewLocationGeo,
   }
  }
 });
@@ -59,10 +67,14 @@ describe('createNewLocation controller', () => {
     locationData: data,
     applicationContext: mockApplicationContext,
    });
-   expect(result.status).toEqual('success');
-   expect(result.coords).toHaveProperty('lat');
-   expect(result.coords).toHaveProperty('lng');
-   expect(result.cityName).toBeTruthy();
+
+   expect(result.validateArtLocation.status).toEqual('success');
+   expect(result.validateArtLocation.artLocation).toBeDefined();
+   expect(result.locationCoordinates.status).toEqual('success');
+   expect(result.locationCoordinates.coords).toHaveProperty('lat');
+   expect(result.locationCoordinates.coords).toHaveProperty('lng');
+   expect(result.locationCoordinates.cityName).toBeDefined();
+   expect(result.saveResult.status).toEqual('success');
   });
 
   it('does not return success for invalid ArtLocation', async () => {
