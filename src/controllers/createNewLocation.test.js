@@ -1,21 +1,5 @@
 const { createNewLocation } = require('./createNewLocation');
 const { createMockApplicationContext } = require('../utilities/TestUtils');
-const {
- getLocationCoordinates,
-} = require('../interactors/getLocationCoordinatesInteractor');
-const environment = {
- apiKey: process.env.API_KEY,
-};
-const { getCoordsFromAddress } = require('../persistence/MapsAPIGateway');
-const apiURLs = {
- geocodeAPIUrl: `https://maps.googleapis.com/maps/api/geocode/json`,
-};
-const {
- saveNewArtLocation,
-} = require('../interactors/saveNewArtLocationInteractor');
-const {
- saveNewLocationGeo,
-} = require('../persistence/GeoDynamoGateway');
 
 const mockLocationData = {
  name: 'Another Cool Art Location',
@@ -29,38 +13,41 @@ const mockLocationData = {
    opera: true,
    visual: true
  },
- street: '730 31st St NE',
- city: 'Rochester',
+ street: '123 Valid Street',
+ city: 'Valid City',
  state: 'MN',
- zip: '55906',
- contactName: 'Brice',
- contactEmail: 'bruth@flexion.us',
+ zip: '00000',
+ contactName: 'Art Curator',
+ contactEmail: 'curator@example.com',
  contactPhone: '555-123-2345',
- gresp: '03AGdBq2421EsxsLwlQqp6hVIkRb7o-01a7eJmbD1mqkreiwJ21_VvKOS2EXybQmRYLX4hfOtHh-ovZjDEXOfzUL04D_59f-FGVXnCyxp3xzwzWPkZgbHhvkvVf-U8T2GbYohHUDazg4Lb7-q9FLH8iAI5UUTKXYLSxccn7Wq084qkVOERE1w5SREDK45mArq30WUnKW7wbVMnS-fpUQG4eo8fzKPm0h36HjAKc4NbriMltR58Cw42Zn5iWg-DfTxuNOnQTOwNz0lo0zTNEto6XlGwJu8xjjn-yiX1MQJdv-CKLrCdXdEBiY4mq-RHOnL4VEeIaAA4lMOL6KEx8y45F4bKFETYMHeSSCHOhyB9s666VQusJPlL3Muj8f2JxfYdC_KnGSadv0LTpBdV1I1wfM4BeilIqs8L1HB_Jy9LXt4VYJY7YbDIEoJZbprox7awY78uLK-89FOn',
+ gresp: 'abc1234',
  approved: true,
 };
 
 const mockApplicationContext = createMockApplicationContext({
- apiURLs: () => {
-  return apiURLs;
- },
  getUseCases: () => {
   return {
-   getLocationCoordinates,
-   saveNewArtLocation,
+   getLocationCoordinates: () => {
+    return {
+     status: 'success',
+     coords: {
+      lat: '0.0',
+      lng: '0.0',
+     },
+     cityName: 'the city',
+    }
+   },
+   saveNewArtLocation: () => {
+    return {
+     status: 'success'
+    }
+   },
   }
  },
- environment,
- getPersistenceGateway: () => {
-  return {
-   getCoordsFromAddress,
-   saveNewLocationGeo,
-  }
- }
 });
 
 describe('createNewLocation controller', () => {
-  it('return a valid geolocation', async () => {
+  it('validates ArtLocation, determines coordinates, and saves location', async () => {
    let data = mockLocationData;
    
    const result = await createNewLocation({
@@ -77,7 +64,7 @@ describe('createNewLocation controller', () => {
    expect(result.saveResult.status).toEqual('success');
   });
 
-  it('does not return success for invalid ArtLocation', async () => {
+  it('throws error for invalid ArtLocation', async () => {
     let data = {
      name: 'foo',
     }
@@ -87,21 +74,25 @@ describe('createNewLocation controller', () => {
       locationData: data,
       applicationContext: emptyApplicationContext,
      })
-    ).rejects.toThrow();
+    ).rejects.toThrowError(/invalid artlocation/i);
   });
 
-  it('return a valid geolocation', async () => {
-   let data = {
-    street: 'An invalid address',
-    city: 'Non-existant city',
-    state: 'XX',
-    zip: '00000',
-    mockLocationData
-   };
+  it('throws error when geolocation fails', async () => {
+   const failingApplicationContext = createMockApplicationContext({
+    getUseCases: () => {
+     return {
+      getLocationCoordinates: () => {
+       return {
+        status: 'error',
+       };
+      },
+     };
+    },
+   });
    
    await expect(createNewLocation({
-    locationData: data,
-    applicationContext: mockApplicationContext,
-   })).rejects.toThrow();
+    locationData: mockLocationData,
+    applicationContext: failingApplicationContext,
+   })).rejects.toThrowError(/error getting location/i);
   });
 });
