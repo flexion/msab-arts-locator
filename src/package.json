@@ -1,5 +1,6 @@
 {
   "name": "msab-art-locator-client",
+  "private": true,
   "version": "0.0.1",
   "description": "Front end client for MSAB mobile Arts Locator application.",
   "author": "Flexion Inc.",
@@ -57,8 +58,8 @@
     "geolib": "^3.3.1",
     "jest": "^24.5.0",
     "jsonwebtoken": "^8.5.1",
-    "node-sass-chokidar": "^1.3.4",
-    "nodemailer": "^6.2.1",
+    "node-sass-chokidar": "^1.5.0",
+    "nodemailer": "^6.6.0",
     "npm-run-all": "^4.1.5",
     "papaparse": "^5.2.0",
     "parcel-bundler": "^1.12.3",
@@ -67,11 +68,12 @@
     "react-dom": "^16.8.6",
     "react-google-recaptcha": "^1.0.5",
     "riot-route": "^3.1.4",
-    "sass": "^1.17.3",
+    "sass": "^1.32.13",
     "uuid": "^3.3.2",
     "xhr-mock": "^2.4.1"
   },
   "devDependencies": {
+    "autoprefixer": "^9.5.1",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-jest": "^22.4.1",
@@ -79,15 +81,14 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-sort-keys-fix": "^1.0.1",
-    "autoprefixer": "^9.5.1",
+    "fullstack-serverless": "^0.6.0",
     "node-sass": "^4.13.1",
     "postcss-cli": "^6.1.2",
     "prettier": "^1.17.1",
-    "stylelint": "^9.10.1",
-    "stylelint-config-idiomatic-order": "^6.2.0",
-    "stylelint-config-standard": "^18.2.0",
     "serverless": "^1.41.1",
     "serverless-stack-output": "^0.2.3",
-    "fullstack-serverless": "^0.6.0"
+    "stylelint": "^9.10.1",
+    "stylelint-config-idiomatic-order": "^6.2.0",
+    "stylelint-config-standard": "^18.2.0"
   }
 }

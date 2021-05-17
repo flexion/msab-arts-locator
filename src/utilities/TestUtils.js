@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 /**
  *
  * @param options
@@ -7,7 +9,10 @@ function createMockApplicationContext(options = {}) {
     getUniqueIdString: () => {
       return '413f62ce-d7c8-446e-aeda-14a2a625a626';
     },
-    getCurrentTimestamp: () => {
+    getUniqueId: () => {
+     return uuidv4();
+   },
+   getCurrentTimestamp: () => {
       return 1554070560001;
     },
     getJsonValidator: () => ({
