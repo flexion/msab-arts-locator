@@ -2453,7 +2453,7 @@ aws-lambda-multipart-parser@^0.1.3:
   resolved "https://registry.yarnpkg.com/aws-lambda-multipart-parser/-/aws-lambda-multipart-parser-0.1.3.tgz#400c14eb94ee797a29ff5c6cea1e6a166ffed8e5"
   integrity sha512-xCvTaRab2+Kh2iYK1OVIpt3X6VVutHhHwrdmtQPqUo6fACo7/Dm1rL41C7J/fRnJqChMfOfDif2lbMVHBWVglA==
 
-aws-sdk@^2.304.0, aws-sdk@^2.869.0:
+aws-sdk@^2.304.0, aws-sdk@^2.869.0, aws-sdk@^2.908.0:
   version "2.908.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.908.0.tgz#7c1772919f2840d322a678b27625ef16a0047949"
   integrity sha512-+UtrKOlwjFhGRRrtf3zl5iwFcAnvuh9m63gBnFj9aA+scbP4K2qOukJxPqXCBDeFPqLGH+ojmMJE/54oSlOfmQ==
