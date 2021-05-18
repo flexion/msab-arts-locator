@@ -10,9 +10,9 @@ function createMockApplicationContext(options = {}) {
       return '413f62ce-d7c8-446e-aeda-14a2a625a626';
     },
     getUniqueId: () => {
-     return uuidv4();
-   },
-   getCurrentTimestamp: () => {
+      return uuidv4();
+    },
+    getCurrentTimestamp: () => {
       return 1554070560001;
     },
     getJsonValidator: () => ({

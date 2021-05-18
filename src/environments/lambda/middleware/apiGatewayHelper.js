@@ -1,8 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {
-  UnauthorizedError,
-  NotFoundError,
-} = require('../../../errors/errors');
+const { UnauthorizedError, NotFoundError } = require('../../../errors/errors');
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -71,7 +68,7 @@ exports.redirect = async (event, fun, statusCode = 302) => {
  * @param {Error} err the error to convert to the api gateway response event
  * @returns {Object} an api gateway response object
  */
-exports.sendError = err => {
+exports.sendError = (err) => {
   return {
     body: JSON.stringify(err.message),
     headers,
@@ -105,7 +102,7 @@ exports.sendOk = (response, statusCode = '200') => {
  * @param {Object} event the API gateway request event with would contain headers, params, or query string, etc.
  * @returns {string} the token found in either the header or ?token query string
  */
-exports.getAuthHeader = event => {
+exports.getAuthHeader = (event) => {
   let usernameTokenArray;
   const authorizationHeader =
     event.headers &&
@@ -133,7 +130,7 @@ exports.getAuthHeader = event => {
  * @param {Object} event the api gateway request event
  * @returns {Object} the user decoded from the JWT token
  */
-exports.getUserFromAuthHeader = event => {
+exports.getUserFromAuthHeader = (event) => {
   const token = exports.getAuthHeader(event);
   const decoded = jwt.decode(token);
   if (decoded) {
