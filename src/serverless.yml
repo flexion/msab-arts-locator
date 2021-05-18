@@ -20,6 +20,7 @@ custom:
     file: .serverless/stack.json
 
   fullstack:
+    noConfirm: true
     domain: ${self:custom.domain}
     certificate:
       Fn::Join:
@@ -55,19 +56,20 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ${self:custom.region}
 
-  role: ${self:custom.vars.lambdaExecutionRole}
+  iam:
+    role: ${self:custom.vars.lambdaExecutionRole}
+  lambdaHashingVersion: "20201221"
 
 package:
-  exclude:
-    - .cache/**
-    - .serverless/**
-    - coverage/**
-    - images/**
-    - sass/**
-    - presenter/**
-    - views/**
-    - favicon/**
-    # - node_modules/**
+  patterns:
+    - '!.cache/**'
+    - '!.serverless/**'
+    - '!coverage/**'
+    - '!images/**'
+    - '!sass/**'
+    - '!presenter/**'
+    - '!views/**'
+    - '!favicon/**'
 
 functions:
   getLocations:
