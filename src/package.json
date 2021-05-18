@@ -59,9 +59,9 @@
     "nodemailer": "^6.6.0",
     "papaparse": "^5.2.0",
     "pug": "^3.0.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-google-recaptcha": "^1.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-google-recaptcha": "^2.1.0",
     "riot-route": "^3.1.4",
     "sass": "^1.32.13",
     "uuid": "^8.3.2"
