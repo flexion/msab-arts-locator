@@ -4,7 +4,6 @@ import {
   Control,
   Field,
   Input,
-  Label,
   Section,
   Title,
 } from 'bloomer';

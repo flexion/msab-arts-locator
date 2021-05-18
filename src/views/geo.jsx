@@ -16,7 +16,7 @@ export const Geo = connect(
       });
     };
 
-    const failure = err => {
+    const failure = () => {
       failureSeq({ status: 'denied' });
     };
 

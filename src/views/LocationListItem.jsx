@@ -80,7 +80,7 @@ export const LocationListItem = ({
           <Tag
             className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10 msab-pointer"
             key={i}
-            onClick={e => {
+            onClick={() => {
               setActiveFilter({ value: tag });
             }}
           >

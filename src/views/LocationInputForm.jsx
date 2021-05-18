@@ -39,22 +39,9 @@ export const LocationInputForm = connect(
     submitLocation,
     updateFormValueSequence,
   }) => {
-    const onSubmit = (e, appr) => {
+    const onSubmit = e => {
       e.preventDefault();
-      const gresp = grecaptcha.getResponse();
-      if (gresp) {
-        updateFormValueSequence({
-          key: 'gresp',
-          value: gresp,
-        });
-
-        updateFormValueSequence({
-          key: 'approved',
-          value: appr,
-        });
-      }
       submitLocation();
-      grecaptcha.reset();
     };
 
     return (
@@ -75,13 +62,16 @@ export const LocationInputForm = connect(
           </Title>
           <form noValidate className="search" id="add-location-form">
             <Field>
-              <Label className="msab-has-text-grey">Name</Label>
+              <Label className="msab-has-text-grey" htmlFor="name">
+                Name
+              </Label>
               <Subtitle className="msab-has-text-grey-small">
                 How do you want people to know and find you? (e.g., your legal
                 name, your publicity name, a DBA, a pen name, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
+                  id="name"
                   name="name"
                   type="text"
                   value={form.name || ''}
@@ -95,13 +85,16 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Street Address</Label>
+              <Label className="msab-has-text-grey" htmlFor="street">
+                Street Address
+              </Label>
               <Subtitle className="msab-has-text-grey-small">
                 Where do you want people to find you and potentially visit?
                 (e.g., a performance venue, your studio, retail location, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
+                  id="street"
                   name="street"
                   type="text"
                   value={form.street || ''}
@@ -115,9 +108,12 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Town/City</Label>
+              <Label className="msab-has-text-grey" htmlFor="city">
+                Town/City
+              </Label>
               <Control className="text-field">
                 <Input
+                  id="city"
                   name="city"
                   type="text"
                   value={form.city || ''}
@@ -131,9 +127,12 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">ZIP</Label>
+              <Label className="msab-has-text-grey" htmlFor="zip">
+                ZIP
+              </Label>
               <Control className="text-field">
                 <Input
+                  id="zip"
                   name="zip"
                   type="number"
                   value={form.zip || ''}
@@ -147,9 +146,12 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Web Site (optional)</Label>
+              <Label className="msab-has-text-grey" htmlFor="website">
+                Web Site (optional)
+              </Label>
               <Control className="text-field">
                 <Input
+                  id="website"
                   name="website"
                   type="text"
                   value={form.website || ''}
@@ -163,7 +165,7 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">
+              <Label className="msab-has-text-grey" htmlFor="description">
                 Brief Description (optional - max 250 characters)
               </Label>
               <Subtitle className="msab-has-text-grey-small">
@@ -172,6 +174,7 @@ export const LocationInputForm = connect(
               </Subtitle>
               <Control className="text-field">
                 <TextArea
+                  id="description"
                   maxLength="250"
                   name="description"
                   value={form.description || ''}
@@ -184,16 +187,16 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
-            <Label className="msab-has-text-grey">Type</Label>
+            <span className="label msab-has-text-grey">Type</span>
             <Subtitle className="msab-has-text-grey" isSize={6}>
               (Select up to three that apply)
             </Subtitle>
-            {Object.keys(form.category).map((catKey, i) => {
+            {Object.entries(form.category).map(([catKey, value]) => {
               return (
-                <Field key={i}>
+                <Field key={categories[catKey]}>
                   <Control>
                     <Checkbox
-                      checked={form.category[catKey] || false}
+                      checked={value || false}
                       name={catKey}
                       onChange={e => {
                         updateFormValueSequence({
@@ -201,16 +204,17 @@ export const LocationInputForm = connect(
                           value: e.target.checked,
                         });
                       }}
-                    />
-                    <span className="msab-has-text-grey margin-left-10">
-                      {categories[catKey]}
-                    </span>
+                    >
+                      <span className="msab-has-text-grey margin-left-10">
+                        {categories[catKey]}
+                      </span>
+                    </Checkbox>
                   </Control>
                 </Field>
               );
             })}
             <Field className="msab-margin-top">
-              <Label className="msab-has-text-grey">
+              <Label className="msab-has-text-grey" htmlFor="image">
                 Location Image (optional - max size 1 MB)
               </Label>
               <Subtitle className="msab-has-text-grey-small">
@@ -246,9 +250,12 @@ export const LocationInputForm = connect(
               (For internal use only, won’t be published on site)
             </Subtitle>
             <Field>
-              <Label className="msab-has-text-grey">Contact Name</Label>
+              <Label className="msab-has-text-grey" htmlFor="contactName">
+                Contact Name
+              </Label>
               <Control className="text-field">
                 <Input
+                  id="contactName"
                   name="contactName"
                   type="text"
                   value={form.contactName || ''}
@@ -262,9 +269,12 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Contact E-mail</Label>
+              <Label className="msab-has-text-grey" htmlFor="contactEmail">
+                Contact E-mail
+              </Label>
               <Control className="text-field">
                 <Input
+                  id="contactEmail"
                   name="contactEmail"
                   type="text"
                   value={form.contactEmail || ''}
@@ -278,9 +288,12 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Contact Phone</Label>
+              <Label className="msab-has-text-grey" htmlFor="contactPhone">
+                Contact Phone
+              </Label>
               <Control className="text-field">
                 <Input
+                  id="contactPhone"
                   name="contactPhone"
                   type="text"
                   value={form.contactPhone || ''}
@@ -297,6 +310,7 @@ export const LocationInputForm = connect(
               <Field>
                 <Control>
                   <Checkbox
+                    id="tos"
                     name="ToS"
                     onChange={e => {
                       updateFormValueSequence({
@@ -305,12 +319,15 @@ export const LocationInputForm = connect(
                       });
                     }}
                   />
-                  <span className="msab-has-text-grey margin-left-10">
+                  <Label
+                    className="msab-has-text-grey margin-left-10"
+                    htmlFor="tos"
+                  >
                     I agree to the{' '}
                     <a href="tos" target="_new">
                       terms of service
                     </a>
-                  </span>
+                  </Label>
                 </Control>
               </Field>
             )}
@@ -325,7 +342,7 @@ export const LocationInputForm = connect(
                       value,
                     });
                   }}
-                  onExpired={e => {
+                  onExpired={() => {
                     updateFormValueSequence({
                       key: 'gresp',
                       value: '',
@@ -387,7 +404,7 @@ export const LocationInputForm = connect(
                           onSubmit(e, false);
                         }}
                       >
-                        Don't Publish
+                        Don&apos;t Publish
                       </Button>
                     </Control>
                   </Field>

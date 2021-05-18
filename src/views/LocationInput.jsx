@@ -1,5 +1,5 @@
 import { AppHeader } from './Header';
-import { Container, Notification, Section } from 'bloomer';
+import { Container, Notification } from 'bloomer';
 import { Foot } from './Footer';
 import { LocationInputForm } from './LocationInputForm';
 import { connect } from '@cerebral/react';

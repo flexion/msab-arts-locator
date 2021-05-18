@@ -1,5 +1,5 @@
 import { AppHeader } from './Header';
-import { Container, Level, Section, Title } from 'bloomer';
+import { Container, Section, Title } from 'bloomer';
 import { Foot } from './Footer';
 import React from 'react';
 
@@ -17,10 +17,10 @@ export const TOS = () => (
         </Title>
         <p>
           Minnesota IT Services (MNIT) operates the Arts Around Minnesota
-          website (the <strong>"website"</strong>) on behalf of the Minnesota
-          State Arts Board. You may use this website only if you comply with and
-          agree to be bound by these Terms of Use (collectively, these{' '}
-          <strong>"Terms of Use"</strong>).
+          website (the <strong>&quot;website&quot;</strong>) on behalf of the
+          Minnesota State Arts Board. You may use this website only if you
+          comply with and agree to be bound by these Terms of Use (collectively,
+          these <strong>&quot;Terms of Use&quot;</strong>).
         </p>
         <br />
         <p>
@@ -36,10 +36,10 @@ export const TOS = () => (
         </Title>
         <p>
           MNIT is committed to maintaining a website that protects the
-          individual's right to privacy. Visitors to the site are not required
-          to provide personal information. MNIT does not collect any personally
-          identifying information (name, e-mail address, or other unique
-          identifier) unless you knowingly provide it.
+          individual&apos;s right to privacy. Visitors to the site are not
+          required to provide personal information. MNIT does not collect any
+          personally identifying information (name, e-mail address, or other
+          unique identifier) unless you knowingly provide it.
         </p>
         <br />
         <p>
@@ -72,12 +72,12 @@ export const TOS = () => (
           need to update or revise these Terms of Use, and we reserve the right
           to make any such modifications at any time, without prior notice, by
           posting the revised version of these Terms of Use behind the link
-          marked "Terms" at the bottom of each page of the website. Your
-          continued use of or contributions to the website after we have posted
-          the revised Terms of Use constitutes your agreement to be bound by the
-          revised Terms of Use. You may access the current version of these
-          Terms of Use at any time by clicking the link marked "Terms" at the
-          bottom of each page of the website.
+          marked &quot;Terms&quot; at the bottom of each page of the website.
+          Your continued use of or contributions to the website after we have
+          posted the revised Terms of Use constitutes your agreement to be bound
+          by the revised Terms of Use. You may access the current version of
+          these Terms of Use at any time by clicking the link marked
+          &quot;Terms&quot; at the bottom of each page of the website.
         </p>
         <br />
         <Title className="msab-has-text-purple" isSize={4}>
@@ -89,7 +89,7 @@ export const TOS = () => (
           regardless of its format or the means of its transmission. There is no
           guarantee or representation to the user as to the accuracy, currency,
           suitability, or reliability of this data for any purpose. The user
-          accepts the data “as is." The State of Minnesota assumes no
+          accepts the data &quot;as is.&quot; The State of Minnesota assumes no
           responsibility for loss or damage incurred as a result of any user
           reliance on this data. All maps and other material provided herein are
           protected by copyright.
@@ -177,8 +177,8 @@ export const TOS = () => (
         <p>
           You expressly understand and agree that your use of the website and
           all content, products, and services offered through the website is at
-          your sole risk and that all of the foregoing are provided on an "as
-          is" and "as available" basis.
+          your sole risk and that all of the foregoing are provided on an
+          &quot;as is&quot; and &quot;as available&quot; basis.
         </p>
         <br />
         <p>
@@ -258,7 +258,7 @@ export const TOS = () => (
           Individuals using the website must understand that the Internet is
           inherently insecure and no website operator can guarantee that a
           website is secure. MNIT does not warrant that the website is secure or
-          "hackerproof"; you use the website solely at your own risk.
+          &quot;hackerproof&quot;; you use the website solely at your own risk.
         </p>
         <br />
         <Title className="msab-has-text-purple" isSize={4}>
@@ -281,9 +281,9 @@ export const TOS = () => (
           these Terms of Use will not constitute a waiver of such right or
           provision. If any provision of these Terms of Use is found by a court
           of competent jurisdiction to be invalid, the parties nevertheless
-          agree that the court should endeavor to give effect to the parties'
-          intentions as reflected in the provision, and the other provisions of
-          these Terms of Use remain in full force and effect.
+          agree that the court should endeavor to give effect to the
+          parties&apos; intentions as reflected in the provision, and the other
+          provisions of these Terms of Use remain in full force and effect.
         </p>
         <br />
         <Title className="msab-has-text-purple" isSize={4}>

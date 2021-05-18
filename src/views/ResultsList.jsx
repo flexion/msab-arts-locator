@@ -50,7 +50,7 @@ class ResultsListComponent extends React.Component {
                         <LevelItem>
                           <Delete
                             className="msab-delete"
-                            onClick={e => {
+                            onClick={() => {
                               setActiveFilter({ value: '' });
                             }}
                           />
