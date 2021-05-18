@@ -1,10 +1,10 @@
 ## IAM setup
 
-To run the serverless deploy (e.g. `npx sls deploy --verbose --stage pre --no-confirm --force`), certain prerequisites need to be setup in IAM first.
+To run the serverless deploy (e.g. `yarn sls deploy --verbose --stage pre --force`), certain prerequisites need to be setup in IAM first.
 
 ### Deployer
 
-The `deployer` account will be active in the session that runs the `npx sls deploy ...` command. It needs an associated policy or role that provides the following permissions.
+The `deployer` account will be active in the session that runs the `yarn sls deploy ...` command. It needs an associated policy or role that provides the following permissions.
 
 _Note_: `<account-id>` must be filled in with your AWS account ID (12-digit number).
 

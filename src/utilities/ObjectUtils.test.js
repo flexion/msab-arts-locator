@@ -5,7 +5,7 @@ function MockEntity1(raw) {
   Object.assign(this, raw);
 }
 
-const MockEntity2 = function(raw) {
+const MockEntity2 = function (raw) {
   Object.assign(this, raw);
 };
 

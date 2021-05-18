@@ -7,13 +7,16 @@ phases:
   pre_build:
     commands:
       - echo Installing source NPM dependencies...
-      - cd src && npm install
+      - cd src
+      - yarn
+
   build:
     commands:
       - echo Build started on `date`
-      - cd src && npm run-script build
+      - yarn build
   post_build:
     commands:
+      - yarn test
       - echo Build completed on `date`
 # Include only the files required for your application to run.
 # artifacts:

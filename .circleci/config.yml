@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: Deploy application # creates .serverless/stack.json w/ CF stack vars
-          command: cd src && npx sls deploy --verbose --stage pre --no-confirm --force
+          command: cd src && yarn sls deploy --verbose --stage pre --force
           no_output_timeout: 30m
 
       - run:

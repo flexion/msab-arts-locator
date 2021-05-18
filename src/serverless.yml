@@ -20,6 +20,7 @@ custom:
     file: .serverless/stack.json
 
   fullstack:
+    noConfirm: true
     domain: ${self:custom.domain}
     certificate:
       Fn::Join:
@@ -37,7 +38,7 @@ custom:
     singlePageApp: true # If true 403 errors will be rerouted (missing assets) to your root index document to support single page apps like React and Angular where the js framework handles routing
     compressWebContent: true # Use compression when serving web content
     apiPath: api # The path prefix for your API Gateway lambdas. The path for the lambda http event trigger needs to start with this too eg. api/myMethod
-    clientCommand: npm i && npm run build
+    clientCommand: yarn build
     clientSrcPath: . # The path to where you want to run the clientCommand
     logging:
       bucket: !GetAtt LoggingBucket.RegionalDomainName
@@ -55,19 +56,20 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ${self:custom.region}
 
-  role: ${self:custom.vars.lambdaExecutionRole}
+  iam:
+    role: ${self:custom.vars.lambdaExecutionRole}
+  lambdaHashingVersion: "20201221"
 
 package:
-  exclude:
-    - .cache/**
-    - .serverless/**
-    - coverage/**
-    - images/**
-    - sass/**
-    - presenter/**
-    - views/**
-    - favicon/**
-    # - node_modules/**
+  patterns:
+    - '!.cache/**'
+    - '!.serverless/**'
+    - '!coverage/**'
+    - '!images/**'
+    - '!sass/**'
+    - '!presenter/**'
+    - '!views/**'
+    - '!favicon/**'
 
 functions:
   getLocations:

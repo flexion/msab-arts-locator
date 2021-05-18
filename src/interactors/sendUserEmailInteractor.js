@@ -30,9 +30,7 @@ exports.sendUserEmail = async ({
         body: `<p>Congratulations! The listing you submitted for the Arts Around MN site has been approved and can now be viewed on the site.</p>
         <p>You can edit your listing at any time. We suggest reviewing your listing once a year to make sure the information is still up to date.</p>
         <p><strong>THIS IS THE ONLY WAY TO EDIT YOUR LISTING, SO KEEP THIS E-MAIL IN A SAFE PLACE OR BOOKMARK THE URL.</strong></p>
-        <p>1. Click on your listing URL https://${
-          applicationContext.environment.domainName
-        }/update-location/${artLocation.updateId} </p>
+        <p>1. Click on your listing URL https://${applicationContext.environment.domainName}/update-location/${artLocation.updateId} </p>
         <p>2. Make any necessary changes or updates to your listing.</p>
         <p>3. Press the “Update” button.</p>
         <p>4. The Arts Board will review your changes.</p>

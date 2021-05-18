@@ -6,9 +6,7 @@ const getCoordsFromAddress = async (
 ) => {
   if (artLocation && apiKey) {
     const address = encodeURIComponent(
-      `${artLocation.street}+${artLocation.city}+${artLocation.state}+${
-        artLocation.zip
-      }`,
+      `${artLocation.street}+${artLocation.city}+${artLocation.state}+${artLocation.zip}`,
     );
 
     let url = `${
