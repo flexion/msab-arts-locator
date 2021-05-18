@@ -49,7 +49,7 @@ const {
 const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { putImage, getImage } = require('../../persistence/s3Gateway');
 const { sendEmail } = require('../../persistence/emailGateway');
-const uuidv4 = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
 
 const apiURLs = {
   captchaURL: `https://www.google.com/recaptcha/api/siteverify`,
