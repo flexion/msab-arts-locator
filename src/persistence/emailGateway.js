@@ -4,7 +4,7 @@ let transporter = undefined;
 
 const sendEmail = async ({ requestData, applicationContext }) => {
   return { dummyEmail: true };
-}
+};
 
 const sendEmailReal = async ({ requestData, applicationContext }) => {
   // create reusable transporter object using the default SMTP transport
