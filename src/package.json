@@ -92,5 +92,9 @@
     "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-standard": "^22.0.0",
     "xhr-mock": "^2.4.1"
+  },
+  "resolutions": {
+     "sugarss": "^3.0.3",
+     "qs": "^6.3.2"
   }
 }
