@@ -42,12 +42,12 @@ describe('getGeoLocationSequence', () => {
           };
         },
         getArtLocationsInRadius: (request) => {
-         return {
-          status: 'success',
-          data: {
-           list: [],
-          },
-         };
+          return {
+            status: 'success',
+            data: {
+              list: [],
+            },
+          };
         },
       }),
     });

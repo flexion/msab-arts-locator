@@ -16,9 +16,6 @@ a.button:active {
   background-color: $msab-blue !important;
   color: white !important;
 }
-a:active {
-  color: $msab-blue !important;
-}
 
 h1 {
   font-family: 'Frank Ruhl Libre', serif;
@@ -56,33 +53,35 @@ label {
   padding: 1rem 1.5rem;
 }
 .msab-loading {
-  font-family: Asap;
+  font-family: Asap, sans-serif;
+  font-size: 20px;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
   line-height: 30px;
 }
 
 .msab-filter {
-  font-family: 'Frank Ruhl Libre', serif;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 33px;
+  padding: 5px;
+  padding-left: 15px;
   color: white;
-}
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 33px;
+ }
 
 .msab-loading-ellipsis {
   font-size: 30px;
 }
 
 .msab-loading-ellipsis:after {
-  overflow: hidden;
   display: inline-block;
-  vertical-align: bottom;
+  overflow: hidden;
+  width: 0px;
   -webkit-animation: ellipsis steps(4, end) 900ms infinite;
   animation: ellipsis steps(4, end) 900ms infinite;
   content: '\2026'; /* ascii code for the ellipsis character */
-  width: 0px;
+  vertical-align: bottom;
 }
 
 @keyframes ellipsis {
@@ -101,33 +100,28 @@ label {
   width: 70%;
 }
 .msab-loading-footer {
-  font-family: Asap;
+  font-family: Asap, sans-serif;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
   line-height: 18px;
 }
 .msab-footer {
   padding-top: 5px;
   padding-bottom: 10px;
-  font-family: Asap;
+  font-family: Asap, sans-serif;
+  font-size: 13px;
   font-style: normal;
   font-weight: normal;
-  font-size: 13px;
   line-height: 18px;
 }
 
 .msab-tiny-text {
-  font-family: Asap;
+  font-family: Asap, sans-serif;
+  font-size: 10px;
   font-style: normal;
   font-weight: normal;
-  font-size: 10px;
   line-height: 11px;
-}
-
-.msab-filter {
-  padding: 5px;
-  padding-left: 15px;
 }
 
 .msab-margin-10 {
@@ -136,36 +130,36 @@ label {
 }
 
 .location-name {
-  font-family: Asap;
+  font-family: Asap, sans-serif;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
   line-height: 17px;
 }
 
 .msab-location-address {
   font-family: 'Asap', sans-serif;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
   line-height: 14px;
 }
 
 .tag-text {
-  font-family: Asap;
+  font-family: Asap, sans-serif;
+  font-size: 11px;
   font-style: normal;
   font-weight: 600;
-  font-size: 11px;
   line-height: 13px;
 }
 
 .msab-location-description {
+  margin-top: -0.5rem;
   font-family: 'Asap', sans-serif;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
   line-height: 18px;
-  margin-top: -0.5rem;
 }
 
 .address-level {
@@ -211,26 +205,26 @@ li:not(:first-child) {
 }
 
 .subtitle.is-5 {
+  color: #565c65;
   font-size: 1rem;
   line-height: 1.5rem;
-  color: #565c65;
 }
 
 .subtitle.is-6 {
-  font-size: 1rem;
   color: #565c65;
+  font-size: 1rem;
 }
 
 .msab-has-text-grey-bold {
-  font-weight: 600;
   color: #565c65;
+  font-weight: 600;
 }
 
 .msab-has-text-grey-small {
+  margin-bottom: 0.75rem !important;
+  color: #565c65;
   font-size: 0.85rem;
   line-height: 1.2rem;
-  color: #565c65;
-  margin-bottom: 0.75rem !important;
 }
 
 .subtitle:not(.is-spaced) + .title {
@@ -246,8 +240,8 @@ li:not(:first-child) {
 }
 
 .button.is-primary {
-  font-weight: 600;
   color: #ffffff !important;
+  font-weight: 600;
 }
 
 .field.has-addons {
@@ -270,11 +264,11 @@ li:not(:first-child) {
 }
 
 .tag:not(body) {
+  height: 1.5em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
   font-size: 0.9rem;
   font-variant-caps: all-small-caps;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  height: 1.5em;
 }
 
 .level.is-mobile .level-item:not(:last-child) {
@@ -295,13 +289,13 @@ li:not(:first-child) {
 }
 
 .msab-margin-lr {
-  margin-left: 10px;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .delete, .modal-close {
-    background-color: #A9AEB1;
     margin-left: 10px;
+    background-color: #A9AEB1;
 }
 
 a.has-text-primary:hover, a.has-text-primary:focus {
@@ -310,6 +304,10 @@ a.has-text-primary:hover, a.has-text-primary:focus {
 
 a {
   color: #217575 !important;
+}
+
+a:active {
+ color: $msab-blue !important;
 }
 
 a:hover {

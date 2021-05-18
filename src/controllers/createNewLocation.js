@@ -9,7 +9,9 @@ exports.createNewLocation = async ({ locationData, applicationContext }) => {
     requestData: locationData,
   });
   state.validateArtLocation = validateResult;
-  if (validateResult.status != 'success') { throw new Error(`Invalid ArtLocation: ${validateResult.data}`)}
+  if (validateResult.status != 'success') {
+    throw new Error(`Invalid ArtLocation: ${validateResult.data}`);
+  }
 
   const artLocation = validateResult.artLocation;
   const coordResult = await applicationContext
@@ -18,13 +20,15 @@ exports.createNewLocation = async ({ locationData, applicationContext }) => {
       applicationContext,
       artLocation,
     });
-  state.locationCoordinates = coordResult
-  if (coordResult.status != 'success') { throw new Error(`Error getting location coordinates: ${coordResult.status}`)}
+  state.locationCoordinates = coordResult;
+  if (coordResult.status != 'success') {
+    throw new Error(
+      `Error getting location coordinates: ${coordResult.status}`,
+    );
+  }
 
   artLocation.city = coordResult.cityName;
-  let saveResult = await applicationContext
-  .getUseCases()
-  .saveNewArtLocation({
+  let saveResult = await applicationContext.getUseCases().saveNewArtLocation({
     applicationContext,
     artLocation,
     coords: coordResult.coords,
