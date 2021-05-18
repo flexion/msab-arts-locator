@@ -6,12 +6,12 @@ describe('searchByCitySequence', () => {
   it('should invoke the searchByCity use case interactor', async () => {
     const mockApplicationContext = createMockApplicationContext({
       getUseCases: () => ({
-        getArtLocationsInCity: (request) => {
+        getArtLocationsInCity: request => {
           expect(request.requestData).toMatchObject({
             city: 'Mankato',
           });
           expect(request.applicationContext).toBeDefined();
-          return { status: 'success', data: responseData.data };
+          return { data: responseData.data, status: 'success' };
         },
       }),
     });
@@ -26,7 +26,7 @@ describe('searchByCitySequence', () => {
   it('should add the interactor response to cerebral state', async () => {
     const mockApplicationContext = createMockApplicationContext({
       getUseCases: () => ({
-        getArtLocationsInCity: (request) => {
+        getArtLocationsInCity: () => {
           return { message: 'success', results: responseData.data };
         },
       }),
@@ -43,7 +43,6 @@ describe('searchByCitySequence', () => {
 });
 
 const responseData = {
-  status: 'success',
   data: {
     locationsList: [
       {
@@ -53,4 +52,5 @@ const responseData = {
       },
     ],
   },
+  status: 'success',
 };

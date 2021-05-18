@@ -1,38 +1,38 @@
+import {
+  Button,
+  Container,
+  Control,
+  Field,
+  Input,
+  Label,
+  Section,
+  Title,
+} from 'bloomer';
 import { connect } from '@cerebral/react';
 import { sequences, state } from 'cerebral';
 import React from 'react';
-import {
-  Field,
-  Label,
-  Control,
-  Input,
-  Button,
-  Section,
-  Container,
-  Title,
-} from 'bloomer';
 export const SearchByCity = connect(
   {
     cityValue: state.cityValue,
+    haveGeo: state.haveGeo,
     searchByCitySequence: sequences.searchByCitySequence,
     updateCitySearchSequence: sequences.updateCitySearchSequence,
-    haveGeo: state.haveGeo,
   },
-  ({ cityValue, searchByCitySequence, updateCitySearchSequence, haveGeo }) => {
+  ({ cityValue, haveGeo, searchByCitySequence, updateCitySearchSequence }) => {
     return (
       <Section>
         <Container>
-          <Title isSize={3} className="msab-has-text-purple">
+          <Title className="msab-has-text-purple" isSize={3}>
             {haveGeo
               ? 'Find Arts in Minnesota'
               : 'Oops! Can’t Find Your Location'}
           </Title>
 
           <form
+            noValidate
             className="search"
             id="city-search-form"
-            noValidate
-            onSubmit={(e) => {
+            onSubmit={e => {
               e.preventDefault();
               searchByCitySequence();
             }}
@@ -44,12 +44,12 @@ export const SearchByCity = connect(
               <Control style={{ maxWidth: '100%', width: '100%' }}>
                 <Input
                   className="input is-medium"
-                  type="search"
-                  //type="text"
                   id="city-search"
+                  //type="text"
                   name="citySearch"
+                  type="search"
                   value={cityValue}
-                  onChange={(e) => {
+                  onChange={e => {
                     updateCitySearchSequence({
                       cityValue: e.target.value,
                     });
@@ -57,7 +57,7 @@ export const SearchByCity = connect(
                 />
               </Control>
               <Control>
-                <Button isColor="primary" type="submit" className="is-medium">
+                <Button className="is-medium" isColor="primary" type="submit">
                   <span className="icon is-right has-text-white">
                     <i className="fas fa-search" />
                   </span>

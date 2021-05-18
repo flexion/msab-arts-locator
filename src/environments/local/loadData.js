@@ -1,33 +1,33 @@
 const localApplicationContext = require('./ApplicationContext');
-const { createNewLocation } = require('../../controllers/createNewLocation');
 const sampleData = require('../../../sample-data/sample-data');
+const { createNewLocation } = require('../../controllers/createNewLocation');
 
-const main = async (entities) => {
+const main = async entities => {
   return Promise.all(
-    entities.map(transformSampleData).map((entity) =>
+    entities.map(transformSampleData).map(entity =>
       createNewLocation({
-        locationData: entity,
         applicationContext: localApplicationContext(),
+        locationData: entity,
       }),
     ),
   );
 };
 
-const transformSampleData = (data) => {
+const transformSampleData = data => {
   return {
-    name: data.name,
-    street: data.address1,
-    city: data.city,
-    state: data.st,
-    zip: data.zip,
-    contactName: data.primary_contact,
-    contactEmail: data.email,
-    contactPhone: data.phone,
-    gresp: 'abc123',
     approved: true,
     category: {
       visual: true,
     },
+    city: data.city,
+    contactEmail: data.email,
+    contactName: data.primary_contact,
+    contactPhone: data.phone,
+    gresp: 'abc123',
+    name: data.name,
+    state: data.st,
+    street: data.address1,
+    zip: data.zip,
   };
 };
 

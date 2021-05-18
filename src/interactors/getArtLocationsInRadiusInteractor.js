@@ -1,24 +1,24 @@
 const { validateRequestData } = require('../utilities/CleanUtils');
 
 exports.getArtLocationsInRadius = async ({
-  requestData,
   applicationContext,
+  requestData,
 }) => {
   const dataSchema = {
-    type: 'object',
+    additionalProperties: false,
+    errorMessage:
+      "should be an object with string properties 'lat', 'long', 'radius'",
     properties: {
       lat: { type: 'number' },
       long: { type: 'number' },
       radius: { type: 'number' },
     },
     required: ['lat', 'long', 'radius'],
-    additionalProperties: false,
-    errorMessage:
-      "should be an object with string properties 'lat', 'long', 'radius'",
+    type: 'object',
   };
 
   // An interactor validates that the required objects are present.
-  validateRequestData({ data: requestData, dataSchema, applicationContext });
+  validateRequestData({ applicationContext, data: requestData, dataSchema });
 
   const lat = parseFloat(requestData.lat);
   const long = parseFloat(requestData.long);

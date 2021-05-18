@@ -1,11 +1,11 @@
 import '@babel/polyfill';
-import App from 'cerebral';
 import { Container } from '@cerebral/react';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { Main } from './views/Main';
 import { presenter } from './presenter/presenter';
 import { route, router } from './router';
+import App from 'cerebral';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 presenter.providers.router = {
   route,
@@ -16,5 +16,5 @@ ReactDOM.render(
   <Container app={cerebralApp}>
     <Main />
   </Container>,
-  document.querySelector('#app'),
+  window.document.querySelector('#app'),
 );

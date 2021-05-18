@@ -3,15 +3,15 @@ import { state } from 'cerebral';
 export const validateLocationAction = async ({
   applicationContext,
   get,
-  store,
   path,
+  store,
 }) => {
   store.set(state.submitLocationSuccess, false);
   store.set(state.submitLocationFailure, false);
   store.set(state.submitLocationMsg, '');
   const result = await applicationContext.getUseCases().validateArtLocation({
-    requestData: get(state.form),
     applicationContext,
+    requestData: get(state.form),
   });
   if (
     get(state.form.formDirty) ||

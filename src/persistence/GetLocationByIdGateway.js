@@ -1,6 +1,6 @@
 const makeRequest = (method, url) => {
   return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     // xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
     // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
@@ -25,9 +25,9 @@ const makeRequest = (method, url) => {
 };
 
 const getLocationById = async ({
-  entityId,
   actionType,
   applicationContext,
+  entityId,
 }) => {
   const lambdaURL = applicationContext.environment().apiURL + 'get-location';
   const method = 'GET';

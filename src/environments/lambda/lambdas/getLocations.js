@@ -1,15 +1,15 @@
-const createApplicationContext = require('../ApplicationContext');
 const AWS = require('aws-sdk');
+const createApplicationContext = require('../ApplicationContext');
 const { getDistance } = require('geolib');
-var conversions = require('conversions');
+let conversions = require('conversions');
 /**
  * used for retrieving locations based on geocoords
  *
- * @param {Object} event the AWS event object
+ * @param {object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
 
-const removeKeys = (location) => {
+const removeKeys = location => {
   location.coordinates = JSON.parse(location.geoJson).coordinates;
   delete location.geoJson;
   delete location.hashKey;
@@ -31,7 +31,7 @@ const formatLocation = (location, requestData) => {
   return location;
 };
 
-const get = async (event, context) => {
+const get = async event => {
   const applicationContext = createApplicationContext();
   let requestData = null;
   let results = null;
@@ -50,10 +50,9 @@ const get = async (event, context) => {
           applicationContext,
           requestData,
         });
-      status = queryResults.status;
-      results = queryResults.results;
+      ({ results, status } = queryResults);
       console.log('geoResults: ', results);
-      results.forEach((result) => {
+      results.forEach(result => {
         let location = AWS.DynamoDB.Converter.unmarshall(result, {
           convertEmptyValues: true,
         });
@@ -66,9 +65,9 @@ const get = async (event, context) => {
       newResults.sort((a, b) => (a.distance > b.distance ? 1 : -1));
     } else if (requestData.city) {
       const geocode = {
-        street: '',
         city: requestData.city,
         state: 'MN',
+        street: '',
         zip: '',
       };
       //need to standardize city name:
@@ -78,7 +77,7 @@ const get = async (event, context) => {
           applicationContext,
           artLocation: geocode,
         });
-      status = coordResult.status;
+      ({ status } = coordResult);
       let city = coordResult.cityName;
       console.log('standardized city name: ', city);
       if (city) {
@@ -88,10 +87,9 @@ const get = async (event, context) => {
             applicationContext,
             requestData: { city },
           });
-        status = queryResults.status;
-        results = queryResults.results;
+        ({ results, status } = queryResults);
         console.log('queryResults: ', queryResults);
-        results.Items.forEach((location) => {
+        results.Items.forEach(location => {
           if (location.approved) {
             location = removeKeys(location);
             console.log('location: ', location);
@@ -102,25 +100,25 @@ const get = async (event, context) => {
     }
     if (status === 'success') {
       return {
-        statusCode: 201,
         body: JSON.stringify({
           message: 'success',
           results: newResults,
         }),
+        statusCode: 201,
       };
     } else {
       return {
-        statusCode: 406,
         body: JSON.stringify({
-          message: status,
           input: event,
+          message: status,
         }),
+        statusCode: 406,
       };
     }
   } catch (e) {
     console.log('e: ', e);
     applicationContext.logger.error(e);
-    return { statusCode: 500, body: JSON.stringify({ message: 'error', e }) };
+    return { body: JSON.stringify({ e, message: 'error' }), statusCode: 500 };
   }
 };
 

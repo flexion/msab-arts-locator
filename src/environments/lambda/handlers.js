@@ -1,6 +1,6 @@
 module.exports = {
-  saveLocation: require('./lambdas/saveLocation').post,
-  getLocations: require('./lambdas/getLocations').get,
   getLocation: require('./lambdas/getLocation').get,
+  getLocations: require('./lambdas/getLocations').get,
+  saveLocation: require('./lambdas/saveLocation').post,
   updateLocationApproval: require('./lambdas/updateLocationApproval').post,
 };

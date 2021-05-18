@@ -1,6 +1,6 @@
 const makeRequest = (method, url) => {
   return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     // xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
     // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');

@@ -10,66 +10,66 @@ const config = new ddbGeo.GeoDataManagerConfiguration(
 config.hashKeyLength = 5;
 const myGeoTableManager = new ddbGeo.GeoDataManager(config);
 const documentClient = new AWS.DynamoDB.DocumentClient();
-const queryDynamo = (params) => {
+const queryDynamo = params => {
   return new Promise(function (resolve, reject) {
     documentClient.query(params, function (err, data) {
       if (err) {
         console.log(err);
-        reject({ status: 'failed', data: err });
+        reject({ data: err, status: 'failed' });
       } else {
-        resolve({ status: 'success', results: data });
+        resolve({ results: data, status: 'success' });
       }
     });
   });
 };
 
-const updateDynamo = (params) => {
+const updateDynamo = params => {
   return new Promise(function (resolve, reject) {
     documentClient.update(params, function (err, data) {
       if (err) {
         console.log(err);
-        reject({ status: 'failed', data: err });
+        reject({ data: err, status: 'failed' });
       } else {
-        resolve({ status: 'success', results: data });
+        resolve({ results: data, status: 'success' });
       }
     });
   });
 };
 
-const deleteDynamo = (params) => {
+const deleteDynamo = params => {
   return new Promise(function (resolve, reject) {
     documentClient.delete(params, function (err, data) {
       if (err) {
         console.log(err);
-        reject({ status: 'failed', data: err });
+        reject({ data: err, status: 'failed' });
       } else {
-        resolve({ status: 'success', results: data });
+        resolve({ results: data, status: 'success' });
       }
     });
   });
 };
 
 const saveNewLocationGeo = async ({
+  applicationContext,
   artLocation,
   coords,
-  applicationContext,
 }) => {
   try {
     let item = {
-      name: { S: artLocation.name },
+      adminId: { S: artLocation.adminId },
+      approved: { BOOL: artLocation.approved },
       category: { S: JSON.stringify(artLocation.category) },
-      street: { S: artLocation.street },
       city: { S: artLocation.city },
-      state: { S: artLocation.state },
-      zip: { S: artLocation.zip },
-      contactName: { S: artLocation.contactName },
       contactEmail: { S: artLocation.contactEmail },
+      contactName: { S: artLocation.contactName },
       contactPhone: { S: artLocation.contactPhone },
       createdAt: { N: `${artLocation.createdAt}` },
       entityId: { S: artLocation.entityId },
-      adminId: { S: artLocation.adminId },
+      name: { S: artLocation.name },
+      state: { S: artLocation.state },
+      street: { S: artLocation.street },
       updateId: { S: artLocation.updateId },
-      approved: { BOOL: artLocation.approved },
+      zip: { S: artLocation.zip },
     };
 
     if (artLocation.imageURL) {
@@ -84,7 +84,7 @@ const saveNewLocationGeo = async ({
     console.log('Location being inserted: ', item);
     await myGeoTableManager
       .putPoint({
-        RangeKeyValue: { S: applicationContext.getUniqueId() }, // Use this to ensure uniqueness of the hash/range pairs.
+        // Use this to ensure uniqueness of the hash/range pairs.
         GeoPoint: {
           // An object specifying latitutde and longitude as plain numbers. Used to build the geohash, the hashkey and geojson data
           latitude: coords.lat,
@@ -93,13 +93,14 @@ const saveNewLocationGeo = async ({
         PutItemInput: {
           Item: item,
         },
+        RangeKeyValue: { S: applicationContext.getUniqueId() },
       })
       .promise()
       .then(function () {
         console.log('Done putting new location!');
       });
 
-    return { status: 'success', artLocation };
+    return { artLocation, status: 'success' };
   } catch (e) {
     console.log('something failed on dynamo put', e);
     return { status: 'save failed' };
@@ -109,13 +110,13 @@ const saveNewLocationGeo = async ({
 const getLocationsByGeo = async ({ lat, long, radius }) => {
   try {
     const results = await myGeoTableManager.queryRadius({
-      RadiusInMeter: radius,
       CenterPoint: {
         latitude: lat,
         longitude: long,
       },
+      RadiusInMeter: radius,
     });
-    return { status: 'success', results };
+    return { results, status: 'success' };
   } catch (e) {
     console.log('something failed on dynamo get', e);
     return { status: 'get failed' };
@@ -123,30 +124,30 @@ const getLocationsByGeo = async ({ lat, long, radius }) => {
 };
 
 const getLocationsInCity = async ({ city }) => {
-  var params = {
-    TableName: process.env.GIS_TABLE,
-    IndexName: 'cityName-index',
-    KeyConditionExpression: 'city = :c',
+  let params = {
     ExpressionAttributeValues: {
       ':c': city,
     },
+    IndexName: 'cityName-index',
+    KeyConditionExpression: 'city = :c',
+    TableName: process.env.GIS_TABLE,
   };
   console.log('params for query: ', params);
   const results = await queryDynamo(params);
   return results;
 };
 
-const getLocationById = async ({ entityId, actionType }) => {
+const getLocationById = async ({ actionType, entityId }) => {
   console.group('entityid, action', entityId, actionType);
   const indexName = `${actionType}Id-index`;
   const columnName = `${actionType}Id`;
-  var params = {
-    TableName: process.env.GIS_TABLE,
-    IndexName: indexName,
-    KeyConditionExpression: `${columnName} = :id`,
+  let params = {
     ExpressionAttributeValues: {
       ':id': entityId,
     },
+    IndexName: indexName,
+    KeyConditionExpression: `${columnName} = :id`,
+    TableName: process.env.GIS_TABLE,
   };
   console.log('params', params);
   const results = await queryDynamo(params);
@@ -157,25 +158,25 @@ const getLocationById = async ({ entityId, actionType }) => {
 const updateLocationApproval = async ({ artLocationData }) => {
   let results = null;
   const id = artLocationData.update.entityId;
-  const approved = artLocationData.approved;
-  results = await getLocationById({ entityId: id, actionType: 'admin' });
+  const { approved } = artLocationData;
+  results = await getLocationById({ actionType: 'admin', entityId: id });
 
   if (results.results.Items.length > 0) {
     const item = results.results.Items[0];
 
     let params = {
-      TableName: process.env.GIS_TABLE,
-      Key: { hashKey: item.hashKey, rangeKey: item.rangeKey },
-      UpdateExpression: 'set approved = :a',
       ExpressionAttributeValues: {
         ':a': approved,
       },
+      Key: { hashKey: item.hashKey, rangeKey: item.rangeKey },
+      TableName: process.env.GIS_TABLE,
+      UpdateExpression: 'set approved = :a',
     };
 
     console.log('params', params);
     await updateDynamo(params);
 
-    results = { status: 'success', artLocation: item };
+    results = { artLocation: item, status: 'success' };
     console.log('update results: ', results);
   }
   return results;
@@ -183,12 +184,12 @@ const updateLocationApproval = async ({ artLocationData }) => {
 
 const deleteLocation = async ({ requestData }) => {
   let results = null;
-  const hashKey = requestData.hashKey;
-  const rangeKey = requestData.rangeKey;
+  const { hashKey } = requestData;
+  const { rangeKey } = requestData;
 
   let params = {
+    Key: { hashKey, rangeKey },
     TableName: process.env.GIS_TABLE,
-    Key: { hashKey: hashKey, rangeKey: rangeKey },
   };
 
   console.log('params', params);
@@ -198,10 +199,10 @@ const deleteLocation = async ({ requestData }) => {
   return results;
 };
 module.exports = {
-  saveNewLocationGeo,
+  deleteLocation,
+  getLocationById,
   getLocationsByGeo,
   getLocationsInCity,
-  getLocationById,
+  saveNewLocationGeo,
   updateLocationApproval,
-  deleteLocation,
 };

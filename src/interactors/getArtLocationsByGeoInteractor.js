@@ -1,21 +1,21 @@
 const { validateRequestData } = require('../utilities/CleanUtils');
 
-exports.getArtLocationsByGeo = async ({ requestData, applicationContext }) => {
+exports.getArtLocationsByGeo = async ({ applicationContext, requestData }) => {
   const dataSchema = {
-    type: 'object',
+    additionalProperties: false,
+    errorMessage:
+      "should be an object with string properties 'lat', 'lon', 'radius'",
     properties: {
       lat: { type: 'string' },
       lon: { type: 'string' },
       radius: { type: 'string' },
     },
     required: ['lat', 'lon', 'radius'],
-    additionalProperties: false,
-    errorMessage:
-      "should be an object with string properties 'lat', 'lon', 'radius'",
+    type: 'object',
   };
 
   // An interactor validates that the required objects are present.
-  validateRequestData({ data: requestData, dataSchema, applicationContext });
+  validateRequestData({ applicationContext, data: requestData, dataSchema });
 
   const lat = parseFloat(requestData.lat);
   const long = parseFloat(requestData.lon);

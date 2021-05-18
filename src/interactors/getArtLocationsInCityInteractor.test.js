@@ -2,7 +2,6 @@ const assert = require('assert');
 const { createMockApplicationContext } = require('../utilities/TestUtils');
 const { getArtLocationsInCity } = require('./getArtLocationsInCityInteractor');
 const { validateJson } = require('../utilities/AjvJsonValidator');
-const mockData = require('../persistence/mockData');
 describe('valid city', () => {
   it('should reject requests with missing city in the requestData', async () => {
     const mockApplicationContext = createMockApplicationContext({
@@ -15,8 +14,8 @@ describe('valid city', () => {
 
     try {
       await getArtLocationsInCity({
-        requestData: { meow: 'meow' },
         applicationContext: mockApplicationContext,
+        requestData: { meow: 'meow' },
       });
     } catch (e) {
       assert.ok(
@@ -36,10 +35,10 @@ describe('valid city', () => {
 
     try {
       await getArtLocationsInCity({
+        applicationContext: mockApplicationContext,
         requestData: {
           city: 'Mankato',
         },
-        applicationContext: mockApplicationContext,
       });
     } catch (e) {
       console.log(e);

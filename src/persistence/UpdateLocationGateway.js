@@ -1,6 +1,6 @@
 const makeRequest = (method, url, artLocationData) => {
   return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     // xhr.setRequestHeader('enctype', 'multipart/form-data');
@@ -31,8 +31,8 @@ const makeRequest = (method, url, artLocationData) => {
 };
 
 const updateLocationApproval = async ({
-  artLocationData,
   applicationContext,
+  artLocationData,
 }) => {
   if (artLocationData) {
     const method = 'POST';

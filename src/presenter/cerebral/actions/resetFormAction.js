@@ -1,5 +1,5 @@
-import { state } from 'cerebral';
 import { defaultForm } from '../../defaultForm';
-export const resetFormAction = ({ store, props }) => {
+import { state } from 'cerebral';
+export const resetFormAction = ({ store }) => {
   store.set(state.form, defaultForm);
 };

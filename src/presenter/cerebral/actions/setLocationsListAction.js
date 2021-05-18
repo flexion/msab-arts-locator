@@ -1,6 +1,6 @@
 import { state } from 'cerebral';
 
-export const setLocationsListAction = ({ store, props }) => {
+export const setLocationsListAction = ({ props, store }) => {
   if (typeof props.result === 'string') {
     props.result = JSON.parse(props.result);
   }

@@ -1,6 +1,9 @@
 const assert = require('assert');
 const { toJSON } = require('./ObjectUtils');
 
+/**
+ * @param raw
+ */
 function MockEntity1(raw) {
   Object.assign(this, raw);
 }

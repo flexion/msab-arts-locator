@@ -1,14 +1,14 @@
-const { v4: uuidv4 } = require('uuid');
-const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {
   getLocationCoordinates,
 } = require('../../interactors/getLocationCoordinatesInteractor');
+const { v4: uuidv4 } = require('uuid');
+const { validateJson } = require('../../utilities/AjvJsonValidator');
 const environment = {
   apiKey: process.env.API_KEY,
 };
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const apiURLs = {
-  geocodeAPIUrl: `https://maps.googleapis.com/maps/api/geocode/json`,
+  geocodeAPIUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
 };
 const {
   saveNewArtLocation,
@@ -20,25 +20,7 @@ module.exports = () => {
     apiURLs: () => {
       return apiURLs;
     },
-    getUseCases: () => {
-      return {
-        getLocationCoordinates,
-        saveNewArtLocation,
-      };
-    },
     environment,
-    getPersistenceGateway: () => {
-      return {
-        getCoordsFromAddress,
-        saveNewLocationGeo,
-      };
-    },
-    getUniqueIdString: () => {
-      return uuidv4();
-    },
-    getUniqueId: () => {
-      return uuidv4();
-    },
     getCurrentTimestamp: () => {
       return Date.now();
     },
@@ -47,8 +29,26 @@ module.exports = () => {
         validateJson,
       };
     },
+    getPersistenceGateway: () => {
+      return {
+        getCoordsFromAddress,
+        saveNewLocationGeo,
+      };
+    },
+    getUniqueId: () => {
+      return uuidv4();
+    },
+    getUniqueIdString: () => {
+      return uuidv4();
+    },
+    getUseCases: () => {
+      return {
+        getLocationCoordinates,
+        saveNewArtLocation,
+      };
+    },
     logger: {
-      error: (value) => {
+      error: value => {
         // eslint-disable-next-line no-console
         console.error(JSON.stringify(value));
       },

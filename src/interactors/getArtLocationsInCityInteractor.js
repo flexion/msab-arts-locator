@@ -1,23 +1,23 @@
 const { validateRequestData } = require('../utilities/CleanUtils');
 
-exports.getArtLocationsInCity = async ({ requestData, applicationContext }) => {
+exports.getArtLocationsInCity = async ({ applicationContext, requestData }) => {
   const dataSchema = {
-    type: 'object',
+    additionalProperties: false,
+    errorMessage: "should be an object with string properties 'city'",
     properties: {
       city: { type: 'string' },
     },
     required: ['city'],
-    additionalProperties: false,
-    errorMessage: "should be an object with string properties 'city'",
+    type: 'object',
   };
 
   // An interactor validates that the required objects are present.
-  validateRequestData({ data: requestData, dataSchema, applicationContext });
+  validateRequestData({ applicationContext, data: requestData, dataSchema });
 
   const { city } = requestData;
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
     .getPersistenceGateway()
-    .getLocationsInCity({ city, applicationContext });
+    .getLocationsInCity({ applicationContext, city });
   return artLocationData;
 };

@@ -1,8 +1,8 @@
 const fileType = require('file-type');
 
-const getBase64 = (image) => {
+const getBase64 = image => {
   let file = null;
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const reader = new FileReader();
     reader.readAsDataURL(image);
     reader.onload = () => {
@@ -17,10 +17,10 @@ const getBase64 = (image) => {
  * @param image
  * @returns {success, contentType, image}
  */
-exports.validateImageFileType = async (image) => {
+exports.validateImageFileType = async image => {
   // converts to base64 to buffer to check the mime type
   if (!image) {
-    return { status: 'success', base64Image: null };
+    return { base64Image: null, status: 'success' };
   }
   try {
     const types = ['image/jpeg', 'image/png', 'image/gif'];
@@ -42,7 +42,7 @@ exports.validateImageFileType = async (image) => {
       types.indexOf(contentType.mime) > -1 &&
       imageBuffer.length <= 1000000
     ) {
-      return { status: 'success', contentType, base64Image };
+      return { base64Image, contentType, status: 'success' };
     } else {
       return {
         status:
@@ -50,6 +50,6 @@ exports.validateImageFileType = async (image) => {
       };
     }
   } catch (e) {
-    return { status: 'error: unsupported filetype', data: e.message };
+    return { data: e.message, status: 'error: unsupported filetype' };
   }
 };

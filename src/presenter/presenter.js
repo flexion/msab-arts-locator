@@ -1,20 +1,20 @@
-import { searchByCitySequence } from './cerebral/sequences/searchByCitySequence';
-import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
 import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSequence';
-import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
-import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
-import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
 import { getLocationSequence } from './cerebral/sequences/getLocationSequence';
-import { setImageSequence } from './cerebral/sequences/setImageSequence';
-import { setActiveFilterSequence } from './cerebral/sequences/setActiveFilterSequence';
-import { setRadiusSequence } from './cerebral/sequences/setRadiusSequence';
-import applicationContext from '../environments/client/ApplicationContext';
-import { locationListHelper } from './cerebral/computeds/locationListHelper';
 import { locationFormButtonsHelper } from './cerebral/computeds/locationFormButtonsHelper';
+import { locationListHelper } from './cerebral/computeds/locationListHelper';
+import { routeChangeSequence } from './cerebral/sequences/routeChangeSequence';
+import { searchByCitySequence } from './cerebral/sequences/searchByCitySequence';
+import { setActiveFilterSequence } from './cerebral/sequences/setActiveFilterSequence';
+import { setImageSequence } from './cerebral/sequences/setImageSequence';
+import { setRadiusSequence } from './cerebral/sequences/setRadiusSequence';
+import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
+import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
+import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
+import applicationContext from '../environments/client/ApplicationContext';
 
 // Cerebral module
 
-const presenter = {
+export const presenter = {
   catch: [
     // [ServerInvalidResponseError, setCurrentPageErrorSequence], // 501, 503, etc
     // [UnauthorizedRequestError, unauthorizedErrorSequence], // 403
@@ -24,84 +24,88 @@ const presenter = {
   ],
   providers: { applicationContext },
   sequences: {
-    getLocationSequence,
-    searchByCitySequence,
-    updateCitySearchSequence,
     getGeoLocationSequence,
-    updateFormValueSequence,
+    getLocationSequence,
     routeChangeSequence,
-    submitLocationSequence,
-    setImageSequence,
+    searchByCitySequence,
     setActiveFilterSequence,
+    setImageSequence,
     setRadiusSequence,
+    submitLocationSequence,
+    updateCitySearchSequence,
+    updateFormValueSequence,
   },
   state: {
     activeFilter: null,
-    submitLocationSuccess: false,
-    submitLocationFailure: false,
-    selectImageFailure: false,
-    selectImageMsg: '',
-    submitLocationMsg: '',
-    cityValue: '',
-    locationsList: [],
-    locationsListBk: [],
-    locationListHelper,
-    locationFormButtonsHelper,
-    haveGeo: false,
     askingLocation: false,
-    findingLocations: false,
-    gettingLocation: false,
-    citySearch: false,
-    radius: 16093, //in meters
-    position: { lat: 0, long: 0 },
-    currentPage: 'Home',
     categories: {
       craft: 'Craft/Textiles',
       dance: 'Dance',
       folk: 'Folk/Traditional',
-      visual: 'Visual Arts',
       literary: 'Literary Arts',
       music: 'Music',
-      photo: 'Photography/Film/Media',
       opera: 'Theater/Opera',
+      photo: 'Photography/Film/Media',
+      visual: 'Visual Arts',
     },
-    update: {
-      entityId: '',
-      actionType: '',
-    },
+    citySearch: false,
+    cityValue: '',
+    currentPage: 'Home',
+    findingLocations: false,
     form: {
-      update: {
-        entityId: '',
-        actionType: '',
-      },
-      formDirty: false,
-      gresp: '',
-      name: null,
+      ToS: false,
+      approved: false,
+      base64Image: null,
       category: {
         craft: false,
         dance: false,
         folk: false,
         literary: false,
         music: false,
-        photo: false,
         opera: false,
+        photo: false,
         visual: false,
       },
-      website: null,
-      street: null,
       city: null,
-      state: 'MN',
-      zip: null,
-      contactName: null,
       contactEmail: null,
+      contactName: null,
       contactPhone: null,
       description: null,
+      formDirty: false,
+      gresp: '',
       image: null,
-      approved: false,
-      base64Image: null,
-      ToS: false,
+      name: null,
+      state: 'MN',
+      street: null,
+      update: {
+        actionType: '',
+        entityId: '',
+      },
+      website: null,
+      zip: null,
+    },
+    gettingLocation: false,
+    haveGeo: false,
+    locationFormButtonsHelper,
+    locationListHelper,
+    locationsList: [],
+    locationsListBk: [],
+    //in meters
+    position: { lat: 0, long: 0 },
+
+    radius: 16093,
+
+    selectImageFailure: false,
+
+    selectImageMsg: '',
+
+    submitLocationFailure: false,
+
+    submitLocationMsg: '',
+    submitLocationSuccess: false,
+    update: {
+      actionType: '',
+      entityId: '',
     },
   },
 };
-
-module.exports = { presenter };

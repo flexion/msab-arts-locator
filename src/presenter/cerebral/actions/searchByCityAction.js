@@ -7,8 +7,8 @@ export const searchByCityAction = async ({
 }) => {
   store.set(state.citySearch, true);
   const result = await applicationContext.getUseCases().getArtLocationsInCity({
-    requestData: { city: get(state`cityValue`) },
     applicationContext,
+    requestData: { city: get(state`cityValue`) },
   });
   return { result };
 };

@@ -1,15 +1,17 @@
 /**
  *
+ * @param requestData.requestData
  * @param requestData
  * @param applicationContext
+ * @param requestData.applicationContext
  * @returns {result}
  */
-exports.sendArtLocation = async ({ requestData, applicationContext }) => {
+exports.sendArtLocation = async ({ applicationContext, requestData }) => {
   const result = await applicationContext
     .getPersistenceGateway()
     .submitNewLocation({
-      artLocationData: requestData,
       applicationContext,
+      artLocationData: requestData,
     });
 
   return result;

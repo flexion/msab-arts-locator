@@ -1,27 +1,27 @@
-import { Home } from './Home';
-import { LocationInput } from './LocationInput';
 import { Curate } from './Curate';
+import { Home } from './Home';
 import { Loading } from './Loading';
+import { LocationInput } from './LocationInput';
 import { TOS } from './TOS';
 import { connect } from '@cerebral/react';
 import { state } from 'cerebral';
 import React from 'react';
 
 const pages = {
+  Curate,
   Home,
   LocationInput,
-  Curate,
   TOS,
 };
 
 export const Main = connect(
   {
+    askingLocation: state.askingLocation,
     currentPage: state.currentPage,
     findingLocations: state.findingLocations,
-    askingLocation: state.askingLocation,
     gettingLocation: state.gettingLocation,
   },
-  ({ currentPage, findingLocations, askingLocation, gettingLocation }) => {
+  ({ askingLocation, currentPage, findingLocations, gettingLocation }) => {
     let CurrentPage = pages[currentPage];
     let isActive = findingLocations || askingLocation || gettingLocation;
     return (
@@ -29,10 +29,10 @@ export const Main = connect(
         <main id="main-content" role="main">
           {/* {currentPage === 'Home' && ( */}
           <Loading
-            isActive={isActive}
             askingLocation={askingLocation}
             findingLocations={findingLocations}
             gettingLocation={gettingLocation}
+            isActive={isActive}
           />
           {/* )} */}
           <CurrentPage />

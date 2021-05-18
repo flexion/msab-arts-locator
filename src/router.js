@@ -4,38 +4,38 @@ route.base('/');
 const pageTitleSuffix = ' | MN Arts Board';
 
 const router = {
-  initialize: (app) => {
-    document.title = 'Art Around MN';
+  initialize: app => {
+    window.document.title = 'Art Around MN';
 
     route('/', () => {
       app.getSequence('routeChangeSequence')({ page: 'Home' });
     });
 
     route('/submit-location', () => {
-      document.title = `Submit Location ${pageTitleSuffix}`;
+      window.document.title = `Submit Location ${pageTitleSuffix}`;
       app.getSequence('routeChangeSequence')({ page: 'LocationInput' });
     });
 
     route('/tos', () => {
-      document.title = `Terms of Service ${pageTitleSuffix}`;
+      window.document.title = `Terms of Service ${pageTitleSuffix}`;
       app.getSequence('routeChangeSequence')({ page: 'TOS' });
     });
 
-    route('/curate-location/*', (entityId) => {
-      document.title = `Curate Location ${pageTitleSuffix}`;
+    route('/curate-location/*', entityId => {
+      window.document.title = `Curate Location ${pageTitleSuffix}`;
       app.getSequence('getLocationSequence')({
-        page: 'LocationInput',
-        entityId,
         actionType: 'admin',
+        entityId,
+        page: 'LocationInput',
       });
     });
 
-    route('/update-location/*', (entityId) => {
-      document.title = `Update Location ${pageTitleSuffix}`;
+    route('/update-location/*', entityId => {
+      window.document.title = `Update Location ${pageTitleSuffix}`;
       app.getSequence('getLocationSequence')({
-        page: 'LocationInput',
-        entityId,
         actionType: 'update',
+        entityId,
+        page: 'LocationInput',
       });
     });
 

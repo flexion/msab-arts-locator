@@ -1,16 +1,16 @@
-import React from 'react';
 import {
-  LevelLeft,
-  Image,
   Container,
-  LevelRight,
-  LevelItem,
+  Image,
   Level,
+  LevelItem,
+  LevelLeft,
+  LevelRight,
   Section,
 } from 'bloomer';
+import React from 'react';
+import artsboard from '../images/artsboard.png';
 import logo from '../images/logo1.svg';
 import mnlogo from '../images/mnlogo.png';
-import artsboard from '../images/artsboard.png';
 
 export const AppHeader = () => (
   <Section className="header-section">

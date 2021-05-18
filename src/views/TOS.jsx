@@ -1,7 +1,7 @@
-import React from 'react';
-import { Section, Container, Title, Level } from 'bloomer';
 import { AppHeader } from './Header';
+import { Container, Level, Section, Title } from 'bloomer';
 import { Foot } from './Footer';
+import React from 'react';
 
 export const TOS = () => (
   <React.Fragment>
@@ -9,10 +9,10 @@ export const TOS = () => (
 
     <Section>
       <Container>
-        <Title isSize={3} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={3}>
           Terms of Service
         </Title>
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Terms of Use
         </Title>
         <p>
@@ -31,7 +31,7 @@ export const TOS = () => (
           use, or contribute to the website.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Privacy Statement
         </Title>
         <p>
@@ -62,7 +62,7 @@ export const TOS = () => (
           13).
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           These Terms of Use May Change
         </Title>
         <p>
@@ -80,7 +80,7 @@ export const TOS = () => (
           bottom of each page of the website.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Maps and Other Plug-Ins
         </Title>
         <p>
@@ -95,7 +95,7 @@ export const TOS = () => (
           protected by copyright.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Disclaimer of Accuracy or Endorsement
         </Title>
         <p>
@@ -107,7 +107,7 @@ export const TOS = () => (
           other important details before engaging with the entity.{' '}
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Copyright
         </Title>
         <p>
@@ -126,7 +126,7 @@ export const TOS = () => (
           available below.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Restrictions on Use of Logo
         </Title>
         <p>
@@ -137,7 +137,7 @@ export const TOS = () => (
           contact Jodi.Niehoff@arts.state.mn.us.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Ownership of Website and Content
         </Title>
         <p>
@@ -151,7 +151,7 @@ export const TOS = () => (
           communication whether now existing or hereafter developed.{' '}
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Right to Modify or Discontinue Site
         </Title>
         <p>
@@ -162,7 +162,7 @@ export const TOS = () => (
           or discontinuance of the website.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Disclaimer of Warranties and Limitations of Liability
         </Title>
         <p>
@@ -219,7 +219,7 @@ export const TOS = () => (
           limitations of liability may not apply to you.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Indemnification
         </Title>
         <p>
@@ -235,7 +235,7 @@ export const TOS = () => (
           submitted by you.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Indemnification
         </Title>
         <p>
@@ -251,7 +251,7 @@ export const TOS = () => (
           submitted by you.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           General Terms
         </Title>
         <p>
@@ -261,7 +261,7 @@ export const TOS = () => (
           "hackerproof"; you use the website solely at your own risk.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Choice of Law and Forum
         </Title>
         <p>
@@ -272,7 +272,7 @@ export const TOS = () => (
           county of Ramsey, Minnesota.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Waiver and Severability of Terms
         </Title>
         <p>
@@ -286,7 +286,7 @@ export const TOS = () => (
           these Terms of Use remain in full force and effect.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Statute of Limitations
         </Title>
         <p>
@@ -296,7 +296,7 @@ export const TOS = () => (
           such claim or cause of action arose or be forever barred.
         </p>
         <br />
-        <Title isSize={4} className="msab-has-text-purple">
+        <Title className="msab-has-text-purple" isSize={4}>
           Entire Agreement
         </Title>
         <p>

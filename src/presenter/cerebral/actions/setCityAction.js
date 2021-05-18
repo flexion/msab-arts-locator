@@ -1,5 +1,5 @@
 import { state } from 'cerebral';
 
-export const setCityAction = ({ store, props }) => {
+export const setCityAction = ({ props, store }) => {
   store.set(state.cityValue, props.cityValue);
 };

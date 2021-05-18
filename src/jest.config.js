@@ -1,7 +1,11 @@
 module.exports = {
-  testEnvironment: 'jsdom',
-  verbose: true,
   collectCoverage: true,
+  collectCoverageFrom: [
+    'client/**/*.js',
+    '!e2e/**/*.js',
+    '!client/**/*.test.js',
+    '!client/**/TestUtils.js',
+  ],
   coverageDirectory: './coverage',
   coverageThreshold: {
     global: {
@@ -11,10 +15,6 @@ module.exports = {
       statements: 95,
     },
   },
-  collectCoverageFrom: [
-    'client/**/*.js',
-    '!e2e/**/*.js',
-    '!client/**/*.test.js',
-    '!client/**/TestUtils.js',
-  ],
+  testEnvironment: 'jsdom',
+  verbose: true,
 };

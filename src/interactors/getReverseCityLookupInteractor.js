@@ -1,31 +1,31 @@
 const { validateRequestData } = require('../utilities/CleanUtils');
 
 exports.getReverseCityLookupInteractor = async ({
-  requestData,
   applicationContext,
+  requestData,
 }) => {
   const dataSchema = {
-    type: 'object',
+    additionalProperties: false,
+    errorMessage: 'should be an object with lat and long properties',
     properties: {
       lat: { type: 'number' },
       long: { type: 'number' },
     },
     required: ['lat', 'long'],
-    additionalProperties: false,
-    errorMessage: 'should be an object with lat and long properties',
+    type: 'object',
   };
 
   // An interactor validates that the required objects are present.
   validateRequestData({
+    applicationContext,
     data: requestData.result,
     dataSchema,
-    applicationContext,
   });
 
   // The interactor invokes a very specific persistence gateway operation.
   const data = requestData.result;
   const cityFromGeo = await applicationContext
     .getPersistenceGateway()
-    .getCityFromGeo({ data, applicationContext });
-  return { status: 'success', data: cityFromGeo };
+    .getCityFromGeo({ applicationContext, data });
+  return { data: cityFromGeo, status: 'success' };
 };

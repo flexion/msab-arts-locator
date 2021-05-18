@@ -1,6 +1,6 @@
 import { state } from 'cerebral';
 
-export const setGeoAction = ({ store, props }) => {
+export const setGeoAction = ({ props, store }) => {
   store.set(state.askingLocation, false);
   if (props.result.status === 'success') {
     const geo = {

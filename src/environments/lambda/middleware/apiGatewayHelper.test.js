@@ -1,10 +1,10 @@
 const {
-  redirect,
-  handle,
   getAuthHeader,
   getUserFromAuthHeader,
+  handle,
+  redirect,
 } = require('./apiGatewayHelper');
-const { UnauthorizedError, NotFoundError } = require('../../../errors/errors');
+const { NotFoundError, UnauthorizedError } = require('../../../errors/errors');
 
 const EXPECTED_HEADERS = {
   'Access-Control-Allow-Origin': '*',

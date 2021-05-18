@@ -1,9 +1,9 @@
-exports.validateCaptcha = async ({ value, applicationContext }) => {
+exports.validateCaptcha = async ({ applicationContext, value }) => {
   // The interactor invokes a very specific persistence gateway operation.
   const captcha = await applicationContext
     .getPersistenceGateway()
     .confirmCaptcha(
-      { value, key: applicationContext.environment.captchaKey },
+      { key: applicationContext.environment.captchaKey, value },
       applicationContext,
     );
   return captcha;

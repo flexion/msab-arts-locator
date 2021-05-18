@@ -1,6 +1,6 @@
 import { state } from 'cerebral';
 const urlFormat = require('format-url');
-
+/* eslint-disable */
 // const getMapUrl = () => {
 //   let mapUrlFullPath;
 //   var mapUrl = '?q=' + geocoding.latitude + ',' + geocoding.longitude;
@@ -16,14 +16,14 @@ const urlFormat = require('format-url');
 //   window.open(mapUrlFullPath, '_system');
 // };
 
-const formatWebsiteURL = (location) => {
+const formatWebsiteURL = location => {
   if (location.website) {
     location.website = urlFormat(location.website);
   }
   return location;
 };
 
-const formatDistance = (location) => {
+const formatDistance = location => {
   if (typeof location.distance === 'number') {
     const distance = Math.round(location.distance * 10) / 10;
     location.distance = `${distance} miles`;
@@ -31,7 +31,7 @@ const formatDistance = (location) => {
   return location;
 };
 
-const formatCategories = (location) => {
+const formatCategories = location => {
   location.categories = [];
 
   let cats = location.category;
@@ -47,7 +47,7 @@ const formatCategories = (location) => {
   return location;
 };
 
-const formatMapsURL = (location) => {
+const formatMapsURL = location => {
   // location.coordinates is [long, lat]
   // https://www.google.com/maps/search/?api=1&query=28.6139,77.2090
   location.googleURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -56,7 +56,7 @@ const formatMapsURL = (location) => {
   return location;
 };
 
-const formatLocation = (location) => {
+const formatLocation = location => {
   location = formatDistance(location);
   location = formatCategories(location);
   return formatMapsURL(formatWebsiteURL(location));

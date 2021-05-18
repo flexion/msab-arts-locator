@@ -3,11 +3,11 @@ const createApplicationContext = require('../ApplicationContext');
 /**
  * used for retrieving locations based on geocoords
  *
- * @param {Object} event the AWS event object
+ * @param {object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
 
-const removeKeys = (location) => {
+const removeKeys = location => {
   location.coordinates = JSON.parse(location.geoJson).coordinates;
   delete location.geoJson;
   delete location.hashKey;
@@ -19,7 +19,7 @@ const removeKeys = (location) => {
   return location;
 };
 
-const get = async (event, context) => {
+const get = async event => {
   const applicationContext = createApplicationContext();
   let requestData = null;
   let results = null;
@@ -38,43 +38,42 @@ const get = async (event, context) => {
         requestData,
       });
 
-      results = queryResults.results;
-      status = queryResults.status;
+      ({ results, status } = queryResults);
       if (status === 'success') {
         if (results.Count > 0) {
           location = removeKeys(results.Items[0]);
           return {
-            statusCode: 201,
             body: JSON.stringify({
               message: 'success',
               results: location,
             }),
+            statusCode: 201,
           };
         } else {
           //no results found
           return {
-            statusCode: 204,
             body: JSON.stringify({
-              message: 'success',
               input: event,
+              message: 'success',
               results,
             }),
+            statusCode: 204,
           };
         }
       }
     } else {
       return {
-        statusCode: 406,
         body: JSON.stringify({
-          message: msg,
           input: event,
+          message: msg,
         }),
+        statusCode: 406,
       };
     }
   } catch (e) {
     console.log('e: ', e);
     applicationContext.logger.error(e);
-    return { statusCode: 500, body: JSON.stringify({ message: 'error', e }) };
+    return { body: JSON.stringify({ e, message: 'error' }), statusCode: 500 };
   }
 };
 

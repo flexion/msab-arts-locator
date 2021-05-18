@@ -26,8 +26,8 @@ describe('ReverseCityLookupGateway', () => {
         return res.status(201).body('{"address":{"town":"Sun Prairie"}}');
       });
       const city = await getCityFromGeo({
-        data: { lat: 43.1796, long: -89.2802 },
         applicationContext: mockApplicationContext,
+        data: { lat: 43.1796, long: -89.2802 },
       });
       assert.deepStrictEqual(city.cityValue, 'Sun Prairie');
     });

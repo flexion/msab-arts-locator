@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const confirmCaptcha = async ({ value, key }, applicationContext) => {
+const confirmCaptcha = async ({ key, value }, applicationContext) => {
   if (value && key) {
     let url = `${
       applicationContext.apiURLs().captchaURL
@@ -14,7 +14,7 @@ const confirmCaptcha = async ({ value, key }, applicationContext) => {
     }
   } else {
     console.log('missing data');
-    return { status: 'catpcha failure', msg: 'missing data' };
+    return { msg: 'missing data', status: 'catpcha failure' };
   }
 };
 

@@ -1,15 +1,15 @@
 const assert = require('assert');
+const mockData = require('../persistence/mockData');
 const { createMockApplicationContext } = require('../utilities/TestUtils');
 const { getGeoLocationInteractor } = require('./getGeoLocationInteractor');
-const mockData = require('../persistence/mockData');
 describe('valid city', () => {
   it('should reject requests with data in the requestData', async () => {
     const mockApplicationContext = createMockApplicationContext({ mockData });
 
     try {
       await getGeoLocationInteractor({
-        requestData: { meow: 'meow' },
         applicationContext: mockApplicationContext,
+        requestData: { meow: 'meow' },
       });
     } catch (e) {
       console.log('e: ', e);
@@ -24,8 +24,8 @@ describe('valid city', () => {
 
     try {
       await getGeoLocationInteractor({
-        requestData: {},
         applicationContext: mockApplicationContext,
+        requestData: {},
       });
     } catch (e) {
       assert.fail('should not have thrown an exception');
