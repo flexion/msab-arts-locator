@@ -11,8 +11,8 @@ config.hashKeyLength = 5;
 const myGeoTableManager = new ddbGeo.GeoDataManager(config);
 const documentClient = new AWS.DynamoDB.DocumentClient();
 const queryDynamo = (params) => {
-  return new Promise(function(resolve, reject) {
-    documentClient.query(params, function(err, data) {
+  return new Promise(function (resolve, reject) {
+    documentClient.query(params, function (err, data) {
       if (err) {
         console.log(err);
         reject({ status: 'failed', data: err });
@@ -24,8 +24,8 @@ const queryDynamo = (params) => {
 };
 
 const updateDynamo = (params) => {
-  return new Promise(function(resolve, reject) {
-    documentClient.update(params, function(err, data) {
+  return new Promise(function (resolve, reject) {
+    documentClient.update(params, function (err, data) {
       if (err) {
         console.log(err);
         reject({ status: 'failed', data: err });
@@ -37,8 +37,8 @@ const updateDynamo = (params) => {
 };
 
 const deleteDynamo = (params) => {
-  return new Promise(function(resolve, reject) {
-    documentClient.delete(params, function(err, data) {
+  return new Promise(function (resolve, reject) {
+    documentClient.delete(params, function (err, data) {
       if (err) {
         console.log(err);
         reject({ status: 'failed', data: err });
@@ -95,7 +95,7 @@ const saveNewLocationGeo = async ({
         },
       })
       .promise()
-      .then(function() {
+      .then(function () {
         console.log('Done putting new location!');
       });
 

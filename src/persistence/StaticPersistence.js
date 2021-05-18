@@ -1,4 +1,4 @@
-const findLocationsByCity = function(rawData, city) {
+const findLocationsByCity = function (rawData, city) {
   if (city) {
     return rawData.filter(
       (location) => location.city.toUpperCase() === city.toUpperCase(),
@@ -7,7 +7,7 @@ const findLocationsByCity = function(rawData, city) {
   return rawData;
 };
 
-const readAllLocationsByCity = function({ city, applicationContext }) {
+const readAllLocationsByCity = function ({ city, applicationContext }) {
   const rawData = applicationContext.getDataReader();
   return findLocationsByCity(rawData, city);
 };

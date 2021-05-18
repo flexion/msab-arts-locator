@@ -1,12 +1,12 @@
 const makeRequest = (method, url, artLocationData) => {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     // xhr.setRequestHeader('enctype', 'multipart/form-data');
     // xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
     //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.onload = function() {
+    xhr.onload = function () {
       if (this.status >= 200 && this.status < 300) {
         resolve(xhr.response);
       } else {
@@ -16,7 +16,7 @@ const makeRequest = (method, url, artLocationData) => {
         });
       }
     };
-    xhr.onerror = function() {
+    xhr.onerror = function () {
       reject({
         status: this.status,
         statusText: xhr.statusText,

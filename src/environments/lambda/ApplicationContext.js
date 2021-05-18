@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-object-injection */
 //const AWSXRay = require('aws-xray-sdk');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
 const {

@@ -5,7 +5,7 @@ const requestPosition = () => {
     maximumAge: 10, // max cached age of gps data, also in millis
   };
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         resolve(pos);

@@ -69,8 +69,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
         zip: 'Zip should be a number at least 5 numbers long',
         gresp: 'Please complete the CAPTCHA to submit',
       },
-      _:
-        'Location should include a name, street address, city name, zip code, contact name, contact phone, and contact email.',
+      _: 'Location should include a name, street address, city name, zip code, contact name, contact phone, and contact email.',
     },
   };
 
@@ -88,7 +87,7 @@ function ArtLocation({ rawArtLocation, applicationContext }) {
     cats = JSON.parse(cats);
   }
 
-  Object.keys(cats).forEach(function(cat) {
+  Object.keys(cats).forEach(function (cat) {
     if (cats[cat]) {
       atLeastOne = true;
     }

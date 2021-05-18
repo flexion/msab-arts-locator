@@ -39,7 +39,7 @@ const formatCategories = (location) => {
     cats = JSON.parse(cats);
   }
 
-  Object.keys(cats).forEach(function(cat) {
+  Object.keys(cats).forEach(function (cat) {
     if (cats[cat]) {
       location.categories.push(cat);
     }
