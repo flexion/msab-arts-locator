@@ -39,9 +39,9 @@ const get = async event => {
   let newResults = [];
   let status = null;
   try {
-    console.log('event data: ', event.queryStringParameters);
     if (!event || !event.queryStringParameters)
       throw new Error('data not-found error');
+    console.log('event data: ', event.queryStringParameters);
     requestData = event.queryStringParameters;
     if (requestData.lat && requestData.lon) {
       queryResults = await applicationContext
