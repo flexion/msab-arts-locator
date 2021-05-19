@@ -359,7 +359,7 @@ export const LocationInputForm = connect(
                     isColor="primary"
                     type="submit"
                     onClick={e => {
-                      onSubmit(e, true);
+                      onSubmit(e);
                     }}
                   >
                     Publish
@@ -372,7 +372,7 @@ export const LocationInputForm = connect(
                     isColor="primary"
                     type="submit"
                     onClick={e => {
-                      onSubmit(e, true);
+                      onSubmit(e);
                     }}
                   >
                     Submit
@@ -386,7 +386,7 @@ export const LocationInputForm = connect(
                     isColor="primary"
                     type="submit"
                     onClick={e => {
-                      onSubmit(e, true);
+                      onSubmit(e);
                     }}
                   >
                     Update
@@ -401,7 +401,7 @@ export const LocationInputForm = connect(
                         isColor="primary"
                         type="submit"
                         onClick={e => {
-                          onSubmit(e, false);
+                          onSubmit(e);
                         }}
                       >
                         Don&apos;t Publish
