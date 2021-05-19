@@ -1,5 +1,5 @@
+import { Button, Footer, Level, LevelItem, Section } from 'bloomer';
 import React from 'react';
-import { Level, LevelItem, Section, Footer, Button } from 'bloomer';
 
 export const Foot = () => (
   <Footer className="msab-has-background-purple msab-footer has-text-white">
@@ -11,7 +11,7 @@ export const Foot = () => (
       </Level>
       <Level isMobile>
         <LevelItem className="has-text-centered">
-          <Button isColor="primary" href="/submit-location/">
+          <Button href="/submit-location/" isColor="primary">
             Submit Location
           </Button>
         </LevelItem>

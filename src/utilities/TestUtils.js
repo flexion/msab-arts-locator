@@ -6,31 +6,34 @@ const { v4: uuidv4 } = require('uuid');
  */
 function createMockApplicationContext(options = {}) {
   return {
-    getUniqueIdString: () => {
-      return '413f62ce-d7c8-446e-aeda-14a2a625a626';
-    },
-    getUniqueId: () => {
-      return uuidv4();
-    },
     getCurrentTimestamp: () => {
       return 1554070560001;
+    },
+    getDataReader: () => {
+      return options.mockData;
     },
     getJsonValidator: () => ({
       validateJson: () => {},
     }),
     getPersistenceGateway: () => ({
-      readAllLocationsByCity: () => {},
-      getGeoLocation: () => {},
       getCityFromGeo: () => {},
+      getGeoLocation: () => {},
       getLocationsInCity: () => {},
+      readAllLocationsByCity: () => {},
     }),
-    getDataReader: () => {
-      return options.mockData;
+    getUniqueId: () => {
+      return uuidv4();
+    },
+    getUniqueIdString: () => {
+      return '413f62ce-d7c8-446e-aeda-14a2a625a626';
     },
     ...options,
   };
 }
 
+/**
+ *
+ */
 function createSchemaValidationApplicationContext() {
   const { validateJson } = require('./AjvJsonValidator');
   return createMockApplicationContext({

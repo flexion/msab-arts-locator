@@ -1,10 +1,10 @@
 exports.saveNewArtLocation = async ({
-  artLocation,
   applicationContext,
+  artLocation,
   coords,
 }) => {
   const saveResp = await applicationContext
     .getPersistenceGateway()
-    .saveNewLocationGeo({ artLocation, applicationContext, coords });
+    .saveNewLocationGeo({ applicationContext, artLocation, coords });
   return { status: saveResp.status };
 };

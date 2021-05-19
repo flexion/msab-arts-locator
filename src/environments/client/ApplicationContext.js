@@ -1,62 +1,62 @@
-const { v4: uuidv4 } = require('uuid');
 const rawEntityData = require('../../../sample-data/sample-data');
-const {
-  getArtLocationsInCity,
-} = require('../../interactors/getArtLocationsInCityInteractor');
 const {
   getArtLocationById,
 } = require('../../interactors/getArtLocationByIdInteractor');
 const {
+  getArtLocationsInCity,
+} = require('../../interactors/getArtLocationsInCityInteractor');
+const {
   getArtLocationsInRadius,
 } = require('../../interactors/getArtLocationsInRadiusInteractor');
+const {
+  getCityFromGeo,
+} = require('../../persistence/ReverseCityLookupGateway');
 const {
   getGeoLocationInteractor,
 } = require('../../interactors/getGeoLocationInteractor');
 const {
+  getLocationsByRadius,
+} = require('../../persistence/GetLocationsByRadiusGateway');
+const {
+  getLocationsInCity,
+} = require('../../persistence/GetLocationsInCityGateway');
+const {
   getReverseCityLookupInteractor,
 } = require('../../interactors/getReverseCityLookupInteractor');
 const {
+  readAllLocationsByCity,
+} = require('../../persistence/StaticPersistence');
+const {
   sendArtLocation,
 } = require('../../interactors/sendArtLocationInteractor');
+const {
+  submitNewLocation,
+} = require('../../persistence/SubmitNewLocationGateway');
+const {
+  updateArtLocation,
+} = require('../../interactors/updateArtLocationInteractor');
+const {
+  updateLocationApproval,
+} = require('../../persistence/UpdateLocationGateway');
 const {
   validateArtLocation,
 } = require('../../interactors/validateArtLocationInteractor');
 const {
   validateImageFileType,
 } = require('../../interactors/validateImageFileTypeInteractor');
-const {
-  updateArtLocation,
-} = require('../../interactors/updateArtLocationInteractor');
-const { validateJson } = require('../../utilities/AjvJsonValidator');
-const {
-  readAllLocationsByCity,
-} = require('../../persistence/StaticPersistence');
-const {
-  getLocationsInCity,
-} = require('../../persistence/GetLocationsInCityGateway');
-const { getGeoLocation } = require('../../persistence/GeoLocationGateway');
-const {
-  getCityFromGeo,
-} = require('../../persistence/ReverseCityLookupGateway');
-const {
-  submitNewLocation,
-} = require('../../persistence/SubmitNewLocationGateway');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
-const {
-  getLocationsByRadius,
-} = require('../../persistence/GetLocationsByRadiusGateway');
+const { getGeoLocation } = require('../../persistence/GeoLocationGateway');
 const { getLocationById } = require('../../persistence/GetLocationByIdGateway');
-const {
-  updateLocationApproval,
-} = require('../../persistence/UpdateLocationGateway');
+const { v4: uuidv4 } = require('uuid');
+const { validateJson } = require('../../utilities/AjvJsonValidator');
 const environment = {
-  domain: window.location.href,
   apiURL: `${window.location.origin}/api/v1/`,
+  domain: window.location.href,
 };
 
 const apiURLs = {
-  captchaURL: `https://www.google.com/recaptcha/api/siteverify`,
-  geocodeAPIUrl: `https://maps.googleapis.com/maps/api/geocode/json`,
+  captchaURL: 'https://www.google.com/recaptcha/api/siteverify',
+  geocodeAPIUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
   reverseApiUrl: 'https://nominatim.openstreetmap.org/reverse?format=json',
 };
 const applicationContext = {
@@ -66,11 +66,11 @@ const applicationContext = {
   environment: () => {
     return environment;
   },
-  getUniqueIdString: () => {
-    return uuidv4();
-  },
   getCurrentTimestamp: () => {
     return Date.now();
+  },
+  getDataReader: () => {
+    return rawEntityData;
   },
   getJsonValidator: () => {
     return {
@@ -79,34 +79,31 @@ const applicationContext = {
   },
   getPersistenceGateway: () => {
     return {
-      getLocationById,
-      readAllLocationsByCity,
-      getGeoLocation,
       getCityFromGeo,
-      submitNewLocation,
       getCoordsFromAddress,
+      getGeoLocation,
+      getLocationById,
       getLocationsByRadius,
       getLocationsInCity,
+      readAllLocationsByCity,
+      submitNewLocation,
       updateLocationApproval,
     };
   },
-  getDataReader: () => {
-    return rawEntityData;
-  },
-  getCoords: () => {
-    return { getCoordsHandler: getCoords.handler };
+  getUniqueIdString: () => {
+    return uuidv4();
   },
   getUseCases: () => {
     return {
       getArtLocationById,
       getArtLocationsInCity,
+      getArtLocationsInRadius,
       getGeoLocationInteractor,
       getReverseCityLookupInteractor,
-      validateArtLocation,
       sendArtLocation,
-      getArtLocationsInRadius,
-      validateImageFileType,
       updateArtLocation,
+      validateArtLocation,
+      validateImageFileType,
     };
   },
 };

@@ -1,6 +1,6 @@
 const makeRequest = (method, url) => {
   return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.onload = function () {
       if (this.status >= 200 && this.status < 300) {
@@ -22,7 +22,7 @@ const makeRequest = (method, url) => {
   });
 };
 
-const getCityFromGeo = async ({ data, applicationContext }) => {
+const getCityFromGeo = async ({ applicationContext, data }) => {
   if (data.lat && data.long) {
     const method = 'GET';
 

@@ -1,77 +1,77 @@
 //const AWSXRay = require('aws-xray-sdk');
-const { validateJson } = require('../../utilities/AjvJsonValidator');
-const {
-  validateArtLocation,
-} = require('../../interactors/validateArtLocationInteractor');
-const {
-  getArtLocationsByGeo,
-} = require('../../interactors/getArtLocationsByGeoInteractor');
-const {
-  saveNewArtLocation,
-} = require('../../interactors/saveNewArtLocationInteractor');
-const {
-  getLocationCoordinates,
-} = require('../../interactors/getLocationCoordinatesInteractor');
-const {
-  validateCaptcha,
-} = require('../../interactors/validateCaptchaInteractor');
-const {
-  putArtLocationImage,
-} = require('../../interactors/putArtLocationImageInteractor');
-const {
-  validateImageFileType,
-} = require('../../interactors/validateImageFileTypeInteractor');
-const {
-  getArtLocationById,
-} = require('../../interactors/getArtLocationByIdInteractor');
-const {
-  getArtLocationsInCity,
-} = require('../../interactors/getArtLocationsInCityInteractor');
-const {
-  updateArtLocation,
-} = require('../../interactors/updateArtLocationInteractor');
 const {
   deleteArtLocation,
 } = require('../../interactors/deleteArtLocationInteractor');
 const {
-  sendAdminEmail,
-} = require('../../interactors/sendAdminEmailInteractor');
-const { sendUserEmail } = require('../../interactors/sendUserEmailInteractor');
-const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
-const {
-  saveNewLocationGeo,
+  deleteLocation,
+  getLocationById,
   getLocationsByGeo,
   getLocationsInCity,
-  getLocationById,
+  saveNewLocationGeo,
   updateLocationApproval,
-  deleteLocation,
 } = require('../../persistence/GeoDynamoGateway');
+const {
+  getArtLocationById,
+} = require('../../interactors/getArtLocationByIdInteractor');
+const {
+  getArtLocationsByGeo,
+} = require('../../interactors/getArtLocationsByGeoInteractor');
+const {
+  getArtLocationsInCity,
+} = require('../../interactors/getArtLocationsInCityInteractor');
+const {
+  getLocationCoordinates,
+} = require('../../interactors/getLocationCoordinatesInteractor');
+const {
+  putArtLocationImage,
+} = require('../../interactors/putArtLocationImageInteractor');
+const {
+  saveNewArtLocation,
+} = require('../../interactors/saveNewArtLocationInteractor');
+const {
+  sendAdminEmail,
+} = require('../../interactors/sendAdminEmailInteractor');
+const {
+  updateArtLocation,
+} = require('../../interactors/updateArtLocationInteractor');
+const {
+  validateArtLocation,
+} = require('../../interactors/validateArtLocationInteractor');
+const {
+  validateCaptcha,
+} = require('../../interactors/validateCaptchaInteractor');
+const {
+  validateImageFileType,
+} = require('../../interactors/validateImageFileTypeInteractor');
 const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
-const { putImage, getImage } = require('../../persistence/s3Gateway');
+const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
+const { getImage, putImage } = require('../../persistence/s3Gateway');
 const { sendEmail } = require('../../persistence/emailGateway');
+const { sendUserEmail } = require('../../interactors/sendUserEmailInteractor');
 const { v4: uuidv4 } = require('uuid');
+const { validateJson } = require('../../utilities/AjvJsonValidator');
 
 const apiURLs = {
-  captchaURL: `https://www.google.com/recaptcha/api/siteverify`,
-  geocodeAPIUrl: `https://maps.googleapis.com/maps/api/geocode/json`,
+  captchaURL: 'https://www.google.com/recaptcha/api/siteverify',
+  geocodeAPIUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
   reverseApiUrl: 'https://nominatim.openstreetmap.org/reverse?format=json',
 };
 
 const environment = {
-  stage: process.env.STAGE || 'local',
   apiKey: process.env.API_KEY,
   captchaKey: process.env.CAPTCHA_KEY,
-  imageBucket: process.env.IMAGE_BUCKET,
   domainName: process.env.DOMAIN_NAME,
+  imageBucket: process.env.IMAGE_BUCKET,
+  stage: process.env.STAGE || 'local',
 };
 const emailConfig = {
+  auth: {
+    pass: process.env.EMAIL_PW,
+    user: process.env.EMAIL_USER,
+  },
+  debug: false,
   from: 'artsaroundmn.admin@state.mn.us',
   logger: false,
-  debug: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PW,
-  },
 };
 
 module.exports = () => {
@@ -79,47 +79,8 @@ module.exports = () => {
     apiURLs: () => {
       return apiURLs;
     },
-    environment,
     emailConfig,
-    getPersistenceGateway: () => {
-      return {
-        putImage,
-        getImage,
-        getCoordsFromAddress,
-        saveNewLocationGeo,
-        getLocationsByGeo,
-        confirmCaptcha,
-        getLocationsInCity,
-        getLocationById,
-        updateLocationApproval,
-        deleteLocation,
-        sendEmail,
-      };
-    },
-    getUniqueId: () => {
-      return uuidv4();
-    },
-    getUseCases: () => {
-      return {
-        getArtLocationById,
-        putArtLocationImage,
-        saveNewArtLocation,
-        getLocationCoordinates,
-        validateArtLocation,
-        getArtLocationsByGeo,
-        validateCaptcha,
-        validateImageFileType,
-        getArtLocationsInCity,
-        updateArtLocation,
-        deleteArtLocation,
-        sendAdminEmail,
-        sendUserEmail,
-      };
-    },
-
-    getUniqueIdString: () => {
-      return uuidv4();
-    },
+    environment,
     getCurrentTimestamp: () => {
       return Date.now();
     },
@@ -128,8 +89,47 @@ module.exports = () => {
         validateJson,
       };
     },
+    getPersistenceGateway: () => {
+      return {
+        confirmCaptcha,
+        deleteLocation,
+        getCoordsFromAddress,
+        getImage,
+        getLocationById,
+        getLocationsByGeo,
+        getLocationsInCity,
+        putImage,
+        saveNewLocationGeo,
+        sendEmail,
+        updateLocationApproval,
+      };
+    },
+
+    getUniqueId: () => {
+      return uuidv4();
+    },
+    getUniqueIdString: () => {
+      return uuidv4();
+    },
+    getUseCases: () => {
+      return {
+        deleteArtLocation,
+        getArtLocationById,
+        getArtLocationsByGeo,
+        getArtLocationsInCity,
+        getLocationCoordinates,
+        putArtLocationImage,
+        saveNewArtLocation,
+        sendAdminEmail,
+        sendUserEmail,
+        updateArtLocation,
+        validateArtLocation,
+        validateCaptcha,
+        validateImageFileType,
+      };
+    },
     logger: {
-      error: (value) => {
+      error: value => {
         // eslint-disable-next-line no-console
         console.error(JSON.stringify(value));
       },

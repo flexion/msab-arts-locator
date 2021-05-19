@@ -1,6 +1,6 @@
 const makeRequest = (method, url, artLocationData) => {
   return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     // xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
@@ -29,7 +29,7 @@ const makeRequest = (method, url, artLocationData) => {
   });
 };
 
-const submitNewLocation = async ({ artLocationData, applicationContext }) => {
+const submitNewLocation = async ({ applicationContext, artLocationData }) => {
   if (artLocationData) {
     const method = 'POST';
     const lambdaURL = applicationContext.environment().apiURL + 'save-location';

@@ -1,91 +1,81 @@
-import { connect } from '@cerebral/react';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { sequences, state } from 'cerebral';
-import React from 'react';
 import {
-  Field,
-  Label,
-  Control,
-  Input,
   Button,
-  Section,
-  Container,
-  Title,
   Checkbox,
+  Container,
+  Control,
+  Field,
+  Input,
+  Label,
+  Notification,
+  Section,
   Subtitle,
   TextArea,
-  Notification,
+  Title,
 } from 'bloomer';
 import { RECAPTCHA_KEY } from '../config/config';
+import { connect } from '@cerebral/react';
+import { sequences, state } from 'cerebral';
+import ReCAPTCHA from 'react-google-recaptcha';
+import React from 'react';
 
 export const LocationInputForm = connect(
   {
+    categories: state.categories,
     form: state.form,
-    submitLocation: sequences.submitLocationSequence,
-    updateFormValueSequence: sequences.updateFormValueSequence,
-    setImageSequence: sequences.setImageSequence,
     imgFailure: state.selectImageFailure,
     imgMsg: state.selectImageMsg,
-    categories: state.categories,
     locationFormButtonsHelper: state.locationFormButtonsHelper,
+    setImageSequence: sequences.setImageSequence,
+    submitLocation: sequences.submitLocationSequence,
+    updateFormValueSequence: sequences.updateFormValueSequence,
   },
   ({
+    categories,
     form,
-    submitLocation,
-    updateFormValueSequence,
-    setImageSequence,
     imgFailure,
     imgMsg,
-    categories,
     locationFormButtonsHelper,
+    setImageSequence,
+    submitLocation,
+    updateFormValueSequence,
   }) => {
-    const onSubmit = (e, appr) => {
+    const onSubmit = e => {
       e.preventDefault();
-      const gresp = grecaptcha.getResponse();
-      if (gresp) {
-        updateFormValueSequence({
-          key: 'gresp',
-          value: gresp,
-        });
-
-        updateFormValueSequence({
-          key: 'approved',
-          value: appr,
-        });
-      }
       submitLocation();
-      grecaptcha.reset();
     };
 
     return (
       <Section className="msab-section-form">
         <Container>
-          <Title isSize={3} className="msab-has-text-purple">
+          <Title className="msab-has-text-purple" isSize={3}>
             Submit Your Arts Location
           </Title>
-          <Subtitle isSize={5} className="msab-has-text-grey">
+          <Subtitle className="msab-has-text-grey" isSize={5}>
             Fill out this form and a Minnesota State Arts Board administrator
             will review it before publishing.
           </Subtitle>
-          <Subtitle isSize={6} className="msab-has-text-grey-bold">
+          <Subtitle className="msab-has-text-grey-bold" isSize={6}>
             * All fields required unless otherwise noted
           </Subtitle>
-          <Title isSize={4} className="msab-has-text-purple">
+          <Title className="msab-has-text-purple" isSize={4}>
             Your Location
           </Title>
-          <form className="search" id="add-location-form" noValidate>
+          <form noValidate className="search" id="add-location-form">
             <Field>
-              <Label className="msab-has-text-grey">Name</Label>
+              <Label className="msab-has-text-grey" htmlFor="name">
+                Name
+              </Label>
               <Subtitle className="msab-has-text-grey-small">
                 How do you want people to know and find you? (e.g., your legal
                 name, your publicity name, a DBA, a pen name, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
-                  type="text"
+                  id="name"
                   name="name"
+                  type="text"
                   value={form.name || ''}
-                  onChange={(e) => {
+                  onChange={e => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
@@ -95,17 +85,20 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Street Address</Label>
+              <Label className="msab-has-text-grey" htmlFor="street">
+                Street Address
+              </Label>
               <Subtitle className="msab-has-text-grey-small">
                 Where do you want people to find you and potentially visit?
                 (e.g., a performance venue, your studio, retail location, etc.)
               </Subtitle>
               <Control className="text-field">
                 <Input
-                  type="text"
+                  id="street"
                   name="street"
+                  type="text"
                   value={form.street || ''}
-                  onChange={(e) => {
+                  onChange={e => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
@@ -115,45 +108,16 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Town/City</Label>
+              <Label className="msab-has-text-grey" htmlFor="city">
+                Town/City
+              </Label>
               <Control className="text-field">
                 <Input
-                  type="text"
+                  id="city"
                   name="city"
-                  value={form.city || ''}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-              </Control>
-            </Field>
-            <Field>
-              <Label className="msab-has-text-grey">ZIP</Label>
-              <Control className="text-field">
-                <Input
-                  type="number"
-                  name="zip"
-                  value={form.zip || ''}
-                  onChange={(e) => {
-                    updateFormValueSequence({
-                      key: e.target.name,
-                      value: e.target.value,
-                    });
-                  }}
-                />
-              </Control>
-            </Field>
-            <Field>
-              <Label className="msab-has-text-grey">Web Site (optional)</Label>
-              <Control className="text-field">
-                <Input
                   type="text"
-                  name="website"
-                  value={form.website || ''}
-                  onChange={(e) => {
+                  value={form.city || ''}
+                  onChange={e => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
@@ -163,7 +127,45 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">
+              <Label className="msab-has-text-grey" htmlFor="zip">
+                ZIP
+              </Label>
+              <Control className="text-field">
+                <Input
+                  id="zip"
+                  name="zip"
+                  type="number"
+                  value={form.zip || ''}
+                  onChange={e => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+              </Control>
+            </Field>
+            <Field>
+              <Label className="msab-has-text-grey" htmlFor="website">
+                Web Site (optional)
+              </Label>
+              <Control className="text-field">
+                <Input
+                  id="website"
+                  name="website"
+                  type="text"
+                  value={form.website || ''}
+                  onChange={e => {
+                    updateFormValueSequence({
+                      key: e.target.name,
+                      value: e.target.value,
+                    });
+                  }}
+                />
+              </Control>
+            </Field>
+            <Field>
+              <Label className="msab-has-text-grey" htmlFor="description">
                 Brief Description (optional - max 250 characters)
               </Label>
               <Subtitle className="msab-has-text-grey-small">
@@ -172,10 +174,11 @@ export const LocationInputForm = connect(
               </Subtitle>
               <Control className="text-field">
                 <TextArea
+                  id="description"
                   maxLength="250"
                   name="description"
                   value={form.description || ''}
-                  onChange={(e) => {
+                  onChange={e => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
@@ -184,33 +187,34 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
-            <Label className="msab-has-text-grey">Type</Label>
-            <Subtitle isSize={6} className="msab-has-text-grey">
+            <span className="label msab-has-text-grey">Type</span>
+            <Subtitle className="msab-has-text-grey" isSize={6}>
               (Select up to three that apply)
             </Subtitle>
-            {Object.keys(form.category).map((catKey, i) => {
+            {Object.entries(form.category).map(([catKey, value]) => {
               return (
-                <Field key={i}>
+                <Field key={categories[catKey]}>
                   <Control>
                     <Checkbox
+                      checked={value || false}
                       name={catKey}
-                      checked={form.category[catKey] || false}
-                      onChange={(e) => {
+                      onChange={e => {
                         updateFormValueSequence({
                           key: `category.${catKey}`,
                           value: e.target.checked,
                         });
                       }}
-                    />
-                    <span className="msab-has-text-grey margin-left-10">
-                      {categories[catKey]}
-                    </span>
+                    >
+                      <span className="msab-has-text-grey margin-left-10">
+                        {categories[catKey]}
+                      </span>
+                    </Checkbox>
                   </Control>
                 </Field>
               );
             })}
             <Field className="msab-margin-top">
-              <Label className="msab-has-text-grey">
+              <Label className="msab-has-text-grey" htmlFor="image">
                 Location Image (optional - max size 1 MB)
               </Label>
               <Subtitle className="msab-has-text-grey-small">
@@ -219,10 +223,10 @@ export const LocationInputForm = connect(
               </Subtitle>
               <Control>
                 <input
-                  type="file"
                   id="image"
                   name="image"
-                  onChange={(e) => {
+                  type="file"
+                  onChange={e => {
                     setImageSequence({
                       image: e.target.files[0],
                     });
@@ -239,20 +243,23 @@ export const LocationInputForm = connect(
               <Notification isColor="danger">{imgMsg}</Notification>
             )}
             <br />
-            <Title isSize={4} className="msab-has-text-purple">
+            <Title className="msab-has-text-purple" isSize={4}>
               Contact Information
             </Title>
-            <Subtitle isSize={5} className="msab-has-text-grey">
+            <Subtitle className="msab-has-text-grey" isSize={5}>
               (For internal use only, won’t be published on site)
             </Subtitle>
             <Field>
-              <Label className="msab-has-text-grey">Contact Name</Label>
+              <Label className="msab-has-text-grey" htmlFor="contactName">
+                Contact Name
+              </Label>
               <Control className="text-field">
                 <Input
-                  type="text"
+                  id="contactName"
                   name="contactName"
+                  type="text"
                   value={form.contactName || ''}
-                  onChange={(e) => {
+                  onChange={e => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
@@ -262,13 +269,16 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Contact E-mail</Label>
+              <Label className="msab-has-text-grey" htmlFor="contactEmail">
+                Contact E-mail
+              </Label>
               <Control className="text-field">
                 <Input
-                  type="text"
+                  id="contactEmail"
                   name="contactEmail"
+                  type="text"
                   value={form.contactEmail || ''}
-                  onChange={(e) => {
+                  onChange={e => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
@@ -278,13 +288,16 @@ export const LocationInputForm = connect(
               </Control>
             </Field>
             <Field>
-              <Label className="msab-has-text-grey">Contact Phone</Label>
+              <Label className="msab-has-text-grey" htmlFor="contactPhone">
+                Contact Phone
+              </Label>
               <Control className="text-field">
                 <Input
-                  type="text"
+                  id="contactPhone"
                   name="contactPhone"
+                  type="text"
                   value={form.contactPhone || ''}
-                  onChange={(e) => {
+                  onChange={e => {
                     updateFormValueSequence({
                       key: e.target.name,
                       value: e.target.value,
@@ -297,20 +310,24 @@ export const LocationInputForm = connect(
               <Field>
                 <Control>
                   <Checkbox
+                    id="tos"
                     name="ToS"
-                    onChange={(e) => {
+                    onChange={e => {
                       updateFormValueSequence({
                         key: 'ToS',
                         value: e.target.checked,
                       });
                     }}
                   />
-                  <span className="msab-has-text-grey margin-left-10">
+                  <Label
+                    className="msab-has-text-grey margin-left-10"
+                    htmlFor="tos"
+                  >
                     I agree to the{' '}
                     <a href="tos" target="_new">
                       terms of service
                     </a>
-                  </span>
+                  </Label>
                 </Control>
               </Field>
             )}
@@ -319,13 +336,13 @@ export const LocationInputForm = connect(
                 <ReCAPTCHA
                   className="msab-margin-top"
                   sitekey={RECAPTCHA_KEY}
-                  onChange={(value) => {
+                  onChange={value => {
                     updateFormValueSequence({
                       key: 'gresp',
-                      value: value,
+                      value,
                     });
                   }}
-                  onExpired={(e) => {
+                  onExpired={() => {
                     updateFormValueSequence({
                       key: 'gresp',
                       value: '',
@@ -338,10 +355,10 @@ export const LocationInputForm = connect(
               <Control>
                 {locationFormButtonsHelper.showAdmin && (
                   <Button
-                    type="submit"
-                    isColor="primary"
                     className="msab-margin-top"
-                    onClick={(e) => {
+                    isColor="primary"
+                    type="submit"
+                    onClick={e => {
                       onSubmit(e, true);
                     }}
                   >
@@ -350,11 +367,11 @@ export const LocationInputForm = connect(
                 )}
                 {locationFormButtonsHelper.showSubmit && (
                   <Button
-                    type="submit"
-                    isColor="primary"
                     className="msab-margin-top"
                     disabled={!form.ToS}
-                    onClick={(e) => {
+                    isColor="primary"
+                    type="submit"
+                    onClick={e => {
                       onSubmit(e, true);
                     }}
                   >
@@ -364,11 +381,11 @@ export const LocationInputForm = connect(
 
                 {locationFormButtonsHelper.showUpdate && (
                   <Button
-                    type="submit"
-                    isColor="primary"
                     className="msab-margin-top"
                     disabled={!form.formDirty}
-                    onClick={(e) => {
+                    isColor="primary"
+                    type="submit"
+                    onClick={e => {
                       onSubmit(e, true);
                     }}
                   >
@@ -380,14 +397,14 @@ export const LocationInputForm = connect(
                   <Field isGrouped>
                     <Control>
                       <Button
-                        type="submit"
-                        isColor="primary"
                         className="msab-margin-top"
-                        onClick={(e) => {
+                        isColor="primary"
+                        type="submit"
+                        onClick={e => {
                           onSubmit(e, false);
                         }}
                       >
-                        Don't Publish
+                        Don&apos;t Publish
                       </Button>
                     </Control>
                   </Field>

@@ -1,6 +1,6 @@
 import { CerebralTest } from 'cerebral/test';
 import { createMockApplicationContext } from '../../../utilities/TestUtils';
-import { presenter } from '../../../presenter/presenter';
+import { presenter } from '../../presenter';
 
 describe('updateCitySearchSequence', () => {
   it('should update cerebral state with city', async () => {

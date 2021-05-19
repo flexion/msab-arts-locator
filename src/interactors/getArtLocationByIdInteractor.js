@@ -1,24 +1,24 @@
 const { validateRequestData } = require('../utilities/CleanUtils');
 
-exports.getArtLocationById = async ({ requestData, applicationContext }) => {
+exports.getArtLocationById = async ({ applicationContext, requestData }) => {
   const dataSchema = {
-    type: 'object',
-    properties: {
-      entityId: { type: 'string' },
-      actionType: { type: 'string' },
-    },
-    required: ['entityId', 'actionType'],
     additionalProperties: false,
     errorMessage: 'Failed to provide required values',
+    properties: {
+      actionType: { type: 'string' },
+      entityId: { type: 'string' },
+    },
+    required: ['entityId', 'actionType'],
+    type: 'object',
   };
 
   // An interactor validates that the required objects are present.
-  validateRequestData({ data: requestData, dataSchema, applicationContext });
+  validateRequestData({ applicationContext, data: requestData, dataSchema });
 
-  const { entityId, actionType } = requestData;
+  const { actionType, entityId } = requestData;
   // The interactor invokes a very specific persistence gateway operation.
   const artLocationData = await applicationContext
     .getPersistenceGateway()
-    .getLocationById({ entityId, actionType, applicationContext });
+    .getLocationById({ actionType, applicationContext, entityId });
   return artLocationData;
 };

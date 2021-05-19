@@ -1,20 +1,20 @@
-import { connect } from '@cerebral/react';
-import { state } from 'cerebral';
-import React from 'react';
-import { LocationListItem } from './LocationListItem';
 import {
-  Section,
   Container,
-  Title,
+  Delete,
   Level,
   LevelItem,
-  Tag,
-  Delete,
   LevelLeft,
   LevelRight,
+  Section,
   Select,
+  Tag,
+  Title,
 } from 'bloomer';
-import { sequences } from 'cerebral';
+import { LocationListItem } from './LocationListItem';
+import { connect } from '@cerebral/react';
+import { sequences, state } from 'cerebral';
+
+import React from 'react';
 import collage from '../images/collage.svg';
 
 class ResultsListComponent extends React.Component {
@@ -23,13 +23,13 @@ class ResultsListComponent extends React.Component {
   }
 
   render() {
-    const locations = this.props.locations;
-    const citySearch = this.props.citySearch;
-    const categories = this.props.categories;
-    const activeFilter = this.props.activeFilter;
-    const setActiveFilter = this.props.setActiveFilter;
-    const setRadius = this.props.setRadius;
-    const haveGeo = this.props.haveGeo;
+    const { locations } = this.props;
+    const { citySearch } = this.props;
+    const { categories } = this.props;
+    const { activeFilter } = this.props;
+    const { setActiveFilter } = this.props;
+    const { setRadius } = this.props;
+    const { haveGeo } = this.props;
 
     return (
       <Section>
@@ -50,7 +50,7 @@ class ResultsListComponent extends React.Component {
                         <LevelItem>
                           <Delete
                             className="msab-delete"
-                            onClick={(e) => {
+                            onClick={() => {
                               setActiveFilter({ value: '' });
                             }}
                           />
@@ -66,7 +66,7 @@ class ResultsListComponent extends React.Component {
               <Level isMobile>
                 <LevelLeft>
                   <LevelItem>
-                    <Title isSize={5} className="msab-has-text-purple">
+                    <Title className="msab-has-text-purple" isSize={5}>
                       Search Results ({locations.length})
                     </Title>
                   </LevelItem>
@@ -76,9 +76,9 @@ class ResultsListComponent extends React.Component {
                     <LevelItem>
                       <span>Within </span>
                       <Select
-                        defaultValue="10"
                         className="msab-margin-lr"
-                        onChange={(e) => {
+                        defaultValue="10"
+                        onChange={e => {
                           setRadius({
                             key: e.target.name,
                             value: e.target.value,
@@ -101,10 +101,10 @@ class ResultsListComponent extends React.Component {
             {locations.map((location, i) => (
               <li key={i}>
                 <LocationListItem
-                  location={location}
-                  index={i}
-                  citySearch={citySearch}
                   categories={categories}
+                  citySearch={citySearch}
+                  index={i}
+                  location={location}
                   setActiveFilter={setActiveFilter}
                 />
               </li>
@@ -124,14 +124,16 @@ class ResultsListComponent extends React.Component {
 }
 export const ResultsList = connect(
   {
-    locations: state.locationListHelper, //this alters the location list to include google url
-    citySearch: state.citySearch,
     activeFilter: state.activeFilter,
-    getGeoLocationSequence: sequences.getGeoLocationSequence,
+
     categories: state.categories,
+    //this alters the location list to include google url
+    citySearch: state.citySearch,
+    getGeoLocationSequence: sequences.getGeoLocationSequence,
+    haveGeo: state.haveGeo,
+    locations: state.locationListHelper,
     setActiveFilter: sequences.setActiveFilterSequence,
     setRadius: sequences.setRadiusSequence,
-    haveGeo: state.haveGeo,
   },
   ResultsListComponent,
 );

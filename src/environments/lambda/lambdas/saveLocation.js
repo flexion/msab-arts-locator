@@ -3,21 +3,21 @@ const createApplicationContext = require('../ApplicationContext');
 // const { getUserFromAuthHeader } = require("../middleware/apiGatewayHelper");
 //const { handle } = require('../middleware/apiGatewayHelper');
 const headers = {
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'OPTIONS, POST',
   'Access-Control-Allow-Origin': '*',
   'Cache-Control': 'max-age=0, private, no-cache, no-store, must-revalidate',
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Methods': 'OPTIONS, POST',
-  'Access-Control-Allow-Headers': 'Content-Type',
 };
 
 /**
  * used for saving new locations
  *
- * @param {Object} event the AWS event object
+ * @param {object} event the AWS event object
  * @returns {Promise<*|undefined>} the api gateway response object containing the statusCode, body, and headers
  */
 
-const post = async (event) => {
+const post = async event => {
   const applicationContext = createApplicationContext();
   let requestData = null;
   let saveResult = null;
@@ -27,7 +27,6 @@ const post = async (event) => {
   let imageUrl = null;
   let isUpdateValid = true;
   let isUpdate = false;
-  let sendEmail = true;
   let artLocation = null;
   try {
     console.log('event:', event);
@@ -36,7 +35,7 @@ const post = async (event) => {
     console.log('requestData: ', requestData);
     const captchaResult = await applicationContext
       .getUseCases()
-      .validateCaptcha({ value: requestData.gresp, applicationContext });
+      .validateCaptcha({ applicationContext, value: requestData.gresp });
     console.log('captcharesult: ', captchaResult);
     requestData.approved = false; // always false, if admin action handled later
     if (captchaResult.status === 'success') {
@@ -53,8 +52,8 @@ const post = async (event) => {
           .getArtLocationById({
             applicationContext,
             requestData: {
-              entityId: requestData.update.entityId,
               actionType: requestData.update.actionType,
+              entityId: requestData.update.entityId,
             },
           });
         if (currentLocationData.results.Count < 1) {
@@ -77,7 +76,7 @@ const post = async (event) => {
           });
         msg = validateResult.status;
         if (msg === 'success') {
-          artLocation = validateResult.artLocation;
+          ({ artLocation } = validateResult);
           const coordResult = await applicationContext
             .getUseCases()
             .getLocationCoordinates({
@@ -98,10 +97,10 @@ const post = async (event) => {
                   .getUseCases()
                   .putArtLocationImage(
                     {
-                      contentType: validateResult.contentType.type,
-                      ext: validateResult.contentType.ext,
-                      entityId: artLocation.entityId,
                       base64Image: requestData.base64Image,
+                      contentType: validateResult.contentType.type,
+                      entityId: artLocation.entityId,
+                      ext: validateResult.contentType.ext,
                     },
                     applicationContext,
                   );
@@ -167,10 +166,10 @@ const post = async (event) => {
               emailResults = await applicationContext
                 .getUseCases()
                 .sendUserEmail({
-                  initial: false,
-                  approved: true,
                   applicationContext,
+                  approved: true,
                   artLocation,
+                  initial: false,
                 });
               console.log('user email Results: ', emailResults);
             } else {
@@ -195,32 +194,32 @@ const post = async (event) => {
             emailResults = await applicationContext
               .getUseCases()
               .sendUserEmail({
-                initial: true,
-                approved: false,
                 applicationContext,
+                approved: false,
                 artLocation,
+                initial: true,
               });
             console.log('user email Results: ', emailResults);
           }
 
           console.log('should return a 201');
           return {
-            statusCode: 201,
-            headers: headers,
             body: JSON.stringify({
-              message: 'success',
               input: event,
+              message: 'success',
             }),
+            headers,
+            statusCode: 201,
           };
         } else {
           console.log('should return a 406', msg);
           return {
-            statusCode: 406,
-            headers: headers,
             body: JSON.stringify({
-              message: msg,
               input: event,
+              message: msg,
             }),
+            headers,
+            statusCode: 406,
           };
         }
       }
@@ -229,9 +228,9 @@ const post = async (event) => {
     console.log('e: ', e);
     applicationContext.logger.error(e);
     return {
+      body: JSON.stringify({ e, message: 'error' }),
+      headers,
       statusCode: 500,
-      headers: headers,
-      body: JSON.stringify({ message: 'error', e }),
     };
   }
 };

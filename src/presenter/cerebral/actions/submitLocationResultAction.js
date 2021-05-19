@@ -1,6 +1,6 @@
 import { state } from 'cerebral';
 
-export const submitLocationResultAction = async ({ store, props, get }) => {
+export const submitLocationResultAction = async ({ get, props, store }) => {
   let response = null;
   let action = null;
 
@@ -19,7 +19,7 @@ export const submitLocationResultAction = async ({ store, props, get }) => {
     if (typeof props.result.response === 'string') {
       response = JSON.parse(props.result.response);
     } else {
-      response = props.result.response;
+      ({ response } = props.result);
     }
     if (response.message === 'success') {
       store.set(state.submitLocationSuccess, true);

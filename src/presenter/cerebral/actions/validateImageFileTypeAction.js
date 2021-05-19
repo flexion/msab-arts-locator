@@ -2,9 +2,8 @@ import { state } from 'cerebral';
 
 export const validateImageFileTypeAction = async ({
   applicationContext,
-  get,
-  store,
   props,
+  store,
 }) => {
   // props.image is of type File
   store.set(state.selectImageFailure, false);

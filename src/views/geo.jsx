@@ -4,19 +4,19 @@ import React from 'react';
 
 export const Geo = connect(
   {
-    successSeq: sequences.geoLocationSuccessSequence,
     failureSeq: sequences.geoLocationFailSequence,
+    successSeq: sequences.geoLocationSuccessSequence,
   },
-  ({ successSeq, failureSeq }) => {
-    const success = (position) => {
+  ({ failureSeq, successSeq }) => {
+    const success = position => {
       successSeq({
-        status: 'success',
         lat: position.coords.latitude,
         long: position.coords.longitude,
+        status: 'success',
       });
     };
 
-    const failure = (err) => {
+    const failure = () => {
       failureSeq({ status: 'denied' });
     };
 

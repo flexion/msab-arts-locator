@@ -1,27 +1,27 @@
-const { createNewLocation } = require('./createNewLocation');
 const { createMockApplicationContext } = require('../utilities/TestUtils');
+const { createNewLocation } = require('./createNewLocation');
 
 const mockLocationData = {
-  name: 'Another Cool Art Location',
+  approved: true,
   category: {
     craft: true,
     dance: true,
     folk: true,
     literary: true,
     music: true,
-    photo: true,
     opera: true,
+    photo: true,
     visual: true,
   },
-  street: '123 Valid Street',
   city: 'Valid City',
-  state: 'MN',
-  zip: '00000',
-  contactName: 'Art Curator',
   contactEmail: 'curator@example.com',
+  contactName: 'Art Curator',
   contactPhone: '555-123-2345',
   gresp: 'abc1234',
-  approved: true,
+  name: 'Another Cool Art Location',
+  state: 'MN',
+  street: '123 Valid Street',
+  zip: '00000',
 };
 
 const mockApplicationContext = createMockApplicationContext({
@@ -29,12 +29,12 @@ const mockApplicationContext = createMockApplicationContext({
     return {
       getLocationCoordinates: () => {
         return {
-          status: 'success',
+          cityName: 'the city',
           coords: {
             lat: '0.0',
             lng: '0.0',
           },
-          cityName: 'the city',
+          status: 'success',
         };
       },
       saveNewArtLocation: () => {
@@ -51,8 +51,8 @@ describe('createNewLocation controller', () => {
     let data = mockLocationData;
 
     const result = await createNewLocation({
-      locationData: data,
       applicationContext: mockApplicationContext,
+      locationData: data,
     });
 
     expect(result.validateArtLocation.status).toEqual('success');
@@ -72,8 +72,8 @@ describe('createNewLocation controller', () => {
     const emptyApplicationContext = createMockApplicationContext();
     await expect(
       createNewLocation({
-        locationData: data,
         applicationContext: emptyApplicationContext,
+        locationData: data,
       }),
     ).rejects.toThrowError(/invalid artlocation/i);
   });
@@ -93,8 +93,8 @@ describe('createNewLocation controller', () => {
 
     await expect(
       createNewLocation({
-        locationData: mockLocationData,
         applicationContext: failingApplicationContext,
+        locationData: mockLocationData,
       }),
     ).rejects.toThrowError(/error getting location/i);
   });

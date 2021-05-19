@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const getCoordsFromAddress = async (
-  { artLocation, apiKey },
+  { apiKey, artLocation },
   applicationContext,
 ) => {
   if (artLocation && apiKey) {
@@ -18,20 +18,20 @@ const getCoordsFromAddress = async (
     if (response.data.results && response.data.results.length > 0) {
       const coords = response.data.results[0].geometry.location;
       const address_comps = response.data.results[0].address_components;
-      address_comps.forEach((comp) => {
+      address_comps.forEach(comp => {
         if (comp.types[0] === 'locality') {
           cityName = comp.long_name;
         }
       });
 
-      return { status: 'success', coords, cityName };
+      return { cityName, coords, status: 'success' };
     } else {
       console.log('geolocation failure for :', artLocation, response.data);
-      return { status: 'geolocation failure', msg: response.data };
+      return { msg: response.data, status: 'geolocation failure' };
     }
   } else {
     console.log('missing data for coords', artLocation);
-    return { status: 'geolocation failure', msg: 'missing data' };
+    return { msg: 'missing data', status: 'geolocation failure' };
   }
 };
 

@@ -1,6 +1,6 @@
 import { state } from 'cerebral';
 
-export const updateFormValueAction = ({ store, props }) => {
+export const updateFormValueAction = ({ props, store }) => {
   if (props.value === '') {
     props.value = null;
   }

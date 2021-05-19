@@ -1,6 +1,6 @@
-exports.deleteArtLocation = async ({ requestData, applicationContext }) => {
+exports.deleteArtLocation = async ({ applicationContext, requestData }) => {
   const deleteLocation = await applicationContext
     .getPersistenceGateway()
-    .deleteLocation({ requestData, applicationContext });
+    .deleteLocation({ applicationContext, requestData });
   return deleteLocation;
 };

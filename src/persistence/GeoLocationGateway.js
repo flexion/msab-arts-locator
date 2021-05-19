@@ -1,18 +1,19 @@
 const requestPosition = () => {
   let options = {
     enableHighAccuracy: false,
-    timeout: 30000, // time in millis when error callback will be invoked
-    maximumAge: 10, // max cached age of gps data, also in millis
+    // time in millis when error callback will be invoked
+    maximumAge: 10,
+    timeout: 30000, // max cached age of gps data, also in millis
   };
 
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
+      pos => {
         resolve(pos);
       },
-      (err) => {
+      err => {
         console.log('geolocation failed on this device');
-        reject({ result: { status: 'failed', error: err } });
+        reject({ result: { error: err, status: 'failed' } });
       },
       options,
     );

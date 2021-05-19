@@ -4,21 +4,21 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 
 const putImage = async (
-  { base64Image, ext, entityId, contentType },
+  { base64Image, contentType, entityId, ext },
   applicationContext,
 ) => {
   try {
     const imageBuffer = Buffer.from(base64Image, 'base64');
     const bucket = applicationContext.environment.imageBucket;
     let params = {
+      ACL: 'public-read',
       Body: imageBuffer,
       Bucket: bucket,
-      Key: `${entityId}.${ext}`,
       ContentType: contentType,
-      ACL: 'public-read',
+      Key: `${entityId}.${ext}`,
     };
     const response = await s3.upload(params).promise();
-    return { status: 'success', data: response };
+    return { data: response, status: 'success' };
   } catch (e) {
     console.log('something failed on s3 put', e);
     return { status: 's3 put failed' };

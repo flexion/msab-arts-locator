@@ -5,6 +5,6 @@ import { validateLocationAction } from '../actions/validateLocationAction';
 
 export const submitLocationSequence = [
   validateLocationAction,
-  { update: [updateLocationAction], submit: [submitLocationAction] },
+  { submit: [submitLocationAction], update: [updateLocationAction] },
   submitLocationResultAction,
 ];

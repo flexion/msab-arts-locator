@@ -1,5 +1,5 @@
 import { state } from 'cerebral';
 
-export const setPageAction = ({ store, props }) => {
+export const setPageAction = ({ props, store }) => {
   store.set(state.currentPage, props.page);
 };

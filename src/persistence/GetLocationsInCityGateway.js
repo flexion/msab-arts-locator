@@ -1,6 +1,6 @@
 const makeRequest = (method, url) => {
   return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     // xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
     // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
@@ -24,7 +24,7 @@ const makeRequest = (method, url) => {
   });
 };
 
-const getLocationsInCity = async ({ city, applicationContext }) => {
+const getLocationsInCity = async ({ applicationContext, city }) => {
   const method = 'GET';
   const lambdaURL = applicationContext.environment().apiURL + 'get-locations';
   let url = `${lambdaURL}?city=${city}`;

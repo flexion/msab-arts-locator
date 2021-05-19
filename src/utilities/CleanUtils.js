@@ -1,10 +1,13 @@
 /**
  *
+ * @param data.data
  * @param data
  * @param dataSchema
  * @param applicationContext
+ * @param data.dataSchema
+ * @param data.applicationContext
  */
-function validateRequestData({ data, dataSchema, applicationContext }) {
+function validateRequestData({ applicationContext, data, dataSchema }) {
   const validationResult = applicationContext
     .getJsonValidator()
     .validateJson(data, dataSchema);

@@ -1,32 +1,32 @@
-import React from 'react';
 import {
-  Media,
   Content,
-  MediaLeft,
-  MediaContent,
+  Icon,
+  Image,
   Level,
+  LevelItem,
   LevelLeft,
   LevelRight,
-  LevelItem,
-  Image,
-  Icon,
+  Media,
+  MediaContent,
+  MediaLeft,
   Tag,
 } from 'bloomer';
+import React from 'react';
 
 export const LocationListItem = ({
-  location,
+  categories,
   citySearch,
   index,
-  categories,
+  location,
   setActiveFilter,
 }) => {
   return (
     <React.Fragment>
       <div>
         <a
+          className="has-text-primary location-name"
           href={location.website}
           target="_new"
-          className="has-text-primary location-name"
         >
           <span>
             {index + 1}. {location.name}
@@ -80,7 +80,7 @@ export const LocationListItem = ({
           <Tag
             className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10 msab-pointer"
             key={i}
-            onClick={(e) => {
+            onClick={() => {
               setActiveFilter({ value: tag });
             }}
           >

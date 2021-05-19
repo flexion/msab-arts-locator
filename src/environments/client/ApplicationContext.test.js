@@ -1,5 +1,5 @@
-const assert = require('assert');
 const applicationContext = require('./ApplicationContext');
+const assert = require('assert');
 
 describe('AplicationContext', () => {
   describe('API', () => {

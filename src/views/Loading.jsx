@@ -1,23 +1,23 @@
-import React from 'react';
-import logo from '../images/logo1.svg';
-import collage from '../images/collage.svg';
 import {
+  Level,
+  LevelItem,
   Modal,
   ModalBackground,
   ModalContent,
   Section,
-  Level,
-  LevelItem,
 } from 'bloomer';
+import React from 'react';
+import collage from '../images/collage.svg';
+import logo from '../images/logo1.svg';
 
 export const Loading = ({
-  isActive,
   askingLocation,
   findingLocations,
   gettingLocation,
+  isActive,
 }) => {
   return (
-    <Modal isActive={isActive} className="has-text-white msab-loading">
+    <Modal className="has-text-white msab-loading" isActive={isActive}>
       <ModalBackground className="msab-has-background-purple" />
       <ModalContent style={{ maxHeight: '2000px' }}>
         <Section style={{ margin: '0px', padding: '0px' }}>
