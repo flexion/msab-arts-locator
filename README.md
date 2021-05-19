@@ -1,9 +1,16 @@
+<p align="center">
+  <img alt="GitHub branch checks state" src="https://img.shields.io/github/checks-status/flexion/msab-arts-locator/main">
+  <a href="https://deepscan.io/dashboard#view=project&tid=8969&pid=17228&bid=388480"><img src="https://deepscan.io/api/teams/8969/projects/17228/branches/388480/badge/grade.svg" alt="DeepScan grade"></a>
+  <img alt="Libraries.io dependency status for GitHub repo" src="https://img.shields.io/librariesio/github/flexion/msab-arts-locator">
+</p>
+
 # Development
 
 This project leverages AWS Lambda runtime `nodejs12.x`, so using Node 12 locally is a good idea to avoid accidentally introducing incompatibilities.
 
 ```
 nvm i 12
+npm i -g yarn
 ```
 
 ## AWS Access
@@ -62,11 +69,11 @@ The build environment needs to be populated with the variables in `sample.env` w
 
 ## Deploying
 
-The service stack is namespaced to allow multiple concurrent deployments for testing, debugging, etc. E.g.: `sls deploy --stage bdruth --force`
+The service stack is namespaced to allow multiple concurrent deployments for testing, debugging, etc. E.g.: `yarn sls deploy --stage bdruth --force`
 **Note** The env vars need to be properly populated per prerequisites above.
 
 ```
-sls deploy --stage <namespace> --force
+yarn sls deploy --stage <namespace> --force
 ```
 
 ## Fullstack / web-app client
@@ -75,12 +82,12 @@ This project leverages the `fullstack-serverless` plugin to deploy the single-pa
 
 Start the app in dev mode
 
-    npm start
+    yarn start
 
 Build the app in prod mode
 
-    npm run build
+    yarn build
 
 Test the app locally
 
-    npm test
+    yarn test

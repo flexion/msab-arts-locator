@@ -1,3 +1,9 @@
+<p align="center">
+  <img alt="GitHub branch checks state" src="https://img.shields.io/github/checks-status/flexion/msab-arts-locator/main">
+  <a href="https://deepscan.io/dashboard#view=project&tid=8969&pid=17228&bid=388480"><img src="https://deepscan.io/api/teams/8969/projects/17228/branches/388480/badge/grade.svg" alt="DeepScan grade"></a>
+  <img alt="Libraries.io dependency status for GitHub repo" src="https://img.shields.io/librariesio/github/flexion/msab-arts-locator">
+</p>
+
 ## IAM setup
 
 To run the serverless deploy (e.g. `yarn sls deploy --verbose --stage pre --force`), certain prerequisites need to be setup in IAM first.

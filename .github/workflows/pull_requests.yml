@@ -1,5 +1,8 @@
 name: MSAB Pull Requests
 on:
+  push:
+    branches:
+      - main
   pull_request:
 jobs:
   build:
