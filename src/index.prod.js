@@ -1,4 +1,5 @@
-import '@babel/polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import { Container } from '@cerebral/react';
 import { Main } from './views/Main';
 import { presenter } from './presenter/presenter';
