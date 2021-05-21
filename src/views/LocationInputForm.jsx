@@ -321,7 +321,7 @@ export const LocationInputForm = connect(
                   >
                     <span className="msab-has-text-grey margin-left-10">
                       I agree to the{' '}
-                      <a href="tos" target="_new">
+                      <a href="tos" target="_blank">
                         terms of service
                       </a>
                     </span>
