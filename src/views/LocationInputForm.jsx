@@ -318,16 +318,14 @@ export const LocationInputForm = connect(
                         value: e.target.checked,
                       });
                     }}
-                  />
-                  <Label
-                    className="msab-has-text-grey margin-left-10"
-                    htmlFor="tos"
                   >
-                    I agree to the{' '}
-                    <a href="tos" target="_new">
-                      terms of service
-                    </a>
-                  </Label>
+                    <span className="msab-has-text-grey margin-left-10">
+                      I agree to the{' '}
+                      <a href="tos" target="_blank">
+                        terms of service
+                      </a>
+                    </span>
+                  </Checkbox>
                 </Control>
               </Field>
             )}
@@ -351,6 +349,26 @@ export const LocationInputForm = connect(
                 />
               </Control>
             </Field>
+            {locationFormButtonsHelper.showAdmin && (
+              <Field>
+                <Control>
+                  <Checkbox
+                    id="approved"
+                    name="approved"
+                    onChange={e => {
+                      updateFormValueSequence({
+                        key: 'approved',
+                        value: e.target.checked,
+                      });
+                    }}
+                  >
+                    <span className="msab-has-text-grey margin-left-10">
+                      Approved for publish
+                    </span>
+                  </Checkbox>
+                </Control>
+              </Field>
+            )}
             <Field isGrouped>
               <Control>
                 {locationFormButtonsHelper.showAdmin && (
@@ -362,7 +380,7 @@ export const LocationInputForm = connect(
                       onSubmit(e);
                     }}
                   >
-                    Publish
+                    Save
                   </Button>
                 )}
                 {locationFormButtonsHelper.showSubmit && (
@@ -391,23 +409,6 @@ export const LocationInputForm = connect(
                   >
                     Update
                   </Button>
-                )}
-
-                {locationFormButtonsHelper.showAdmin && (
-                  <Field isGrouped>
-                    <Control>
-                      <Button
-                        className="msab-margin-top"
-                        isColor="primary"
-                        type="submit"
-                        onClick={e => {
-                          onSubmit(e);
-                        }}
-                      >
-                        Don&apos;t Publish
-                      </Button>
-                    </Control>
-                  </Field>
                 )}
               </Control>
             </Field>
