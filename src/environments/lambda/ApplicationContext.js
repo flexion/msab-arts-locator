@@ -46,7 +46,7 @@ const {
 const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const { getImage, putImage } = require('../../persistence/s3Gateway');
-const { sendEmail } = require('../../persistence/emailGatewaySES');
+const { sendEmail } = require('../../persistence/emailGatewayGmail');
 const { sendUserEmail } = require('../../interactors/sendUserEmailInteractor');
 const { v4: uuidv4 } = require('uuid');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
@@ -70,7 +70,7 @@ const emailConfig = {
     user: process.env.EMAIL_USER,
   },
   debug: false,
-  from: 'bruth+msab@flexion.us',
+  from: 'artsaroundmn@gmail.com',
   logger: false,
 };
 
