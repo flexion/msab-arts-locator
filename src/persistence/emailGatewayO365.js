@@ -2,12 +2,7 @@
 const nodemailer = require('nodemailer');
 let transporter = undefined;
 
-/* eslint-disable */
 const sendEmail = async ({ applicationContext, requestData }) => {
-  return { dummyEmail: true };
-};
-
-const sendEmailReal = async ({ applicationContext, requestData }) => {
   // create reusable transporter object using the default SMTP transport
   const emailConfig = {
     service: 'Outlook365',
