@@ -31,12 +31,12 @@ Basically, if you can run commands like `aws s3 ls`, then you should be in good 
 ## GOOGLE Access
 
 To use the various google apis, you will need to get api keys for:
-Google reCAPTCHA - https://developers.google.com/recaptcha/intro
-Google Maps - https://developers.google.com/maps/documentation/geocoding/start
+- [ ] Google reCAPTCHA - https://developers.google.com/recaptcha/intro
+- [ ] Google Maps - https://developers.google.com/maps/documentation/geocoding/start
 
 The environment variables for these keys are:
-GOOGLE_CAPTCHA_KEY (server-side secret)
-GOOGLE_GEOCODING_API_KEY
+* GOOGLE_CAPTCHA_KEY (server-side secret)
+* GOOGLE_GEOCODING_API_KEY
 
 ### reCAPTCHA
 
