@@ -14,10 +14,11 @@ phases:
     commands:
       - echo Build started on `date`
       - yarn build
-  post_build:
-    commands:
       - yarn test
       - echo Build completed on `date`
+  post_build:
+    commands:
+      - yarn sls deploy --verbose --stage dev --force
 # Include only the files required for your application to run.
 # artifacts:
 #   files:
