@@ -217,22 +217,21 @@ The `deployer` (above) policy has no `IAM` permissions to create the Lambda exec
                 "logs:PutLogEvents"
             ],
             "Resource": [
-                "arn:aws:logs:<region>:<account-id>:log-group:/aws/lambda/msab-arts-locator-*:*",
-                "arn:aws:logs:<region>:<account-id>:log-group:/aws/lambda/msab-arts-locator-*:*:*"
+                "*"
             ],
             "Effect": "Allow"
         },
         {
             "Action": [
-                "dynamodb:DescribeTable",
-                "dynamodb:Query",
-                "dynamodb:Scan",
-                "dynamodb:GetItem",
-                "dynamodb:PutItem",
                 "dynamodb:BatchGetItem",
-                "dynamodb:UpdateItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:DescribeTable",
                 "dynamodb:DeleteItem",
-                "dynamodb:BatchWriteItem"
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:UpdateItem"
             ],
             "Resource": [
                 "arn:aws:dynamodb:<region>:<account-id>:table/msab-arts-locator-gis-*"
