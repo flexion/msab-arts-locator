@@ -1,0 +1,23 @@
+name: Releases
+
+on: 
+  push:
+    tags:
+    - '*'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get the tag name
+      run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+    - name: Set archive name
+      run: echo "ARCHIVE=msab-arts-locator_${{ env.TAG }}.zip" >> $GITHUB_ENV
+    - name: bundle release artifact
+      run: zip "$ARCHIVE" -r .
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "$ARCHIVE"
+        token: ${{ secrets.GITHUB_TOKEN }}

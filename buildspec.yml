@@ -18,7 +18,7 @@ phases:
       - echo Build completed on `date`
   post_build:
     commands:
-      - yarn sls deploy --verbose --stage dev --force
+      - yarn sls deploy --verbose --stage $STAGE --force
 # Include only the files required for your application to run.
 # artifacts:
 #   files:
