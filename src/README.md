@@ -240,11 +240,22 @@ The `deployer` (above) policy has no `IAM` permissions to create the Lambda exec
             "Effect": "Allow"
         },
         {
+            "Effect": "Allow",
             "Action": [
-                "s3:*"
+                "s3:ListBucket"
             ],
-            "Resource": "arn:aws:s3:<region>:<account-id>:/msab-arts-locator-*",
-            "Effect": "Allow"
+            "Resource": [
+                "arn:aws:s3:::msab-arts-locator-*-images"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::msab-arts-locator-*-images/*"
+            ]
         }
     ]
 }
