@@ -46,7 +46,7 @@ exports.validateImageFileType = async image => {
       return { base64Image, contentType, status: 'success' };
     } else {
       console.warn(
-        `File type: ${contentType.mime} (supported: ${types}), size: ${imageBuffer.length}/${maxSize}`,
+        `File type info: ${contentType} (supported: ${types}), size: ${imageBuffer.length}/${maxSize}`,
         contentType,
       );
       return {
