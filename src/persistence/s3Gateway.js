@@ -7,10 +7,11 @@ const putImage = async (
   { base64Image, contentType, entityId, ext },
   applicationContext,
 ) => {
+  let params = {};
   try {
     const imageBuffer = Buffer.from(base64Image, 'base64');
     const bucket = applicationContext.environment.imageBucket;
-    let params = {
+    params = {
       ACL: 'public-read',
       Body: imageBuffer,
       Bucket: bucket,
@@ -20,7 +21,8 @@ const putImage = async (
     const response = await s3.upload(params).promise();
     return { data: response, status: 'success' };
   } catch (e) {
-    console.log('something failed on s3 put', e);
+    delete params.Body; // don't log image buffer
+    console.log('something failed on s3 put: ' + JSON.stringify(params), e);
     return { status: 's3 put failed' };
   }
 };
