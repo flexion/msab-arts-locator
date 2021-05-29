@@ -1,10 +1,12 @@
 module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
-    'client/**/*.js',
-    '!e2e/**/*.js',
-    '!client/**/*.test.js',
-    '!client/**/TestUtils.js',
+    'environments/**/*.js',
+    'presenter/**/*.js',
+    'utilities/**/*.js',
+    'persistence/**/*.js',
+    'interactors/**/*.js',
+    'controllers/**/*.js',
   ],
   coverageDirectory: './coverage',
   coverageThreshold: {
@@ -15,6 +17,15 @@ module.exports = {
       statements: 95,
     },
   },
+  reporters: [
+    'default',
+    [
+      './node_modules/jest-html-reporter',
+      {
+        pageTitle: 'Test Report',
+      },
+    ],
+  ],
   testEnvironment: 'jsdom',
   verbose: true,
 };
