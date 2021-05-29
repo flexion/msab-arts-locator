@@ -1,0 +1,10 @@
+{
+  "jest.jestCommandLine": "jest",
+  "jest.autoRun": {
+    "watch": false,
+    "onSave": "test-src-file",
+    "onStartup": [
+      "all-tests"
+    ]
+  }
+}
