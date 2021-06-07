@@ -68,8 +68,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
-    "aws-sdk": "^2.914.0",
+    "autoprefixer": "^10.2.6",
+    "aws-sdk": "^2.915.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^27.0.1",
     "eslint": "^7.27.0",
