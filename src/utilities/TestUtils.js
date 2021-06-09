@@ -34,7 +34,7 @@ function createMockApplicationContext(options = {}) {
 /**
  *
  */
-function createSchemaValidationApplicationContext() {
+function createSchemaValidationApplicationContext(options = {}) {
   const { validateJson } = require('./AjvJsonValidator');
   return createMockApplicationContext({
     getJsonValidator: () => {
@@ -42,6 +42,7 @@ function createSchemaValidationApplicationContext() {
         validateJson,
       };
     },
+    ...options,
   });
 }
 
