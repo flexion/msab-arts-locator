@@ -84,19 +84,18 @@ function ArtLocation({ applicationContext, rawArtLocation }) {
     dataSchema,
   });
   // need to loop through categories to see if type is true
-  let atLeastOne = false;
   let cats = this.category;
   if (typeof cats === 'string') {
     cats = JSON.parse(cats);
   }
 
-  Object.keys(cats).forEach(function (cat) {
-    if (cats[cat]) {
-      atLeastOne = true;
-    }
-  });
-  if (!atLeastOne) {
-    throw new Error('[{"message": "At least one category type is required"}]');
+  let numberOfEnabledCategories = Object.values(cats).filter(
+    categoryEnabled => categoryEnabled === true,
+  ).length;
+  if (numberOfEnabledCategories < 1 || numberOfEnabledCategories > 3) {
+    throw new Error(
+      '[{"message": "Between one and three categories are required"}]',
+    );
   }
 }
 
