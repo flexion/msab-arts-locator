@@ -7,14 +7,15 @@ module.exports = {
     'persistence/**/*.js',
     'interactors/**/*.js',
     'controllers/**/*.js',
+    '!**/*ApplicationContext*.js',
   ],
   coverageDirectory: './coverage',
   coverageThreshold: {
     global: {
-      branches: 25,
-      functions: 22,
-      lines: 30,
-      statements: 30,
+      branches: 26,
+      functions: 26,
+      lines: 31,
+      statements: 31,
     },
   },
   reporters: [
