@@ -19,5 +19,8 @@ jobs:
       run: zip ${{ env.ARCHIVE }} -r .
     - uses: ncipollo/release-action@v1
       with:
+        allowUpdates: true
+        omitBodyDuringUpdate: true
+        omitNameDuringUpdate: true
         artifacts: ${{ env.ARCHIVE }}
         token: ${{ secrets.GITHUB_TOKEN }}
