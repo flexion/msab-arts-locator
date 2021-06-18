@@ -49,6 +49,7 @@ const { getGeoLocation } = require('../../persistence/GeoLocationGateway');
 const { getLocationById } = require('../../persistence/GetLocationByIdGateway');
 const { v4: uuidv4 } = require('uuid');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
+const { version: codeVersion } = require('./version');
 const environment = {
   apiURL: `${window.location.origin}/api/v1/`,
   domain: window.location.href,
@@ -65,6 +66,9 @@ const applicationContext = {
   },
   environment: () => {
     return environment;
+  },
+  getCodeVersion: () => {
+    return codeVersion;
   },
   getCurrentTimestamp: () => {
     return Date.now();
