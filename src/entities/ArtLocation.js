@@ -94,7 +94,7 @@ function ArtLocation({ applicationContext, rawArtLocation }) {
   ).length;
   if (numberOfEnabledCategories < 1 || numberOfEnabledCategories > 3) {
     throw new Error(
-      '[{"message": "Between one and three categories are required"}]',
+      '[{"message": "Between one and three art location Type identifiers are required"}]',
     );
   }
 }
