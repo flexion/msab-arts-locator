@@ -50,6 +50,7 @@ export const presenter = {
     },
     citySearch: false,
     cityValue: '',
+    codeVersion: applicationContext.getCodeVersion(),
     currentPage: 'Home',
     findingLocations: false,
     form: {
