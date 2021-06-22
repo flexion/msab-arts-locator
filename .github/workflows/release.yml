@@ -17,7 +17,7 @@ jobs:
       run: echo "ARCHIVE=msab-arts-locator_${{ env.TAG }}.zip" >> $GITHUB_ENV
     - run: echo "module.exports = { version:'${{ env.TAG }}' };" > src/release_info.js
     - name: bundle release artifact
-      run: zip ${{ env.ARCHIVE }} -r .
+      run: zip -r ${{ env.ARCHIVE }} . -x '*.git*'
     - uses: ncipollo/release-action@v1
       with:
         allowUpdates: true
