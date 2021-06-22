@@ -20,6 +20,7 @@ import React from 'react';
 
 export const LocationInputForm = connect(
   {
+    cancelLocationInput: sequences.cancelLocationInputSequence,
     categories: state.categories,
     form: state.form,
     imgFailure: state.selectImageFailure,
@@ -30,6 +31,7 @@ export const LocationInputForm = connect(
     updateFormValueSequence: sequences.updateFormValueSequence,
   },
   ({
+    cancelLocationInput,
     categories,
     form,
     imgFailure,
@@ -371,6 +373,16 @@ export const LocationInputForm = connect(
             )}
             <Field isGrouped>
               <Control>
+                <Button
+                  className="msab-margin-top msab-margin-lr"
+                  isColor="primary"
+                  type="button"
+                  onClick={() => {
+                    cancelLocationInput();
+                  }}
+                >
+                  Cancel
+                </Button>
                 {locationFormButtonsHelper.showAdmin && (
                   <Button
                     className="msab-margin-top"

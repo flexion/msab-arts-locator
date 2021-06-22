@@ -1,3 +1,4 @@
+import { cancelLocationInputSequence } from './cerebral/sequences/cancelLocationInputSequence';
 import { getGeoLocationSequence } from './cerebral/sequences/getGeoLocationSequence';
 import { getLocationSequence } from './cerebral/sequences/getLocationSequence';
 import { locationFormButtonsHelper } from './cerebral/computeds/locationFormButtonsHelper';
@@ -11,6 +12,7 @@ import { submitLocationSequence } from './cerebral/sequences/submitLocationSeque
 import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
 import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
 import applicationContext from '../environments/client/ApplicationContext';
+import humbleWindow from './cerebral/frameworks/humbleBrowser';
 
 // Cerebral module
 
@@ -22,8 +24,9 @@ export const presenter = {
     // [UnidentifiedUserError, unidentifiedUserErrorSequence], //401
     // [ActionError, setCurrentPageErrorSequence], // generic error handler
   ],
-  providers: { applicationContext },
+  providers: { applicationContext, humbleWindow },
   sequences: {
+    cancelLocationInputSequence,
     getGeoLocationSequence,
     getLocationSequence,
     routeChangeSequence,

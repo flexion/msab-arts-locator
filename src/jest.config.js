@@ -8,6 +8,7 @@ module.exports = {
     'interactors/**/*.js',
     'controllers/**/*.js',
     '!**/*ApplicationContext*.js',
+    '!**/humble*.js',
   ],
   coverageDirectory: './coverage',
   coverageThreshold: {
