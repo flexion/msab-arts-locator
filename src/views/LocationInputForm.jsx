@@ -355,6 +355,7 @@ export const LocationInputForm = connect(
               <Field>
                 <Control>
                   <Checkbox
+                    checked={form.approved || false}
                     id="approved"
                     name="approved"
                     onChange={e => {
