@@ -1,5 +1,11 @@
 //const AWSXRay = require('aws-xray-sdk');
 const {
+  confirmCaptcha: confirmCaptchaGoogle,
+} = require('../../persistence/CaptchaGateway');
+const {
+  confirmCaptcha: confirmCaptchaNoOp,
+} = require('../../persistence/NoOpCaptchaGateway');
+const {
   deleteArtLocation,
 } = require('../../interactors/deleteArtLocationInteractor');
 const {
@@ -32,6 +38,15 @@ const {
   sendAdminEmail,
 } = require('../../interactors/sendAdminEmailInteractor');
 const {
+  sendEmail: sendEmailDummy,
+} = require('../../persistence/emailGatewayDummy');
+const {
+  sendEmail: sendEmailGmail,
+} = require('../../persistence/emailGatewayGmail');
+const {
+  sendEmail: sendEmailSES,
+} = require('../../persistence/emailGatewaySES');
+const {
   updateArtLocation,
 } = require('../../interactors/updateArtLocationInteractor');
 const {
@@ -43,10 +58,8 @@ const {
 const {
   validateImageFileType,
 } = require('../../interactors/validateImageFileTypeInteractor');
-const { confirmCaptcha } = require('../../persistence/CaptchaGateway');
 const { getCoordsFromAddress } = require('../../persistence/MapsAPIGateway');
 const { getImage, putImage } = require('../../persistence/s3Gateway');
-const { sendEmail } = require('../../persistence/emailGatewayGmail');
 const { sendUserEmail } = require('../../interactors/sendUserEmailInteractor');
 const { v4: uuidv4 } = require('uuid');
 const { validateJson } = require('../../utilities/AjvJsonValidator');
@@ -59,18 +72,33 @@ const apiURLs = {
 
 const environment = {
   apiKey: process.env.API_KEY,
+  captchaGateway: process.env.GOOGLE_CAPTCHA_GATEWAY,
   captchaKey: process.env.CAPTCHA_KEY,
   domainName: process.env.DOMAIN_NAME,
+  emailGateway: process.env.EMAIL_GATEWAY,
   imageBucket: process.env.IMAGE_BUCKET,
   stage: process.env.STAGE || 'local',
 };
+let confirmCaptcha;
+if (environment.captchaGateway == 'noop') {
+  confirmCaptcha = confirmCaptchaNoOp;
+} else {
+  confirmCaptcha = confirmCaptchaGoogle;
+}
+const sendEmailGateways = {
+  dummy: sendEmailDummy,
+  gmail: sendEmailGmail,
+  ses: sendEmailSES,
+};
+const sendEmail = sendEmailGateways[environment.emailGateway];
+
 const emailConfig = {
   auth: {
     pass: process.env.EMAIL_PW,
     user: process.env.EMAIL_USER,
   },
   debug: false,
-  from: 'artsaroundmn@gmail.com',
+  from: process.env.EMAIL_USER,
   logger: false,
 };
 

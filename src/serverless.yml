@@ -3,6 +3,7 @@ service: msab-arts-locator
 plugins:
   - fullstack-serverless
   - serverless-stack-output
+  - serverless-offline
 
 custom:
   vars: ${file(./config/${opt:stage}.yml)}
@@ -10,9 +11,11 @@ custom:
   region: ${opt:region, 'us-east-2'}
   certificateId: ${self:custom.vars.certificateId} # Required by AWS to be in us-east-1
   apiKey: ${self:custom.vars.googleGeocodingApiKey} #api key to use google maps api
-  captchaKey: ${self:custom.vars.googleCaptchaKey}
+  captchaKey: ${self:custom.vars.googleCaptchaKey, ''}
+  captchaGateway: ${self:custom.vars.googleCaptchaGateway, ''}
   imageBucket: ${self:service}-${opt:stage}-images
   loggingBucket: ${self:service}-${opt:stage}-logs
+  emailGateway: ${self:custom.vars.emailGateway, 'gmail'}
   emailUser: ${self:custom.vars.emailUsername}
   emailPW: ${self:custom.vars.emailPassword}
 
@@ -90,7 +93,9 @@ functions:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
       API_KEY: ${self:custom.apiKey}
       CAPTCHA_KEY: ${self:custom.captchaKey}
+      GOOGLE_CAPTCHA_GATEWAY: ${self:custom.captchaGateway}
       IMAGE_BUCKET: ${self:custom.imageBucket}
+      EMAIL_GATEWAY: ${self:custom.emailGateway}
       EMAIL_USER: ${self:custom.emailUser}
       EMAIL_PW: ${self:custom.emailPW}
       DOMAIN_NAME: ${self:custom.domain}
@@ -115,6 +120,8 @@ functions:
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
       CAPTCHA_KEY: ${self:custom.captchaKey}
+      GOOGLE_CAPTCHA_GATEWAY: ${self:custom.captchaGateway}
+      EMAIL_GATEWAY: ${self:custom.emailGateway}
       EMAIL_USER: ${self:custom.emailUser}
       EMAIL_PW: ${self:custom.emailPW}
       DOMAIN_NAME: ${self:custom.domain}
