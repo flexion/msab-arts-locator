@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 let sts = new AWS.STS();
 let params = {};
-sts.getCallerIdentity(params, function (err, data) {
+sts.getCallerIdentity(params, function (err) {
   if (err) {
     console.log(err, err.stack);
     console.error(
