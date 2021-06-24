@@ -1,6 +1,11 @@
 import { state } from 'cerebral';
 
-export const submitLocationResultAction = async ({ get, props, store }) => {
+export const submitLocationResultAction = async ({
+  get,
+  path,
+  props,
+  store,
+}) => {
   let response = null;
   let action = null;
 
@@ -28,6 +33,7 @@ export const submitLocationResultAction = async ({ get, props, store }) => {
         `Art Location Successfully ${action}!`,
       );
       store.set(state.form.formDirty, false);
+      return path.success({ page: 'Home' });
     }
   } else {
     if (props.result && props.result.data) {
