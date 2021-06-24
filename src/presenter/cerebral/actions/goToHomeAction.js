@@ -1,3 +1,3 @@
-export const goToHomeAction = () => {
-  window.location.href = '/';
+export const goToHomeAction = ({ router }) => {
+  router.route('/');
 };
