@@ -107,6 +107,7 @@ export const presenter = {
 
     submitLocationFailure: false,
     submitLocationMsg: '',
+    submitLocationMsgDetail: '',
     submitLocationSuccess: false,
     update: {
       actionType: '',

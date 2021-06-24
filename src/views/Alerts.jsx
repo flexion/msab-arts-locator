@@ -1,4 +1,4 @@
-import { Container, Notification, Section } from 'bloomer';
+import { Section, Notification as div } from 'bloomer';
 import { connect } from '@cerebral/react';
 import { state } from 'cerebral';
 import React, { useEffect, useRef } from 'react';
@@ -8,8 +8,10 @@ export const Alerts = connect(
     failure: state.submitLocationFailure,
     submitErrors: state.submitLocationErrors,
     submitMsg: state.submitLocationMsg,
+    submitMsgDetail: state.submitLocationMsgDetail,
+    success: state.submitLocationSuccess,
   },
-  ({ failure, submitErrors, submitMsg }) => {
+  ({ failure, submitErrors, submitMsg, submitMsgDetail, success }) => {
     const notificationRef = useRef(null);
     useEffect(() => {
       const notification = notificationRef.current;
@@ -20,20 +22,18 @@ export const Alerts = connect(
     });
     return (
       <>
-        {failure && (
+        {(failure || success) && (
           <div ref={notificationRef}>
             <Section className="hero is-small is-danger">
-              <Notification isColor="danger">
-                <p className="msab-has-text-grey-bold is-size-5">
-                  There&apos;s an error submitting the form.
+              <div>
+                <p className="msab-has-text-grey is-size-5">{submitMsg}</p>
+                <p className="msab-has-text-grey is-size-6">
+                  {submitMsgDetail}
                 </p>
-                {submitErrors && (
-                  <p className="msab-has-text-grey is-size-6">{submitMsg}</p>
-                )}
                 {submitErrors.map((errorMsg, i) => {
                   return <li key={i}>{errorMsg}</li>;
                 })}
-              </Notification>
+              </div>
             </Section>
           </div>
         )}
