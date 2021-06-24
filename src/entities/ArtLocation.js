@@ -46,18 +46,15 @@ function ArtLocation({ applicationContext, rawArtLocation }) {
     errorMessage: {
       _: 'Location should include a name, street address, city name, zip code, contact name, contact phone, and contact email.',
       properties: {
-        city: 'City should be a string 1 characters long',
-        contactEmail:
-          'Contact e-mail should be a string at least 1 characters long',
-        contactName:
-          'Contact name should be a string at least 1 characters long',
-        contactPhone:
-          'Contact phone should be a string at least 1 characters long',
+        city: 'City',
+        contactEmail: 'Contact e-mail',
+        contactName: 'Contact name',
+        contactPhone: 'Contact phone',
         gresp: 'Please complete the CAPTCHA to submit',
-        name: 'Name should be a string at least 1 characters long',
-        state: 'State should be a string 2 characters long',
-        street: 'Street should be a string at least 1 characters long',
-        zip: 'Zip should be a number at least 5 numbers long',
+        name: 'Name',
+        state: 'State',
+        street: 'Street',
+        zip: 'ZIP',
       },
       type: 'Data should be an object',
     },

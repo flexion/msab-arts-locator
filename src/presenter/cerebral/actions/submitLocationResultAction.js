@@ -32,7 +32,14 @@ export const submitLocationResultAction = async ({ get, props, store }) => {
   } else {
     if (props.result && props.result.data) {
       const fullError = JSON.parse(props.result.data);
-      store.set(state.submitLocationMsg, fullError[0].message);
+      store.set(
+        state.submitLocationMsg,
+        'Please complete the following form fields',
+      );
+      store.set(
+        state.submitLocationErrors,
+        fullError.map(error => error.message),
+      );
     } else {
       store.set(state.submitLocationMsg, 'Location Failed to Send.');
     }
