@@ -6,10 +6,10 @@
 
 # Development
 
-This project leverages AWS Lambda runtime `nodejs12.x`, so using Node 12 locally is a good idea to avoid accidentally introducing incompatibilities.
+This project leverages AWS Lambda runtime `nodejs14.x`, so using Node 14 locally is a good idea to avoid accidentally introducing incompatibilities.
 
 ```
-nvm i 12
+nvm i 14
 npm i -g yarn
 ```
 

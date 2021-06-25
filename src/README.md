@@ -263,7 +263,7 @@ The `deployer` (above) policy has no `IAM` permissions to create the Lambda exec
 Update the `dev.yml` configuration with the ARN of the role created above.
 ## Fullstack / web-app client
 
-This project leverages `nodejs12.x` and the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
+This project leverages `nodejs14.x` and the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
 
 Change to the `src/` subdirectory and install dependencies
 
