@@ -30,8 +30,8 @@ export const Alerts = connect(
                 <p className="msab-has-text-grey is-size-6">
                   {submitMsgDetail}
                 </p>
-                {submitErrors.map((errorMsg, i) => {
-                  return <li key={i}>{errorMsg}</li>;
+                {submitErrors.map(errorMsg => {
+                  return <li key={errorMsg}>{errorMsg}</li>;
                 })}
               </div>
             </Section>

@@ -99,7 +99,7 @@ class ResultsListComponent extends React.Component {
           )}
           <ul>
             {locations.map((location, i) => (
-              <li key={i}>
+              <li key={location.name}>
                 <LocationListItem
                   categories={categories}
                   citySearch={citySearch}
