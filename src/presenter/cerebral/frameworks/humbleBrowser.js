@@ -1,6 +1,6 @@
 const humbleWindow = {
   history: () => {
-    return history;
+    return window.history;
   },
 };
 module.exports = humbleWindow;
