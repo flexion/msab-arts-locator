@@ -4,22 +4,21 @@ import { runAction } from 'cerebral/test';
 
 describe('goBackAction', () => {
   it('should call `back` on history', () => {
+    const backMock = jest.fn();
     const mockWindow = {
       history: () => {
         return {
-          back: () => {
-            expect(true).toBeTruthy();
-          },
+          back: backMock,
         };
       },
     };
 
     presenter.providers.humbleWindow = mockWindow;
-    expect.assertions(1);
-    return runAction(goBackAction, {
+    runAction(goBackAction, {
       modules: {
         presenter,
       },
     });
+    expect(backMock).toHaveBeenCalled();
   });
 });

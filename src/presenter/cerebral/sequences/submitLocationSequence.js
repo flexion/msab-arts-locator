@@ -1,3 +1,4 @@
+import { goToHomeAction } from '../actions/goToHomeAction';
 import { submitLocationAction } from '../actions/submitLocationAction';
 import { submitLocationResultAction } from '../actions/submitLocationResultAction';
 import { updateLocationAction } from '../actions/updateLocationAction';
@@ -7,4 +8,5 @@ export const submitLocationSequence = [
   validateLocationAction,
   { submit: [submitLocationAction], update: [updateLocationAction] },
   submitLocationResultAction,
+  { success: [goToHomeAction] },
 ];

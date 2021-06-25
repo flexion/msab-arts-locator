@@ -53,7 +53,7 @@
     "bulma": "^0.9.3",
     "cerebral": "^5.1.0",
     "conversions": "^1.5.2",
-    "core-js": "3.15.0",
+    "core-js": "3.15.1",
     "dynamodb-geo": "^0.4.0",
     "file-type": "^16.5.0",
     "format-url": "^1.1.0",

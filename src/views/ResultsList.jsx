@@ -35,11 +35,11 @@ class ResultsListComponent extends React.Component {
       <Section>
         <Container>
           {!!locations.length && (
-            <React.Fragment>
+            <>
               <Level className="msab-has-background-grey msab-filter">
                 {!activeFilter && 'Click on a Category Tag to Filter'}
                 {activeFilter && (
-                  <React.Fragment>
+                  <>
                     <Level isMobile>
                       <LevelLeft>
                         <LevelItem>
@@ -60,7 +60,7 @@ class ResultsListComponent extends React.Component {
                         </LevelItem>
                       </LevelRight>
                     </Level>
-                  </React.Fragment>
+                  </>
                 )}
               </Level>
               <Level isMobile>
@@ -95,11 +95,11 @@ class ResultsListComponent extends React.Component {
                   )}
                 </LevelRight>
               </Level>
-            </React.Fragment>
+            </>
           )}
           <ul>
             {locations.map((location, i) => (
-              <li key={i}>
+              <li key={location.name}>
                 <LocationListItem
                   categories={categories}
                   citySearch={citySearch}

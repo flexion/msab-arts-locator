@@ -4,7 +4,7 @@ import { Foot } from './Footer';
 import React from 'react';
 
 export const TOS = () => (
-  <React.Fragment>
+  <>
     <AppHeader />
 
     <Section>
@@ -311,5 +311,5 @@ export const TOS = () => (
       </Container>
     </Section>
     <Foot />
-  </React.Fragment>
+  </>
 );

@@ -25,7 +25,7 @@ export const Main = connect(
     let CurrentPage = pages[currentPage];
     let isActive = findingLocations || askingLocation || gettingLocation;
     return (
-      <React.Fragment>
+      <>
         <main id="main-content" role="main">
           {/* {currentPage === 'Home' && ( */}
           <Loading
@@ -37,7 +37,7 @@ export const Main = connect(
           {/* )} */}
           <CurrentPage />
         </main>
-      </React.Fragment>
+      </>
     );
   },
 );

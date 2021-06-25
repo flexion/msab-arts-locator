@@ -21,7 +21,7 @@ export const LocationListItem = ({
   setActiveFilter,
 }) => {
   return (
-    <React.Fragment>
+    <>
       <div>
         <a
           className="has-text-primary location-name"
@@ -76,10 +76,10 @@ export const LocationListItem = ({
         </MediaContent>
       </Media>
       <div className="msab-location-media">
-        {location.categories.map((tag, i) => (
+        {location.categories.map(tag => (
           <Tag
             className="msab-has-background-teal msab-has-text-grey tag-text msab-margin-10 msab-pointer"
-            key={i}
+            key={tag}
             onClick={() => {
               setActiveFilter({ value: tag });
             }}
@@ -88,6 +88,6 @@ export const LocationListItem = ({
           </Tag>
         ))}
       </div>
-    </React.Fragment>
+    </>
   );
 };

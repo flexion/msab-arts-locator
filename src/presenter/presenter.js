@@ -103,9 +103,11 @@ export const presenter = {
 
     selectImageMsg: '',
 
-    submitLocationFailure: false,
+    submitLocationErrors: [],
 
+    submitLocationFailure: false,
     submitLocationMsg: '',
+    submitLocationMsgDetail: '',
     submitLocationSuccess: false,
     update: {
       actionType: '',
