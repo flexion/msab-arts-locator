@@ -13,8 +13,7 @@ describe('resetFormAction', () => {
         },
       },
     };
-    return runAction(resetFormAction, initialState).then(({ state }) =>
-      expect(state.form).toMatchObject(defaultForm()),
-    );
+    const { state } = await runAction(resetFormAction, initialState);
+    expect(state.form).toMatchObject(defaultForm());
   });
 });
