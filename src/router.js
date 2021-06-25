@@ -13,7 +13,9 @@ const router = {
 
     route('/submit-location', () => {
       window.document.title = `Submit Location ${pageTitleSuffix}`;
-      app.getSequence('routeChangeSequence')({ page: 'LocationInput' });
+      app.getSequence('submitLocationRouteChangeSequence')({
+        page: 'LocationInput',
+      });
     });
 
     route('/tos', () => {
