@@ -1,4 +1,4 @@
-import { Section, Notification as div } from 'bloomer';
+import { Section } from 'bloomer';
 import { connect } from '@cerebral/react';
 import { state } from 'cerebral';
 import React, { useEffect, useRef } from 'react';
