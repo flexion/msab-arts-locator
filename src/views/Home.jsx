@@ -6,11 +6,11 @@ import { SearchByCity } from './SearchByCity';
 import React from 'react';
 
 export const Home = () => (
-  <React.Fragment>
+  <>
     <AppHeader />
     <Alerts />
     <SearchByCity />
     <ResultsList />
     <Foot />
-  </React.Fragment>
+  </>
 );

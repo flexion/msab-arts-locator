@@ -21,7 +21,7 @@ export const LocationListItem = ({
   setActiveFilter,
 }) => {
   return (
-    <React.Fragment>
+    <>
       <div>
         <a
           className="has-text-primary location-name"
@@ -88,6 +88,6 @@ export const LocationListItem = ({
           </Tag>
         ))}
       </div>
-    </React.Fragment>
+    </>
   );
 };
