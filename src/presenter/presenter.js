@@ -8,6 +8,7 @@ import { searchByCitySequence } from './cerebral/sequences/searchByCitySequence'
 import { setActiveFilterSequence } from './cerebral/sequences/setActiveFilterSequence';
 import { setImageSequence } from './cerebral/sequences/setImageSequence';
 import { setRadiusSequence } from './cerebral/sequences/setRadiusSequence';
+import { submitLocationRouteChangeSequence } from './cerebral/sequences/submitLocationRouteChangeSequence copy';
 import { submitLocationSequence } from './cerebral/sequences/submitLocationSequence';
 import { updateCitySearchSequence } from './cerebral/sequences/updateCitySearchSequence';
 import { updateFormValueSequence } from './cerebral/sequences/updateFormValueSequence';
@@ -34,6 +35,7 @@ export const presenter = {
     setActiveFilterSequence,
     setImageSequence,
     setRadiusSequence,
+    submitLocationRouteChangeSequence,
     submitLocationSequence,
     updateCitySearchSequence,
     updateFormValueSequence,
