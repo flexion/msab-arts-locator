@@ -30,10 +30,23 @@ class ResultsListComponent extends React.Component {
     const { setActiveFilter } = this.props;
     const { setRadius } = this.props;
     const { haveGeo } = this.props;
+    const { findingLocations } = this.props;
+    const noResults =
+      !findingLocations && !locations.length && (citySearch || haveGeo);
 
     return (
       <Section>
         <Container>
+          {noResults && (
+            <>
+              <p className="msab-has-text-purple is-size-5">
+                We&apos;re sorry, we don&apos;t have any listings in that area.
+              </p>
+              <p className="msab-has-text-grey is-size-6">
+                Try searching a different nearby town/city.
+              </p>
+            </>
+          )}
           {!!locations.length && (
             <>
               <Level className="msab-has-background-grey msab-filter">
@@ -110,7 +123,7 @@ class ResultsListComponent extends React.Component {
               </li>
             ))}
           </ul>
-          {!locations.length && (
+          {!locations.length && !noResults && (
             <Level>
               <LevelItem>
                 <img src={collage} />
@@ -129,6 +142,7 @@ export const ResultsList = connect(
     categories: state.categories,
     //this alters the location list to include google url
     citySearch: state.citySearch,
+    findingLocations: state.findingLocations,
     getGeoLocationSequence: sequences.getGeoLocationSequence,
     haveGeo: state.haveGeo,
     locations: state.locationListHelper,

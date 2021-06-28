@@ -5,6 +5,7 @@ export const searchByCityAction = async ({
   get,
   store,
 }) => {
+  store.set(state.findingLocations, true);
   store.set(state.citySearch, true);
   const result = await applicationContext.getUseCases().getArtLocationsInCity({
     applicationContext,
