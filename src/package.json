@@ -1,6 +1,6 @@
 {
   "name": "msab-art-locator-client",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "private": true,
   "description": "Front end client for MSAB mobile Arts Locator application.",
   "homepage": "https://github.com/flexion/msab-arts-locator#readme",
@@ -14,6 +14,7 @@
   "license": "MIT",
   "author": "Flexion Inc.",
   "main": "index.dev.js",
+  "engines" : { "node" : ">=14.0.0" },
   "scripts": {
     "debug": "node --inspect-brk node_modules/.bin/jest --runInBand .*test\\.js$",
     "fix": "prettier --write",
