@@ -363,6 +363,8 @@ There's a few things to check/setup for CodeBuild, but most of these are default
 - The container image it's going to run the build from
 - The environment variables to populate for the build process
 
+**Note**: setup CodeBuild in the same region as the S3 bucket!
+
 Here's the details.
 
 - Project configuration
