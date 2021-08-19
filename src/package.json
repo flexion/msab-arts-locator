@@ -33,10 +33,11 @@
     "lint:fix": "eslint --fix . && eslint --fix ./**/*.jsx && stylelint --fix ./**/*.scss",
     "offline": "yarn sls offline --stage local",
     "checkAwsEnv": "node utilities/get-caller-identity.js",
-    "start": "rm -rf dist && npm-run-all -p watch-css start-js offline",
+    "start": "yarn setClientReCAPTCHAKey && rm -rf dist && npm-run-all -p watch-css start-js offline",
     "start-js": "yarn codeVersion && yarn checkAwsEnv && MSAB_ENV=dev node run-localServer.js",
     "codeVersion": "cp -v release_info.js environments/client/version.js || echo \"module.exports = { version: '$(git describe --tags)' };\" > environments/client/version.js",
-    "build": "yarn codeVersion && MSAB_ENV=prod parcel build  --no-source-maps index.pug"
+    "setClientReCAPTCHAKey": "if [[ ! -z \"$GOOGLE_CLIENT_RECAPTCHA_KEY\" ]]; then echo \"module.exports = { RECAPTCHA_KEY: '$GOOGLE_CLIENT_RECAPTCHA_KEY' };\" > config/config.js && echo \"Updated client config.js\"; else echo \"No GOOGLE_CLIENT_RECAPTCHA_KEY var set, not updating client config.js\"; fi",
+    "build": "yarn setClientReCAPTCHAKey && yarn codeVersion && MSAB_ENV=prod parcel build  --no-source-maps index.pug"
   },
   "resolutions": {
     "qs": "^6.3.2",

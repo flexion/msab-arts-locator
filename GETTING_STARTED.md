@@ -390,9 +390,11 @@ Here's the details.
       - `AWS_TLS_CERTIFICATE_ID` (whatever you setup before, looks like a GUID)
       - `EMAIL_USERNAME` (used to configure the email gateway)
       - `EMAIL_PASSWORD` (used to configure the email gateway)
-      - `GOOGLE_CAPTCHA_KEY` (whatever you saved from the reCAPTCHA setup before)
+      - `GOOGLE_SERVER_RECAPTCHA_KEY` (whatever you saved from the reCAPTCHA setup before)
+      - `GOOGLE_CLIENT_RECAPTCHA_KEY`
       - `GOOGLE_GEOCODING_API_KEY` (whatever you saved from the geocoder setup before)
       - `STAGE` (the namespace for this job to deploy to, e.g. `staging` or `live` or anything you want it to be)
+      - `LAMBDA_EXECUTION_ROLE_ARN` (the ARN of the _lambda execution_ role you setup previously)
 - Buildspec
   - (Select) Use a buildspec file
 - No artifacts or batch configuration (skip)
