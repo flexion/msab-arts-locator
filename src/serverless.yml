@@ -6,7 +6,7 @@ plugins:
   - serverless-offline
 
 custom:
-  vars: ${file(./config/${opt:stage}.yml)}
+  vars: ${file(./config/${opt:stage, 'defaults'}.yml)}
   domain: ${opt:stage}.${self:custom.vars.domainNameRoot}
   region: ${opt:region, 'us-east-2'}
   certificateId: ${self:custom.vars.certificateId} # Required by AWS to be in us-east-1
@@ -61,7 +61,7 @@ provider:
 
   iam:
     role: ${self:custom.vars.lambdaExecutionRole}
-  lambdaHashingVersion: "20201221"
+  lambdaHashingVersion: '20201221'
 
 package:
   patterns:
@@ -143,9 +143,9 @@ resources:
       Properties:
         DistributionConfig:
           Origins:
-          - Id: WebApp
-            DomainName:
-              Fn::GetAtt: [WebAppS3Bucket, RegionalDomainName]
+            - Id: WebApp
+              DomainName:
+                Fn::GetAtt: [WebAppS3Bucket, RegionalDomainName]
     LoggingBucket:
       Type: AWS::S3::Bucket
       Properties:
@@ -159,14 +159,14 @@ resources:
       Properties:
         Bucket: !Ref ImagesBucket
         PolicyDocument:
-          Version: "2012-10-17"
-          Statement: 
+          Version: '2012-10-17'
+          Statement:
             - Effect: Allow
-              Action: 
-                - "s3:GetObject"
-              Resource: 
+              Action:
+                - 's3:GetObject'
+              Resource:
                 - !Join ['', ['arn:aws:s3:::', !Ref ImagesBucket, '/*']]
-              Principal: "*"
+              Principal: '*'
     GisTable:
       Type: AWS::DynamoDB::Table
       Properties:
