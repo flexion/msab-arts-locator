@@ -1,7 +1,8 @@
 # Do not change version. This is the version of aws buildspec, not the version of your buldspec file.
 version: 0.2
-env: 
+env:
   git-credential-helper: yes
+  shell: bash
 phases:
   install:
     runtime-versions:
