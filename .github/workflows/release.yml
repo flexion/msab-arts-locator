@@ -1,27 +1,29 @@
 name: Releases
 
-on: 
+on:
   push:
     tags:
-    - '*'
+      - "*"
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     steps:
-    - uses: actions/checkout@v1
-    - name: Get the tag name
-      run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-    - name: Set archive name
-      run: echo "ARCHIVE=msab-arts-locator_${{ env.TAG }}.zip" >> $GITHUB_ENV
-    - run: echo "module.exports = { version:'${{ env.TAG }}' };" > src/release_info.js
-    - name: bundle release artifact
-      run: zip -r ${{ env.ARCHIVE }} . -x '*.git*'
-    - uses: ncipollo/release-action@v1
-      with:
-        allowUpdates: true
-        omitBodyDuringUpdate: true
-        omitNameDuringUpdate: true
-        artifacts: ${{ env.ARCHIVE }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v1
+      - name: Get the tag name
+        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+      - name: Set archive name
+        run: echo "ARCHIVE=msab-arts-locator_${{ env.TAG }}.zip" >> $GITHUB_ENV
+      - run: echo "module.exports = { version:'${{ env.TAG }}' };" > src/release_info.js
+      - name: bundle release artifact
+        run: zip -r ${{ env.ARCHIVE }} . -x '*.git*'
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          omitBodyDuringUpdate: true
+          omitNameDuringUpdate: true
+          artifacts: ${{ env.ARCHIVE }}
+          token: ${{ secrets.GITHUB_TOKEN }}
