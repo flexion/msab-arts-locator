@@ -1,7 +1,0 @@
-domainNameRoot: ${env:DOMAIN_NAME_ROOT}
-certificateId: ${env:AWS_TLS_CERTIFICATE_ID}
-googleGeocodingApiKey: ${env:GOOGLE_GEOCODING_API_KEY}
-googleCaptchaKey: ${env:GOOGLE_SERVER_RECAPTCHA_KEY}
-emailUsername: ${env:EMAIL_USERNAME}
-emailPassword: ${env:EMAIL_PASSWORD}
-lambdaExecutionRole: ${env:LAMBDA_EXECUTION_ROLE_ARN}

@@ -5,19 +5,19 @@ plugins:
   - serverless-stack-output
   - serverless-offline
 
+useDotenv: true
 custom:
-  vars: ${file(./config/${opt:stage, 'defaults'}.yml)}
-  domain: ${opt:stage}.${self:custom.vars.domainNameRoot}
+  domain: ${opt:stage}.${env:domainNameRoot}
   region: ${opt:region, 'us-east-2'}
-  certificateId: ${self:custom.vars.certificateId} # Required by AWS to be in us-east-1
-  apiKey: ${self:custom.vars.googleGeocodingApiKey} #api key to use google maps api
-  captchaKey: ${self:custom.vars.googleCaptchaKey, ''}
-  captchaGateway: ${self:custom.vars.googleCaptchaGateway, ''}
+  certificateId: ${env:certificateId} # Required by AWS to be in us-east-1
+  apiKey: ${env:googleGeocodingApiKey} #api key to use google maps api
+  captchaKey: ${env:googleCaptchaKey, ''}
+  captchaGateway: ${env:googleCaptchaGateway, ''}
   imageBucket: ${self:service}-${opt:stage}-images
   loggingBucket: ${self:service}-${opt:stage}-logs
-  emailGateway: ${self:custom.vars.emailGateway, 'gmail'}
-  emailUser: ${self:custom.vars.emailUsername}
-  emailPW: ${self:custom.vars.emailPassword}
+  emailGateway: ${env:emailGateway, 'gmail'}
+  emailUser: ${env:emailUsername}
+  emailPW: ${env:emailPassword}
 
   output:
     file: .serverless/stack.json
@@ -60,7 +60,7 @@ provider:
   region: ${self:custom.region}
 
   iam:
-    role: ${self:custom.vars.lambdaExecutionRole}
+    role: ${env:lambdaExecutionRole}
   lambdaHashingVersion: '20201221'
 
 package:
