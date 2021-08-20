@@ -31,27 +31,29 @@ Basically, if you can run commands like `aws s3 ls`, then you should be in good 
 ## GOOGLE Access
 
 To use the various google apis, you will need to get api keys for:
+
 - [ ] Google reCAPTCHA - https://developers.google.com/recaptcha/intro
 - [ ] Google Maps - https://developers.google.com/maps/documentation/geocoding/start
 
 The environment variables for these keys are:
-* GOOGLE_CAPTCHA_KEY (server-side secret)
-* GOOGLE_GEOCODING_API_KEY
+
+- GOOGLE_CAPTCHA_KEY (server-side secret)
+- GOOGLE_GEOCODING_API_KEY
 
 ### reCAPTCHA
 
-Access http://www.google.com/recaptcha/admin to setup a key pair (client/server). You'll _Register a new site_, providing 
+Access http://www.google.com/recaptcha/admin to setup a key pair (client/server). You'll _Register a new site_, providing
 
 1. Label: anything you want, site URL is a good option if it's descriptive enough
 2. reCAPTCHA type: v2
-3. Domains: the domains the reCAPTCHA will be served from (base domain should suffice, e.g. msab.flexion.us should enable *.msab.flexion.us)
+3. Domains: the domains the reCAPTCHA will be served from (base domain should suffice, e.g. msab.flexion.us should enable \*.msab.flexion.us)
 4. Owners: email addresses/accounts that can administer
 5. Accept the reCAPTCH TOS
 6. Send alerts to owners: optional
 
 Submit
 
-You'll receive two keys - a client-side key and a server-side secret. The client-side key is encoded in the React client code (see `src/config/config.js`), the server-side secret is provided in the serverless environment config (see `config/example.yml`).
+You'll receive two keys - a client-side key and a server-side secret. The client-side key is encoded in the React client code (see `src/config/config.js`), the server-side secret is provided in the serverless environment config (see `src/.env`).
 
 ## Prerequisites
 
