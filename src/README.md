@@ -262,6 +262,24 @@ The `deployer` (above) policy has no `IAM` permissions to create the Lambda exec
 
 Update the `.env.dev` configuration with the ARN of the role created above.
 
+## Loading Sample Data into DynamoDB
+
+There is a sample dataset of art locations located in `./sample-data` - to load this data, a simple script exists that leverages the same logic as is executed when adding data via the website's "submit new art location" feature.
+
+Do use this, you'll need a console/terminal/cloud shell that has access to the script & sample-data as well as valid AWS credentials to access the dynamoDB table created by the serverless deployment. In addition, you'll need the API KEY for geocoding, as the sample data contains addresses, not GIS info.
+
+Env vars explained:
+* `AWS_REGION` - region containing the DynamoDB table
+* `GIS_TABLE` - DynamoDB table name created by the deployment (you can find this in the stack output of the deploy process, or just look in the AWS console in the region you ran the deploy)
+* `API_KEY` - Google Geocoding API Key
+
+**Example:**
+
+```
+cd src/
+AWS_REGION=us-east-2 GIS_TABLE=msab-arts-locator-gis-dev API_KEY=<redacted> node environments/local/loadData.js > output.txt 2>&1
+```
+
 ## Fullstack / web-app client
 
 This project leverages `nodejs14.x` and the `fullstack-serverless` plugin to deploy the single-page client app in `client/`.
