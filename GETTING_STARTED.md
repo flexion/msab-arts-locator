@@ -402,3 +402,284 @@ Here's the details.
   - (Yes) Cloudwatch logs (optional)
 
 **Important**: Once this setup is completed, the IAM `deployer` policy needs to be associated with the CodeBuild role that AWS generates for you.
+
+#### CodeBuild IAM policies
+
+In case you need to build the IAM role for codebuild manually, below are the 5 policies it creates when using the wizard.
+
+**CodeBuildBasePolicy-msab-s3-us-east-2**
+* `${AWS::AccountId}`: Your AWS Account Id
+* `${jobName}`: CodeBuild job name, e.g.: `msab-s3`
+* 
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:logs:us-east-2:${AWS::AccountId}:log-group:/aws/codebuild/${jobName}",
+                "arn:aws:logs:us-east-2:${AWS::AccountId}:log-group:/aws/codebuild/${jobName}:*"
+            ],
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::codepipeline-us-east-2-*"
+            ],
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:GetObjectVersion",
+                "s3:GetBucketAcl",
+                "s3:GetBucketLocation"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages"
+            ],
+            "Resource": [
+                "arn:aws:codebuild:us-east-2:${AWS::AccountId}:report-group/${jobName}-*"
+            ]
+        }
+    ]
+}
+```
+
+**CodeBuildS3ReadOnlyPolicy-msab-s3-us-east-2**
+* `${deploymentBucket}`: whatever bucket you're dropping the release .zip file in
+* `${pathToZip}`: the full path in the bucket to the .zip file, e.g. `/manual-builds/msab-release.zip`
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::${deploymentBucket}/${pathToZip}",
+                "arn:aws:s3:::${deploymentBucket}/${pathToZip}/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::${deploymentBucket}"
+            ],
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketAcl",
+                "s3:GetBucketLocation"
+            ]
+        }
+    ]
+}
+```
+
+**deployer-policy**
+This seems like it's a copy of the `deployer` policy that's provided? Not sure why the wizard copies it ...
+* `${AWS::AccountId}`: Your AWS Account ID
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:List*",
+                "cloudformation:Get*",
+                "cloudformation:ValidateTemplate"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:CreateStack",
+                "cloudformation:CreateUploadBucket",
+                "cloudformation:DeleteStack",
+                "cloudformation:Describe*",
+                "cloudformation:UpdateStack"
+            ],
+            "Resource": [
+                "arn:aws:cloudformation:*:*:stack/msab-arts-locator-*/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:Get*",
+                "lambda:List*",
+                "lambda:CreateFunction"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "apigateway:GET",
+                "apigateway:POST",
+                "apigateway:PUT",
+                "apigateway:DELETE",
+                "apigateway:PATCH",
+                "apigateway:UpdateRestApiPolicy"
+            ],
+            "Resource": [
+                "arn:aws:apigateway:*::/restapis*",
+                "arn:aws:apigateway:*::/apikeys*",
+                "arn:aws:apigateway:*::/usageplans*",
+                "arn:aws:apigateway:*::/tags*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:List*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:Create*",
+                "s3:Delete*",
+                "s3:List*",
+                "s3:Put*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::msab-arts-locator-*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:CreateAlias",
+                "lambda:DeleteFunction",
+                "lambda:InvokeFunction",
+                "lambda:PublishVersion",
+                "lambda:RemovePermission",
+                "lambda:Update*"
+            ],
+            "Resource": [
+                "arn:aws:lambda:*:*:function:msab-arts-locator-*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:GetMetricStatistics"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DeleteLogGroup"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:FilterLogEvents"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "events:Put*",
+                "events:Remove*",
+                "events:Delete*"
+            ],
+            "Resource": [
+                "arn:aws:events:*:*:rule/msab-arts-locator-*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "events:DescribeRule"
+            ],
+            "Resource": [
+                "arn:aws:events:*:*:rule/msab-arts-locator-*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": [
+                "arn:aws:s3:::msab-arts-locator-*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::${AWS::AccountId}:role/msab-arts-locator-*"
+        }
+    ]
+}
+```
+

@@ -12,11 +12,10 @@ const putImage = async (
     const imageBuffer = Buffer.from(base64Image, 'base64');
     const bucket = applicationContext.environment.imageBucket;
     params = {
-      ACL: 'public-read',
       Body: imageBuffer,
       Bucket: bucket,
       ContentType: contentType,
-      Key: `${entityId}.${ext}`,
+      Key: `photos/${entityId}.${ext}`,
     };
     const response = await s3.upload(params).promise();
     return { data: response, status: 'success' };

@@ -58,7 +58,7 @@ const save = async ({ applicationContext, requestData }) => {
                   applicationContext,
                 );
               msg = saveResult.status;
-              imageUrl = saveResult.data.Location;
+              imageUrl = saveResult.data.Key;
             }
           }
 

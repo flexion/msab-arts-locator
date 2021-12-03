@@ -208,14 +208,14 @@ describe('saveLocation controller', () => {
             usecasesCalled.push('putArtLocationImage');
             return {
               data: {
-                Location: 'http://example.com',
+                Key: 'photos/blah-blah.jpg',
               },
               status: 'success',
             };
           },
           saveNewArtLocation: async ({ artLocation }) => {
             usecasesCalled.push('saveNewArtLocation');
-            expect(artLocation.imageURL).toEqual('http://example.com');
+            expect(artLocation.imageURL).toEqual('photos/blah-blah.jpg');
             return {
               status: 'success',
             };
