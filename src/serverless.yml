@@ -161,7 +161,29 @@ resources:
                 Fn::GetAtt: [ImagesBucket, RegionalDomainName]
               S3OriginConfig:
                 OriginAccessIdentity: !Join ['', ["origin-access-identity/cloudfront/", !Ref S3OriginAccessIdentity]]
-              OriginPath: /images
+          CacheBehaviors:
+            - {}
+            - AllowedMethods:
+                - GET
+                - HEAD
+                - OPTIONS
+              CachedMethods:
+                - GET
+                - HEAD
+              ForwardedValues:
+                QueryString: true
+                Headers:
+                  - Accept
+                  - Referer
+                  - Authorization
+                  - Content-Type
+                Cookies:
+                  Forward: all
+              MinTTL: "0"
+              DefaultTTL: "0"
+              TargetOriginId: Images
+              ViewerProtocolPolicy: https-only
+              PathPattern: photos/*
     ImagesBucketAllowCloudfrontReadPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
@@ -175,7 +197,7 @@ resources:
               Resource:
                 - !Join ['', ['arn:aws:s3:::', !Ref ImagesBucket, '/*']]
               Principal:
-                AWS: !Join ['', ["arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity", !Ref "S3OriginAccessIdentity"]]
+                CanonicalUser: !GetAtt S3OriginAccessIdentity.S3CanonicalUserId
     DynamoDbTableKmsKey:
       Type: AWS::KMS::Key
       Properties:
