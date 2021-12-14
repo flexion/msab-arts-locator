@@ -102,7 +102,7 @@ const sendEmail = sendEmailGateways[environment.emailGateway];
 
 // make SMTP_PORT optional, default to 25
 let smtpPort = process.env.SMTP_PORT;
-if (Number.isNan(smtpPort)) {
+if (!smtpPort) {
   smtpPort = 25;
 }
 
