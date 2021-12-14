@@ -299,3 +299,42 @@ Build the app in prod mode
 Test the app locally
 
     npm test
+
+## Email Configuration
+
+This application uses Email as a key part of the workflow. The [nodemailer](https://github.com/nodemailer/nodemailer) package is used to send emails and currently is configured to support `gmail`, `Amazon SES`, and `Office365`. Select the mailer configuration to use in the `.env.<stage>` file, e.g.:
+```
+# options: dummy, gmail, o365, ses
+# default when not specified: gmail, see serverless.yml, custom.emailGateway
+emailGateway=o365
+emailUsername=${EMAIL_USERNAME}
+emailPassword=${EMAIL_PASSWORD}
+```
+With this configuration, `nodemailer` will also use the default bundled configuration, see [well-known services](https://github.com/nodemailer/nodemailer/blob/fcb0d1f5918a89ca5e8ab880134fec07c4e92bc7/lib/well-known/services.json#L145).
+
+### Adding new (unsupported) email gateways
+
+In order to support configurability of the email client in a pluggable way, mailer gateways are located in `persistence/` and prefixed with `emailGateway*` - new email gateways can be implemented and added here, but must then also be wired in to the ApplicationContext in `environments/lambda/ApplicationContext.js` - following the pattern, e.g.:
+```
+const {
+  sendEmail: sendEmailDummy,
+} = require('../../persistence/emailGatewayDummy');
+const {
+  sendEmail: sendEmailGmail,
+} = require('../../persistence/emailGatewayGmail');
+const {
+  sendEmail: sendEmailO365,
+} = require('../../persistence/emailGatewayO365');
+const {
+  sendEmail: sendEmailSES,
+} = require('../../persistence/emailGatewaySES');
+```
+The new option must then also be added to the `sendEmailGateways` list in the ApplicationContext, as the environment configuration then looks up the proper gateway from here. e.g.:
+```
+const sendEmailGateways = {
+  dummy: sendEmailDummy,
+  gmail: sendEmailGmail,
+  o365: sendEmailO365,
+  ses: sendEmailSES,
+};
+```

@@ -44,6 +44,9 @@ const {
   sendEmail: sendEmailGmail,
 } = require('../../persistence/emailGatewayGmail');
 const {
+  sendEmail: sendEmailO365,
+} = require('../../persistence/emailGatewayO365');
+const {
   sendEmail: sendEmailSES,
 } = require('../../persistence/emailGatewaySES');
 const {
@@ -88,6 +91,7 @@ if (environment.captchaGateway == 'noop') {
 const sendEmailGateways = {
   dummy: sendEmailDummy,
   gmail: sendEmailGmail,
+  o365: sendEmailO365,
   ses: sendEmailSES,
 };
 const sendEmail = sendEmailGateways[environment.emailGateway];
