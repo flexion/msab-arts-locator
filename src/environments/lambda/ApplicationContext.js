@@ -50,6 +50,9 @@ const {
   sendEmail: sendEmailSES,
 } = require('../../persistence/emailGatewaySES');
 const {
+  sendEmail: sendEmailSMTP,
+} = require('../../persistence/emailGatewaySMTP');
+const {
   updateArtLocation,
 } = require('../../interactors/updateArtLocationInteractor');
 const {
@@ -93,8 +96,15 @@ const sendEmailGateways = {
   gmail: sendEmailGmail,
   o365: sendEmailO365,
   ses: sendEmailSES,
+  smtp: sendEmailSMTP,
 };
 const sendEmail = sendEmailGateways[environment.emailGateway];
+
+// make SMTP_PORT optional, default to 25
+let smtpPort = process.env.SMTP_PORT;
+if (Number.isNan(smtpPort)) {
+  smtpPort = 25;
+}
 
 const emailConfig = {
   auth: {
@@ -104,6 +114,8 @@ const emailConfig = {
   debug: false,
   from: process.env.EMAIL_USER,
   logger: false,
+  smtpHost: process.env.SMTP_HOST,
+  smtpPort,
 };
 
 module.exports = () => {

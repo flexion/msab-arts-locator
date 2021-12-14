@@ -58,6 +58,7 @@
     "geolib": "^3.3.1",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.6.3",
+    "nodemailer-smtp-transport": "^2.7.4",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
