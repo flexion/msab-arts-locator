@@ -4,9 +4,33 @@ plugins:
   - fullstack-serverless
   - serverless-stack-output
   - serverless-offline
+  - serverless-plugin-ifelse
 
 useDotenv: true
 custom:
+  serverlessIfElse:
+    - If: '"${env:useVPC}" == "true"'
+      Set:
+        provider.vpc:
+          securityGroupIds:
+            Fn::Split:
+              - ","
+              - ${env:vpcSecurityGroupIDs, ''}
+          subnetIds:
+            Fn::Split:
+              - ","
+              - ${env:vpcSubnetIDs, ''}
+        resources.Resources.DynamoDBEndpoint:
+          Type: "AWS::EC2::VPCEndpoint"
+          Properties:
+            RouteTableIds:
+              Fn::Split:
+                - ","
+                - ${env:vpcRouteTableIDs, ''}
+            ServiceName:
+              !Sub "com.amazonaws.${AWS::Region}.dynamodb"
+            VpcId: ${env:vpcID, ''}
+
   domain: ${opt:stage}.${env:domainNameRoot}
   region: ${opt:region, 'us-east-2'}
   certificateId: ${env:certificateId} # Required by AWS to be in us-east-1
@@ -16,13 +40,13 @@ custom:
   imageBucket: ${self:service}-${opt:stage}-images
   loggingBucket: ${self:service}-${opt:stage}-logs
   emailGateway: ${env:emailGateway, 'gmail'}
-  emailUser: ${env:emailUsername}
-  emailPW: ${env:emailPassword}
-  smtpHost: ${env:smtpHost}
-  smtpPort: ${env:smtpPort}
+  emailUser: ${env:emailUsername, ''}
+  emailPW: ${env:emailPassword, ''}
+  smtpHost: ${env:smtpHost, ''}
+  smtpPort: ${env:smtpPort, 25}
   DynamoDbKmsKeyId: ${env:DynamoDbKmsKeyId, ''}
   KMSMasterKeyId: ${env:DynamoDbKmsKeyId, '!Ref DynamoDbTableKmsKey'}
-
+  
   output:
     file: .serverless/stack.json
 
@@ -81,6 +105,7 @@ package:
 functions:
   getLocations:
     handler: environments/lambda/handlers.getLocations
+    vpc: ~
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
       API_KEY: ${self:custom.apiKey}
@@ -100,8 +125,8 @@ functions:
       GOOGLE_CAPTCHA_GATEWAY: ${self:custom.captchaGateway}
       IMAGE_BUCKET: ${self:custom.imageBucket}
       EMAIL_GATEWAY: ${self:custom.emailGateway}
-      EMAIL_USER: ${self:custom.emailUser}
-      EMAIL_PW: ${self:custom.emailPW}
+      EMAIL_USER: ${self:custom.emailUser, ''}
+      EMAIL_PW: ${self:custom.emailPW, ''}
       SMTP_HOST: ${self:custom.smtpHost}
       SMTP_PORT: ${self:custom.smtpPort}
       DOMAIN_NAME: ${self:custom.domain}
@@ -113,6 +138,7 @@ functions:
           cors: true
   getLocation:
     handler: environments/lambda/handlers.getLocation
+    vpc: ~
     environment:
       GIS_TABLE: ${self:service}-gis-${opt:stage}
     timeout: 30
@@ -128,8 +154,8 @@ functions:
       CAPTCHA_KEY: ${self:custom.captchaKey}
       GOOGLE_CAPTCHA_GATEWAY: ${self:custom.captchaGateway}
       EMAIL_GATEWAY: ${self:custom.emailGateway}
-      EMAIL_USER: ${self:custom.emailUser}
-      EMAIL_PW: ${self:custom.emailPW}
+      EMAIL_USER: ${self:custom.emailUser, ''}
+      EMAIL_PW: ${self:custom.emailPW, ''}
       SMTP_HOST: ${self:custom.smtpHost}
       SMTP_PORT: ${self:custom.smtpPort}
       DOMAIN_NAME: ${self:custom.domain}

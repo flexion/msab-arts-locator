@@ -338,3 +338,78 @@ const sendEmailGateways = {
   ses: sendEmailSES,
 };
 ```
+
+## VPC Configuration
+
+If it's required to run in a VPC, e.g. to access an internal-only mail server, a few additional parameters need to be configured.
+
+Ensure `useVPC` is set to `true` in your stage's `.env` file, then make sure your deployment environment sets the appropriate variables (see below).
+
+```
+useVPC=true
+vpcSecurityGroupIDs=${VPC_SECURITY_GROUP_IDS}
+vpcSubnetIDs=${VPC_SUBNET_IDS}
+vpcRouteTableIDs=${VPC_ROUTE_TABLE_IDS}
+vpcID=${VPC_ID}
+```
+
+The VPC & Route Tables need to be setup to allow access to a DynamoDB VPC Endpoint, which the Lambda will use to access DynamoDB from within the VPC. Of course, the security groups and VPC configuration must also allow access to whichever private resources (e.g. mail server) are configured.
+
+The VPC configuration will not run _all_ functions in the VPC, only the functions that require access to email, as a private email server is the only use case currently requiring VPC access. To change this, the `~` in the `vpc:` argument for each function defined in `serverless.yml` can be removed, and it will then inherit the top-level vpc configuration injected into the `provider:`.
+
+### IAM Policy Updates
+
+The deployer and lambda execution IAM roles must be updated to support the Lambda-in-VPC model. The deployer role changes are primarily to enable the VPCEndpoint setup. The lambda execution role changes are to enable the Lambda to create the necessary ENI in the VPC.
+
+#### Deployer Policy Additions
+* Substitute `<account-id>` appropriately.
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:Describe*",
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "ec2:*VpcEndpoint*",
+            "Resource": [
+                "arn:aws:ec2:*:<account-id>:vpc/*",
+                "arn:aws:ec2:*:<account-id>:route-table/*",
+                "arn:aws:ec2:*:<account-id>:vpc-endpoint/*",
+                "arn:aws:ec2:*:<account-id>:security-group/*",
+                "arn:aws:ec2:*:<account-id>:subnet/*"
+            ]
+        }
+    ]
+}
+```
+
+#### Lambda Execution Policy Additions
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstances",
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface",
+                "ec2:AttachNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "autoscaling:CompleteLifecycleAction"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```

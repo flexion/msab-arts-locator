@@ -38,7 +38,7 @@
     "start": "yarn setClientReCAPTCHAKey && rm -rf dist && npm-run-all -p watch-css start-js offline",
     "start-js": "yarn codeVersion && yarn checkAwsEnv && MSAB_ENV=dev node run-localServer.js",
     "codeVersion": "cp -v release_info.js environments/client/version.js || echo \"module.exports = { version: '$(git describe --tags)' };\" > environments/client/version.js",
-    "setClientReCAPTCHAKey": "if [[ ! -z \"$GOOGLE_CLIENT_RECAPTCHA_KEY\" ]]; then echo \"module.exports = { RECAPTCHA_KEY: '$GOOGLE_CLIENT_RECAPTCHA_KEY' };\" > config/config.js && echo \"Updated client config.js\"; else echo \"No GOOGLE_CLIENT_RECAPTCHA_KEY var set, not updating client config.js\"; fi",
+    "setClientReCAPTCHAKey": "scripts/updateReCAPTCHAClientKey.sh",
     "build": "yarn setClientReCAPTCHAKey && yarn codeVersion && MSAB_ENV=prod parcel build  --no-source-maps index.pug"
   },
   "resolutions": {
@@ -59,6 +59,7 @@
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.6.3",
     "nodemailer-smtp-transport": "^2.7.4",
+    "serverless-plugin-ifelse": "^1.0.7",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
