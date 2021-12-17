@@ -39,8 +39,10 @@ custom:
   apiKey: ${env:googleGeocodingApiKey} #api key to use google maps api
   captchaKey: ${env:googleCaptchaKey, ''}
   captchaGateway: ${env:googleCaptchaGateway, ''}
-  imageBucket: ${self:service}-${opt:stage}-images
-  loggingBucket: ${self:service}-${opt:stage}-logs
+  bucketPrefix: ${self:service}-${opt:stage}
+  bucketSuffix: ${self:custom.region}.${env:domainNameRoot}
+  imageBucket: ${self:custom.bucketPrefix}-images-${self:custom.bucketSuffix}
+  loggingBucket: ${self:custom.bucketPrefix}-logs-${self:custom.bucketSuffix}
   emailGateway: ${env:emailGateway, 'gmail'}
   emailUser: ${env:emailUsername, ''}
   emailPW: ${env:emailPassword, ''}
@@ -64,7 +66,7 @@ custom:
           - 'Ref': 'AWS::AccountId'
           - ':certificate/'
           - '${self:custom.certificateId}'
-    bucketName: '${self:custom.region}'
+    bucketName: ${self:custom.bucketSuffix}
     distributionFolder: dist # Path to the client assets to be uploaded to S3
     indexDocument: index.html # The index document to use
     errorDocument: error.html # The error document to use
