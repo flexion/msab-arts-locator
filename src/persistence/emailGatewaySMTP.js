@@ -8,6 +8,8 @@ const sendEmail = async ({ applicationContext, requestData }) => {
   const emailConfig = smtpTransport({
     host: applicationContext.emailConfig.smtpHost,
     port: applicationContext.emailConfig.smtpPort,
+    secure: false,
+    ignoreTLS: true,
   });
 
   if (transporter == undefined) {

@@ -20,6 +20,8 @@ custom:
             Fn::Split:
               - ","
               - ${env:vpcSubnetIDs, ''}
+    - If: '"${env:createVPCEndpoint}" == "true"'
+      Set:
         resources.Resources.DynamoDBEndpoint:
           Type: "AWS::EC2::VPCEndpoint"
           Properties:
