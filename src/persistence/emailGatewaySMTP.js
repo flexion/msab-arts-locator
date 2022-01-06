@@ -7,9 +7,9 @@ const sendEmail = async ({ applicationContext, requestData }) => {
   // create reusable transporter object using the default SMTP transport
   const emailConfig = smtpTransport({
     host: applicationContext.emailConfig.smtpHost,
+    ignoreTLS: true,
     port: applicationContext.emailConfig.smtpPort,
     secure: false,
-    ignoreTLS: true,
   });
 
   if (transporter == undefined) {
