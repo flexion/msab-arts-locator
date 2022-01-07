@@ -245,7 +245,7 @@ export const LocationInputForm = connect(
                 </Control>
                 {form.imageURL && !form.base64Image && (
                   <Control>
-                    <img src="/{form.imageURL}" />
+                    <img src={`/${form.imageURL}`} />
                   </Control>
                 )}
               </Field>
