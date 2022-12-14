@@ -92,7 +92,7 @@
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-sort-requires": "^2.1.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fullstack-serverless": "^0.8.0",
     "http-proxy-middleware": "^2.0.1",
     "jest": "^27.0.6",
